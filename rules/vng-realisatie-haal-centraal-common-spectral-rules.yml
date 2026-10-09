@@ -1,0 +1,21 @@
+# harvested from https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/48fe071b9e2ece2900b7e84dd9f2d6ec5da87a6c/.spectral.yml on 2026-10-09 — a Spectral ruleset published in the provider's own GitHub repository (VNG-Realisatie/Haal-Centraal-common); found by GitHub code search, fetched verbatim
+x-method: harvested
+x-stamped: 2026-10-09
+x-source-url: https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/48fe071b9e2ece2900b7e84dd9f2d6ec5da87a6c/.spectral.yml
+extends:
+- spectral:oas
+- ./spectral_rules/allof-adds-property.yml
+- ./spectral_rules/allof-extends-object.yml
+- ./spectral_rules/allof-single-extension.yml
+- ./spectral_rules/enum-value-snake-case.yml
+- ./spectral_rules/query-parameter-names-camel-case.yml
+- ./spectral_rules/property-of-object-type.yml
+- ./spectral_rules/schema-names-pascal-case.yml
+- ./spectral_rules/too-much-information.yml
+rules:
+  oas3-unused-component: off
+  oas3-valid-schema-example: off
+  tag-description: off
+  oas3-api-servers: off
+  openapi-tags: off
+  info-description: off

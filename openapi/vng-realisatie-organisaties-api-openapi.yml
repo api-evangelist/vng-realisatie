@@ -1,0 +1,639 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Organisaties API
+  version: 00.01.00
+  contact:
+    url: http://www.verzoeken.nl
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
+  description: 'Operations tagged Organisaties across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+- description: Referentie-implementatie
+  url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+tags:
+- name: Organisaties
+paths:
+  /_registreer_organisatie:
+    post:
+      operationId: registreerorganisatie
+      description: De operatie waarmee gegevens van een organisaties kunnen worden geregistreerd. De id, het partijnummer en de soortPartij (in dit geval default `organisatien`) worden door de provider bepaald op het moment van registeren.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistreerOrganisatie_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Organisaties
+      summary: Registreerorganisatie
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_wijzig_organisatie:
+    post:
+      operationId: wijzigorganisatie
+      description: De operatie waarmee gegevens van een persoon kunnen worden gewijzigd. De id en het partijnummer en de soortPartij kunnen niet gewijzigd worden.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WijzigOrganisatie_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Organisaties
+      summary: Wijzigorganisatie
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_zoek_organisatie:
+    post:
+      operationId: zoekorganisatie
+      description: De operatie waarmee gegevens van organisaties kunnen worden gezocht.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoekOrganisatie_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Organisaties
+      summary: Zoekorganisatie
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+components:
+  schemas:
+    ZoekOrganisatie_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      - nummer
+      properties:
+        bezoekadres:
+          $ref: '#/components/schemas/Bezoekadres'
+        correspondentieadres:
+          $ref: '#/components/schemas/Correspondentieadres'
+        digitaalAdres:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/DigitaalAdres'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        nummer:
+          $ref: '#/components/schemas/Partijnummer'
+        voorkeurskanaal:
+          $ref: '#/components/schemas/Kanaal'
+    Huisnummertoevoeging:
+      type: string
+      description: ''
+      maxLength: 4
+    Partijnummer:
+      type: integer
+      description: ''
+    Huisnummer:
+      type: integer
+      description: ''
+    Organisatie:
+      allOf:
+      - $ref: '#/components/schemas/Partij'
+      - type: object
+        description: "Geformaliseerde entiteit, niet zijnde een natuurlijk persoon, die maatschappelijke activiteiten uitvoert.\n\nEen organisatie met rechtspersoonlijkheid, of een eenmanszaak, vennootschap onder firma, maatschap of commanditaire vennootschap of andere organisatie zonder rechtspersoonlijkheid.\n\nEen organisatie met rechtspersoonlijkheid, of een eenmanszaak, vennootschap onder firma, maatschap of commanditaire vennootschap of andere organisatie zonder rechtspersoonlijkheid. \n\nEen organisatie met rechtspersoonlijkheid, of een eenmanszaak, vennootschap onder firma, maatschap of commanditaire vennootschap of andere organisatie zonder rechtspersoonlijkheid."
+        properties:
+          naam:
+            $ref: '#/components/schemas/Naamlang'
+    SoortPartij:
+      type: string
+      description: De typering van de partij.
+      enum:
+      - persoon
+      - organisatie
+      - contactpersoon
+    SoortDigitaalAdres:
+      type: object
+      description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort digitaal adres.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort digitaal adres.
+          minLength: 1
+    SoortExternId:
+      type: object
+      description: Een opsomming van de soorten externe identificatiecodes met de bijbehorende externe registers.
+      required:
+      - code
+      - externRegister
+      - indicatieActief
+      - naam
+      - soortPartij
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort extern id.
+          minLength: 1
+        externRegister:
+          type: string
+          title: Extern register
+          description: Het register dat geraadpleegd kan worden m.b.v. de externe identificatiecode.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort extern id.
+          minLength: 1
+        soortPartij:
+          $ref: '#/components/schemas/SoortPartij'
+    AanduidingBijHuisnummer:
+      type: string
+      description: De aanduiding die gebruikt wordt voor bijvoorbeeld een ligplaats of een standplaats die geen eigen nummeraanduiding heeft.
+      enum:
+      - bij
+      - tegenover
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
+    Correspondentieadres:
+      type: object
+      description: Het adres waarnaar de persoon of de organisatie de voor hen bestemde correspondentie laat verzenden.
+      required:
+      - soortCorrespondentieadres
+      properties:
+        aanduidingBijHuisnummer:
+          $ref: '#/components/schemas/AanduidingBijHuisnummer'
+        adresregelBuitenland1:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland2:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland3:
+          $ref: '#/components/schemas/Adresregel'
+        antwoordnummer:
+          $ref: '#/components/schemas/Antwoordnummer'
+        huisletter:
+          $ref: '#/components/schemas/Huisletter'
+        huisnummer:
+          $ref: '#/components/schemas/Huisnummer'
+        huisnummertoevoeging:
+          $ref: '#/components/schemas/Huisnummertoevoeging'
+        land:
+          $ref: '#/components/schemas/Land'
+        postbusnummer:
+          $ref: '#/components/schemas/Postbusnummer'
+        postcode:
+          $ref: '#/components/schemas/Postcode'
+        soortCorrespondentieadres:
+          $ref: '#/components/schemas/SoortCorrespondentieadres'
+        straat:
+          $ref: '#/components/schemas/Straat'
+        woonplaats:
+          $ref: '#/components/schemas/Woonplaats'
+    RegistreerOrganisatie_parameters:
+      type: object
+      description: ''
+      properties:
+        bezoekadres:
+          $ref: '#/components/schemas/Bezoekadres'
+        correspondentieadres:
+          $ref: '#/components/schemas/Correspondentieadres'
+        digitaalAdres:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/RegistreerDigitaalAdres_parameters'
+        interneNotitie:
+          $ref: '#/components/schemas/Omschrijvinglang'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        voorkeurskanaal:
+          $ref: '#/components/schemas/Kanaal'
+        voorkeurstaal:
+          $ref: '#/components/schemas/Voorkeurstaal'
+    Voorkeurstaal:
+      type: object
+      description: Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij de voorkeurstaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van de voorkeurstaal.
+          minLength: 1
+    Antwoordnummer:
+      type: integer
+      description: ''
+    Huisletter:
+      type: string
+      description: ''
+      maxLength: 1
+    Woonplaats:
+      type: string
+      description: ''
+      maxLength: 80
+    Adresregel:
+      type: string
+      description: Een generieke regel om adresgegevens in op te nemen.
+      maxLength: 80
+    Partij:
+      type: object
+      description: "Een persoon of organisatie waarmee de gemeente een relatie heeft.\n\n(Uiteindelijk) belanghebbenden waarmee de gemeente geen direct contact heeft (of heeft gehad) (bijvoorbeeld door vertegenwoordiging) zien we als partijen waarmee de gemeente een relatie heeft.? Een vertegenwoordiger (van een belanghebbende) is een partij? Partijen zijn ???gekende??? personen of organisaties? Dit betekent dat er voor eerste registratie en bij eventueel (her)gebruik authenticatie heeft plaatsgevonden. Dit hoeft niet per se te gebeuren met DigiD, eHerkenning o.i.d. Er is dus ook niet altijd sprake van vastlegging en verwerking van een BSN of ander buiten de gemeente toegekend ID-nummer.?\n\n(Uiteindelijk) belanghebbenden waarmee de gemeente geen direct contact heeft (of heeft gehad) (bijvoorbeeld door vertegenwoordiging) zien we als partijen waarmee de gemeente een relatie heeft.? Een vertegenwoordiger (van een belanghebbende) is een partij? Partijen zijn ???gekende??? personen of organisaties? Dit betekent dat er voor eerste registratie en bij eventueel (her)gebruik authenticatie heeft plaatsgevonden. Dit hoeft niet per se te gebeuren met DigiD, eHerkenning o.i.d. Er is dus ook niet altijd sprake van vastlegging en verwerking van een BSN of ander buiten de gemeente toegekend ID-nummer.? \n\n(Uiteindelijk) belanghebbenden waarmee de gemeente geen direct contact heeft (of heeft gehad) (bijvoorbeeld door vertegenwoordiging) zien we als partijen waarmee de gemeente een relatie heeft.? Een vertegenwoordiger (van een belanghebbende) is een partij? Partijen zijn ???gekende??? personen of organisaties? Dit betekent dat er voor eerste registratie en bij eventueel (her)gebruik authenticatie heeft plaatsgevonden. Dit hoeft niet per se te gebeuren met DigiD, eHerkenning o.i.d. Er is dus ook niet altijd sprake van vastlegging en verwerking van een BSN of ander buiten de gemeente toegekend ID-nummer.?"
+      required:
+      - externeIdentificatie
+      - id
+      - nummer
+      - soortPartij
+      properties:
+        bezoekadres:
+          $ref: '#/components/schemas/Bezoekadres'
+        correspondentieadres:
+          $ref: '#/components/schemas/Correspondentieadres'
+        digitaalAdres:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/DigitaalAdres'
+        externeIdentificatie:
+          $ref: '#/components/schemas/ExterneIdentificatie'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        interneNotitie:
+          $ref: '#/components/schemas/Omschrijvinglang'
+        nummer:
+          $ref: '#/components/schemas/Partijnummer'
+        soortPartij:
+          $ref: '#/components/schemas/SoortPartij'
+        voorkeurskanaal:
+          $ref: '#/components/schemas/Kanaal'
+        voorkeurstaal:
+          $ref: '#/components/schemas/Voorkeurstaal'
+        ExterneIdentificaties:
+          type: array
+          title: geidentificeerd door
+          description: De identificerende gegevens die de partij in een externe registratie aanwijzen.
+          minItems: 1
+          items:
+            type: string
+            format: uri
+          readOnly: true
+          uniqueItems: true
+          example: datapunt.voorbeeldgemeente.nl/api/v1//123456789
+        DigitaleAdressen:
+          type: array
+          title: heeft
+          description: Een e-mailadres, telefoonnumer of andere niet-fysieke adres waarop de partij bereikbaar is.
+          items:
+            type: string
+            format: uri
+          readOnly: true
+          uniqueItems: true
+          example: datapunt.voorbeeldgemeente.nl/api/v1/Digitale adressen/123456789
+    RegistreerDigitaalAdres_parameters:
+      type: object
+      description: ''
+      required:
+      - adres
+      - codeSoortDigitaalAdres
+      - omschrijving
+      - partijId
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        codeSoortDigitaalAdres:
+          type: string
+          title: Soort digitaal adres
+          description: De typering van het digitale adres waarmee bepaald kan worden op welk kanaal dit digitale adres valide is.
+          minLength: 1
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+    DigitaalAdres:
+      type: object
+      description: 'Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.
+
+
+        Digitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.'
+      required:
+      - adres
+      - id
+      - indicatieActief
+      - omschrijving
+      - partijId
+      - soortDigitaalAdres
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+        soortDigitaalAdres:
+          $ref: '#/components/schemas/SoortDigitaalAdres'
+    Land:
+      type: object
+      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
+      required:
+      - einddatumLand
+      - ingangsdatumLand
+      - landcode
+      - landnaam
+      properties:
+        einddatumLand:
+          type: string
+          title: Einddatum land
+          description: De datum waarop het land/gebied is opgeheven.
+          format: date
+        ingangsdatumLand:
+          type: string
+          title: Ingangsdatum land
+          description: De datum waarop het land/gebied is ontstaan.
+          format: date
+        landcode:
+          type: string
+          title: Landcode
+          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
+          minLength: 1
+        landnaam:
+          type: string
+          title: Landnaam
+          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
+          minLength: 1
+    Omschrijvingkort:
+      type: string
+      description: ''
+      maxLength: 40
+    SoortBezoekadres:
+      type: string
+      description: Typering waarmee aangegeven of het bezoekadres een binnenlands - of een buitenlands adres is.<body><ul><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
+      enum:
+      - binnenlands_adres
+      - buitenlands_adres
+    Straat:
+      type: string
+      description: ''
+      maxLength: 80
+    Postcode:
+      type: string
+      description: ''
+      maxLength: 7
+    Kanaal:
+      type: object
+      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het kanaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het kanaal.
+          minLength: 1
+    WijzigOrganisatie_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      properties:
+        bezoekadres:
+          $ref: '#/components/schemas/Bezoekadres'
+        correspondentieadres:
+          $ref: '#/components/schemas/Correspondentieadres'
+        digitaalAdres:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/RegistreerDigitaalAdres_parameters'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        interneNotitie:
+          $ref: '#/components/schemas/Omschrijvinglang'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        voorkeurskanaal:
+          $ref: '#/components/schemas/Kanaal'
+        voorkeurstaal:
+          $ref: '#/components/schemas/Voorkeurstaal'
+    ExterneIdentificatie:
+      type: object
+      description: De identificatiecode van een Relatie zoals die in een andere (authentieke?) registratie gevoerd wordt.
+      required:
+      - externId
+      - id
+      - soortExternId
+      properties:
+        anderSoortExternId:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        soortExternId:
+          $ref: '#/components/schemas/SoortExternId'
+    Bezoekadres:
+      type: object
+      description: Een bezoekadres is een adres waar een persoon of een bedrijf bezoekers ontvangt.
+      required:
+      - soortBezoekadres
+      properties:
+        aanduidingBijHuisnummer:
+          $ref: '#/components/schemas/AanduidingBijHuisnummer'
+        adresregelBuitenland1:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland2:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland3:
+          $ref: '#/components/schemas/Adresregel'
+        huisletter:
+          $ref: '#/components/schemas/Huisletter'
+        huisnummer:
+          $ref: '#/components/schemas/Huisnummer'
+        huisnummertoevoeging:
+          $ref: '#/components/schemas/Huisnummertoevoeging'
+        land:
+          $ref: '#/components/schemas/Land'
+        postcode:
+          $ref: '#/components/schemas/Postcode'
+        soortBezoekadres:
+          $ref: '#/components/schemas/SoortBezoekadres'
+        straat:
+          $ref: '#/components/schemas/Straat'
+        woonplaats:
+          $ref: '#/components/schemas/Woonplaats'
+    Postbusnummer:
+      type: integer
+      description: ''
+    IndicatieJaNee:
+      type: boolean
+      description: ''
+    Omschrijvinglang:
+      type: string
+      description: ''
+      maxLength: 200
+    Naamlang:
+      type: string
+      description: ''
+      maxLength: 200
+    SoortCorrespondentieadres:
+      type: string
+      description: Typering waarmee aangegeven wordt of het correspondentieadres een binnenlands - of een buitenlands adres is danwel een postbusnummer of een antwoordnummer.<body><ul><li>`postbusnummer` - postbusnummer </li><li>`antwoordnummer` - antwoordnummer </li><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
+      enum:
+      - postbusnummer
+      - antwoordnummer
+      - binnenlands_adres
+      - buitenlands_adres
+x-refined-from:
+- vng-realisatie-klantinteracties-openapi.yml
+- vng-realisatie-klantinteracties-openapi.yml

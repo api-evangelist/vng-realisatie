@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-object-van-klantcontact-schema.json",
+  "title": "ObjectVanKlantcontact",
+  "description": "De relatie tussen het klantcontact en de Zaak, Klanttaak of ander object waar dit klantcontact betrekking op heeft.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-klantinteracties-openapi.yml#/components/schemas/ObjectVanKlantcontact",
+  "type": "object",
+  "required": [
+    "externId",
+    "externRegister",
+    "id",
+    "interneTaakId",
+    "klantcontactId",
+    "ontstaanUitKlantcontact",
+    "soortObject"
+  ],
+  "properties": {
+    "externId": {
+      "$ref": "#/$defs/Identificatiecode"
+    },
+    "externRegister": {
+      "$ref": "#/$defs/Omschrijvingkort"
+    },
+    "id": {
+      "$ref": "#/$defs/Identificatiecode"
+    },
+    "interneTaakId": {
+      "$ref": "#/$defs/Identificatiecode"
+    },
+    "klantcontactId": {
+      "$ref": "#/$defs/Identificatiecode"
+    },
+    "ontstaanUitKlantcontact": {
+      "$ref": "#/$defs/IndicatieJaNee"
+    },
+    "soortObject": {
+      "$ref": "#/$defs/SoortObject"
+    },
+    "InterneTaken": {
+      "title": "gaat over",
+      "description": "De taak waarvan uitvoering aanleiding gaf tot het klantcontact.",
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    },
+    "AndereObjecten": {
+      "type": "array",
+      "title": "gaat over",
+      "description": "",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "readOnly": true,
+      "uniqueItems": true
+    },
+    "Zaken": {
+      "title": "gaat over",
+      "description": "De zaak die uit een klantcontact ontstond of waarover een klantcontact ging.",
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    },
+    "Klanttaken": {
+      "title": "gaat over",
+      "description": "De klanttaak waarover het klantcontact ging.",
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    },
+    "Klantcontacten": {
+      "title": "heeft",
+      "description": "Het klantcontact dat aanleiding gaf tot het starten van een zaak of dat over een zaak ging.",
+      "type": "string",
+      "format": "uri",
+      "readOnly": true
+    }
+  },
+  "$defs": {
+    "Identificatiecode": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "IndicatieJaNee": {
+      "type": "boolean",
+      "description": ""
+    },
+    "Omschrijvingkort": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "SoortObject": {
+      "type": "object",
+      "description": "Een opsomming van de soorten objecten waarmee een koppeling gelegd wordt vanuit het register klantinteracties.",
+      "required": [
+        "code",
+        "indicatieActief",
+        "naam"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "description": "De code, behorende bij het soort object.",
+          "minLength": 1
+        },
+        "indicatieActief": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "naam": {
+          "type": "string",
+          "title": "Naam",
+          "description": "De naam van het soort object.",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,654 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Referentielijsten API
+  version: 00.01.00
+  contact:
+    url: http://www.verzoeken.nl
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
+  description: 'Operations tagged Referentielijsten across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+- description: Referentie-implementatie
+  url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+tags:
+- name: Referentielijsten
+paths:
+  /_haal_referentielijsten_waarden_op:
+    post:
+      operationId: haalreferentielijstenop
+      description: De operatie waarmee de inhoud van de gewenste referentielijsten in 1 call opgehaald kan worden. In de requestbody worden booleans als input geleverd. Voor iedere boolean die met de waarde true wordt opgenomen in de requestbody worden alle waarden van de corresponderende referentielijst opgenomen in de response. Indien de waarden van een referentielijst niet gewenst zijn mag de corresponderende boolean ontbreken of als `false`worden opgenomen.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Referentielijsten_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Referentielijstbody'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Referentielijsten
+      summary: Haalreferentielijstenop
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_raadpleeg_kanaal:
+    post:
+      operationId: raadpleegkanaal
+      description: De operatie waarmee een specifieke waarde van de referentielijst `kanaal` wordt opgehaald op basis van de (unieke) code.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Kanaal_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Kanaal'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Referentielijsten
+      summary: Raadpleegkanaal
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_raadpleeg_land:
+    post:
+      operationId: raadpleegland
+      description: De operatie waarmee een specifieke waarde van de referentielijst `Land` wordt opgehaald op basis van de (unieke) landcode. Aangezien de referentietabel `Landen`een doior het RVIG beheerde landelijke tabel is wijkt de naamgeving van de code af.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Land_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Land'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Referentielijsten
+      summary: Raadpleegland
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_raadpleeg_soort_digitaal_adres:
+    post:
+      operationId: raadpleegsoortdigitaaladres
+      description: De operatie waarmee een specifieke waarde van de referentielijst `Soort digitaal adres` wordt opgehaald op basis van de (unieke) code.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SoortDigitaalAdres_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoortDigitaalAdres'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Referentielijsten
+      summary: Raadpleegsoortdigitaaladres
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_raadpleeg_soort_extern_id:
+    post:
+      operationId: raadpleegsoortexternid
+      description: De operatie waarmee een specifieke waarde van de referentielijst `Soort extern ID` wordt opgehaald op basis van de (unieke) code.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SoortExternId_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoortExternId'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Referentielijsten
+      summary: Raadpleegsoortexternid
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_raadpleeg_soort_object:
+    post:
+      operationId: raadpleegsoortobject
+      description: De operatie waarmee een specifieke waarde van de referentielijst `Soort object` wordt opgehaald op basis van de (unieke) code.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SoortObject_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SoortObject'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Referentielijsten
+      summary: Raadpleegsoortobject
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_raadpleeg_voorkeurstaal:
+    post:
+      operationId: raadpleegvoorkeurstaal
+      description: De operatie waarmee een specifieke waarde van de referentielijst `Voorkeurstaal` wordt opgehaald op basis van de (unieke) code.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Voorkeurstaal_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Voorkeurstaal'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Referentielijsten
+      summary: Raadpleegvoorkeurstaal
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+components:
+  schemas:
+    Voorkeurstaal_parameters:
+      type: object
+      description: Parameter voor het raadplegen van de voorkeurstaal.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij de voorkeurstaal.
+          minLength: 1
+    Kanaal:
+      type: object
+      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het kanaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het kanaal.
+          minLength: 1
+    SoortExternId_parameters:
+      type: object
+      description: Parameter voor het raadplegen van het soort extern id.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort extern id.
+          minLength: 1
+    Land:
+      type: object
+      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
+      required:
+      - einddatumLand
+      - ingangsdatumLand
+      - landcode
+      - landnaam
+      properties:
+        einddatumLand:
+          type: string
+          title: Einddatum land
+          description: De datum waarop het land/gebied is opgeheven.
+          format: date
+        ingangsdatumLand:
+          type: string
+          title: Ingangsdatum land
+          description: De datum waarop het land/gebied is ontstaan.
+          format: date
+        landcode:
+          type: string
+          title: Landcode
+          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
+          minLength: 1
+        landnaam:
+          type: string
+          title: Landnaam
+          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
+          minLength: 1
+    Voorkeurstaal:
+      type: object
+      description: Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij de voorkeurstaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van de voorkeurstaal.
+          minLength: 1
+    SoortObject:
+      type: object
+      description: Een opsomming van de soorten objecten waarmee een koppeling gelegd wordt vanuit het register klantinteracties.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort object.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort object.
+          minLength: 1
+    Referentielijsten_parameters:
+      type: object
+      description: ''
+      properties:
+        kanaal:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        land:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        soortDigitaalAdres:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        soortExternId:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        soortObject:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        voorkeurstaal:
+          $ref: '#/components/schemas/IndicatieJaNee'
+    SoortPartij:
+      type: string
+      description: De typering van de partij.
+      enum:
+      - persoon
+      - organisatie
+      - contactpersoon
+    Referentielijstbody:
+      type: object
+      description: Bevat waarden van referentielijsten.
+      properties:
+        kanalen:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/Kanaal'
+        landen:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/Land'
+        soortenDigitaalAdres:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/SoortDigitaalAdres'
+        soortenExternId:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/SoortExternId'
+        soortenObject:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/SoortObject'
+        voorkeurstalen:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/Voorkeurstaal'
+    SoortObject_parameters:
+      type: object
+      description: Parameter voor het raadplegen van een Soort object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort object.
+          minLength: 1
+    SoortDigitaalAdres_parameters:
+      type: object
+      description: Parameter voor het raadplegen van het kanaal.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort digitaal adres.
+          minLength: 1
+    SoortExternId:
+      type: object
+      description: Een opsomming van de soorten externe identificatiecodes met de bijbehorende externe registers.
+      required:
+      - code
+      - externRegister
+      - indicatieActief
+      - naam
+      - soortPartij
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort extern id.
+          minLength: 1
+        externRegister:
+          type: string
+          title: Extern register
+          description: Het register dat geraadpleegd kan worden m.b.v. de externe identificatiecode.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort extern id.
+          minLength: 1
+        soortPartij:
+          $ref: '#/components/schemas/SoortPartij'
+    IndicatieJaNee:
+      type: boolean
+      description: ''
+    SoortDigitaalAdres:
+      type: object
+      description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort digitaal adres.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort digitaal adres.
+          minLength: 1
+    Kanaal_parameters:
+      type: object
+      description: Parameter voor het raadplegen van het kanaal.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het kanaal.
+          minLength: 1
+    Land_parameters:
+      type: object
+      description: Parameter voor het raadplegen van het kanaal.
+      required:
+      - landcode
+      properties:
+        landcode:
+          type: string
+          title: Landcode
+          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
+          minLength: 1
+x-refined-from:
+- vng-realisatie-klantinteracties-openapi.yml
+- vng-realisatie-klantinteracties-openapi.yml

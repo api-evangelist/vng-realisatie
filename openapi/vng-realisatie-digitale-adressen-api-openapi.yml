@@ -1,0 +1,297 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Digitale adressen API
+  version: 00.01.00
+  contact:
+    url: http://www.verzoeken.nl
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
+  description: 'Operations tagged Digitale adressen across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+- description: Referentie-implementatie
+  url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+tags:
+- name: Digitale adressen
+paths:
+  /_registreer_digitaal_adres:
+    post:
+      operationId: registreerdigitaaladres
+      description: De operatie waarmee gegevens van een digitaal adres kunnen worden geregistreerd. De id en de indicatie actief (default `True`) worden door de provider bepaald op het moment van registeren.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistreerDigitaalAdres_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitaalAdres'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Digitale adressen
+      summary: Registreerdigitaaladres
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_wijzig_digitaal_adres:
+    post:
+      operationId: wijzigdigitaaladres
+      description: De operatie waarmee gegevens van digitaal adres van een partij kunnen worden gewijzigd. De id, de soort digitaalAdres en de indicatie actief kunnen niet gewijzigd worden.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WijzigDigitaalAdres_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitaalAdres'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Digitale adressen
+      summary: Wijzigdigitaaladres
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_zoek_digitaal_adres:
+    post:
+      operationId: zoekdigitaaladres
+      description: De operatie waarmee gegevens van digitaal adres kunnen worden gezocht.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoekDigitaalAdres_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitaalAdres'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Digitale adressen
+      summary: Zoekdigitaaladres
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+components:
+  schemas:
+    RegistreerDigitaalAdres_parameters:
+      type: object
+      description: ''
+      required:
+      - adres
+      - codeSoortDigitaalAdres
+      - omschrijving
+      - partijId
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        codeSoortDigitaalAdres:
+          type: string
+          title: Soort digitaal adres
+          description: De typering van het digitale adres waarmee bepaald kan worden op welk kanaal dit digitale adres valide is.
+          minLength: 1
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+    ZoekDigitaalAdres_parameters:
+      type: object
+      description: ''
+      required:
+      - adres
+      - id
+      - omschrijving
+      - partijId
+      - soortDigitaalAdres
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+        soortDigitaalAdres:
+          $ref: '#/components/schemas/SoortDigitaalAdres'
+    DigitaalAdres:
+      type: object
+      description: 'Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.
+
+
+        Digitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.'
+      required:
+      - adres
+      - id
+      - indicatieActief
+      - omschrijving
+      - partijId
+      - soortDigitaalAdres
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+        soortDigitaalAdres:
+          $ref: '#/components/schemas/SoortDigitaalAdres'
+    WijzigDigitaalAdres_parameters:
+      type: object
+      description: ''
+      required:
+      - adres
+      - id
+      - omschrijving
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+    Omschrijvingkort:
+      type: string
+      description: ''
+      maxLength: 40
+    SoortDigitaalAdres:
+      type: object
+      description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort digitaal adres.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort digitaal adres.
+          minLength: 1
+    IndicatieJaNee:
+      type: boolean
+      description: ''
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
+    Adresregel:
+      type: string
+      description: Een generieke regel om adresgegevens in op te nemen.
+      maxLength: 80
+x-refined-from:
+- vng-realisatie-klantinteracties-openapi.yml
+- vng-realisatie-klantinteracties-openapi.yml

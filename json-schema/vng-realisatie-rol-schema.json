@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-rol-schema.json",
+  "title": "Rol",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-zaken-openapi.yml#/components/schemas/Rol",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "readOnly": true,
+      "title": "url",
+      "description": "URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "readOnly": true,
+      "description": "Unieke resource identifier (UUID4)",
+      "title": "uuid"
+    },
+    "zaak": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL-referentie naar de ZAAK.",
+      "title": "zaak",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "betrokkene": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL-referentie naar een betrokkene gerelateerd aan de ZAAK.",
+      "title": "betrokkene",
+      "maxLength": 1000
+    },
+    "betrokkeneType": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Rol_betrokkeneTypeEnum"
+        }
+      ],
+      "description": "Type van de `betrokkene`.\n\nUitleg bij mogelijke waarden:\n\n* `natuurlijk_persoon` - Natuurlijk persoon\n* `niet_natuurlijk_persoon` - Niet-natuurlijk persoon\n* `vestiging` - Vestiging\n* `organisatorische_eenheid` - Organisatorische eenheid\n* `medewerker` - Medewerker",
+      "title": "betrokkene type"
+    },
+    "afwijkendeNaamBetrokkene": {
+      "type": "string",
+      "description": "De naam van de betrokkene waaronder deze in relatie tot de zaak aangesproken wil worden.",
+      "title": "afwijkende naam betrokkene",
+      "maxLength": 625
+    },
+    "roltype": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL-referentie naar een roltype binnen het ZAAKTYPE van de ZAAK.",
+      "title": "roltype",
+      "maxLength": 1000
+    },
+    "omschrijving": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Omschrijving van de aard van de ROL, afgeleid uit het ROLTYPE.",
+      "title": "omschrijving"
+    },
+    "omschrijvingGeneriek": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Algemeen gehanteerde benaming van de aard van de ROL, afgeleid uit het ROLTYPE.\n\nUitleg bij mogelijke waarden:\n\n* `adviseur` - (Adviseur) Kennis in dienst stellen van de behandeling van (een deel van) een zaak.\n* `behandelaar` - (Behandelaar) De vakinhoudelijke behandeling doen van (een deel van) een zaak.\n* `belanghebbende` - (Belanghebbende) Vanuit eigen en objectief belang rechtstreeks betrokken zijn bij de behandeling en/of de uitkomst van een zaak.\n* `beslisser` - (Beslisser) Nemen van besluiten die voor de uitkomst van een zaak noodzakelijk zijn.\n* `initiator` - (Initiator) Aanleiding geven tot de start van een zaak ..\n* `klantcontacter` - (Klantcontacter) Het eerste aanspreekpunt zijn voor vragen van burgers en bedrijven ..\n* `zaakcoordinator` - (Zaakcoördinator) Er voor zorg dragen dat de behandeling van de zaak in samenhang uitgevoerd wordt conform de daarover gemaakte afspraken.\n* `mede_initiator` - Mede-initiator",
+      "title": "omschrijving generiek"
+    },
+    "roltoelichting": {
+      "type": "string",
+      "title": "roltoelichting",
+      "maxLength": 1000
+    },
+    "registratiedatum": {
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true,
+      "description": "De datum waarop dit object is geregistreerd.",
+      "title": "registratiedatum"
+    },
+    "indicatieMachtiging": {
+      "description": "Indicatie machtiging\n\nUitleg bij mogelijke waarden:\n\n* `gemachtigde` - De betrokkene in de rol bij de zaak is door een andere betrokkene bij dezelfde zaak gemachtigd om namens hem of haar te handelen\n* `machtiginggever` - De betrokkene in de rol bij de zaak heeft een andere betrokkene bij dezelfde zaak gemachtigd om namens hem of haar te handelen",
+      "title": "indicatie machtiging",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/IndicatieMachtigingEnum"
+        },
+        {
+          "$ref": "#/$defs/BlankEnum"
+        }
+      ]
+    },
+    "contactpersoonRol": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ContactPersoonRol"
+        }
+      ],
+      "nullable": true,
+      "description": "De gegevens van de persoon die anderen desgevraagd in contact brengt met medewerkers van de BETROKKENE, een NIET-NATUURLIJK PERSOON of VESTIGING zijnde, of met BETROKKENE zelf, een NATUURLIJK PERSOON zijnde , vanuit het belang van BETROKKENE in haar ROL bij een ZAAK.",
+      "title": "contactpersoonRol"
+    },
+    "statussen": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "title": "",
+        "minLength": 1,
+        "maxLength": 1000
+      },
+      "readOnly": true,
+      "description": "De BETROKKENE die in zijn/haar ROL in een ZAAK heeft geregistreerd dat STATUSsen in die ZAAK bereikt zijn.",
+      "title": "statussen",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "betrokkeneType",
+    "omschrijving",
+    "omschrijvingGeneriek",
+    "registratiedatum",
+    "roltoelichting",
+    "roltype",
+    "statussen",
+    "url",
+    "uuid",
+    "zaak"
+  ],
+  "$defs": {
+    "BlankEnum": {
+      "enum": [
+        ""
+      ]
+    },
+    "ContactPersoonRol": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "De gegevens van de persoon die anderen desgevraagd in contact brengt met medewerkers van de BETROKKENE, een NIET-NATUURLIJK PERSOON of VESTIGING zijnde, of met BETROKKENE zelf, een NATUURLIJK PERSOON zijnde , vanuit het belang van BETROKKENE in haar ROL bij een ZAAK.",
+      "properties": {
+        "emailadres": {
+          "type": "string",
+          "format": "email",
+          "title": "Email",
+          "description": "Elektronich postadres waaronder de contactpersoon in de regel bereikbaar is.",
+          "maxLength": 254
+        },
+        "functie": {
+          "type": "string",
+          "description": "De aanduiding van de taken, rechten en plichten die de contactpersoon heeft binnen de organisatie van BETROKKENE. ",
+          "title": "functie",
+          "maxLength": 50
+        },
+        "telefoonnummer": {
+          "type": "string",
+          "description": "Telefoonnummer waaronder de contactpersoon in de regel bereikbaar is.",
+          "title": "telefoonnummer",
+          "maxLength": 20
+        },
+        "naam": {
+          "type": "string",
+          "description": "De opgemaakte naam van de contactpersoon namens de BETROKKENE.",
+          "title": "naam",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "naam"
+      ]
+    },
+    "IndicatieMachtigingEnum": {
+      "enum": [
+        "gemachtigde",
+        "machtiginggever"
+      ],
+      "type": "string"
+    },
+    "Rol_betrokkeneTypeEnum": {
+      "enum": [
+        "natuurlijk_persoon",
+        "niet_natuurlijk_persoon",
+        "vestiging",
+        "organisatorische_eenheid",
+        "medewerker"
+      ],
+      "type": "string"
+    }
+  }
+}

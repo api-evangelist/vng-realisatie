@@ -1,0 +1,125 @@
+generated: '2026-10-09'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 10
+  own: 3
+  other_domain: 4
+  platform: 3
+  roles:
+  - api
+  - other
+  - security
+  - source
+  - support
+  - website
+hosts:
+- host: api.vng.nl
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: vng.nl
+  role: api
+  relation: own
+- host: catalogi-api.vng.cloud
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: vng.cloud
+  role: other
+  relation: other-domain
+- host: documenten-api.vng.cloud
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: vng.cloud
+  role: other
+  relation: other-domain
+- host: github.com
+  found_by:
+  - pointer
+  - apis[]
+  types:
+  - SpectralRules
+  - GitHubOrganization
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: standaarden.vng.nl
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - Website
+  - Documentation
+  serves:
+  - cdn
+  - hosting
+  vendor: fastly
+  registrable_domain: vng.nl
+  role: website
+  relation: own
+- host: vng-realisatie.github.io
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - docs
+  registrable_domain: github.io
+  role: other
+  relation: platform
+- host: vng.nl
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types:
+  - About
+  - Support
+  - Blog
+  - PrivacyPolicy
+  - Accessibility
+  serves: []
+  registrable_domain: vng.nl
+  role: support
+  relation: own
+- host: www.informatiebeveiligingsdienst.nl
+  found_by:
+  - pointer
+  types:
+  - Security
+  serves: []
+  registrable_domain: informatiebeveiligingsdienst.nl
+  role: security
+  relation: other-domain
+- host: www.linkedin.com
+  found_by:
+  - pointer
+  types:
+  - LinkedIn
+  serves: []
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: zaken-api.vng.cloud
+  found_by:
+  - apis[]
+  types: []
+  serves:
+  - api
+  registrable_domain: vng.cloud
+  role: other
+  relation: other-domain

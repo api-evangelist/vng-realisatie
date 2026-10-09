@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-applicatie-schema.json",
+  "title": "Applicatie",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/Applicatie",
+  "required": [
+    "clientIds",
+    "label"
+  ],
+  "type": "object",
+  "properties": {
+    "url": {
+      "title": "Url",
+      "description": "URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.",
+      "type": "string",
+      "format": "uri",
+      "readOnly": true,
+      "maxLength": 1000,
+      "minLength": 1
+    },
+    "clientIds": {
+      "description": "Lijst van consumer identifiers (hun 'client_id'). Een `client_id` mag slechts bij één applicatie-object voorkomen.",
+      "type": "array",
+      "items": {
+        "title": "Client ids",
+        "type": "string",
+        "maxLength": 50,
+        "minLength": 1
+      }
+    },
+    "label": {
+      "title": "Label",
+      "description": "Een leesbare representatie van de applicatie, voor eindgebruikers.",
+      "type": "string",
+      "maxLength": 100,
+      "minLength": 1
+    },
+    "heeftAlleAutorisaties": {
+      "title": "Heeft alle autorisaties",
+      "description": "Indien alle autorisaties gegeven zijn, dan hoeven deze niet individueel opgegeven te worden. Gebruik dit alleen als je de consumer helemaal vertrouwt.",
+      "type": "boolean"
+    },
+    "autorisaties": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/AutorisatieBase"
+      }
+    }
+  },
+  "$defs": {
+    "AutorisatieBase": {
+      "required": [
+        "component",
+        "scopes"
+      ],
+      "type": "object",
+      "properties": {
+        "component": {
+          "title": "Component",
+          "description": "Component waarop autorisatie van toepassing is.\n\nUitleg bij mogelijke waarden:\n\n* `ac` - Autorisaties API\n* `nrc` - Notificaties API\n* `zrc` - Zaken API\n* `ztc` - Catalogi API\n* `drc` - Documenten API\n* `brc` - Besluiten API\n* `cmc` - Contactmomenten API\n* `kc` - Klanten API\n* `vrc` - Verzoeken API",
+          "type": "string",
+          "enum": [
+            "ac",
+            "nrc",
+            "zrc",
+            "ztc",
+            "drc",
+            "brc",
+            "cmc",
+            "kc",
+            "vrc"
+          ]
+        },
+        "componentWeergave": {
+          "title": "Component weergave",
+          "description": "Omschrijving van `component`.",
+          "type": "string",
+          "readOnly": true,
+          "minLength": 1
+        },
+        "scopes": {
+          "description": "Lijst van scope labels. Elke scope geeft toegang tot een set van acties/operaties, zoals gedocumenteerd bij de betreffende component.",
+          "type": "array",
+          "items": {
+            "title": "Scopes",
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

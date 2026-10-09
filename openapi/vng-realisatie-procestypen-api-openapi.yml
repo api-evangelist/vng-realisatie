@@ -1,0 +1,252 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Procestypen API
+  version: 0.0.1
+  contact:
+    url: https://github.com/VNG-Realisatie/referentielijsten-api
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: EUPL 1.2
+    url: https://opensource.org/licenses/EUPL-1.2
+  description: 'Operations tagged procestypen across 2 of this provider''s published API definitions: vng-realisatie-referentielijsten-openapi.yml, vng-realisatie-referentielijsten-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: http://referentielijsten-api.internal/api/v1
+- url: https://referentielijsten-api.internal/api/v1
+tags:
+- name: procestypen
+paths:
+  /procestypen:
+    get:
+      tags:
+      - procestypen
+      summary: Ontsluit de selectielijst procestypen
+      description: 'Procestypen worden gerefereerd in zaaktypecatalogi - bij het configureren
+
+        van een zaaktype wordt aangegeven welk procestype van toepassing is, zodat
+
+        het archiefregime van zaken bepaald kan worden.
+
+        Zie https://vng.nl/files/vng/20170706-selectielijst-gemeenten-intergemeentelijke-organen-2017.pdf
+
+        voor de bron van de inhoud.'
+      operationId: procestypen_list
+      parameters:
+      - name: jaar
+        in: query
+        description: jaar
+        schema:
+          type: string
+      responses:
+        200:
+          description: ProcesType
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcesType'
+        400:
+          description: ValidatieFout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatieFout'
+        405:
+          description: Fout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+    servers:
+    - url: http://referentielijsten-api.internal/api/v1
+    - url: https://referentielijsten-api.internal/api/v1
+  /procestypen/{uuid}:
+    get:
+      tags:
+      - procestypen
+      summary: Ontsluit de selectielijst procestypen
+      description: 'Procestypen worden gerefereerd in zaaktypecatalogi - bij het configureren
+
+        van een zaaktype wordt aangegeven welk procestype van toepassing is, zodat
+
+        het archiefregime van zaken bepaald kan worden.
+
+        Zie https://vng.nl/files/vng/20170706-selectielijst-gemeenten-intergemeentelijke-organen-2017.pdf
+
+        voor de bron van de inhoud.'
+      operationId: procestypen_retrieve
+      parameters:
+      - name: uuid
+        in: path
+        description: uuid van de resultaattypeomschrijving
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: ProcesType
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProcesType'
+        400:
+          description: ValidatieFout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidatieFout'
+        404:
+          description: Fout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        405:
+          description: Fout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+    servers:
+    - url: http://referentielijsten-api.internal/api/v1
+    - url: https://referentielijsten-api.internal/api/v1
+components:
+  schemas:
+    ValidatieFout:
+      title: ValidatieFout represents an error
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+      type: object
+      properties:
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+        status:
+          type: integer
+          description: De HTTP status code
+          format: int32
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+      description: Formaat van HTTP 4xx en 5xx fouten.
+    FieldValidationError:
+      title: FieldValidationError represents an error
+      required:
+      - code
+      - name
+      - reason
+      type: object
+      properties:
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+      description: Formaat van validatiefouten.
+    ProcesType:
+      required:
+      - jaar
+      - naam
+      - nummer
+      - omschrijving
+      - procesobject
+      - toelichting
+      - url
+      type: object
+      properties:
+        jaar:
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          description: Nummer van de selectielijstcategorie
+          format: int32
+          example: 2020
+        naam:
+          maxLength: 100
+          type: string
+          description: Benaming van het procestype
+          example: Producten en diensten leveren
+        nummer:
+          maximum: 2147483647
+          minimum: -2147483648
+          type: integer
+          description: Het jaartal waartoe dit ProcesType behoort
+          format: int32
+          example: 6
+        omschrijving:
+          maxLength: 300
+          type: string
+          description: Omschrijving van het procestype
+          example: Het door het orgaan leveren van (publieke) producten of diensten
+        procesobject:
+          maxLength: 80
+          type: string
+          description: 'Object waar de uitvoering van het proces op van toepassing
+
+            is en waarvan de bestaans- of geldigheidsduur eventueel van belang is
+
+            bij het bepalen van de start van de bewaartermijn'
+          example: Het geleverde product of de geleverde dienst
+        toelichting:
+          type: string
+          description: Toelichting van het procestype
+          example: Voor het verstrekken van een product of dienst hoeft de aanvrager niet aan een bepaalde situatie te voldoen, want in dat geval is het procestype 'Voorzieningen verstrekken' van toepassing. Het product of de dienst houdt niet het doen of laten van het orgaan in, want in dat geval valt het onder het procestype 'Verzoeken behandelen'.
+        url:
+          type: string
+          description: Interne referentie naar de url
+          readOnly: true
+          example: http://referentielijsten-api.internal/api/v1/651a1b5b-f84f-4c73-9151-4d485c7dcb99
+    Fout:
+      title: Fout represents an error
+      required:
+      - code
+      - detail
+      - instance
+      - status
+      - title
+      type: object
+      properties:
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+        status:
+          type: integer
+          description: De HTTP status code
+          format: int64
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+      description: Formaat van HTTP 4xx en 5xx fouten.
+x-refined-from:
+- vng-realisatie-referentielijsten-openapi.yml
+- vng-realisatie-referentielijsten-openapi.yml

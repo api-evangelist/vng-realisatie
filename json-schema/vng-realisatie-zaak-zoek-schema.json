@@ -1,0 +1,622 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-zaak-zoek-schema.json",
+  "title": "ZaakZoek",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-zaken-openapi.yml#/components/schemas/ZaakZoek",
+  "type": "object",
+  "properties": {
+    "zaakgeometrie": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/GeoWithin"
+        }
+      ],
+      "title": "GeoWithin"
+    },
+    "uuid__in": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid",
+        "title": ""
+      },
+      "description": "Array of unieke resource identifiers (UUID4)",
+      "title": "uuid__in"
+    },
+    "identificatie": {
+      "type": "string",
+      "description": "De unieke identificatie van de ZAAK binnen de organisatie die verantwoordelijk is voor de behandeling van de ZAAK.",
+      "title": "identificatie"
+    },
+    "expand": {
+      "type": "string",
+      "description": "Examples: \n`expand=zaaktype, status, status.statustype, hoofdzaak.status.statustype, hoofdzaak.deelzaken.status.statustype`\nHaal details van gelinkte resources direct op. Als je meerdere resources tegelijk wilt ophalen kun je deze scheiden met een komma. Voor het ophalen van resources die een laag dieper genest zijn wordt de punt-notatie gebruikt.",
+      "title": "expand"
+    },
+    "bronorganisatie": {
+      "type": "string",
+      "description": "Het RSIN van de Niet-natuurlijk persoon zijnde de organisatie die de zaak heeft gecreeerd. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef",
+      "title": "bronorganisatie"
+    },
+    "bronorganisatie__in": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "title": ""
+      },
+      "description": "Array van bronorganisaties.",
+      "title": "bronorganisatie__in"
+    },
+    "zaaktype": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL-referentie naar het ZAAKTYPE (in de Catalogi API) in de CATALOGUS waar deze voorkomt",
+      "title": "zaaktype"
+    },
+    "zaaktype__in": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri",
+        "title": ""
+      },
+      "description": "Array van zaaktypen.",
+      "title": "zaaktype__in"
+    },
+    "archiefnominatie": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ArchiefnominatieEnum"
+        }
+      ],
+      "description": "Aanduiding of het zaakdossier blijvend bewaard of na een bepaalde termijn vernietigd moet worden. Uitleg bij mogelijke waarden: * blijvend_bewaren - Het zaakdossier moet bewaard blijven en op de Archiefactiedatum overgedragen worden naar een archiefbewaarplaats. * vernietigen - Het zaakdossier moet op of na de Archiefactiedatum vernietigd worden.",
+      "title": "archiefnominatie"
+    },
+    "archiefnominatie__in": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "title": ""
+      },
+      "description": "Multiple values may be separated by commas.",
+      "title": "archiefnominatie__in"
+    },
+    "einddatum": {
+      "type": "string",
+      "description": "De datum waarop de uitvoering van de zaak afgerond is.",
+      "title": "einddatum"
+    },
+    "einddatum__gt": {
+      "type": "string",
+      "title": "einddatum__gt"
+    },
+    "einddatum__lt": {
+      "type": "string",
+      "title": "einddatum__lt"
+    },
+    "einddatum__isnull": {
+      "type": "boolean",
+      "title": "einddatum__isnull"
+    },
+    "einddatumGepland": {
+      "type": "string",
+      "description": "De datum waarop volgens de planning verwacht wordt dat de zaak afgerond wordt.",
+      "title": "einddatumGepland"
+    },
+    "einddatumGepland__gt": {
+      "type": "string",
+      "title": "einddatumGepland__gt"
+    },
+    "einddatumGepland__lt": {
+      "type": "string",
+      "title": "einddatumGepland__lt"
+    },
+    "uiterlijkeEinddatumAfdoening": {
+      "type": "string",
+      "description": "De laatste datum waarop volgens wet- en regelgeving de zaak afgerond dient te zijn.",
+      "title": "uiterlijkeEinddatumAfdoening"
+    },
+    "uiterlijkeEinddatumAfdoening__gt": {
+      "type": "string",
+      "title": "uiterlijkeEinddatumAfdoening__gt"
+    },
+    "uiterlijkeEinddatumAfdoening__lt": {
+      "type": "string",
+      "title": "uiterlijkeEinddatumAfdoening__lt"
+    },
+    "archiefactiedatum": {
+      "type": "string",
+      "description": "De datum waarop het gearchiveerde zaakdossier vernietigd moet worden dan wel overgebracht moet worden naar een archiefbewaarplaats. Wordt automatisch berekend bij het aanmaken of wijzigen van een RESULTAAT aan deze ZAAK indien nog leeg.",
+      "title": "archiefactiedatum"
+    },
+    "archiefactiedatum__lt": {
+      "type": "string",
+      "title": "Archiefactiedatum lt"
+    },
+    "archiefactiedatum__gt": {
+      "type": "string",
+      "title": "Archiefactiedatum gt"
+    },
+    "archiefactiedatum__isnull": {
+      "type": "boolean",
+      "title": "Archiefactiedatum is leeg",
+      "description": "De archiefactiedatum is leeg"
+    },
+    "archiefstatus": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/ArchiefstatusEnum"
+        }
+      ],
+      "description": "Aanduiding of het zaakdossier blijvend bewaard of na een bepaalde termijn vernietigd moet worden. Uitleg bij mogelijke waarden: * nog_te_archiveren - De zaak cq. het zaakdossier is nog niet als geheel gearchiveerd. * gearchiveerd - De zaak cq. het zaakdossier is als geheel niet-wijzigbaar bewaarbaar gemaakt. * gearchiveerd_procestermijn_onbekend - De zaak cq. het zaakdossier is als geheel niet-wijzigbaar bewaarbaar gemaakt maar de vernietigingsdatum kan nog niet bepaald worden. * overgedragen - De zaak cq. het zaakdossier is overgebracht naar een archiefbewaarplaats.",
+      "title": "archiefstatus"
+    },
+    "archiefstatus__in": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "title": ""
+      },
+      "description": "Multiple values may be separated by commas.",
+      "title": "archiefstatus__in"
+    },
+    "startdatum": {
+      "type": "string",
+      "description": "De datum waarop met de uitvoering van de zaak is gestart",
+      "title": "startdatum"
+    },
+    "startdatum__gt": {
+      "type": "string",
+      "description": "De datum waarop met de uitvoering van de zaak is gestart",
+      "title": "startdatum__gt"
+    },
+    "startdatum__gte": {
+      "type": "string",
+      "description": "De datum waarop met de uitvoering van de zaak is gestart",
+      "title": "startdatum__gte"
+    },
+    "startdatum__lt": {
+      "type": "string",
+      "description": "De datum waarop met de uitvoering van de zaak is gestart",
+      "title": "startdatum__lt"
+    },
+    "startdatum__lte": {
+      "type": "string",
+      "description": "De datum waarop met de uitvoering van de zaak is gestart",
+      "title": "startdatum__lte"
+    },
+    "rol__betrokkeneType": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Rol_betrokkeneTypeEnum"
+        }
+      ],
+      "description": "Type van de betrokkene. Uitleg bij mogelijke waarden: * natuurlijk_persoon - Natuurlijk persoon * niet_natuurlijk_persoon - Niet-natuurlijk persoon * vestiging - Vestiging * organisatorische_eenheid - Organisatorische eenheid * medewerker - Medewerker",
+      "title": "rol__betrokkeneType"
+    },
+    "rol__betrokkene": {
+      "type": "string",
+      "description": "URL-referentie naar een betrokkene gerelateerd aan de ZAAK.",
+      "title": "rol__betrokkene"
+    },
+    "rol__omschrijvingGeneriek": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/Rol_omschrijvingGeneriekEnum"
+        }
+      ],
+      "description": "Algemeen gehanteerde benaming van de aard van de ROL, afgeleid uit het ROLTYPE. Uitleg bij mogelijke waarden:\n\n`adviseur` - Adviseur\n\n`behandelaar` - Behandelaar\n\n`belanghebbende` - Belanghebbende\n\n`beslisser` - Beslisser\n\n`initiator` - Initiator\n\n`klantcontacter` - Klantcontacter\n\n`zaakcoordinator` - Zaakcoördinator\n \n`mede_initiator` - Mede-initiator\n",
+      "title": "rol__omschrijvingGeneriek"
+    },
+    "maximaleVertrouwelijkheidaanduiding": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/MaximaleVertrouwelijkheidaanduidingEnum"
+        }
+      ],
+      "description": "Zaken met een vertrouwelijkheidaanduiding die beperkter is dan de aangegeven aanduiding worden uit de resultaten gefiltered. Uitleg bij mogelijke waarden: * `openbaar` - Openbaar * `beperkt_openbaar` - Beperkt openbaar * `intern` - Intern * `zaakvertrouwelijk` - Zaakvertrouwelijk * `vertrouwelijk` - Vertrouwelijk * `confidentieel` - Confidentieel * `geheim` - Geheim * `zeer_geheim` - Zeer geheim",
+      "title": "maximaleVertrouwelijkheidaanduiding"
+    },
+    "rol__betrokkeneIdentificatie__natuurlijkPersoon__anpIdentificatie": {
+      "type": "string",
+      "description": "Het door de gemeente uitgegeven unieke nummer voor een ANDER NATUURLIJK PERSOON",
+      "title": "rol__betrokkeneIdentificatie__natuurlijkPersoon__anpIdentificatie",
+      "maxLength": 17
+    },
+    "rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn": {
+      "type": "string",
+      "description": "Het burgerservicenummer, bedoeld in artikel 1.1 van de Wet algemene bepalingen burgerservicenummer.",
+      "title": "rol__betrokkeneIdentificatie__natuurlijkPersoon__inpBsn",
+      "maxLength": 9
+    },
+    "rol__betrokkeneIdentificatie__natuurlijkPersoon__inpA_nummer": {
+      "type": "string",
+      "description": "Het administratienummer van de persoon, bedoeld in de Wet BRP",
+      "title": "rol__betrokkeneIdentificatie__natuurlijkPersoon__inpA_nummer",
+      "maxLength": 10
+    },
+    "rol__betrokkeneIdentificatie__nietNatuurlijkPersoon__innNnpId": {
+      "type": "string",
+      "description": "Het door een kamer toegekend uniek nummer voor de INGESCHREVEN NIET-NATUURLIJK PERSOON",
+      "title": "rol__betrokkeneIdentificatie__nietNatuurlijkPersoon__innNnpId"
+    },
+    "rol__betrokkeneIdentificatie__nietNatuurlijkPersoon__annIdentificatie": {
+      "type": "string",
+      "description": "Het door de gemeente uitgegeven unieke nummer voor een ANDER NIET-NATUURLIJK PERSOON",
+      "title": "rol__betrokkeneIdentificatie__nietNatuurlijkPersoon__annIdentificatie",
+      "maxLength": 17
+    },
+    "rol__betrokkeneIdentificatie__vestiging__vestigingsNummer": {
+      "type": "string",
+      "description": "Een korte unieke aanduiding van de Vestiging.",
+      "title": "rol__betrokkeneIdentificatie__vestiging__vestigingsNummer",
+      "maxLength": 24
+    },
+    "rol__betrokkeneIdentificatie__medewerker__identificatie": {
+      "type": "string",
+      "description": "Een korte unieke aanduiding van de MEDEWERKER.",
+      "title": "rol__betrokkeneIdentificatie__medewerker__identificatie",
+      "maxLength": 24
+    },
+    "rol__betrokkeneIdentificatie__organisatorischeEenheid__identificatie": {
+      "type": "string",
+      "description": "Een korte identificatie van de organisatorische eenheid.",
+      "title": "rol__betrokkeneIdentificatie__organisatorischeEenheid__identificatie"
+    },
+    "registratiedatum": {
+      "type": "string",
+      "description": "De datum waarop de zaakbehandelende organisatie de ZAAK heeft geregistreerd. Indien deze niet opgegeven wordt, wordt de datum van vandaag gebruikt.",
+      "title": "registratiedatum"
+    },
+    "registratiedatum__gt": {
+      "type": "string",
+      "title": "registratiedatum__gt"
+    },
+    "registratiedatum__lt": {
+      "type": "string",
+      "title": "registratiedatum__lt"
+    },
+    "ordering": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/OrderingEnum"
+        }
+      ],
+      "description": "Het veld waarop de resultaten geordend worden. Het minnetje betekent omgekeerde volgorde.",
+      "title": "ordering"
+    }
+  },
+  "$defs": {
+    "ArchiefnominatieEnum": {
+      "enum": [
+        "blijvend_bewaren",
+        "vernietigen"
+      ],
+      "type": "string"
+    },
+    "ArchiefstatusEnum": {
+      "enum": [
+        "nog_te_archiveren",
+        "gearchiveerd",
+        "gearchiveerd_procestermijn_onbekend",
+        "overgedragen"
+      ],
+      "type": "string"
+    },
+    "GeoJSONGeometry": {
+      "title": "GeoJSONGeometry",
+      "type": "object",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/Point"
+        },
+        {
+          "$ref": "#/$defs/MultiPoint"
+        },
+        {
+          "$ref": "#/$defs/LineString"
+        },
+        {
+          "$ref": "#/$defs/MultiLineString"
+        },
+        {
+          "$ref": "#/$defs/Polygon"
+        },
+        {
+          "$ref": "#/$defs/MultiPolygon"
+        },
+        {
+          "$ref": "#/$defs/GeometryCollection"
+        }
+      ]
+    },
+    "GeoWithin": {
+      "type": "object",
+      "properties": {
+        "within": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/GeoJSONGeometry"
+            }
+          ],
+          "title": "within"
+        }
+      }
+    },
+    "Geometry": {
+      "title": "Geometry",
+      "description": "GeoJSON geometry",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/GeometryTypeEnum"
+            }
+          ],
+          "description": "The geometry type"
+        }
+      }
+    },
+    "GeometryCollection": {
+      "title": "Geometry collection",
+      "description": "GeoJSON multi-polygon geometry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Geometry"
+        },
+        {
+          "type": "object",
+          "required": [
+            "geometries"
+          ],
+          "properties": {
+            "geometries": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Geometry"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "GeometryTypeEnum": {
+      "type": "string",
+      "enum": [
+        "Point",
+        "MultiPoint",
+        "LineString",
+        "MultiLineString",
+        "Polygon",
+        "MultiPolygon",
+        "Feature",
+        "FeatureCollection",
+        "GeometryCollection"
+      ]
+    },
+    "LineString": {
+      "title": "Line-string",
+      "description": "GeoJSON line-string geometry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Geometry"
+        },
+        {
+          "type": "object",
+          "required": [
+            "coordinates"
+          ],
+          "properties": {
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Point2D"
+              },
+              "minItems": 2
+            }
+          }
+        }
+      ]
+    },
+    "MaximaleVertrouwelijkheidaanduidingEnum": {
+      "enum": [
+        "openbaar",
+        "beperkt_openbaar",
+        "intern",
+        "zaakvertrouwelijk",
+        "vertrouwelijk",
+        "confidentieel",
+        "geheim",
+        "zeer_geheim"
+      ],
+      "type": "string"
+    },
+    "MultiLineString": {
+      "title": "Multi-line string",
+      "description": "GeoJSON multi-line-string geometry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Geometry"
+        },
+        {
+          "type": "object",
+          "required": [
+            "coordinates"
+          ],
+          "properties": {
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/Point2D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "MultiPoint": {
+      "title": "MultiPoint",
+      "description": "GeoJSON multi-point geometry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Geometry"
+        },
+        {
+          "type": "object",
+          "required": [
+            "coordinates"
+          ],
+          "properties": {
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/Point2D"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "MultiPolygon": {
+      "title": "Multi-polygon",
+      "description": "GeoJSON multi-polygon geometry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Geometry"
+        },
+        {
+          "type": "object",
+          "required": [
+            "coordinates"
+          ],
+          "properties": {
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/Point2D"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "OrderingEnum": {
+      "enum": [
+        "startdatum",
+        "-startdatum",
+        "einddatum",
+        "-einddatum",
+        "publicatiedatum",
+        "-publicatiedatum",
+        "archiefactiedatum",
+        "-archiefactiedatum",
+        "registratiedatum",
+        "-registratiedatum",
+        "identificatie",
+        "-identificatie"
+      ],
+      "type": "string"
+    },
+    "Point": {
+      "title": "Point",
+      "description": "GeoJSON point geometry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Geometry"
+        },
+        {
+          "type": "object",
+          "required": [
+            "coordinates"
+          ],
+          "properties": {
+            "coordinates": {
+              "$ref": "#/$defs/Point2D"
+            }
+          }
+        }
+      ]
+    },
+    "Point2D": {
+      "title": "Point2D",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 2,
+      "minItems": 2
+    },
+    "Polygon": {
+      "title": "Polygon",
+      "description": "GeoJSON polygon geometry",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/$defs/Geometry"
+        },
+        {
+          "type": "object",
+          "required": [
+            "coordinates"
+          ],
+          "properties": {
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/Point2D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "Rol_betrokkeneTypeEnum": {
+      "enum": [
+        "natuurlijk_persoon",
+        "niet_natuurlijk_persoon",
+        "vestiging",
+        "organisatorische_eenheid",
+        "medewerker"
+      ],
+      "type": "string"
+    },
+    "Rol_omschrijvingGeneriekEnum": {
+      "enum": [
+        "adviseur",
+        "behandelaar",
+        "belanghebbende",
+        "beslisser",
+        "initiator",
+        "klantcontacter",
+        "zaakcoordinator",
+        "mede_initiator"
+      ],
+      "type": "string"
+    }
+  }
+}

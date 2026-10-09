@@ -1,0 +1,37 @@
+name: VNG Realisatie Test Environments
+generated: '2026-10-09'
+method: searched
+source:
+- https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/
+- https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/handleidingen-en-tutorials/api-guides
+docs: https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/
+description: 'VNG-Realisatie hosts the ZGW reference implementations in two fully separated environment sets: "stable" (current
+  standard or release candidates, bugfix-only, version-tagged, master branches) and "volgende release" (continuously updated
+  from develop branches to try new features). Access uses a JWT generated with the token-issuer tool; use of the hosted reference
+  implementation is subject to published terms of use (gebruiksvoorwaarden).'
+environments:
+- name: stable
+  hosts:
+  - https://zaken-api.vng.cloud
+  - https://documenten-api.vng.cloud
+  - https://catalogi-api.vng.cloud
+  - https://besluiten-api.vng.cloud
+  - https://notificaties-api.vng.cloud
+  - https://autorisaties-api.vng.cloud
+  - https://zaken-auth.vng.cloud
+- name: volgende release (test)
+  hosts:
+  - https://zaken-api.test.vng.cloud
+  - https://documenten-api.test.vng.cloud
+  - https://catalogi-api.test.vng.cloud
+  - https://besluiten-api.test.vng.cloud
+  - https://notificaties-api.test.vng.cloud
+  - https://autorisaties-api.test.vng.cloud
+  - https://zaken-auth.test.vng.cloud
+tooling:
+- https://github.com/VNG-Realisatie/token-issuer (JWT generation)
+- 'Test scenarios guide: https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/handleidingen-en-tutorials/test-scenarios'
+- 'Local install of reference implementation: https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/handleidingen-en-tutorials/installatie-en-configuratie'
+mocks:
+- https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00 (declared server in Klantinteracties spec)
+- https://virtserver.swaggerhub.com/VNGRealisatie/api/bg_imwoz_woz/v1 (declared server in WOZ-bevragen spec)

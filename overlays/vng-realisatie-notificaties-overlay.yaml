@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Notificaties API
+  version: 1.0.0
+extends: ../openapi/_original/vng-realisatie-notificaties-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/vng-realisatie-notificaties-openapi.yml
+x-rationale: Adds provider metadata, the documentation link recorded in apis.yml, and an x-agent-safe marker on every GET
+  operation. Derived only from the saved contract and apis.yml; the original OpenAPI is not modified.
+actions:
+- target: $.info
+  description: Attach API Evangelist provider metadata without mutating the contract.
+  update:
+    x-provider: VNG Realisatie
+    x-provider-slug: vng-realisatie
+    x-apis-json-name: Notificaties API
+    x-provider-hosted-openapi: https://raw.githubusercontent.com/VNG-Realisatie/notificaties-api/master/src/openapi.yaml
+- target: $
+  description: Point to the provider documentation recorded in apis.yml.
+  update:
+    externalDocs:
+      description: Notificaties API documentation (VNG Realisatie)
+      url: https://vng-realisatie.github.io/gemma-zaken/
+- target: $.paths['/domains'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/domains/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/subscriptions'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/subscriptions/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true

@@ -1,0 +1,50 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Health API
+  version: 0.0.1
+  contact:
+    url: https://github.com/VNG-Realisatie/referentielijsten-api
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: EUPL 1.2
+    url: https://opensource.org/licenses/EUPL-1.2
+  description: 'Operations tagged health across 2 of this provider''s published API definitions: vng-realisatie-referentielijsten-openapi.yml, vng-realisatie-referentielijsten-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: http://referentielijsten-api.internal/api/v1
+- url: https://referentielijsten-api.internal/api/v1
+tags:
+- name: Health
+paths:
+  /health:
+    get:
+      tags:
+      - Health
+      summary: Controleer of de api online is
+      operationId: health_retrieve
+      responses:
+        200:
+          description: Health
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+    servers:
+    - url: http://referentielijsten-api.internal/api/v1
+    - url: https://referentielijsten-api.internal/api/v1
+components:
+  schemas:
+    Health:
+      required:
+      - healthy
+      - time
+      type: object
+      properties:
+        healthy:
+          type: boolean
+          description: Als de api online is is dit altijd true
+        time:
+          type: string
+          description: Tijd waarop de message is gegenereerd
+x-refined-from:
+- vng-realisatie-referentielijsten-openapi.yml
+- vng-realisatie-referentielijsten-openapi.yml

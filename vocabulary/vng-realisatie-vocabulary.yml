@@ -1,0 +1,444 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/vng-realisatie-autorisaties-openapi.yml
+- openapi/vng-realisatie-besluiten-openapi.yml
+- openapi/vng-realisatie-catalogi-openapi.yml
+- openapi/vng-realisatie-documenten-openapi.yml
+- openapi/vng-realisatie-klantinteracties-openapi.yml
+vocabulary:
+  name: VNG Realisatie Domain Vocabulary
+  description: 'Terms declared by VNG Realisatie''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-09'
+  terms:
+  - term: besluittypen
+    definition: Opvragen en bewerken van BESLUITTYPEn nodig voor BESLUITEN in de Besluiten API. Alle BESLUITTYPEn van de besluiten die het resultaat
+      kunnen zijn van het zaakgericht werken van de behandelende organisatie(s).
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: catalogussen
+    definition: Opvragen en bewerken van CATALOGUSsen. De verzameling van ZAAKTYPEn, INFORMATIEOBJECTTYPEn en BESLUITTYPEn voor een domein die
+      als één geheel beheerd wordt.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: eigenschappen
+    definition: Opvragen en bewerken van EIGENSCHAPpen van een ZAAKTYPE. Een relevant inhoudelijk gegeven dat bij ZAAKen van dit ZAAKTYPE geregistreerd
+      moet kunnen worden en geen standaard kenmerk is van een zaak.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: informatieobjecttypen
+    definition: Opvragen en bewerken van INFORMATIEOBJECTTYPEn nodig voor INFORMATIEOBJECTen in de Documenten API. Een INFORMATIEOBJECTTYPE beschijft
+      de karakteristieken van een document of ander object dat informatie bevat.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: resultaattypen
+    definition: Opvragen en bewerken van RESULTAATTYPEn van een ZAAKTYPE. Het betreft de indeling of groepering van resultaten van zaken van hetzelfde
+      ZAAKTYPE naar hun aard, zoals 'verleend', 'geweigerd', 'verwerkt', etc.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: roltypen
+    definition: Opvragen en bewerken van ROLTYPEn van een ZAAKTYPE. Generieke aanduiding van de aard van een ROL die een BETROKKENE kan uitoefenen
+      in ZAAKen van een ZAAKTYPE.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: statustypen
+    definition: Opvragen en bewerken van STATUSTYPEn van een ZAAKTYPE. Generieke aanduiding van de aard van een status.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: zaakobjecttypen
+    definition: 'Opvragen en bewerken van ZAAKOBJECTTYPEn. Er wordt gevalideerd op: - `zaaktype` behoort tot dezelfde `catalogus`'
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: zaaktype-informatieobjecttypen
+    definition: Opvragen en bewerken van ZAAKTYPE-INFORMATIEOBJECTTYPE relaties. Geeft aan welke INFORMATIEOBJECTTYPEn binnen een ZAAKTYPE mogelijk
+      zijn en hoe de richting is.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: zaaktypen
+    definition: Opvragen en bewerken van ZAAKTYPEn nodig voor ZAKEN in de Zaken API.Een ZAAKTYPE beschrijft het geheel van karakteristieke eigenschappen
+      van zaken van eenzelfde soort.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-catalogi-openapi.yml
+  - term: enkelvoudiginformatieobjecten
+    definition: Opvragen en bewerken van (ENKELVOUDIG) INFORMATIEOBJECTen (documenten).
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-documenten-openapi.yml
+  - term: gebruiksrechten
+    definition: Opvragen en bewerken van GEBRUIKSRECHTen bij een INFORMATIEOBJECT.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-documenten-openapi.yml
+  - term: objectinformatieobjecten
+    definition: Opvragen en verwijderen van OBJECT-INFORMATIEOBJECT relaties. Het betreft een relatie tussen een willekeurig OBJECT, bijvoorbeeld
+      een ZAAK in de Zaken API, en een INFORMATIEOBJECT.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-documenten-openapi.yml
+  - term: verzendingen
+    definition: Opvragen en bewerken van VERZENDINGen.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-documenten-openapi.yml
+  - term: zaken
+    definition: Een zaak mag (in principe) niet meer gewijzigd worden als de `archiefstatus` een andere status heeft dan "nog_te_archiveren".
+      Voor praktische redenen is er geen harde validatie regel aan de provider kant.
+    tags:
+    - Resource Group
+    source: openapi/vng-realisatie-zaken-openapi.yml
+  - term: AutorisatieBase
+    definition: 'Object declared by the contract with fields: component, componentWeergave, scopes.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/AutorisatieBase
+  - term: zrcAutorisatie
+    definition: 'Object declared by the contract with fields: zaaktype, maxVertrouwelijkheidaanduiding.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/zrcAutorisatie
+  - term: drcAutorisatie
+    definition: 'Object declared by the contract with fields: informatieobjecttype, maxVertrouwelijkheidaanduiding.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/drcAutorisatie
+  - term: brcAutorisatie
+    definition: 'Object declared by the contract with fields: besluittype.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/brcAutorisatie
+  - term: Applicatie
+    definition: 'Object declared by the contract with fields: url, clientIds, label, heeftAlleAutorisaties, autorisaties.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/Applicatie
+  - term: Fout
+    definition: 'Object declared by the contract with fields: type, code, title, status, detail, instance.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/Fout
+  - term: FieldValidationError
+    definition: 'Object declared by the contract with fields: name, code, reason.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/FieldValidationError
+  - term: ValidatieFout
+    definition: 'Object declared by the contract with fields: type, code, title, status, detail, instance, invalidParams.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-autorisaties-openapi.yml#/components/schemas/ValidatieFout
+  - term: Besluit
+    definition: 'Object declared by the contract with fields: url, identificatie, verantwoordelijkeOrganisatie, besluittype, zaak, datum, toelichting,
+      bestuursorgaan, ingangsdatum, vervaldatum, vervalreden, vervalredenWeergave. (3 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-besluiten-openapi.yml#/components/schemas/Besluit
+  - term: Wijzigingen
+    definition: 'Object declared by the contract with fields: oud, nieuw.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-besluiten-openapi.yml#/components/schemas/Wijzigingen
+  - term: AuditTrail
+    definition: 'Object declared by the contract with fields: uuid, bron, applicatieId, applicatieWeergave, gebruikersId, gebruikersWeergave,
+      actie, actieWeergave, resultaat, hoofdObject, resource, resourceUrl. (4 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-besluiten-openapi.yml#/components/schemas/AuditTrail
+  - term: BesluitInformatieObject
+    definition: 'Object declared by the contract with fields: url, informatieobject, besluit.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-besluiten-openapi.yml#/components/schemas/BesluitInformatieObject
+  - term: AardRelatieEnum
+    definition: 'Enumeration declared by the contract with values: vervolg, bijdrage, onderwerp.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/AardRelatieEnum
+  - term: AfleidingswijzeEnum
+    definition: 'Enumeration declared by the contract with values: afgehandeld, ander_datumkenmerk, eigenschap, gerelateerde_zaak, hoofdzaak,
+      ingangsdatum_besluit, termijn, vervaldatum_besluit, zaakobject.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/AfleidingswijzeEnum
+  - term: ArchiefnominatieEnum
+    definition: 'Enumeration declared by the contract with values: blijvend_bewaren, vernietigen.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ArchiefnominatieEnum
+  - term: BesluitType
+    definition: 'Object declared by the contract with fields: url, catalogus, zaaktypen, omschrijving, omschrijvingGeneriek, besluitcategorie,
+      reactietermijn, publicatieIndicatie, publicatietekst, publicatietermijn, toelichting, informatieobjecttypen. (8 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/BesluitType
+  - term: BesluitTypeCreate
+    definition: 'Object declared by the contract with fields: url, catalogus, zaaktypen, omschrijving, omschrijvingGeneriek, besluitcategorie,
+      reactietermijn, publicatieIndicatie, publicatietekst, publicatietermijn, toelichting, informatieobjecttypen. (8 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/BesluitTypeCreate
+  - term: BesluitTypeUpdate
+    definition: 'Object declared by the contract with fields: url, catalogus, zaaktypen, omschrijving, omschrijvingGeneriek, besluitcategorie,
+      reactietermijn, publicatieIndicatie, publicatietekst, publicatietermijn, toelichting, informatieobjecttypen. (8 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/BesluitTypeUpdate
+  - term: BlankEnum
+    definition: 'Enumeration declared by the contract with values: .'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/BlankEnum
+  - term: BronCatalogus
+    definition: De CATALOGUS waaraan het ZAAKTYPE is ontleend.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/BronCatalogus
+  - term: BronZaaktype
+    definition: Het zaaktype binnen de CATALOGUS waaraan dit ZAAKTYPE is ontleend.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/BronZaaktype
+  - term: BrondatumArchiefprocedure
+    definition: Specificatie voor het bepalen van de brondatum voor de start van de Archiefactietermijn (=brondatum) van het zaakdossier.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/BrondatumArchiefprocedure
+  - term: Catalogus
+    definition: 'Object declared by the contract with fields: url, domein, rsin, contactpersoonBeheerNaam, contactpersoonBeheerTelefoonnummer,
+      contactpersoonBeheerEmailadres, zaaktypen, besluittypen, informatieobjecttypen, naam, versie, begindatumVersie.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/Catalogus
+  - term: CheckListItem
+    definition: 'Object declared by the contract with fields: itemnaam, toelichting, vraagstelling, verplicht.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/CheckListItem
+  - term: Eigenschap
+    definition: 'Object declared by the contract with fields: url, naam, catalogus, definitie, specificatie, toelichting, zaaktype, zaaktypeIdentificatie,
+      statustype, beginGeldigheid, eindeGeldigheid, beginObject. (1 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/Eigenschap
+  - term: EigenschapSpecificatie
+    definition: 'Object declared by the contract with fields: groep, formaat, lengte, kardinaliteit, waardenverzameling.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/EigenschapSpecificatie
+  - term: FormaatEnum
+    definition: 'Enumeration declared by the contract with values: tekst, getal, datum, datum_tijd.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/FormaatEnum
+  - term: IndicatieInternOfExternEnum
+    definition: 'Enumeration declared by the contract with values: intern, extern.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/IndicatieInternOfExternEnum
+  - term: InformatieObjectType
+    definition: Serializer based on ``IOT-basis`` specified in XSD ``ztc0310_ent_basis.xsd``.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/InformatieObjectType
+  - term: InformatieObjectTypeOmschrijvingGeneriek
+    definition: 'Object declared by the contract with fields: informatieobjecttypeOmschrijvingGeneriek, definitieInformatieobjecttypeOmschrijvingGeneriek,
+      herkomstInformatieobjecttypeOmschrijvingGeneriek, hierarchieInformatieobjecttypeOmschrijvingGeneriek, opmerkingInformatieobjecttypeOmschrijvingGeneriek.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/InformatieObjectTypeOmschrijvingGeneriek
+  - term: ObjecttypeEnum
+    definition: 'Enumeration declared by the contract with values: adres, besluit, buurt, enkelvoudig_document, gemeente, gemeentelijke_openbare_ruimte,
+      huishouden, inrichtingselement, kadastrale_onroerende_zaak, kunstwerkdeel, maatschappelijke_activiteit, medewerker. (19 more)'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ObjecttypeEnum
+  - term: OmschrijvingGeneriekEnum
+    definition: 'Enumeration declared by the contract with values: adviseur, behandelaar, belanghebbende, beslisser, initiator, klantcontacter,
+      zaakcoordinator, mede_initiator.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/OmschrijvingGeneriekEnum
+  - term: PaginatedCatalogusList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PaginatedCatalogusList
+  - term: PaginatedEigenschapList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PaginatedEigenschapList
+  - term: PaginatedResultaatTypeList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PaginatedResultaatTypeList
+  - term: PaginatedRolTypeList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PaginatedRolTypeList
+  - term: PaginatedStatusTypeList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PaginatedStatusTypeList
+  - term: PaginatedZaakObjectTypeList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PaginatedZaakObjectTypeList
+  - term: PaginatedZaakTypeInformatieObjectTypeList
+    definition: 'Object declared by the contract with fields: count, next, previous, results.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PaginatedZaakTypeInformatieObjectTypeList
+  - term: PatchedEigenschap
+    definition: 'Object declared by the contract with fields: url, naam, catalogus, definitie, specificatie, toelichting, zaaktype, zaaktypeIdentificatie,
+      statustype, beginGeldigheid, eindeGeldigheid, beginObject. (1 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PatchedEigenschap
+  - term: PatchedResultaatType
+    definition: 'Set gegevensgroepdata from validated nested data. Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PatchedResultaatType
+  - term: PatchedRolType
+    definition: Adds nested create feature
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PatchedRolType
+  - term: PatchedStatusType
+    definition: 'Object declared by the contract with fields: url, omschrijving, omschrijvingGeneriek, statustekst, zaaktype, catalogus, zaaktypeIdentificatie,
+      volgnummer, isEindstatus, informeren, doorlooptijd, toelichting. (7 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PatchedStatusType
+  - term: PatchedZaakObjectType
+    definition: 'Object declared by the contract with fields: url, anderObjecttype, beginGeldigheid, eindeGeldigheid, beginObject, eindeObject,
+      objecttype, relatieOmschrijving, zaaktype, zaaktypeIdentificatie, resultaattypen, statustypen. (1 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PatchedZaakObjectType
+  - term: PatchedZaakTypeInformatieObjectType
+    definition: Represent a ZaakTypeInformatieObjectType. Relatie met informatieobjecttype dat relevant is voor zaaktype.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/PatchedZaakTypeInformatieObjectType
+  - term: ReferentieProces
+    definition: Het Referentieproces dat ten grondslag ligt aan dit ZAAKTYPE.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ReferentieProces
+  - term: ResultaatType
+    definition: 'Set gegevensgroepdata from validated nested data. Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ResultaatType
+  - term: ResultaatTypeCreate
+    definition: 'Set gegevensgroepdata from validated nested data. Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ResultaatTypeCreate
+  - term: ResultaatTypeUpdate
+    definition: 'Set gegevensgroepdata from validated nested data. Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ResultaatTypeUpdate
+  - term: RichtingEnum
+    definition: 'Enumeration declared by the contract with values: inkomend, intern, uitgaand.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/RichtingEnum
+  - term: RolType
+    definition: Adds nested create feature
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/RolType
+  - term: StatusType
+    definition: 'Object declared by the contract with fields: url, omschrijving, omschrijvingGeneriek, statustekst, zaaktype, catalogus, zaaktypeIdentificatie,
+      volgnummer, isEindstatus, informeren, doorlooptijd, toelichting. (7 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/StatusType
+  - term: VertrouwelijkheidaanduidingEnum
+    definition: 'Enumeration declared by the contract with values: openbaar, beperkt_openbaar, intern, zaakvertrouwelijk, vertrouwelijk, confidentieel,
+      geheim, zeer_geheim.'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/VertrouwelijkheidaanduidingEnum
+  - term: ZaakObjectType
+    definition: 'Object declared by the contract with fields: url, anderObjecttype, beginGeldigheid, eindeGeldigheid, beginObject, eindeObject,
+      objecttype, relatieOmschrijving, zaaktype, zaaktypeIdentificatie, resultaattypen, statustypen. (1 more)'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ZaakObjectType
+  - term: ZaakType
+    definition: 'Set gegevensgroepdata from validated nested data. Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ZaakType
+  - term: ZaakTypeCreate
+    definition: 'Set gegevensgroepdata from validated nested data. Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ZaakTypeCreate
+  - term: ZaakTypeInformatieObjectType
+    definition: Represent a ZaakTypeInformatieObjectType. Relatie met informatieobjecttype dat relevant is voor zaaktype.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ZaakTypeInformatieObjectType
+  - term: ZaakTypeUpdate
+    definition: 'Set gegevensgroepdata from validated nested data. Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ZaakTypeUpdate
+  - term: ZaakTypenRelatie
+    definition: 'Object declared by the contract with fields: zaaktype, aardRelatie, toelichting.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ZaakTypenRelatie
+  - term: ZaakTypenRelatieCreate
+    definition: 'Object declared by the contract with fields: zaaktype, aardRelatie, toelichting.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-catalogi-openapi.yml#/components/schemas/ZaakTypenRelatieCreate
+  - term: AlgoritmeEnum
+    definition: 'Enumeration declared by the contract with values: crc_16, crc_32, crc_64, fletcher_4, fletcher_8, fletcher_16, fletcher_32, hmac,
+      md5, sha_1, sha_256, sha_512. (1 more)'
+    tags:
+    - Enumeration
+    source: openapi/vng-realisatie-documenten-openapi.yml#/components/schemas/AlgoritmeEnum
+  - term: BestandsDeel
+    definition: 'Object declared by the contract with fields: url, volgnummer, omvang, voltooid, lock.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-documenten-openapi.yml#/components/schemas/BestandsDeel
+  - term: BestandsDeelRequest
+    definition: 'Object declared by the contract with fields: inhoud, lock.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-documenten-openapi.yml#/components/schemas/BestandsDeelRequest
+  - term: BestandsDeelResponse
+    definition: 'Object declared by the contract with fields: url, lock, omvang, inhoud, voltooid, volgnummer.'
+    tags:
+    - Object
+    source: openapi/vng-realisatie-documenten-openapi.yml#/components/schemas/BestandsDeelResponse
+  - term: BinnenlandsCorrespondentieadresVerzending
+    definition: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld
+      in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+    tags:
+    - Object
+    source: openapi/vng-realisatie-documenten-openapi.yml#/components/schemas/BinnenlandsCorrespondentieadresVerzending

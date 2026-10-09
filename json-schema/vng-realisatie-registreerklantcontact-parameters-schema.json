@@ -1,0 +1,522 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json",
+  "title": "Registreerklantcontact_parameters",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-klantinteracties-openapi.yml#/components/schemas/Registreerklantcontact_parameters",
+  "type": "object",
+  "required": [
+    "actorId",
+    "betrokkeneBijKlantcontact",
+    "indicatieContactGelukt",
+    "indicatieHergebruikPartij",
+    "initiatiefnemer",
+    "kanaal",
+    "onderwerp",
+    "plaatsgevondenOp"
+  ],
+  "properties": {
+    "actorId": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/Identificatiecode"
+      }
+    },
+    "betrokkeneBijKlantcontact": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/BetrokkeneBijKlantcontact_param"
+      }
+    },
+    "indicatieContactGelukt": {
+      "$ref": "#/$defs/IndicatieJaNeeOnbekend"
+    },
+    "indicatieHergebruikPartij": {
+      "$ref": "#/$defs/IndicatieJaNee"
+    },
+    "inhoudsdeel": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "$ref": "#/$defs/Inhoudsdeel_param"
+      }
+    },
+    "initiatiefnemer": {
+      "$ref": "#/$defs/Initiatiefnemer"
+    },
+    "kanaal": {
+      "$ref": "#/$defs/Kanaal"
+    },
+    "onderwerp": {
+      "$ref": "#/$defs/Omschrijvingkort"
+    },
+    "plaatsgevondenOp": {
+      "$ref": "#/$defs/Datumtijd"
+    }
+  },
+  "$defs": {
+    "AanduidingBijHuisnummer": {
+      "type": "string",
+      "description": "De aanduiding die gebruikt wordt voor bijvoorbeeld een ligplaats of een standplaats die geen eigen nummeraanduiding heeft.",
+      "enum": [
+        "bij",
+        "tegenover"
+      ]
+    },
+    "Adresregel": {
+      "type": "string",
+      "description": "Een generieke regel om adresgegevens in op te nemen.",
+      "maxLength": 80
+    },
+    "Antwoordnummer": {
+      "type": "integer",
+      "description": ""
+    },
+    "BetrokkeneBijKlantcontact_param": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "digitaalAdres",
+        "rol"
+      ],
+      "properties": {
+        "bezoekadres": {
+          "$ref": "#/$defs/Bezoekadres"
+        },
+        "correspondentieadres": {
+          "$ref": "#/$defs/Correspondentieadres"
+        },
+        "digitaalAdres": {
+          "$ref": "#/$defs/DigitaalAdres"
+        },
+        "organisatienaam": {
+          "$ref": "#/$defs/Naamlang"
+        },
+        "persoonsnaam": {
+          "$ref": "#/$defs/Persoonsnaamgegevens"
+        },
+        "rol": {
+          "$ref": "#/$defs/Klantcontactrol"
+        },
+        "voorkeurskanaal": {
+          "$ref": "#/$defs/Kanaal"
+        },
+        "voorkeurstaal": {
+          "$ref": "#/$defs/Voorkeurstaal"
+        }
+      }
+    },
+    "Bezoekadres": {
+      "type": "object",
+      "description": "Een bezoekadres is een adres waar een persoon of een bedrijf bezoekers ontvangt.",
+      "required": [
+        "soortBezoekadres"
+      ],
+      "properties": {
+        "aanduidingBijHuisnummer": {
+          "$ref": "#/$defs/AanduidingBijHuisnummer"
+        },
+        "adresregelBuitenland1": {
+          "$ref": "#/$defs/Adresregel"
+        },
+        "adresregelBuitenland2": {
+          "$ref": "#/$defs/Adresregel"
+        },
+        "adresregelBuitenland3": {
+          "$ref": "#/$defs/Adresregel"
+        },
+        "huisletter": {
+          "$ref": "#/$defs/Huisletter"
+        },
+        "huisnummer": {
+          "$ref": "#/$defs/Huisnummer"
+        },
+        "huisnummertoevoeging": {
+          "$ref": "#/$defs/Huisnummertoevoeging"
+        },
+        "land": {
+          "$ref": "#/$defs/Land"
+        },
+        "postcode": {
+          "$ref": "#/$defs/Postcode"
+        },
+        "soortBezoekadres": {
+          "$ref": "#/$defs/SoortBezoekadres"
+        },
+        "straat": {
+          "$ref": "#/$defs/Straat"
+        },
+        "woonplaats": {
+          "$ref": "#/$defs/Woonplaats"
+        }
+      }
+    },
+    "Correspondentieadres": {
+      "type": "object",
+      "description": "Het adres waarnaar de persoon of de organisatie de voor hen bestemde correspondentie laat verzenden.",
+      "required": [
+        "soortCorrespondentieadres"
+      ],
+      "properties": {
+        "aanduidingBijHuisnummer": {
+          "$ref": "#/$defs/AanduidingBijHuisnummer"
+        },
+        "adresregelBuitenland1": {
+          "$ref": "#/$defs/Adresregel"
+        },
+        "adresregelBuitenland2": {
+          "$ref": "#/$defs/Adresregel"
+        },
+        "adresregelBuitenland3": {
+          "$ref": "#/$defs/Adresregel"
+        },
+        "antwoordnummer": {
+          "$ref": "#/$defs/Antwoordnummer"
+        },
+        "huisletter": {
+          "$ref": "#/$defs/Huisletter"
+        },
+        "huisnummer": {
+          "$ref": "#/$defs/Huisnummer"
+        },
+        "huisnummertoevoeging": {
+          "$ref": "#/$defs/Huisnummertoevoeging"
+        },
+        "land": {
+          "$ref": "#/$defs/Land"
+        },
+        "postbusnummer": {
+          "$ref": "#/$defs/Postbusnummer"
+        },
+        "postcode": {
+          "$ref": "#/$defs/Postcode"
+        },
+        "soortCorrespondentieadres": {
+          "$ref": "#/$defs/SoortCorrespondentieadres"
+        },
+        "straat": {
+          "$ref": "#/$defs/Straat"
+        },
+        "woonplaats": {
+          "$ref": "#/$defs/Woonplaats"
+        }
+      }
+    },
+    "Datumtijd": {
+      "type": "string",
+      "description": "",
+      "format": "date-time"
+    },
+    "DigitaalAdres": {
+      "type": "object",
+      "description": "Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.\n\nDigitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.",
+      "required": [
+        "adres",
+        "id",
+        "indicatieActief",
+        "omschrijving",
+        "partijId",
+        "soortDigitaalAdres"
+      ],
+      "properties": {
+        "adres": {
+          "$ref": "#/$defs/Adresregel"
+        },
+        "id": {
+          "$ref": "#/$defs/Identificatiecode"
+        },
+        "indicatieActief": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "omschrijving": {
+          "$ref": "#/$defs/Omschrijvingkort"
+        },
+        "partijId": {
+          "$ref": "#/$defs/Identificatiecode"
+        },
+        "soortDigitaalAdres": {
+          "$ref": "#/$defs/SoortDigitaalAdres"
+        }
+      }
+    },
+    "Huisletter": {
+      "type": "string",
+      "description": "",
+      "maxLength": 1
+    },
+    "Huisnummer": {
+      "type": "integer",
+      "description": ""
+    },
+    "Huisnummertoevoeging": {
+      "type": "string",
+      "description": "",
+      "maxLength": 4
+    },
+    "Identificatiecode": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "IndicatieJaNee": {
+      "type": "boolean",
+      "description": ""
+    },
+    "IndicatieJaNeeOnbekend": {
+      "type": "string",
+      "description": "Deze enumeratie is toegevoegd omdat de ingevulde waarde geen boolean kan zijn (waar of niet waar). De gewenste waarden zijn ja,nee of onbekend.<body><ul><li>`onbekend` - </li><li>`ja` - Het verzoek is afgehandeld.</li></ul></body>",
+      "enum": [
+        "onbekend",
+        "ja"
+      ]
+    },
+    "Inhoudsdeel_param": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "externId",
+        "externRegister",
+        "indicatieWeerTeGeven",
+        "omschrijving",
+        "soortInhoudsdeel"
+      ],
+      "properties": {
+        "externId": {
+          "$ref": "#/$defs/Identificatiecode"
+        },
+        "externRegister": {
+          "$ref": "#/$defs/Omschrijvingkort"
+        },
+        "indicatieWeerTeGeven": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "omschrijving": {
+          "$ref": "#/$defs/Omschrijvingkort"
+        },
+        "soortInhoudsdeel": {
+          "$ref": "#/$defs/SoortInhoudsdeel"
+        },
+        "tekst": {
+          "$ref": "#/$defs/Omschrijvinglang"
+        }
+      }
+    },
+    "Initiatiefnemer": {
+      "type": "string",
+      "description": "De waarden van de partij die het contact heeft geinitieerd.<body><ul><li>`gemeente` - De gemeente heeft het contact geinitieerd.</li><li>`klant` - De klant heeft het contact geinitieerd.</li><li>`vertegenwoordiger` - </li></ul></body>",
+      "enum": [
+        "gemeente",
+        "klant",
+        "vertegenwoordiger"
+      ]
+    },
+    "Kanaal": {
+      "type": "object",
+      "description": "Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.",
+      "required": [
+        "code",
+        "indicatieActief",
+        "naam"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "description": "De code, behorende bij het kanaal.",
+          "minLength": 1
+        },
+        "indicatieActief": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "naam": {
+          "type": "string",
+          "title": "Naam",
+          "description": "De naam van het kanaal.",
+          "minLength": 1
+        }
+      }
+    },
+    "Klantcontactrol": {
+      "type": "string",
+      "description": "De typering van de rol van de persoon of organisatie in het klantcontact.",
+      "enum": [
+        "vertegenwoordiger",
+        "klant"
+      ]
+    },
+    "Land": {
+      "type": "object",
+      "description": "Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.",
+      "required": [
+        "einddatumLand",
+        "ingangsdatumLand",
+        "landcode",
+        "landnaam"
+      ],
+      "properties": {
+        "einddatumLand": {
+          "type": "string",
+          "title": "Einddatum land",
+          "description": "De datum waarop het land/gebied is opgeheven.",
+          "format": "date"
+        },
+        "ingangsdatumLand": {
+          "type": "string",
+          "title": "Ingangsdatum land",
+          "description": "De datum waarop het land/gebied is ontstaan.",
+          "format": "date"
+        },
+        "landcode": {
+          "type": "string",
+          "title": "Landcode",
+          "description": "De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.",
+          "minLength": 1
+        },
+        "landnaam": {
+          "type": "string",
+          "title": "Landnaam",
+          "description": "De naam van het land, zoals opgenomen in de Landentabel van de GBA.",
+          "minLength": 1
+        }
+      }
+    },
+    "Naamlang": {
+      "type": "string",
+      "description": "",
+      "maxLength": 200
+    },
+    "Omschrijvingkort": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "Omschrijvinglang": {
+      "type": "string",
+      "description": "",
+      "maxLength": 200
+    },
+    "Persoonsnaamgegevens": {
+      "type": "object",
+      "description": "De naamgegevens van een persoon.",
+      "properties": {
+        "achternaam": {
+          "type": "string",
+          "title": "Achternaam",
+          "description": "De axhternaam waarmee de persoon aangesproken wnest te worden. Deze zal over het algemeen gelijk zijn aan de (geslachts)naam waarvan de eventueel aanwezige voorvoegsels en adellijke titel/predikaat zijn afgesplitst."
+        },
+        "voornaam": {
+          "type": "string",
+          "title": "Voornaam",
+          "description": "De roepnaam waarmee de persoon wenst aangeproken te worden."
+        },
+        "voorvoegselAchternaam": {
+          "type": "string",
+          "title": "Voorvoegsel achternaam",
+          "description": "Dat deel van de achternaam dat voorkomt in de Voorvoegseltabel en, gescheiden door een spatie, vooraf gaat aan de rest van de achternaam."
+        }
+      }
+    },
+    "Postbusnummer": {
+      "type": "integer",
+      "description": ""
+    },
+    "Postcode": {
+      "type": "string",
+      "description": "",
+      "maxLength": 7
+    },
+    "SoortBezoekadres": {
+      "type": "string",
+      "description": "Typering waarmee aangegeven of het bezoekadres een binnenlands - of een buitenlands adres is.<body><ul><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>",
+      "enum": [
+        "binnenlands_adres",
+        "buitenlands_adres"
+      ]
+    },
+    "SoortCorrespondentieadres": {
+      "type": "string",
+      "description": "Typering waarmee aangegeven wordt of het correspondentieadres een binnenlands - of een buitenlands adres is danwel een postbusnummer of een antwoordnummer.<body><ul><li>`postbusnummer` - postbusnummer </li><li>`antwoordnummer` - antwoordnummer </li><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>",
+      "enum": [
+        "postbusnummer",
+        "antwoordnummer",
+        "binnenlands_adres",
+        "buitenlands_adres"
+      ]
+    },
+    "SoortDigitaalAdres": {
+      "type": "object",
+      "description": "Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.",
+      "required": [
+        "code",
+        "indicatieActief",
+        "naam"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "description": "De code, behorende bij het soort digitaal adres.",
+          "minLength": 1
+        },
+        "indicatieActief": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "naam": {
+          "type": "string",
+          "title": "Naam",
+          "description": "De naam van het soort digitaal adres.",
+          "minLength": 1
+        }
+      }
+    },
+    "SoortInhoudsdeel": {
+      "type": "string",
+      "description": "De typering van het inhoudsdeel.<body><ul><li>`informatieobject` - informatieobject </li><li>`overig_object` - overig object </li><li>`tekst` - tekst </li></ul></body>",
+      "enum": [
+        "informatieobject",
+        "overig_object",
+        "tekst"
+      ]
+    },
+    "Straat": {
+      "type": "string",
+      "description": "",
+      "maxLength": 80
+    },
+    "Voorkeurstaal": {
+      "type": "object",
+      "description": "Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.",
+      "required": [
+        "code",
+        "indicatieActief",
+        "naam"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "description": "De code, behorende bij de voorkeurstaal.",
+          "minLength": 1
+        },
+        "indicatieActief": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "naam": {
+          "type": "string",
+          "title": "Naam",
+          "description": "De naam van de voorkeurstaal.",
+          "minLength": 1
+        }
+      }
+    },
+    "Woonplaats": {
+      "type": "string",
+      "description": "",
+      "maxLength": 80
+    }
+  }
+}

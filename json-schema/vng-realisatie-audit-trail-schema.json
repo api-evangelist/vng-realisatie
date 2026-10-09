@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-audit-trail-schema.json",
+  "title": "AuditTrail",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-besluiten-openapi.yml#/components/schemas/AuditTrail",
+  "required": [
+    "bron",
+    "actie",
+    "resultaat",
+    "hoofdObject",
+    "resource",
+    "resourceUrl",
+    "resourceWeergave",
+    "wijzigingen"
+  ],
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "title": "Uuid",
+      "description": "Unieke identificatie van de audit regel.",
+      "type": "string",
+      "format": "uuid"
+    },
+    "bron": {
+      "title": "Bron",
+      "description": "De naam van het component waar de wijziging in is gedaan.\n\nUitleg bij mogelijke waarden:\n\n* `ac` - Autorisaties API\n* `nrc` - Notificaties API\n* `zrc` - Zaken API\n* `ztc` - Catalogi API\n* `drc` - Documenten API\n* `brc` - Besluiten API\n* `cmc` - Contactmomenten API\n* `kc` - Klanten API\n* `vrc` - Verzoeken API",
+      "type": "string",
+      "enum": [
+        "ac",
+        "nrc",
+        "zrc",
+        "ztc",
+        "drc",
+        "brc",
+        "cmc",
+        "kc",
+        "vrc"
+      ]
+    },
+    "applicatieId": {
+      "title": "Applicatie id",
+      "description": "Unieke identificatie van de applicatie, binnen de organisatie.",
+      "type": "string",
+      "maxLength": 100
+    },
+    "applicatieWeergave": {
+      "title": "Applicatie weergave",
+      "description": "Vriendelijke naam van de applicatie.",
+      "type": "string",
+      "maxLength": 200
+    },
+    "gebruikersId": {
+      "title": "Gebruikers id",
+      "description": "Unieke identificatie van de gebruiker die binnen de organisatie herleid kan worden naar een persoon.",
+      "type": "string",
+      "maxLength": 255
+    },
+    "gebruikersWeergave": {
+      "title": "Gebruikers weergave",
+      "description": "Vriendelijke naam van de gebruiker.",
+      "type": "string",
+      "maxLength": 255
+    },
+    "actie": {
+      "title": "Actie",
+      "description": "De uitgevoerde handeling.\n\nDe bekende waardes voor dit veld zijn hieronder aangegeven,                         maar andere waardes zijn ook toegestaan\n\nUitleg bij mogelijke waarden:\n\n* `create` - Object aangemaakt\n* `list` - Lijst van objecten opgehaald\n* `retrieve` - Object opgehaald\n* `destroy` - Object verwijderd\n* `update` - Object bijgewerkt\n* `partial_update` - Object deels bijgewerkt",
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 1
+    },
+    "actieWeergave": {
+      "title": "Actie weergave",
+      "description": "Vriendelijke naam van de actie.",
+      "type": "string",
+      "maxLength": 200
+    },
+    "resultaat": {
+      "title": "Resultaat",
+      "description": "HTTP status code van de API response van de uitgevoerde handeling.",
+      "type": "integer",
+      "maximum": 599,
+      "minimum": 100
+    },
+    "hoofdObject": {
+      "title": "Hoofd object",
+      "description": "De URL naar het hoofdobject van een component.",
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1000,
+      "minLength": 1
+    },
+    "resource": {
+      "title": "Resource",
+      "description": "Het type resource waarop de actie gebeurde.",
+      "type": "string",
+      "maxLength": 50,
+      "minLength": 1
+    },
+    "resourceUrl": {
+      "title": "Resource url",
+      "description": "De URL naar het object.",
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1000,
+      "minLength": 1
+    },
+    "toelichting": {
+      "title": "Toelichting",
+      "description": "Toelichting waarom de handeling is uitgevoerd.",
+      "type": "string"
+    },
+    "resourceWeergave": {
+      "title": "Resource weergave",
+      "description": "Vriendelijke identificatie van het object.",
+      "type": "string",
+      "maxLength": 200,
+      "minLength": 1
+    },
+    "aanmaakdatum": {
+      "title": "Aanmaakdatum",
+      "description": "De datum waarop de handeling is gedaan.",
+      "type": "string",
+      "format": "date-time",
+      "readOnly": true
+    },
+    "wijzigingen": {
+      "$ref": "#/$defs/Wijzigingen"
+    }
+  },
+  "$defs": {
+    "Wijzigingen": {
+      "type": "object",
+      "properties": {
+        "oud": {
+          "title": "Oud",
+          "description": "Volledige JSON body van het object zoals dat bestond voordat de actie heeft plaatsgevonden.",
+          "type": "object"
+        },
+        "nieuw": {
+          "title": "Nieuw",
+          "description": "Volledige JSON body van het object na de actie.",
+          "type": "object"
+        }
+      }
+    }
+  }
+}

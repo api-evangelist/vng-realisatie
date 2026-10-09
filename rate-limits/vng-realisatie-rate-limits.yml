@@ -1,0 +1,12 @@
+name: VNG Realisatie Rate Limits
+generated: '2026-10-09'
+method: none
+source:
+- https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/
+- https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/handleidingen-en-tutorials/api-guides
+- openapi/vng-realisatie-zaken-openapi.yml
+limit_count: 0
+limits: []
+exhaustion_status: 429
+note: The contracts declare a 429 response on operations (8 of 9 specs) but no limits, windows or rate-limit headers are published;
+  limits are set by each implementing municipality/vendor.

@@ -1,0 +1,48 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Besluiten API
+  version: 1.0.0
+extends: ../openapi/_original/vng-realisatie-besluiten-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/vng-realisatie-besluiten-openapi.yml
+x-rationale: Adds provider metadata, the documentation link recorded in apis.yml, and an x-agent-safe marker on every GET
+  operation. Derived only from the saved contract and apis.yml; the original OpenAPI is not modified.
+actions:
+- target: $.info
+  description: Attach API Evangelist provider metadata without mutating the contract.
+  update:
+    x-provider: VNG Realisatie
+    x-provider-slug: vng-realisatie
+    x-apis-json-name: Besluiten API
+    x-provider-hosted-openapi: https://raw.githubusercontent.com/VNG-Realisatie/besluiten-api/develop/src/openapi.yaml
+- target: $
+  description: Point to the provider documentation recorded in apis.yml.
+  update:
+    externalDocs:
+      description: Besluiten API documentation (VNG Realisatie)
+      url: https://vng-realisatie.github.io/gemma-zaken/
+- target: $.paths['/besluiten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/besluiten/{besluit_uuid}/audittrail'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/besluiten/{besluit_uuid}/audittrail/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/besluiten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/besluitinformatieobjecten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/besluitinformatieobjecten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true

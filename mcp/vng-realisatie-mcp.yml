@@ -1,0 +1,1840 @@
+generated: '2026-10-09'
+method: generated
+status: candidate
+name: VNG Realisatie MCP server (candidate)
+source: Derived from the OpenAPI operations in openapi/ (9 contracts). No official or provider-published MCP server was found.
+evidence:
+  searches:
+  - 'WebSearch "VNG Realisatie MCP server ZGW API (Model Context Protocol)" (2026-10-09): no VNG Realisatie MCP server; only
+    unrelated community servers (Developer Overheid API register, Tweede Kamer).'
+  - 'GitHub API search repositories org:VNG-Realisatie mcp (2026-10-09): total_count 0.'
+  preflight: 0-working/preflight/vng-realisatie.json contract_discovery.verdict.mcp=absent on api.vng.nl, standaarden.vng.nl,
+    vng.nl; mcp_tool_table empty.
+deployment:
+  mode: none
+  auth: unknown
+  verified: derived
+auth_note: Where a candidate tool would be built, the ZGW contracts (zaken, documenten, catalogi, besluiten, notificaties,
+  autorisaties) declare a JWT-Claims HTTP bearer scheme; klantinteracties, referentielijsten and woz-bevragen declare none.
+tool_count: 224
+tools:
+- name: zaken__klantcontact_list
+  description: Alle KLANTCONTACTen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: klantcontact_list
+  method: GET
+  path: /klantcontacten
+  readOnly: true
+- name: zaken__klantcontact_create
+  description: Maak een KLANTCONTACT bij een ZAAK aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: klantcontact_create
+  method: POST
+  path: /klantcontacten
+  readOnly: false
+- name: zaken__klantcontact_retrieve
+  description: Een specifieke KLANTCONTACT opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: klantcontact_retrieve
+  method: GET
+  path: /klantcontacten/{uuid}
+  readOnly: true
+- name: zaken__resultaat_list
+  description: Alle RESULTAATen van ZAAKen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: resultaat_list
+  method: GET
+  path: /resultaten
+  readOnly: true
+- name: zaken__resultaat_create
+  description: Maak een RESULTAAT bij een ZAAK aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: resultaat_create
+  method: POST
+  path: /resultaten
+  readOnly: false
+- name: zaken__resultaat_retrieve
+  description: Een specifieke RESULTAAT opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: resultaat_retrieve
+  method: GET
+  path: /resultaten/{uuid}
+  readOnly: true
+- name: zaken__resultaat_update
+  description: Werk een RESULTAAT in zijn geheel bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: resultaat_update
+  method: PUT
+  path: /resultaten/{uuid}
+  readOnly: false
+- name: zaken__resultaat_partial_update
+  description: Werk een RESULTAAT deels bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: resultaat_partial_update
+  method: PATCH
+  path: /resultaten/{uuid}
+  readOnly: false
+- name: zaken__resultaat_destroy
+  description: Verwijder een RESULTAAT van een ZAAK.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: resultaat_destroy
+  method: DELETE
+  path: /resultaten/{uuid}
+  readOnly: false
+- name: zaken__rol_list
+  description: Alle ROLlen bij ZAAKen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: rol_list
+  method: GET
+  path: /rollen
+  readOnly: true
+- name: zaken__rol_create
+  description: Maak een ROL aan bij een ZAAK.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: rol_create
+  method: POST
+  path: /rollen
+  readOnly: false
+- name: zaken__rol_retrieve
+  description: Een specifieke ROL bij een ZAAK opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: rol_retrieve
+  method: GET
+  path: /rollen/{uuid}
+  readOnly: true
+- name: zaken__rol_destroy
+  description: Verwijder een ROL van een ZAAK.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: rol_destroy
+  method: DELETE
+  path: /rollen/{uuid}
+  readOnly: false
+- name: zaken__status_list
+  description: Alle STATUSsen bij ZAAKen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: status_list
+  method: GET
+  path: /statussen
+  readOnly: true
+- name: zaken__status_create
+  description: Maak een STATUS aan voor een ZAAK.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: status_create
+  method: POST
+  path: /statussen
+  readOnly: false
+- name: zaken__status_retrieve
+  description: Een specifieke STATUS van een ZAAK opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: status_retrieve
+  method: GET
+  path: /statussen/{uuid}
+  readOnly: true
+- name: zaken__zaakcontactmoment_list
+  description: Alle ZAAKCONTACTMOMENTen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakcontactmoment_list
+  method: GET
+  path: /zaakcontactmomenten
+  readOnly: true
+- name: zaken__zaakcontactmoment_create
+  description: Maak een ZAAKCONTACTMOMENT aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakcontactmoment_create
+  method: POST
+  path: /zaakcontactmomenten
+  readOnly: false
+- name: zaken__zaakcontactmoment_retrieve
+  description: Een specifiek ZAAKCONTACTMOMENT opvragen
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakcontactmoment_retrieve
+  method: GET
+  path: /zaakcontactmomenten/{uuid}
+  readOnly: true
+- name: zaken__zaakcontactmoment_destroy
+  description: Verwijder een ZAAKCONTACTMOMENT.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakcontactmoment_destroy
+  method: DELETE
+  path: /zaakcontactmomenten/{uuid}
+  readOnly: false
+- name: zaken__zaakinformatieobject_list
+  description: Alle ZAAK-INFORMATIEOBJECT relaties opvragen
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakinformatieobject_list
+  method: GET
+  path: /zaakinformatieobjecten
+  readOnly: true
+- name: zaken__zaakinformatieobject_create
+  description: Maak een ZAAK-INFORMATIEOBJECT relatie aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakinformatieobject_create
+  method: POST
+  path: /zaakinformatieobjecten
+  readOnly: false
+- name: zaken__zaakinformatieobject_retrieve
+  description: Een specifieke ZAAK-INFORMATIEOBJECT relatie opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakinformatieobject_retrieve
+  method: GET
+  path: /zaakinformatieobjecten/{uuid}
+  readOnly: true
+- name: zaken__zaakinformatieobject_update
+  description: Werk een ZAAK-INFORMATIEOBJECT relatie in zijn geheel bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakinformatieobject_update
+  method: PUT
+  path: /zaakinformatieobjecten/{uuid}
+  readOnly: false
+- name: zaken__zaakinformatieobject_partial_update
+  description: Werk een ZAAK-INFORMATIEOBJECT relatie deels bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakinformatieobject_partial_update
+  method: PATCH
+  path: /zaakinformatieobjecten/{uuid}
+  readOnly: false
+- name: zaken__zaakinformatieobject_destroy
+  description: Verwijder een ZAAK-INFORMATIEOBJECT relatie.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakinformatieobject_destroy
+  method: DELETE
+  path: /zaakinformatieobjecten/{uuid}
+  readOnly: false
+- name: zaken__zaakobject_list
+  description: Alle ZAAKOBJECTen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakobject_list
+  method: GET
+  path: /zaakobjecten
+  readOnly: true
+- name: zaken__zaakobject_create
+  description: Maak een ZAAKOBJECT aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakobject_create
+  method: POST
+  path: /zaakobjecten
+  readOnly: false
+- name: zaken__zaakobject_retrieve
+  description: Een specifieke ZAAKOBJECT opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakobject_retrieve
+  method: GET
+  path: /zaakobjecten/{uuid}
+  readOnly: true
+- name: zaken__zaakobject_update
+  description: Werk een ZAAKOBJECT zijn geheel bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakobject_update
+  method: PUT
+  path: /zaakobjecten/{uuid}
+  readOnly: false
+- name: zaken__zaakobject_partial_update
+  description: Werk een ZAAKOBJECT deels bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakobject_partial_update
+  method: PATCH
+  path: /zaakobjecten/{uuid}
+  readOnly: false
+- name: zaken__zaakobject_destroy
+  description: Verwijder een ZAAKOBJECT.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakobject_destroy
+  method: DELETE
+  path: /zaakobjecten/{uuid}
+  readOnly: false
+- name: zaken__zaakverzoek_list
+  description: Alle ZAAK-VERZOEKen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakverzoek_list
+  method: GET
+  path: /zaakverzoeken
+  readOnly: true
+- name: zaken__zaakverzoek_create
+  description: Maak een ZAAK-VERZOEK aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakverzoek_create
+  method: POST
+  path: /zaakverzoeken
+  readOnly: false
+- name: zaken__zaakverzoek_retrieve
+  description: Een specifieke ZAAK-VERZOEK opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakverzoek_retrieve
+  method: GET
+  path: /zaakverzoeken/{uuid}
+  readOnly: true
+- name: zaken__zaakverzoek_destroy
+  description: Verwijder een ZAAK-VERZOEK.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakverzoek_destroy
+  method: DELETE
+  path: /zaakverzoeken/{uuid}
+  readOnly: false
+- name: zaken__zaak_list
+  description: Alle ZAAKen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaak_list
+  method: GET
+  path: /zaken
+  readOnly: true
+- name: zaken__zaak_create
+  description: Maak een ZAAK aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaak_create
+  method: POST
+  path: /zaken
+  readOnly: false
+- name: zaken__zaak_retrieve
+  description: Een specifieke ZAAK opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaak_retrieve
+  method: GET
+  path: /zaken/{uuid}
+  readOnly: true
+- name: zaken__zaak_update
+  description: Werk een ZAAK in zijn geheel bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaak_update
+  method: PUT
+  path: /zaken/{uuid}
+  readOnly: false
+- name: zaken__zaak_partial_update
+  description: Werk een ZAAK deels bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaak_partial_update
+  method: PATCH
+  path: /zaken/{uuid}
+  readOnly: false
+- name: zaken__zaak_destroy
+  description: Verwijder een ZAAK.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaak_destroy
+  method: DELETE
+  path: /zaken/{uuid}
+  readOnly: false
+- name: zaken__audittrail_list
+  description: Alle audit trail regels behorend bij de ZAAK.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: audittrail_list
+  method: GET
+  path: /zaken/{zaak_uuid}/audittrail
+  readOnly: true
+- name: zaken__audittrail_retrieve
+  description: Een specifieke audit trail regel opvragen
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: audittrail_retrieve
+  method: GET
+  path: /zaken/{zaak_uuid}/audittrail/{uuid}
+  readOnly: true
+- name: zaken__zaakbesluit_list
+  description: Alle ZAAKBESLUITen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakbesluit_list
+  method: GET
+  path: /zaken/{zaak_uuid}/besluiten
+  readOnly: true
+- name: zaken__zaakbesluit_create
+  description: Maak een ZAAKBESLUIT aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakbesluit_create
+  method: POST
+  path: /zaken/{zaak_uuid}/besluiten
+  readOnly: false
+- name: zaken__zaakbesluit_retrieve
+  description: Een specifiek ZAAKBESLUIT opvragen
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakbesluit_retrieve
+  method: GET
+  path: /zaken/{zaak_uuid}/besluiten/{uuid}
+  readOnly: true
+- name: zaken__zaakbesluit_destroy
+  description: Verwijder een ZAAKBESLUIT.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakbesluit_destroy
+  method: DELETE
+  path: /zaken/{zaak_uuid}/besluiten/{uuid}
+  readOnly: false
+- name: zaken__zaakeigenschap_list
+  description: Alle ZAAKEIGENSCHAPpen opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakeigenschap_list
+  method: GET
+  path: /zaken/{zaak_uuid}/zaakeigenschappen
+  readOnly: true
+- name: zaken__zaakeigenschap_create
+  description: Maak een ZAAKEIGENSCHAP aan.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakeigenschap_create
+  method: POST
+  path: /zaken/{zaak_uuid}/zaakeigenschappen
+  readOnly: false
+- name: zaken__zaakeigenschap_retrieve
+  description: Een specifieke ZAAKEIGENSCHAP opvragen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakeigenschap_retrieve
+  method: GET
+  path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  readOnly: true
+- name: zaken__zaakeigenschap_update
+  description: Werk een ZAAKEIGENSCHAP in zijn geheel bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakeigenschap_update
+  method: PUT
+  path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  readOnly: false
+- name: zaken__zaakeigenschap_partial_update
+  description: Werk een ZAAKEIGENSCHAP deels bij.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakeigenschap_partial_update
+  method: PATCH
+  path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  readOnly: false
+- name: zaken__zaakeigenschap_destroy
+  description: Verwijder een ZAAKEIGENSCHAP.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaakeigenschap_destroy
+  method: DELETE
+  path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  readOnly: false
+- name: zaken__zaak__zoek
+  description: Voer een (geo)-zoekopdracht uit op ZAAKen.
+  api: Zaken API
+  openapi: openapi/vng-realisatie-zaken-openapi.yml
+  operationId: zaak__zoek
+  method: POST
+  path: /zaken/_zoek
+  readOnly: false
+- name: documenten__bestandsdeel_update
+  description: Upload een bestandsdeel.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: bestandsdeel_update
+  method: PUT
+  path: /bestandsdelen/{uuid}
+  readOnly: false
+- name: documenten__enkelvoudiginformatieobject_list
+  description: Alle (ENKELVOUDIGe) INFORMATIEOBJECTen opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_list
+  method: GET
+  path: /enkelvoudiginformatieobjecten
+  readOnly: true
+- name: documenten__enkelvoudiginformatieobject_create
+  description: Maak een (ENKELVOUDIG) INFORMATIEOBJECT aan.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_create
+  method: POST
+  path: /enkelvoudiginformatieobjecten
+  readOnly: false
+- name: documenten__audittrail_list
+  description: Alle audit trail regels behorend bij het INFORMATIEOBJECT.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: audittrail_list
+  method: GET
+  path: /enkelvoudiginformatieobjecten/{enkelvoudiginformatieobject_uuid}/audittrail
+  readOnly: true
+- name: documenten__audittrail_retrieve
+  description: Een specifieke audit trail regel opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: audittrail_retrieve
+  method: GET
+  path: /enkelvoudiginformatieobjecten/{enkelvoudiginformatieobject_uuid}/audittrail/{uuid}
+  readOnly: true
+- name: documenten__enkelvoudiginformatieobject_retrieve
+  description: Een specifiek (ENKELVOUDIG) INFORMATIEOBJECT opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_retrieve
+  method: GET
+  path: /enkelvoudiginformatieobjecten/{uuid}
+  readOnly: true
+- name: documenten__enkelvoudiginformatieobject_update
+  description: Werk een (ENKELVOUDIG) INFORMATIEOBJECT in zijn geheel bij.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_update
+  method: PUT
+  path: /enkelvoudiginformatieobjecten/{uuid}
+  readOnly: false
+- name: documenten__enkelvoudiginformatieobject_partial_update
+  description: Werk een (ENKELVOUDIG) INFORMATIEOBJECT deels bij.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_partial_update
+  method: PATCH
+  path: /enkelvoudiginformatieobjecten/{uuid}
+  readOnly: false
+- name: documenten__enkelvoudiginformatieobject_destroy
+  description: Verwijder een (ENKELVOUDIG) INFORMATIEOBJECT.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_destroy
+  method: DELETE
+  path: /enkelvoudiginformatieobjecten/{uuid}
+  readOnly: false
+- name: documenten__enkelvoudiginformatieobject_download
+  description: Download de binaire data van het (ENKELVOUDIG) INFORMATIEOBJECT.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_download
+  method: GET
+  path: /enkelvoudiginformatieobjecten/{uuid}/download
+  readOnly: true
+- name: documenten__enkelvoudiginformatieobject_lock
+  description: Vergrendel een (ENKELVOUDIG) INFORMATIEOBJECT.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_lock
+  method: POST
+  path: /enkelvoudiginformatieobjecten/{uuid}/lock
+  readOnly: false
+- name: documenten__enkelvoudiginformatieobject_unlock
+  description: Ontgrendel een (ENKELVOUDIG) INFORMATIEOBJECT.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject_unlock
+  method: POST
+  path: /enkelvoudiginformatieobjecten/{uuid}/unlock
+  readOnly: false
+- name: documenten__enkelvoudiginformatieobject__zoek
+  description: Voer een zoekopdracht uit op (ENKELVOUDIG) INFORMATIEOBJECTen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: enkelvoudiginformatieobject__zoek
+  method: POST
+  path: /enkelvoudiginformatieobjecten/_zoek
+  readOnly: false
+- name: documenten__gebruiksrechten_list
+  description: Alle GEBRUIKSRECHTen opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: gebruiksrechten_list
+  method: GET
+  path: /gebruiksrechten
+  readOnly: true
+- name: documenten__gebruiksrechten_create
+  description: Maak een GEBRUIKSRECHT aan.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: gebruiksrechten_create
+  method: POST
+  path: /gebruiksrechten
+  readOnly: false
+- name: documenten__gebruiksrechten_retrieve
+  description: Een specifieke GEBRUIKSRECHT opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: gebruiksrechten_retrieve
+  method: GET
+  path: /gebruiksrechten/{uuid}
+  readOnly: true
+- name: documenten__gebruiksrechten_update
+  description: Werk een GEBRUIKSRECHT in zijn geheel bij.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: gebruiksrechten_update
+  method: PUT
+  path: /gebruiksrechten/{uuid}
+  readOnly: false
+- name: documenten__gebruiksrechten_partial_update
+  description: Werk een GEBRUIKSRECHT relatie deels bij.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: gebruiksrechten_partial_update
+  method: PATCH
+  path: /gebruiksrechten/{uuid}
+  readOnly: false
+- name: documenten__gebruiksrechten_destroy
+  description: Verwijder een GEBRUIKSRECHT.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: gebruiksrechten_destroy
+  method: DELETE
+  path: /gebruiksrechten/{uuid}
+  readOnly: false
+- name: documenten__objectinformatieobject_list
+  description: Alle OBJECT-INFORMATIEOBJECT relaties opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: objectinformatieobject_list
+  method: GET
+  path: /objectinformatieobjecten
+  readOnly: true
+- name: documenten__objectinformatieobject_create
+  description: Maak een OBJECT-INFORMATIEOBJECT relatie aan.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: objectinformatieobject_create
+  method: POST
+  path: /objectinformatieobjecten
+  readOnly: false
+- name: documenten__objectinformatieobject_retrieve
+  description: Een specifieke OBJECT-INFORMATIEOBJECT relatie opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: objectinformatieobject_retrieve
+  method: GET
+  path: /objectinformatieobjecten/{uuid}
+  readOnly: true
+- name: documenten__objectinformatieobject_destroy
+  description: Verwijder een OBJECT-INFORMATIEOBJECT relatie.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: objectinformatieobject_destroy
+  method: DELETE
+  path: /objectinformatieobjecten/{uuid}
+  readOnly: false
+- name: documenten__verzending_list
+  description: Alle VERZENDINGen opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: verzending_list
+  method: GET
+  path: /verzendingen
+  readOnly: true
+- name: documenten__verzending_create
+  description: Maak een VERZENDING aan.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: verzending_create
+  method: POST
+  path: /verzendingen
+  readOnly: false
+- name: documenten__verzending_retrieve
+  description: Een specifieke VERZENDING opvragen.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: verzending_retrieve
+  method: GET
+  path: /verzendingen/{uuid}
+  readOnly: true
+- name: documenten__verzending_update
+  description: Werk een VERZENDING in zijn geheel bij.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: verzending_update
+  method: PUT
+  path: /verzendingen/{uuid}
+  readOnly: false
+- name: documenten__verzending_partial_update
+  description: Werk een VERZENDING relatie deels bij.
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: verzending_partial_update
+  method: PATCH
+  path: /verzendingen/{uuid}
+  readOnly: false
+- name: documenten__verzending_destroy
+  description: Verwijder een VERZENDING
+  api: Documenten API
+  openapi: openapi/vng-realisatie-documenten-openapi.yml
+  operationId: verzending_destroy
+  method: DELETE
+  path: /verzendingen/{uuid}
+  readOnly: false
+- name: catalogi__besluittype_list
+  description: Alle BESLUITTYPEn opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: besluittype_list
+  method: GET
+  path: /besluittypen
+  readOnly: true
+- name: catalogi__besluittype_create
+  description: Maak een BESLUITTYPE aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: besluittype_create
+  method: POST
+  path: /besluittypen
+  readOnly: false
+- name: catalogi__besluittype_retrieve
+  description: Een specifieke BESLUITTYPE opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: besluittype_retrieve
+  method: GET
+  path: /besluittypen/{uuid}
+  readOnly: true
+- name: catalogi__besluittype_update
+  description: Werk een BESLUITTYPE in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: besluittype_update
+  method: PUT
+  path: /besluittypen/{uuid}
+  readOnly: false
+- name: catalogi__besluittype_partial_update
+  description: Werk een BESLUITTYPE deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: besluittype_partial_update
+  method: PATCH
+  path: /besluittypen/{uuid}
+  readOnly: false
+- name: catalogi__besluittype_destroy
+  description: Verwijder een BESLUITTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: besluittype_destroy
+  method: DELETE
+  path: /besluittypen/{uuid}
+  readOnly: false
+- name: catalogi__besluittype_publish
+  description: Publiceer het concept BESLUITTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: besluittype_publish
+  method: POST
+  path: /besluittypen/{uuid}/publish
+  readOnly: false
+- name: catalogi__catalogus_list
+  description: Alle CATALOGUSsen opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: catalogus_list
+  method: GET
+  path: /catalogussen
+  readOnly: true
+- name: catalogi__catalogus_create
+  description: Maak een CATALOGUS aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: catalogus_create
+  method: POST
+  path: /catalogussen
+  readOnly: false
+- name: catalogi__catalogus_retrieve
+  description: Een specifieke CATALOGUS opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: catalogus_retrieve
+  method: GET
+  path: /catalogussen/{uuid}
+  readOnly: true
+- name: catalogi__eigenschap_list
+  description: Alle EIGENSCHAPpen opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: eigenschap_list
+  method: GET
+  path: /eigenschappen
+  readOnly: true
+- name: catalogi__eigenschap_create
+  description: Maak een EIGENSCHAP aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: eigenschap_create
+  method: POST
+  path: /eigenschappen
+  readOnly: false
+- name: catalogi__eigenschap_retrieve
+  description: Een specifieke EIGENSCHAP opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: eigenschap_retrieve
+  method: GET
+  path: /eigenschappen/{uuid}
+  readOnly: true
+- name: catalogi__eigenschap_update
+  description: Werk een EIGENSCHAP in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: eigenschap_update
+  method: PUT
+  path: /eigenschappen/{uuid}
+  readOnly: false
+- name: catalogi__eigenschap_partial_update
+  description: Werk een EIGENSCHAP deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: eigenschap_partial_update
+  method: PATCH
+  path: /eigenschappen/{uuid}
+  readOnly: false
+- name: catalogi__eigenschap_destroy
+  description: Verwijder een EIGENSCHAP.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: eigenschap_destroy
+  method: DELETE
+  path: /eigenschappen/{uuid}
+  readOnly: false
+- name: catalogi__informatieobjecttype_list
+  description: Alle INFORMATIEOBJECTTYPEn opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: informatieobjecttype_list
+  method: GET
+  path: /informatieobjecttypen
+  readOnly: true
+- name: catalogi__informatieobjecttype_create
+  description: Maak een INFORMATIEOBJECTTYPE aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: informatieobjecttype_create
+  method: POST
+  path: /informatieobjecttypen
+  readOnly: false
+- name: catalogi__informatieobjecttype_retrieve
+  description: Een specifieke INFORMATIEOBJECTTYPE opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: informatieobjecttype_retrieve
+  method: GET
+  path: /informatieobjecttypen/{uuid}
+  readOnly: true
+- name: catalogi__informatieobjecttype_update
+  description: Werk een INFORMATIEOBJECTTYPE in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: informatieobjecttype_update
+  method: PUT
+  path: /informatieobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__informatieobjecttype_partial_update
+  description: Werk een INFORMATIEOBJECTTYPE deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: informatieobjecttype_partial_update
+  method: PATCH
+  path: /informatieobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__informatieobjecttype_destroy
+  description: Verwijder een INFORMATIEOBJECTTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: informatieobjecttype_destroy
+  method: DELETE
+  path: /informatieobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__informatieobjecttype_publish
+  description: Publiceer het concept INFORMATIEOBJECTTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: informatieobjecttype_publish
+  method: POST
+  path: /informatieobjecttypen/{uuid}/publish
+  readOnly: false
+- name: catalogi__resultaattype_list
+  description: Alle RESULTAATTYPEn opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: resultaattype_list
+  method: GET
+  path: /resultaattypen
+  readOnly: true
+- name: catalogi__resultaattype_create
+  description: Maak een RESULTAATTYPE aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: resultaattype_create
+  method: POST
+  path: /resultaattypen
+  readOnly: false
+- name: catalogi__resultaattype_retrieve
+  description: Een specifieke RESULTAATTYPE opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: resultaattype_retrieve
+  method: GET
+  path: /resultaattypen/{uuid}
+  readOnly: true
+- name: catalogi__resultaattype_update
+  description: Werk een RESULTAATTYPE in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: resultaattype_update
+  method: PUT
+  path: /resultaattypen/{uuid}
+  readOnly: false
+- name: catalogi__resultaattype_partial_update
+  description: Werk een RESULTAATTYPE deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: resultaattype_partial_update
+  method: PATCH
+  path: /resultaattypen/{uuid}
+  readOnly: false
+- name: catalogi__resultaattype_destroy
+  description: Verwijder een RESULTAATTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: resultaattype_destroy
+  method: DELETE
+  path: /resultaattypen/{uuid}
+  readOnly: false
+- name: catalogi__roltype_list
+  description: Alle ROLTYPEn opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: roltype_list
+  method: GET
+  path: /roltypen
+  readOnly: true
+- name: catalogi__roltype_create
+  description: Maak een ROLTYPE aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: roltype_create
+  method: POST
+  path: /roltypen
+  readOnly: false
+- name: catalogi__roltype_retrieve
+  description: Een specifieke ROLTYPE opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: roltype_retrieve
+  method: GET
+  path: /roltypen/{uuid}
+  readOnly: true
+- name: catalogi__roltype_update
+  description: Werk een ROLTYPE in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: roltype_update
+  method: PUT
+  path: /roltypen/{uuid}
+  readOnly: false
+- name: catalogi__roltype_partial_update
+  description: Werk een ROLTYPE deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: roltype_partial_update
+  method: PATCH
+  path: /roltypen/{uuid}
+  readOnly: false
+- name: catalogi__roltype_destroy
+  description: Verwijder een ROLTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: roltype_destroy
+  method: DELETE
+  path: /roltypen/{uuid}
+  readOnly: false
+- name: catalogi__statustype_list
+  description: Alle STATUSTYPEn opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: statustype_list
+  method: GET
+  path: /statustypen
+  readOnly: true
+- name: catalogi__statustype_create
+  description: Maak een STATUSTYPE aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: statustype_create
+  method: POST
+  path: /statustypen
+  readOnly: false
+- name: catalogi__statustype_retrieve
+  description: Een specifieke STATUSTYPE opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: statustype_retrieve
+  method: GET
+  path: /statustypen/{uuid}
+  readOnly: true
+- name: catalogi__statustype_update
+  description: Werk een STATUSTYPE in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: statustype_update
+  method: PUT
+  path: /statustypen/{uuid}
+  readOnly: false
+- name: catalogi__statustype_partial_update
+  description: Werk een STATUSTYPE deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: statustype_partial_update
+  method: PATCH
+  path: /statustypen/{uuid}
+  readOnly: false
+- name: catalogi__statustype_destroy
+  description: Verwijder een STATUSTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: statustype_destroy
+  method: DELETE
+  path: /statustypen/{uuid}
+  readOnly: false
+- name: catalogi__zaakobjecttype_list
+  description: Alle ZAAKOBJECTTYPEn opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakobjecttype_list
+  method: GET
+  path: /zaakobjecttypen
+  readOnly: true
+- name: catalogi__zaakobjecttype_create
+  description: Maak een ZAAKOBJECTTYPE aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakobjecttype_create
+  method: POST
+  path: /zaakobjecttypen
+  readOnly: false
+- name: catalogi__zaakobjecttype_retrieve
+  description: Een specifieke ZAAKOBJECTTYPE opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakobjecttype_retrieve
+  method: GET
+  path: /zaakobjecttypen/{uuid}
+  readOnly: true
+- name: catalogi__zaakobjecttype_update
+  description: Werk een ZAAKOBJECTTYPE in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakobjecttype_update
+  method: PUT
+  path: /zaakobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__zaakobjecttype_partial_update
+  description: Werk een ZAAKOBJECTTYPE deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakobjecttype_partial_update
+  method: PATCH
+  path: /zaakobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__zaakobjecttype_destroy
+  description: Verwijder een ZAAKOBJECTTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakobjecttype_destroy
+  method: DELETE
+  path: /zaakobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__zaakinformatieobjecttype_list
+  description: Alle ZAAKTYPE-INFORMATIEOBJECTTYPE relaties opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakinformatieobjecttype_list
+  method: GET
+  path: /zaaktype-informatieobjecttypen
+  readOnly: true
+- name: catalogi__zaakinformatieobjecttype_create
+  description: Maak een ZAAKTYPE-INFORMATIEOBJECTTYPE relatie aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakinformatieobjecttype_create
+  method: POST
+  path: /zaaktype-informatieobjecttypen
+  readOnly: false
+- name: catalogi__zaakinformatieobjecttype_retrieve
+  description: Een specifieke ZAAKTYPE-INFORMATIEOBJECTTYPE relatie opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakinformatieobjecttype_retrieve
+  method: GET
+  path: /zaaktype-informatieobjecttypen/{uuid}
+  readOnly: true
+- name: catalogi__zaakinformatieobjecttype_update
+  description: Werk een ZAAKTYPE-INFORMATIEOBJECTTYPE relatie in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakinformatieobjecttype_update
+  method: PUT
+  path: /zaaktype-informatieobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__zaakinformatieobjecttype_partial_update
+  description: Werk een ZAAKTYPE-INFORMATIEOBJECTTYPE relatie deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakinformatieobjecttype_partial_update
+  method: PATCH
+  path: /zaaktype-informatieobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__zaakinformatieobjecttype_destroy
+  description: Verwijder een ZAAKTYPE-INFORMATIEOBJECTTYPE relatie.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaakinformatieobjecttype_destroy
+  method: DELETE
+  path: /zaaktype-informatieobjecttypen/{uuid}
+  readOnly: false
+- name: catalogi__zaaktype_list
+  description: Alle ZAAKTYPEn opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaaktype_list
+  method: GET
+  path: /zaaktypen
+  readOnly: true
+- name: catalogi__zaaktype_create
+  description: Maak een ZAAKTYPE aan.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaaktype_create
+  method: POST
+  path: /zaaktypen
+  readOnly: false
+- name: catalogi__zaaktype_retrieve
+  description: Een specifieke ZAAKTYPE opvragen.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaaktype_retrieve
+  method: GET
+  path: /zaaktypen/{uuid}
+  readOnly: true
+- name: catalogi__zaaktype_update
+  description: Werk een ZAAKTYPE in zijn geheel bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaaktype_update
+  method: PUT
+  path: /zaaktypen/{uuid}
+  readOnly: false
+- name: catalogi__zaaktype_partial_update
+  description: Werk een ZAAKTYPE deels bij.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaaktype_partial_update
+  method: PATCH
+  path: /zaaktypen/{uuid}
+  readOnly: false
+- name: catalogi__zaaktype_destroy
+  description: Verwijder een ZAAKTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaaktype_destroy
+  method: DELETE
+  path: /zaaktypen/{uuid}
+  readOnly: false
+- name: catalogi__zaaktype_publish
+  description: Publiceer het concept ZAAKTYPE.
+  api: Catalogi API
+  openapi: openapi/vng-realisatie-catalogi-openapi.yml
+  operationId: zaaktype_publish
+  method: POST
+  path: /zaaktypen/{uuid}/publish
+  readOnly: false
+- name: besluiten__besluit_list
+  description: Alle BESLUITen opvragen.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluit_list
+  method: GET
+  path: /besluiten
+  readOnly: true
+- name: besluiten__besluit_create
+  description: Maak een BESLUIT aan.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluit_create
+  method: POST
+  path: /besluiten
+  readOnly: false
+- name: besluiten__audittrail_list
+  description: Alle audit trail regels behorend bij het BESLUIT.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: audittrail_list
+  method: GET
+  path: /besluiten/{besluit_uuid}/audittrail
+  readOnly: true
+- name: besluiten__audittrail_read
+  description: Een specifieke audit trail regel opvragen.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: audittrail_read
+  method: GET
+  path: /besluiten/{besluit_uuid}/audittrail/{uuid}
+  readOnly: true
+- name: besluiten__besluit_read
+  description: Een specifiek BESLUIT opvragen.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluit_read
+  method: GET
+  path: /besluiten/{uuid}
+  readOnly: true
+- name: besluiten__besluit_update
+  description: Werk een BESLUIT in zijn geheel bij.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluit_update
+  method: PUT
+  path: /besluiten/{uuid}
+  readOnly: false
+- name: besluiten__besluit_partial_update
+  description: Werk een BESLUIT deels bij.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluit_partial_update
+  method: PATCH
+  path: /besluiten/{uuid}
+  readOnly: false
+- name: besluiten__besluit_delete
+  description: Verwijder een BESLUIT.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluit_delete
+  method: DELETE
+  path: /besluiten/{uuid}
+  readOnly: false
+- name: besluiten__besluitinformatieobject_list
+  description: Alle BESLUIT-INFORMATIEOBJECT relaties opvragen.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluitinformatieobject_list
+  method: GET
+  path: /besluitinformatieobjecten
+  readOnly: true
+- name: besluiten__besluitinformatieobject_create
+  description: Maak een BESLUIT-INFORMATIEOBJECT relatie aan.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluitinformatieobject_create
+  method: POST
+  path: /besluitinformatieobjecten
+  readOnly: false
+- name: besluiten__besluitinformatieobject_read
+  description: Een specifieke BESLUIT-INFORMATIEOBJECT relatie opvragen.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluitinformatieobject_read
+  method: GET
+  path: /besluitinformatieobjecten/{uuid}
+  readOnly: true
+- name: besluiten__besluitinformatieobject_delete
+  description: Verwijder een BESLUIT-INFORMATIEOBJECT relatie.
+  api: Besluiten API
+  openapi: openapi/vng-realisatie-besluiten-openapi.yml
+  operationId: besluitinformatieobject_delete
+  method: DELETE
+  path: /besluitinformatieobjecten/{uuid}
+  readOnly: false
+- name: notificaties__domain_list
+  description: Returns a list with information about all domains.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: domain_list
+  method: GET
+  path: /domains
+  readOnly: true
+- name: notificaties__domain_create
+  description: Defines a new domain with its basis properties and filter attributes.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: domain_create
+  method: POST
+  path: /domains
+  readOnly: false
+- name: notificaties__domain_read
+  description: Returns information about the specified domain.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: domain_read
+  method: GET
+  path: /domains/{uuid}
+  readOnly: true
+- name: notificaties__domain_update
+  description: Update the specified domain by replacing all properties.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: domain_update
+  method: PUT
+  path: /domains/{uuid}
+  readOnly: false
+- name: notificaties__domain_partial_update
+  description: Update the specified domain by replacing the modified properties.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: domain_partial_update
+  method: PATCH
+  path: /domains/{uuid}
+  readOnly: false
+- name: notificaties__domain_delete
+  description: Delete the specified domain.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: domain_delete
+  method: DELETE
+  path: /domains/{uuid}
+  readOnly: false
+- name: notificaties__events_create
+  description: Publish an event.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: events_create
+  method: POST
+  path: /events
+  readOnly: false
+- name: notificaties__subscription_list
+  description: Returns a list with information about all subscriptions.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: subscription_list
+  method: GET
+  path: /subscriptions
+  readOnly: true
+- name: notificaties__subscription_create
+  description: Subscribe to receive events.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: subscription_create
+  method: POST
+  path: /subscriptions
+  readOnly: false
+- name: notificaties__subscription_read
+  description: Returns information about the specified subscription.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: subscription_read
+  method: GET
+  path: /subscriptions/{uuid}
+  readOnly: true
+- name: notificaties__subscription_update
+  description: Update the specified subscription by replacing all properties.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: subscription_update
+  method: PUT
+  path: /subscriptions/{uuid}
+  readOnly: false
+- name: notificaties__subscription_partial_update
+  description: Update the specified subscription by replacing the modified properties.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: subscription_partial_update
+  method: PATCH
+  path: /subscriptions/{uuid}
+  readOnly: false
+- name: notificaties__subscription_delete
+  description: Delete the specified subscription.
+  api: Notificaties API
+  openapi: openapi/vng-realisatie-notificaties-openapi.yml
+  operationId: subscription_delete
+  method: DELETE
+  path: /subscriptions/{uuid}
+  readOnly: false
+- name: autorisaties__applicatie_list
+  description: Geef een collectie van applicaties, met ingesloten autorisaties.
+  api: Autorisaties API
+  openapi: openapi/vng-realisatie-autorisaties-openapi.yml
+  operationId: applicatie_list
+  method: GET
+  path: /applicaties
+  readOnly: true
+- name: autorisaties__applicatie_create
+  description: Registreer een applicatie met een bepaalde set van autorisaties.
+  api: Autorisaties API
+  openapi: openapi/vng-realisatie-autorisaties-openapi.yml
+  operationId: applicatie_create
+  method: POST
+  path: /applicaties
+  readOnly: false
+- name: autorisaties__applicatie_consumer
+  description: Vraag een applicatie op, op basis van clientId
+  api: Autorisaties API
+  openapi: openapi/vng-realisatie-autorisaties-openapi.yml
+  operationId: applicatie_consumer
+  method: GET
+  path: /applicaties/consumer
+  readOnly: true
+- name: autorisaties__applicatie_read
+  description: Vraag een applicatie op, met ingesloten autorisaties.
+  api: Autorisaties API
+  openapi: openapi/vng-realisatie-autorisaties-openapi.yml
+  operationId: applicatie_read
+  method: GET
+  path: /applicaties/{uuid}
+  readOnly: true
+- name: autorisaties__applicatie_update
+  description: Werk de applicatie bij.
+  api: Autorisaties API
+  openapi: openapi/vng-realisatie-autorisaties-openapi.yml
+  operationId: applicatie_update
+  method: PUT
+  path: /applicaties/{uuid}
+  readOnly: false
+- name: autorisaties__applicatie_partial_update
+  description: Werk (een deel van) de applicatie bij.
+  api: Autorisaties API
+  openapi: openapi/vng-realisatie-autorisaties-openapi.yml
+  operationId: applicatie_partial_update
+  method: PATCH
+  path: /applicaties/{uuid}
+  readOnly: false
+- name: autorisaties__applicatie_delete
+  description: Verwijder een applicatie met de bijhorende autorisaties.
+  api: Autorisaties API
+  openapi: openapi/vng-realisatie-autorisaties-openapi.yml
+  operationId: applicatie_delete
+  method: DELETE
+  path: /applicaties/{uuid}
+  readOnly: false
+- name: klantinteracties__wijziginternetaak
+  description: De operatie waarmee gegevens van een interne taak kunnen worden gewijzigd. De id, het nummer, geregistreerdOp
+    en de status (waarde `te verwerken`) worden door d
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: wijziginternetaak
+  method: POST
+  path: /_corrigeer_interne_taak
+  readOnly: false
+- name: klantinteracties__haalreferentielijstenop
+  description: De operatie waarmee de inhoud van de gewenste referentielijsten in 1 call opgehaald kan worden. In de requestbody
+    worden booleans als input geleverd. Voor ieder
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: haalreferentielijstenop
+  method: POST
+  path: /_haal_referentielijsten_waarden_op
+  readOnly: false
+- name: klantinteracties__markeerinternetaakverwerkt
+  description: De operatie waarmee gegevens van een interne taak als verwerkt wordt gemarkeerd. Op basis van het ID wordt
+    de Status van de Interne Taak gewijzigd naar `Verwerk
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: markeerinternetaakverwerkt
+  method: POST
+  path: /_markeer_interne_taak_verwerkt
+  readOnly: false
+- name: klantinteracties__raadpleegkanaal
+  description: De operatie waarmee een specifieke waarde van de referentielijst `kanaal` wordt opgehaald op basis van de (unieke)
+    code.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: raadpleegkanaal
+  method: POST
+  path: /_raadpleeg_kanaal
+  readOnly: false
+- name: klantinteracties__raadpleegland
+  description: De operatie waarmee een specifieke waarde van de referentielijst `Land` wordt opgehaald op basis van de (unieke)
+    landcode. Aangezien de referentietabel `Landen`
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: raadpleegland
+  method: POST
+  path: /_raadpleeg_land
+  readOnly: false
+- name: klantinteracties__raadpleegsoortdigitaaladres
+  description: De operatie waarmee een specifieke waarde van de referentielijst `Soort digitaal adres` wordt opgehaald op
+    basis van de (unieke) code.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: raadpleegsoortdigitaaladres
+  method: POST
+  path: /_raadpleeg_soort_digitaal_adres
+  readOnly: false
+- name: klantinteracties__raadpleegsoortexternid
+  description: De operatie waarmee een specifieke waarde van de referentielijst `Soort extern ID` wordt opgehaald op basis
+    van de (unieke) code.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: raadpleegsoortexternid
+  method: POST
+  path: /_raadpleeg_soort_extern_id
+  readOnly: false
+- name: klantinteracties__raadpleegsoortobject
+  description: De operatie waarmee een specifieke waarde van de referentielijst `Soort object` wordt opgehaald op basis van
+    de (unieke) code.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: raadpleegsoortobject
+  method: POST
+  path: /_raadpleeg_soort_object
+  readOnly: false
+- name: klantinteracties__raadpleegvoorkeurstaal
+  description: De operatie waarmee een specifieke waarde van de referentielijst `Voorkeurstaal` wordt opgehaald op basis van
+    de (unieke) code.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: raadpleegvoorkeurstaal
+  method: POST
+  path: /_raadpleeg_voorkeurstaal
+  readOnly: false
+- name: klantinteracties__registreerbinnekomendtelefoongesprek
+  description: De operatie waarmee gegevens van een klantcontact kunnen worden geregistreerd. <br/> De id, het nummer, geregistreerdOp,
+    plaatsgevondenOp, Kanaal, IndicatieGelu
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerbinnekomendtelefoongesprek
+  method: POST
+  path: /_registreer_binnenkomend_telefoongesprek
+  readOnly: false
+- name: klantinteracties__registreerdigitaaladres
+  description: De operatie waarmee gegevens van een digitaal adres kunnen worden geregistreerd. De id en de indicatie actief
+    (default `True`) worden door de provider bepaald o
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerdigitaaladres
+  method: POST
+  path: /_registreer_digitaal_adres
+  readOnly: false
+- name: klantinteracties__registreergeautomatiseerdeactor
+  description: De operatie waarmee gegevens van een geautomatiseerde actor kunnen worden geregistreerd. De id, de soort actor
+    (in dit geval default `geautomatiseerde actor`) e
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreergeautomatiseerdeactor
+  method: POST
+  path: /_registreer_geautomatiseerde_actor
+  readOnly: false
+- name: klantinteracties__registreerinternetaak
+  description: De operatie waarmee gegevens van een interne taak kunnen worden geregistreerd. De id, het nummer, geregistreerdOp
+    en de status (waarde `te verwerken`) worden do
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerinternetaak
+  method: POST
+  path: /_registreer_interne_taak
+  readOnly: false
+- name: klantinteracties__registreerkeukentafelgesprek
+  description: De operatie waarmee gegevens van een klantcontact kunnen worden geregistreerd. <br/> De id, het nummer, geregistreerdOp,
+    plaatsgevondenOp, Kanaal, IndicatieGelu
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerkeukentafelgesprek
+  method: POST
+  path: /_registreer_keukentafelgesprek
+  readOnly: false
+- name: klantinteracties__registreerklantcontact
+  description: De operatie waarmee gegevens van een klantcontact kunnen worden geregistreerd. <br/> De id, het nummer en geregistreerdOp
+    worden door de provider bepaald en vas
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerklantcontact
+  method: POST
+  path: /_registreer_klantcontact
+  readOnly: false
+- name: klantinteracties__registreerklantcontactgaatoverinternetaak
+  description: De operatie waarmee de koppeling tussen een Klantcontact en de Interne Taak waar het Klnatcontct over gaat.
+    De provider bepaalt de waarden van de id, onstaanUit
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerklantcontactgaatoverinternetaak
+  method: POST
+  path: /_registreer_klantcontact_gaat_over_interne_taak
+  readOnly: false
+- name: klantinteracties__registreerklantcontactgaatoverobject
+  description: De operatie waarmee geregistreerd wordt over welk object het klantcontact gaat. De provider bepaalt de waarden
+    van id en interneTaakId (leeg).
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerklantcontactgaatoverobject
+  method: POST
+  path: /_registreer_klantcontact_gaat_over_object
+  readOnly: false
+- name: klantinteracties__registreermedewerker
+  description: De operatie waarmee gegevens van een medewerker kunnen worden geregistreerd. De id, de soort actor (in dit
+    geval default `medewerker`) en de indicatie actief (d
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreermedewerker
+  method: POST
+  path: /_registreer_medewerker
+  readOnly: false
+- name: klantinteracties__registreerorganisatie
+  description: De operatie waarmee gegevens van een organisaties kunnen worden geregistreerd. De id, het partijnummer en de
+    soortPartij (in dit geval default `organisatien`) w
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerorganisatie
+  method: POST
+  path: /_registreer_organisatie
+  readOnly: false
+- name: klantinteracties__registreerorganisatorischeeenheid
+  description: De operatie waarmee gegevens van een organisatorische eenheid kunnen worden geregistreerd. De id, de soort
+    actor (in dit geval default `organisatorische eenheid
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerorganisatorischeeenheid
+  method: POST
+  path: /_registreer_organisatorische_eenheid
+  readOnly: false
+- name: klantinteracties__registreerpersoon
+  description: De operatie waarmee gegevens van een persoon kunnen worden geregistreerd. De id, het partijnummer en de soortPartij
+    (in dit geval default `persoon`) worden door
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: registreerpersoon
+  method: POST
+  path: /_registreer_persoon
+  readOnly: false
+- name: klantinteracties__verwijderklantcontactgaatover
+  description: De operatie waarmee de koppeling tussen een klantcontact en het object of de interne taak waarover het gaat
+    kan worden verwijderd.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: verwijderklantcontactgaatover
+  method: POST
+  path: /_verwijder_klantcontact_gaat_over
+  readOnly: false
+- name: klantinteracties__wijzigdigitaaladres
+  description: De operatie waarmee gegevens van digitaal adres van een partij kunnen worden gewijzigd. De id, de soort digitaalAdres
+    en de indicatie actief kunnen niet gewijzi
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: wijzigdigitaaladres
+  method: POST
+  path: /_wijzig_digitaal_adres
+  readOnly: false
+- name: klantinteracties__wijziggeautomatiseerdeactor
+  description: De operatie waarmee gegevens van een geautomatiseerde actor kunnen worden gewijzigd. De id, de soort actor
+    (in dit geval `geautomatiseerde actor`) en de indicat
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: wijziggeautomatiseerdeactor
+  method: POST
+  path: /_wijzig_geautomatiseerde_actor
+  readOnly: false
+- name: klantinteracties__wijzigmedewerker
+  description: De operatie waarmee gegevens van medewerkers kunnen worden gewijzigd. De id, de soort actor (in dit geval `medewerker`)
+    en de indicatie actief kunnen niet gewij
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: wijzigmedewerker
+  method: POST
+  path: /_wijzig_medewerker
+  readOnly: false
+- name: klantinteracties__wijzigorganisatie
+  description: De operatie waarmee gegevens van een persoon kunnen worden gewijzigd. De id en het partijnummer en de soortPartij
+    kunnen niet gewijzigd worden.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: wijzigorganisatie
+  method: POST
+  path: /_wijzig_organisatie
+  readOnly: false
+- name: klantinteracties__wijzigorganisatorischeeenheid
+  description: De operatie waarmee gegevens van een organisatorische eenheid actor kunnen worden gewijzigd. De id, de soort
+    actor (in dit geval `organisatoriesche eenheid`) en
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: wijzigorganisatorischeeenheid
+  method: POST
+  path: /_wijzig_organisatorische_eenheid
+  readOnly: false
+- name: klantinteracties__wijzigpersoon
+  description: De operatie waarmee gegevens van een persoon kunnen worden gewijzigd. De id en het partijnummer en de soortPartij
+    kunnen niet gewijzigd worden.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: wijzigpersoon
+  method: POST
+  path: /_wijzig_persoon
+  readOnly: false
+- name: klantinteracties__zoekdigitaaladres
+  description: De operatie waarmee gegevens van digitaal adres kunnen worden gezocht.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: zoekdigitaaladres
+  method: POST
+  path: /_zoek_digitaal_adres
+  readOnly: false
+- name: klantinteracties__zoekgeautomatiseerdeactor
+  description: De operatie waarmee gegevens van geautomatiseerde actoren kunnen worden gezocht.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: zoekgeautomatiseerdeactor
+  method: POST
+  path: /_zoek_geautomatiseerde_actor
+  readOnly: false
+- name: klantinteracties__zoekinternetaak
+  description: De operatie waarmee gegevens van een interne taak kunnen worden gezocht.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: zoekinternetaak
+  method: POST
+  path: /_zoek_interne_taak
+  readOnly: false
+- name: klantinteracties__zoekmedewerker
+  description: De operatie waarmee gegevens van medewerkers kunnen worden gezocht.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: zoekmedewerker
+  method: POST
+  path: /_zoek_medewerker
+  readOnly: false
+- name: klantinteracties__zoekorganisatie
+  description: De operatie waarmee gegevens van organisaties kunnen worden gezocht.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: zoekorganisatie
+  method: POST
+  path: /_zoek_organisatie
+  readOnly: false
+- name: klantinteracties__zoekorganisatorischeeenheid
+  description: De operatie waarmee gegevens van organisatorische eenheid kunnen worden gezocht.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: zoekorganisatorischeeenheid
+  method: POST
+  path: /_zoek_organisatorische_eenheid
+  readOnly: false
+- name: klantinteracties__zoekpersoon
+  description: De operatie waarmee gegevens van personen kunnen worden gezocht.
+  api: Klantinteracties API
+  openapi: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operationId: zoekpersoon
+  method: POST
+  path: /_zoek_persoon
+  readOnly: false
+- name: referentielijsten__health_retrieve
+  description: Controleer of de api online is.
+  api: Referentielijsten & Selectielijst API
+  openapi: openapi/vng-realisatie-referentielijsten-openapi.yml
+  operationId: health_retrieve
+  method: GET
+  path: /health
+  readOnly: true
+- name: referentielijsten__procestypen_list
+  description: Ontsluit de selectielijst procestypen.
+  api: Referentielijsten & Selectielijst API
+  openapi: openapi/vng-realisatie-referentielijsten-openapi.yml
+  operationId: procestypen_list
+  method: GET
+  path: /procestypen
+  readOnly: true
+- name: referentielijsten__procestypen_retrieve
+  description: Ontsluit de selectielijst procestypen.
+  api: Referentielijsten & Selectielijst API
+  openapi: openapi/vng-realisatie-referentielijsten-openapi.yml
+  operationId: procestypen_retrieve
+  method: GET
+  path: /procestypen/{uuid}
+  readOnly: true
+- name: referentielijsten__resultaattypeomschrijvinggeneriek_list
+  description: Raadpleeg de generieke resultaattypeomschrijvingen.
+  api: Referentielijsten & Selectielijst API
+  openapi: openapi/vng-realisatie-referentielijsten-openapi.yml
+  operationId: resultaattypeomschrijvinggeneriek_list
+  method: GET
+  path: /resultaattypeomschrijvingen
+  readOnly: true
+- name: referentielijsten__resultaattypeomschrijvinggeneriek_retrieve
+  description: Raadpleeg de generieke resultaattypeomschrijvingen.
+  api: Referentielijsten & Selectielijst API
+  openapi: openapi/vng-realisatie-referentielijsten-openapi.yml
+  operationId: resultaattypeomschrijvinggeneriek_retrieve
+  method: GET
+  path: /resultaattypeomschrijvingen/{uuid}
+  readOnly: true
+- name: referentielijsten__resultaten_list
+  description: Ontsluit de selectielijst resultaten.
+  api: Referentielijsten & Selectielijst API
+  openapi: openapi/vng-realisatie-referentielijsten-openapi.yml
+  operationId: resultaten_list
+  method: GET
+  path: /resultaten
+  readOnly: true
+- name: referentielijsten__resultaten_retrieve
+  description: Ontsluit de selectielijst resultaten.
+  api: Referentielijsten & Selectielijst API
+  openapi: openapi/vng-realisatie-referentielijsten-openapi.yml
+  operationId: resultaten_retrieve
+  method: GET
+  path: /resultaten/{uuid}
+  readOnly: true
+- name: woz_bevragen__getsluimerendwozobjecten
+  description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie sluimerendwozobjecten retourneert.</p></body>
+  api: BG IMWOZ WOZ bevragen API
+  openapi: openapi/vng-realisatie-woz-bevragen-openapi.yml
+  operationId: getsluimerendwozobjecten
+  method: GET
+  path: /sluimerendwozobjecten
+  readOnly: true
+- name: woz_bevragen__getsluimerendwozobject
+  description: <body><p>Het bericht dat de JSON/REST API voor het ophalen gegevens van een sluimerendwozobject retourneert.</p></body>
+  api: BG IMWOZ WOZ bevragen API
+  openapi: openapi/vng-realisatie-woz-bevragen-openapi.yml
+  operationId: getsluimerendwozobject
+  method: GET
+  path: /sluimerendwozobjecten/{wozobjectnummer}
+  readOnly: true
+- name: woz_bevragen__getwaterschappen
+  description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie waterschappen retourneert.</p></body>
+  api: BG IMWOZ WOZ bevragen API
+  openapi: openapi/vng-realisatie-woz-bevragen-openapi.yml
+  operationId: getwaterschappen
+  method: GET
+  path: /waterschappen
+  readOnly: true
+- name: woz_bevragen__getwaterschap
+  description: <body><p>Het bericht dat de JSON/REST API voor het ophalen gegevens van een waterschap retourneert.</p></body>
+  api: BG IMWOZ WOZ bevragen API
+  openapi: openapi/vng-realisatie-woz-bevragen-openapi.yml
+  operationId: getwaterschap
+  method: GET
+  path: /waterschappen/{codewaterschap}
+  readOnly: true
+- name: woz_bevragen__getwozobjecten
+  description: <body><p>Het bericht dat de JSON/REST API voor het ophalen van een collectie wozobjecten retourneert.</p></body>
+  api: BG IMWOZ WOZ bevragen API
+  openapi: openapi/vng-realisatie-woz-bevragen-openapi.yml
+  operationId: getwozobjecten
+  method: GET
+  path: /wozobjecten
+  readOnly: true
+- name: woz_bevragen__getwozobject
+  description: <body><p>Het bericht dat de JSON/REST API voor het ophalen gegevens van een WOZobject retourneert.</p></body>
+  api: BG IMWOZ WOZ bevragen API
+  openapi: openapi/vng-realisatie-woz-bevragen-openapi.yml
+  operationId: getwozobject
+  method: GET
+  path: /wozobjecten/{wozobjectnummer}
+  readOnly: true

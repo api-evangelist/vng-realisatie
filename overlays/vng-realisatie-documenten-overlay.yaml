@@ -1,0 +1,68 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Documenten API
+  version: 1.0.0
+extends: ../openapi/_original/vng-realisatie-documenten-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/vng-realisatie-documenten-openapi.yml
+x-rationale: Adds provider metadata, the documentation link recorded in apis.yml, and an x-agent-safe marker on every GET
+  operation. Derived only from the saved contract and apis.yml; the original OpenAPI is not modified.
+actions:
+- target: $.info
+  description: Attach API Evangelist provider metadata without mutating the contract.
+  update:
+    x-provider: VNG Realisatie
+    x-provider-slug: vng-realisatie
+    x-apis-json-name: Documenten API
+    x-provider-hosted-openapi: https://raw.githubusercontent.com/VNG-Realisatie/documenten-api/develop/src/openapi.yaml
+- target: $
+  description: Point to the provider documentation recorded in apis.yml.
+  update:
+    externalDocs:
+      description: Documenten API documentation (VNG Realisatie)
+      url: https://vng-realisatie.github.io/gemma-zaken/
+- target: $.paths['/enkelvoudiginformatieobjecten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/enkelvoudiginformatieobjecten/{enkelvoudiginformatieobject_uuid}/audittrail'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/enkelvoudiginformatieobjecten/{enkelvoudiginformatieobject_uuid}/audittrail/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/enkelvoudiginformatieobjecten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/enkelvoudiginformatieobjecten/{uuid}/download'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/gebruiksrechten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/gebruiksrechten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/objectinformatieobjecten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/objectinformatieobjecten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/verzendingen'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/verzendingen/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true

@@ -1,0 +1,3668 @@
+generated: '2026-10-09'
+method: generated
+source: openapi/vng-realisatie-autorisaties-openapi.yml, openapi/vng-realisatie-besluiten-openapi.yml,
+  openapi/vng-realisatie-catalogi-openapi.yml, openapi/vng-realisatie-documenten-openapi.yml,
+  openapi/vng-realisatie-klantinteracties-openapi.yml, openapi/vng-realisatie-notificaties-openapi.yml,
+  openapi/vng-realisatie-referentielijsten-openapi.yml, openapi/vng-realisatie-woz-bevragen-openapi.yml,
+  openapi/vng-realisatie-zaken-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 245
+  by_action_class:
+    connected: 102
+    acting: 143
+  by_consequence:
+    read: 102
+    write: 143
+  human_in_the_loop_required: 0
+operations:
+- path: /applicaties
+  method: get
+  operationId: applicatie_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - autorisaties.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applicaties
+  method: post
+  operationId: applicatie_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - autorisaties.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /applicaties/consumer
+  method: get
+  operationId: applicatie_consumer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - autorisaties.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applicaties/{uuid}
+  method: get
+  operationId: applicatie_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - autorisaties.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /applicaties/{uuid}
+  method: put
+  operationId: applicatie_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - autorisaties.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /applicaties/{uuid}
+  method: patch
+  operationId: applicatie_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - autorisaties.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /applicaties/{uuid}
+  method: delete
+  operationId: applicatie_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - autorisaties.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluiten
+  method: get
+  operationId: besluit_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - besluiten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluiten
+  method: post
+  operationId: besluit_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - besluiten.aanmaken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluiten/{besluit_uuid}/audittrail
+  method: get
+  operationId: audittrail_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - audittrails.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluiten/{besluit_uuid}/audittrail/{uuid}
+  method: get
+  operationId: audittrail_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - audittrails.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluiten/{uuid}
+  method: get
+  operationId: besluit_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - besluiten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluiten/{uuid}
+  method: put
+  operationId: besluit_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - besluiten.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluiten/{uuid}
+  method: patch
+  operationId: besluit_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - besluiten.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluiten/{uuid}
+  method: delete
+  operationId: besluit_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - besluiten.verwijderen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluitinformatieobjecten
+  method: get
+  operationId: besluitinformatieobject_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - besluiten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluitinformatieobjecten
+  method: post
+  operationId: besluitinformatieobject_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - besluiten.aanmaken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluitinformatieobjecten/{uuid}
+  method: get
+  operationId: besluitinformatieobject_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - besluiten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluitinformatieobjecten/{uuid}
+  method: delete
+  operationId: besluitinformatieobject_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - besluiten.verwijderen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluittypen
+  method: get
+  operationId: besluittype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluittypen
+  method: post
+  operationId: besluittype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - catalogi.schrijven
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluittypen/{uuid}
+  method: get
+  operationId: besluittype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluittypen/{uuid}
+  method: put
+  operationId: besluittype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluittypen/{uuid}
+  method: patch
+  operationId: besluittype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluittypen/{uuid}
+  method: delete
+  operationId: besluittype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /besluittypen/{uuid}
+  method: head
+  operationId: besluittype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /besluittypen/{uuid}/publish
+  method: post
+  operationId: besluittype_publish
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - catalogi.schrijven
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalogussen
+  method: get
+  operationId: catalogus_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalogussen
+  method: post
+  operationId: catalogus_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - catalogi.schrijven
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /catalogussen/{uuid}
+  method: get
+  operationId: catalogus_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /catalogussen/{uuid}
+  method: head
+  operationId: catalogus_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /eigenschappen
+  method: get
+  operationId: eigenschap_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /eigenschappen
+  method: post
+  operationId: eigenschap_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /eigenschappen/{uuid}
+  method: get
+  operationId: eigenschap_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /eigenschappen/{uuid}
+  method: put
+  operationId: eigenschap_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /eigenschappen/{uuid}
+  method: patch
+  operationId: eigenschap_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /eigenschappen/{uuid}
+  method: delete
+  operationId: eigenschap_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /eigenschappen/{uuid}
+  method: head
+  operationId: eigenschap_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /informatieobjecttypen
+  method: get
+  operationId: informatieobjecttype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /informatieobjecttypen
+  method: post
+  operationId: informatieobjecttype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - catalogi.schrijven
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /informatieobjecttypen/{uuid}
+  method: get
+  operationId: informatieobjecttype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /informatieobjecttypen/{uuid}
+  method: put
+  operationId: informatieobjecttype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /informatieobjecttypen/{uuid}
+  method: patch
+  operationId: informatieobjecttype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /informatieobjecttypen/{uuid}
+  method: delete
+  operationId: informatieobjecttype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /informatieobjecttypen/{uuid}
+  method: head
+  operationId: informatieobjecttype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /informatieobjecttypen/{uuid}/publish
+  method: post
+  operationId: informatieobjecttype_publish
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - catalogi.schrijven
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaattypen
+  method: get
+  operationId: resultaattype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaattypen
+  method: post
+  operationId: resultaattype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaattypen/{uuid}
+  method: get
+  operationId: resultaattype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaattypen/{uuid}
+  method: put
+  operationId: resultaattype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaattypen/{uuid}
+  method: patch
+  operationId: resultaattype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaattypen/{uuid}
+  method: delete
+  operationId: resultaattype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaattypen/{uuid}
+  method: head
+  operationId: resultaattype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /roltypen
+  method: get
+  operationId: roltype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /roltypen
+  method: post
+  operationId: roltype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roltypen/{uuid}
+  method: get
+  operationId: roltype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /roltypen/{uuid}
+  method: put
+  operationId: roltype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roltypen/{uuid}
+  method: patch
+  operationId: roltype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roltypen/{uuid}
+  method: delete
+  operationId: roltype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /roltypen/{uuid}
+  method: head
+  operationId: roltype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /statustypen
+  method: get
+  operationId: statustype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /statustypen
+  method: post
+  operationId: statustype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /statustypen/{uuid}
+  method: get
+  operationId: statustype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /statustypen/{uuid}
+  method: put
+  operationId: statustype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /statustypen/{uuid}
+  method: patch
+  operationId: statustype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /statustypen/{uuid}
+  method: delete
+  operationId: statustype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /statustypen/{uuid}
+  method: head
+  operationId: statustype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakobjecttypen
+  method: get
+  operationId: zaakobjecttype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakobjecttypen
+  method: post
+  operationId: zaakobjecttype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecttypen/{uuid}
+  method: get
+  operationId: zaakobjecttype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakobjecttypen/{uuid}
+  method: put
+  operationId: zaakobjecttype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecttypen/{uuid}
+  method: patch
+  operationId: zaakobjecttype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecttypen/{uuid}
+  method: delete
+  operationId: zaakobjecttype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecttypen/{uuid}
+  method: head
+  operationId: zaakobjecttype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaaktype-informatieobjecttypen
+  method: get
+  operationId: zaakinformatieobjecttype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaaktype-informatieobjecttypen
+  method: post
+  operationId: zaakinformatieobjecttype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktype-informatieobjecttypen/{uuid}
+  method: get
+  operationId: zaakinformatieobjecttype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - catalogi.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaaktype-informatieobjecttypen/{uuid}
+  method: put
+  operationId: zaakinformatieobjecttype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktype-informatieobjecttypen/{uuid}
+  method: patch
+  operationId: zaakinformatieobjecttype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktype-informatieobjecttypen/{uuid}
+  method: delete
+  operationId: zaakinformatieobjecttype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktype-informatieobjecttypen/{uuid}
+  method: head
+  operationId: zaakinformatieobjecttype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaaktypen
+  method: get
+  operationId: zaaktype_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - (catalogi.lezen | documenten.lezen | zaken.lezen)
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaaktypen
+  method: post
+  operationId: zaaktype_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - catalogi.schrijven
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktypen/{uuid}
+  method: get
+  operationId: zaaktype_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - (catalogi.lezen | documenten.lezen | zaken.lezen)
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaaktypen/{uuid}
+  method: put
+  operationId: zaaktype_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktypen/{uuid}
+  method: patch
+  operationId: zaaktype_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-schrijven)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktypen/{uuid}
+  method: delete
+  operationId: zaaktype_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (catalogi.schrijven | catalogi.geforceerd-verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaaktypen/{uuid}
+  method: head
+  operationId: zaaktype_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaaktypen/{uuid}/publish
+  method: post
+  operationId: zaaktype_publish
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - catalogi.schrijven
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bestandsdelen/{uuid}
+  method: put
+  operationId: bestandsdeel_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enkelvoudiginformatieobjecten
+  method: get
+  operationId: enkelvoudiginformatieobject_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - documenten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enkelvoudiginformatieobjecten
+  method: post
+  operationId: enkelvoudiginformatieobject_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.aanmaken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enkelvoudiginformatieobjecten/{enkelvoudiginformatieobject_uuid}/audittrail
+  method: get
+  operationId: audittrail_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - audittrails.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enkelvoudiginformatieobjecten/{enkelvoudiginformatieobject_uuid}/audittrail/{uuid}
+  method: get
+  operationId: audittrail_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - audittrails.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enkelvoudiginformatieobjecten/{uuid}
+  method: get
+  operationId: enkelvoudiginformatieobject_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - documenten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enkelvoudiginformatieobjecten/{uuid}
+  method: put
+  operationId: enkelvoudiginformatieobject_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (documenten.bijwerken | documenten.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enkelvoudiginformatieobjecten/{uuid}
+  method: patch
+  operationId: enkelvoudiginformatieobject_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (documenten.bijwerken | documenten.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enkelvoudiginformatieobjecten/{uuid}
+  method: delete
+  operationId: enkelvoudiginformatieobject_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.verwijderen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enkelvoudiginformatieobjecten/{uuid}
+  method: head
+  operationId: enkelvoudiginformatieobject_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enkelvoudiginformatieobjecten/{uuid}/download
+  method: get
+  operationId: enkelvoudiginformatieobject_download
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - documenten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /enkelvoudiginformatieobjecten/{uuid}/lock
+  method: post
+  operationId: enkelvoudiginformatieobject_lock
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.lock
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enkelvoudiginformatieobjecten/{uuid}/unlock
+  method: post
+  operationId: enkelvoudiginformatieobject_unlock
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (documenten.lock | documenten.geforceerd-unlock)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /enkelvoudiginformatieobjecten/_zoek
+  method: post
+  operationId: enkelvoudiginformatieobject__zoek
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.lezen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /gebruiksrechten
+  method: get
+  operationId: gebruiksrechten_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - documenten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /gebruiksrechten
+  method: post
+  operationId: gebruiksrechten_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.aanmaken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /gebruiksrechten/{uuid}
+  method: get
+  operationId: gebruiksrechten_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - documenten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /gebruiksrechten/{uuid}
+  method: put
+  operationId: gebruiksrechten_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /gebruiksrechten/{uuid}
+  method: patch
+  operationId: gebruiksrechten_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /gebruiksrechten/{uuid}
+  method: delete
+  operationId: gebruiksrechten_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.verwijderen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /gebruiksrechten/{uuid}
+  method: head
+  operationId: gebruiksrechten_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /objectinformatieobjecten
+  method: get
+  operationId: objectinformatieobject_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - documenten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /objectinformatieobjecten
+  method: post
+  operationId: objectinformatieobject_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.aanmaken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /objectinformatieobjecten/{uuid}
+  method: get
+  operationId: objectinformatieobject_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - documenten.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /objectinformatieobjecten/{uuid}
+  method: delete
+  operationId: objectinformatieobject_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - documenten.verwijderen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /objectinformatieobjecten/{uuid}
+  method: head
+  operationId: objectinformatieobject_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /verzendingen
+  method: get
+  operationId: verzending_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /verzendingen
+  method: post
+  operationId: verzending_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /verzendingen/{uuid}
+  method: get
+  operationId: verzending_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /verzendingen/{uuid}
+  method: put
+  operationId: verzending_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /verzendingen/{uuid}
+  method: patch
+  operationId: verzending_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /verzendingen/{uuid}
+  method: delete
+  operationId: verzending_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /verzendingen/{uuid}
+  method: head
+  operationId: verzending_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /_corrigeer_interne_taak
+  method: post
+  operationId: wijziginternetaak
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_haal_referentielijsten_waarden_op
+  method: post
+  operationId: haalreferentielijstenop
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_markeer_interne_taak_verwerkt
+  method: post
+  operationId: markeerinternetaakverwerkt
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_raadpleeg_kanaal
+  method: post
+  operationId: raadpleegkanaal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_raadpleeg_land
+  method: post
+  operationId: raadpleegland
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_raadpleeg_soort_digitaal_adres
+  method: post
+  operationId: raadpleegsoortdigitaaladres
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_raadpleeg_soort_extern_id
+  method: post
+  operationId: raadpleegsoortexternid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_raadpleeg_soort_object
+  method: post
+  operationId: raadpleegsoortobject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_raadpleeg_voorkeurstaal
+  method: post
+  operationId: raadpleegvoorkeurstaal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_binnenkomend_telefoongesprek
+  method: post
+  operationId: registreerbinnekomendtelefoongesprek
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_digitaal_adres
+  method: post
+  operationId: registreerdigitaaladres
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_geautomatiseerde_actor
+  method: post
+  operationId: registreergeautomatiseerdeactor
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_interne_taak
+  method: post
+  operationId: registreerinternetaak
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_keukentafelgesprek
+  method: post
+  operationId: registreerkeukentafelgesprek
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_klantcontact
+  method: post
+  operationId: registreerklantcontact
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_klantcontact_gaat_over_interne_taak
+  method: post
+  operationId: registreerklantcontactgaatoverinternetaak
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_klantcontact_gaat_over_object
+  method: post
+  operationId: registreerklantcontactgaatoverobject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_medewerker
+  method: post
+  operationId: registreermedewerker
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_organisatie
+  method: post
+  operationId: registreerorganisatie
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_organisatorische_eenheid
+  method: post
+  operationId: registreerorganisatorischeeenheid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_registreer_persoon
+  method: post
+  operationId: registreerpersoon
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_verwijder_klantcontact_gaat_over
+  method: post
+  operationId: verwijderklantcontactgaatover
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_wijzig_digitaal_adres
+  method: post
+  operationId: wijzigdigitaaladres
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_wijzig_geautomatiseerde_actor
+  method: post
+  operationId: wijziggeautomatiseerdeactor
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_wijzig_medewerker
+  method: post
+  operationId: wijzigmedewerker
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_wijzig_organisatie
+  method: post
+  operationId: wijzigorganisatie
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_wijzig_organisatorische_eenheid
+  method: post
+  operationId: wijzigorganisatorischeeenheid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_wijzig_persoon
+  method: post
+  operationId: wijzigpersoon
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_zoek_digitaal_adres
+  method: post
+  operationId: zoekdigitaaladres
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_zoek_geautomatiseerde_actor
+  method: post
+  operationId: zoekgeautomatiseerdeactor
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_zoek_interne_taak
+  method: post
+  operationId: zoekinternetaak
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_zoek_medewerker
+  method: post
+  operationId: zoekmedewerker
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_zoek_organisatie
+  method: post
+  operationId: zoekorganisatie
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_zoek_organisatorische_eenheid
+  method: post
+  operationId: zoekorganisatorischeeenheid
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /_zoek_persoon
+  method: post
+  operationId: zoekpersoon
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domains
+  method: get
+  operationId: domain_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - domains.read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /domains
+  method: post
+  operationId: domain_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - domains.create
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domains/{uuid}
+  method: get
+  operationId: domain_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - domains.read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /domains/{uuid}
+  method: put
+  operationId: domain_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - domains.update
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domains/{uuid}
+  method: patch
+  operationId: domain_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - domains.update
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /domains/{uuid}
+  method: delete
+  operationId: domain_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - domains.delete
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /events
+  method: post
+  operationId: events_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - events.publish
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions
+  method: get
+  operationId: subscription_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - subscriptions.read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions
+  method: post
+  operationId: subscription_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - subscriptions.create
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/{uuid}
+  method: get
+  operationId: subscription_read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - subscriptions.read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/{uuid}
+  method: put
+  operationId: subscription_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - subscriptions.update
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/{uuid}
+  method: patch
+  operationId: subscription_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - subscriptions.update
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/{uuid}
+  method: delete
+  operationId: subscription_delete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - subscriptions.delete
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /health
+  method: get
+  operationId: health_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /procestypen
+  method: get
+  operationId: procestypen_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /procestypen/{uuid}
+  method: get
+  operationId: procestypen_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaattypeomschrijvingen
+  method: get
+  operationId: resultaattypeomschrijvinggeneriek_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaattypeomschrijvingen/{uuid}
+  method: get
+  operationId: resultaattypeomschrijvinggeneriek_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaten
+  method: get
+  operationId: resultaten_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaten/{uuid}
+  method: get
+  operationId: resultaten_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sluimerendwozobjecten
+  method: get
+  operationId: getsluimerendwozobjecten
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /sluimerendwozobjecten/{wozobjectnummer}
+  method: get
+  operationId: getsluimerendwozobject
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /waterschappen
+  method: get
+  operationId: getwaterschappen
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /waterschappen/{codewaterschap}
+  method: get
+  operationId: getwaterschap
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wozobjecten
+  method: get
+  operationId: getwozobjecten
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /wozobjecten/{wozobjectnummer}
+  method: get
+  operationId: getwozobject
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /klantcontacten
+  method: get
+  operationId: klantcontact_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /klantcontacten
+  method: post
+  operationId: klantcontact_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /klantcontacten/{uuid}
+  method: get
+  operationId: klantcontact_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaten
+  method: get
+  operationId: resultaat_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaten
+  method: post
+  operationId: resultaat_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaten/{uuid}
+  method: get
+  operationId: resultaat_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /resultaten/{uuid}
+  method: put
+  operationId: resultaat_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaten/{uuid}
+  method: patch
+  operationId: resultaat_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaten/{uuid}
+  method: delete
+  operationId: resultaat_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /resultaten/{uuid}
+  method: head
+  operationId: resultaat_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rollen
+  method: get
+  operationId: rol_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rollen
+  method: post
+  operationId: rol_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rollen/{uuid}
+  method: get
+  operationId: rol_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rollen/{uuid}
+  method: delete
+  operationId: rol_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rollen/{uuid}
+  method: head
+  operationId: rol_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /statussen
+  method: get
+  operationId: status_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /statussen
+  method: post
+  operationId: status_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.aanmaken | zaken.statussen.toevoegen | zaken.heropenen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /statussen/{uuid}
+  method: get
+  operationId: status_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /statussen/{uuid}
+  method: head
+  operationId: status_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakcontactmomenten
+  method: get
+  operationId: zaakcontactmoment_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakcontactmomenten
+  method: post
+  operationId: zaakcontactmoment_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakcontactmomenten/{uuid}
+  method: get
+  operationId: zaakcontactmoment_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakcontactmomenten/{uuid}
+  method: delete
+  operationId: zaakcontactmoment_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakinformatieobjecten
+  method: get
+  operationId: zaakinformatieobject_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakinformatieobjecten
+  method: post
+  operationId: zaakinformatieobject_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.aanmaken | zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakinformatieobjecten/{uuid}
+  method: get
+  operationId: zaakinformatieobject_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakinformatieobjecten/{uuid}
+  method: put
+  operationId: zaakinformatieobject_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakinformatieobjecten/{uuid}
+  method: patch
+  operationId: zaakinformatieobject_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakinformatieobjecten/{uuid}
+  method: delete
+  operationId: zaakinformatieobject_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken | zaken.verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakinformatieobjecten/{uuid}
+  method: head
+  operationId: zaakinformatieobject_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakobjecten
+  method: get
+  operationId: zaakobject_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakobjecten
+  method: post
+  operationId: zaakobject_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.aanmaken | zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecten/{uuid}
+  method: get
+  operationId: zaakobject_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakobjecten/{uuid}
+  method: put
+  operationId: zaakobject_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecten/{uuid}
+  method: patch
+  operationId: zaakobject_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecten/{uuid}
+  method: delete
+  operationId: zaakobject_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken | zaken.verwijderen)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakobjecten/{uuid}
+  method: head
+  operationId: zaakobject_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakverzoeken
+  method: get
+  operationId: zaakverzoek_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakverzoeken
+  method: post
+  operationId: zaakverzoek_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaakverzoeken/{uuid}
+  method: get
+  operationId: zaakverzoek_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaakverzoeken/{uuid}
+  method: delete
+  operationId: zaakverzoek_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken
+  method: get
+  operationId: zaak_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken
+  method: post
+  operationId: zaak_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.aanmaken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{uuid}
+  method: get
+  operationId: zaak_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{uuid}
+  method: put
+  operationId: zaak_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{uuid}
+  method: patch
+  operationId: zaak_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{uuid}
+  method: delete
+  operationId: zaak_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.verwijderen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{uuid}
+  method: head
+  operationId: zaak_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{zaak_uuid}/audittrail
+  method: get
+  operationId: audittrail_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - audittrails.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{zaak_uuid}/audittrail/{uuid}
+  method: get
+  operationId: audittrail_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - audittrails.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{zaak_uuid}/besluiten
+  method: get
+  operationId: zaakbesluit_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{zaak_uuid}/besluiten
+  method: post
+  operationId: zaakbesluit_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{zaak_uuid}/besluiten/{uuid}
+  method: get
+  operationId: zaakbesluit_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{zaak_uuid}/besluiten/{uuid}
+  method: delete
+  operationId: zaakbesluit_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.bijwerken
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{zaak_uuid}/zaakeigenschappen
+  method: get
+  operationId: zaakeigenschap_list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{zaak_uuid}/zaakeigenschappen
+  method: post
+  operationId: zaakeigenschap_create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  method: get
+  operationId: zaakeigenschap_retrieve
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - zaken.lezen
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  method: put
+  operationId: zaakeigenschap_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  method: patch
+  operationId: zaakeigenschap_partial_update
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  method: delete
+  operationId: zaakeigenschap_destroy
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - (zaken.bijwerken | zaken.geforceerd-bijwerken)
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /zaken/{zaak_uuid}/zaakeigenschappen/{uuid}
+  method: head
+  operationId: zaakeigenschap_headers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /zaken/_zoek
+  method: post
+  operationId: zaak__zoek
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - zaken.lezen
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required

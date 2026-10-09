@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-organisatorische-eenheid-schema.json",
+  "title": "OrganisatorischeEenheid",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-klantinteracties-openapi.yml#/components/schemas/OrganisatorischeEenheid",
+  "allOf": [
+    {
+      "$ref": "#/$defs/Actor"
+    },
+    {
+      "type": "object",
+      "description": "Het deel van een functioneel afgebakend onderdeel binnen de organisatie dat haar activiteiten uitvoert binnen een VESTIGING VAN ZAAKBEHANDELENDE ORGANISATIE en die verantwoordelijk is voor de behandeling van zaken.\n\nAlleen ORGANISATORISCHE EENHEden van de organisaties die zaken behandelen worden hier bedoeld (bijvoorbeeld afdelingen van gemeenten). Dus niet organisatorische eenheden van andere organisaties zoals de externe initiatoren van zaken (bijvoorbeeld de afdeling van een bedrijf die een vergunning aanvraagt). De ORGANISATORISCHE EENHEID zoals hier bedoeld is gehuisvest binnen ????n fysieke vestiging van de organisatie. Als een functioneel afgebakend onderdeel van de organisatie haar activiteiten uitvoert in meerdere vestigingen dan wordt die uitgewisseld als evenveel ORGANISATORISCHE EENHEden als die vestigingen. Door de relatie naar VESTIGING VAN ZAAKBEHANDELENDE ORGANISATIE en daarmee via VESTIGING naar NIET NATUURLIJK PERSOON is bekend om welke zaakbehandelende organisatie het gaat. Een ORGANISATORISCHE EENHEID kan zowel groot als klein zijn. De ene ORGANISATORISCHE EENHEID mag andere ORGANISATORISCHE EENHEden bevatten, maar dit wordt niet gemodelleerd. We beperken ons tot het aangeven welke ORGANISATORISCHE EENHEID welke rol heeft in een ZAAK en welke gegevens daarvan vanuit het oogpunt van een zaak relevant zijn. ORGANISATORISCHE EENHEID is een specialisatie ('subtype') van BETROKKENE.",
+      "required": [
+        "externId",
+        "externRegister"
+      ],
+      "properties": {
+        "eMailadres": {
+          "$ref": "#/$defs/Emailadres"
+        },
+        "externId": {
+          "$ref": "#/$defs/Identificatiecode"
+        },
+        "externRegister": {
+          "$ref": "#/$defs/Omschrijvingkort"
+        },
+        "faxnummer": {
+          "$ref": "#/$defs/Telefoonnummer"
+        },
+        "omschrijving": {
+          "$ref": "#/$defs/Omschrijvingkort"
+        },
+        "telefoonnummer": {
+          "$ref": "#/$defs/Telefoonnummer"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "Actor": {
+      "type": "object",
+      "description": "De acor handelt in een interne taak of een klantcontact.",
+      "required": [
+        "id",
+        "indicatieActief",
+        "naam",
+        "soortActor"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/Identificatiecode"
+        },
+        "indicatieActief": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "naam": {
+          "$ref": "#/$defs/Naamlang"
+        },
+        "soortActor": {
+          "$ref": "#/$defs/SoortActor"
+        }
+      }
+    },
+    "Emailadres": {
+      "type": "string",
+      "description": "Een geldig email-adres, maximaal 20 karakters lang en minimaal een @ en een . opgenomen.",
+      "maxLength": 200
+    },
+    "Identificatiecode": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "IndicatieJaNee": {
+      "type": "boolean",
+      "description": ""
+    },
+    "Naamlang": {
+      "type": "string",
+      "description": "",
+      "maxLength": 200
+    },
+    "Omschrijvingkort": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "SoortActor": {
+      "type": "string",
+      "description": "De typering van de actor.<body><ul><li>`medewerker` - medewerker </li><li>`geautomatiseerde_actor` - geautomatiseerde actor </li><li>`organisatorische_eenheid` - organisatorische eenheid </li></ul></body>",
+      "enum": [
+        "medewerker",
+        "geautomatiseerde_actor",
+        "organisatorische_eenheid"
+      ]
+    },
+    "Telefoonnummer": {
+      "type": "string",
+      "description": "",
+      "maxLength": 20
+    }
+  }
+}

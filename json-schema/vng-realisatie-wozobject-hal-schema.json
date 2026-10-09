@@ -1,0 +1,1556 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-wozobject-hal-schema.json",
+  "title": "WOZObjectHal",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-woz-bevragen-openapi.yml#/components/schemas/WOZObjectHal",
+  "allOf": [
+    {
+      "$ref": "#/$defs/WOZObject"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "_links": {
+          "$ref": "#/$defs/WOZObject_links"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "AanduidingEigenaarGebruiker": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "B",
+        "E",
+        "G",
+        "M"
+      ]
+    },
+    "AardZakelijkRecht": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "code",
+        "ingangsdatum",
+        "omschrijving"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "code",
+          "description": "",
+          "maxLength": 2,
+          "minLength": 1
+        },
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        },
+        "omschrijving": {
+          "type": "string",
+          "title": "omschrijving",
+          "description": "",
+          "maxLength": 80,
+          "minLength": 1
+        }
+      }
+    },
+    "AdresBagPlusLocatieOmschrijving": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "huisletter",
+        "huisnummer",
+        "huisnummertoevoeging",
+        "locatieomschrijving",
+        "openbareRuimteNaam",
+        "postcode",
+        "woonplaatsnaam"
+      ],
+      "properties": {
+        "huisletter": {
+          "type": "string",
+          "title": "huisletter",
+          "description": "",
+          "pattern": "^[a-zA-Z]$",
+          "maxLength": 1
+        },
+        "huisnummer": {
+          "type": "integer",
+          "title": "huisnummer",
+          "description": ""
+        },
+        "huisnummertoevoeging": {
+          "type": "string",
+          "title": "huisnummertoevoeging",
+          "description": "",
+          "pattern": "^[a-zA-Z0-9]{1,4}$",
+          "maxLength": 4
+        },
+        "identificatieNummeraanduiding": {
+          "$ref": "#/$defs/IdentificatieBAG"
+        },
+        "locatieomschrijving": {
+          "type": "string",
+          "title": "locatieomschrijving",
+          "description": "<body><p>Indien aan een WOZ-object geen unieke aanduiding kan worden gegeven door gebruik te maken van het hoofdadres van een in het WOZ-object betrokken verblijfsobject, standplaats of ligplaats, wordt een unieke aanduiding verkregen door een `authentiek` adres dan wel woonplaatsnaam en straatnaam te combineren met een locatieomschrijving. De verschillende vormen die de unieke aanduiding van een WOZ-object, zoals vermeld wordt op de WOZ-beschikking, kan aannemen en de eventuele rol van de locatieomschrijving daarbij, staat in de toelichting op de Gegevensgroep aanduidingWOZobject. In het adres van een persoon kan hier de locatieomschrijving uit de BRP worden opgenomen of overeenkomstig de werkwijze van de BRP dit veld worden gevuld voor personen die niet uit de BRP kunnen worden overgenomen. Voor adressen van niet-natuurlijke personen kan hier, eventueel in afgekorte vorm, het gegeven toevoegingAdres uit het Handelsregister worden overgenomen.</p></body>",
+          "maxLength": 40,
+          "minLength": 1
+        },
+        "openbareRuimteNaam": {
+          "type": "string",
+          "title": "openbareRuimteNaam",
+          "description": "",
+          "maxLength": 80,
+          "minLength": 1
+        },
+        "postcode": {
+          "$ref": "#/$defs/Postcode"
+        },
+        "straatnaam": {
+          "type": "string",
+          "title": "straatnaam",
+          "description": "<body><p>Als de lengte van de openbareRuimteNaam kleiner of gelijk is aan 24, dan zijn de openbareRuimteNaam en de straatnaam gelijk. Binnen de BAG wordt deze straatnaam aangeduid als verkorteNaam binnen het objecttype openbareRuimte. Dit attribuut heeft altijd een waarde ook als de openbareRuimteNaam kleiner of gelijk is aan 24 posities.</p></body>",
+          "maxLength": 24,
+          "minLength": 1
+        },
+        "woonplaatsnaam": {
+          "type": "string",
+          "title": "woonplaatsnaam",
+          "description": "",
+          "maxLength": 80,
+          "minLength": 1
+        }
+      }
+    },
+    "CodeGebouwdOngebouwd": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "B",
+        "G",
+        "O"
+      ]
+    },
+    "CodeMonumentAanduiding": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ]
+    },
+    "CodeOmzetBelasting": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "E",
+        "I",
+        "O"
+      ]
+    },
+    "CodeOntbrekenNutsvoorzieningen": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "E",
+        "G",
+        "R",
+        "W"
+      ]
+    },
+    "FunctieWOZObject": {
+      "type": "string",
+      "description": "<body><ul><li>`Bedrijfsfunctie` - Bedrijfsfunctie </li><li>`Bijzondere_bestemming` - Bijzondere bestemming </li><li>`Gemengd_bedrijf_woonfunctie` - Gemengd bedrijf/woonfunctie </li><li>`Gemengd_bijzondere_bestemming_woonfunctie` - Gemengd bijzondere bestemming/woonfunctie </li><li>`Ouderenhuisvesting` - Ouderenhuisvesting </li><li>`Permanente_bewoning` - Permanente bewoning </li><li>`Recreatie` - Recreatie </li><li>`Studentenhuisvesting` - Studentenhuisvesting </li></ul></body>",
+      "enum": [
+        "Bedrijfsfunctie",
+        "Bijzondere_bestemming",
+        "Gemengd_bedrijf_woonfunctie",
+        "Gemengd_bijzondere_bestemming_woonfunctie",
+        "Ouderenhuisvesting",
+        "Permanente_bewoning",
+        "Recreatie",
+        "Studentenhuisvesting"
+      ]
+    },
+    "Gebruikscode": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "10",
+        "11",
+        "12",
+        "20",
+        "21",
+        "30",
+        "31",
+        "40",
+        "80"
+      ]
+    },
+    "Gemeente": {
+      "type": "object",
+      "description": "<body><p>In de WOZ wordt alleen de gemeentecode opgenomen in de registratie. De naam kan worden afgeleid vanuit deze referentielijst.</p></body>",
+      "required": [
+        "code",
+        "ingangsdatum"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "code",
+          "description": "",
+          "pattern": "^[0-9]{4}$",
+          "maxLength": 4
+        },
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        }
+      }
+    },
+    "IdentificatieBAG": {
+      "type": "string",
+      "description": "<body><p>Combinatie van (viercijferig) subdomein `gemeentecodering` (volgens GBA tabel 33), het (tweecijferig) subdomein `objecttypecode` en een voor het betreffende objecttype binnen een gemeente uniek (tiencijferig) subdomein `objectvolgnummer`. Objecttypecode: een code waarmee het objecttype van een object wordt aangegeven. Deze codering maakt onderdeel uit van de unieke objectaanduiding. Het is met name bedoeld om objecten van verschillende adresseerbare objecttypen uniek van elkaar te kunnen onderscheiden. Waardeverzameling domein: 01: verblijfsobject; 02: ligplaats; 03: standplaats; 10: pand en 20: nummeraanduiding. Objectvolgnummer: een uniek volgnummer waarmee een object van een bepaald type binnen een gemeente kan worden aangeduid. Indien een `objectvolgnummer` uit minder dan tien posities bestaat, dan dient deze ten behoeve van de uitwisseling te worden aangevuld met voorloopnullen. De van de objectnummering onderdeel uitmakende gemeentecode kan niet worden gebruikt om te bepalen binnen welke gemeente een object is gelegen. Waardeverzameling domein: Alle natuurlijke getallen tussen 0 en 9.999.999.999.</p></body>",
+      "pattern": "^[0-9]{16}$"
+    },
+    "IdentificatiePersoon": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "InBewerking": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "aanduidingMedewerkerOrganisatie",
+        "einddatumInBewerking",
+        "heeftBetrekkingOpJaar",
+        "ingangsdatumInBewerking",
+        "redenInBewerking",
+        "statusInBewerking"
+      ],
+      "properties": {
+        "aanduidingMedewerkerOrganisatie": {
+          "type": "string",
+          "title": "aanduidingMedewerkerOrganisatie",
+          "description": "",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "aantekening": {
+          "type": "string",
+          "title": "aantekening",
+          "description": "",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "einddatumInBewerking": {
+          "type": "string",
+          "title": "einddatumInBewerking",
+          "description": "",
+          "format": "date-time"
+        },
+        "heeftBetrekkingOpJaar": {
+          "type": "array",
+          "title": "heeftBetrekkingOpJaar",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "type": "integer",
+            "format": "date_fullyear",
+            "pattern": "^[1-2]{1}[0-9]{3}$"
+          }
+        },
+        "ingangsdatumInBewerking": {
+          "type": "string",
+          "title": "ingangsdatumInBewerking",
+          "description": "",
+          "format": "date-time"
+        },
+        "redenInBewerking": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/RedenInBewerking"
+            },
+            {
+              "title": "redenInBewerking",
+              "description": ""
+            }
+          ]
+        },
+        "statusInBewerking": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/StatusInBewerking"
+            },
+            {
+              "title": "statusInBewerking",
+              "description": ""
+            }
+          ]
+        }
+      }
+    },
+    "InOnderzoekWOZ": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "statusWozObject",
+        "gebruikscode",
+        "typeWOZObject",
+        "codeGebouwdOngebouwd",
+        "wozObjectGeometrie",
+        "grondoppervlakte",
+        "meegetaxeerdeOppervlakteGebouwd",
+        "ozbVrijstelling",
+        "ingangsdatumObject",
+        "einddatumObject",
+        "aanduidingWOZobject"
+      ]
+    },
+    "InOnderzoekWOZAOTAND": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZAOTAND",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZAOTOND": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZAOTOND",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZKOZ": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZKOZ",
+        "toegekendeOppervlakte",
+        "meegetaxeerdeOppervlakte",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZNUM": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZNUM",
+        "locatieOmschrijving",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZPND": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZPND",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZPRS": {
+      "type": "string",
+      "description": "<body><ul><li>`WOZPRS` - WOZPRS </li><li>`aanduidingEigenaarGebruiker` - aanduidingEigenaarGebruiker </li><li>`aanduidingAfdelingOfComplex` - aanduidingAfdelingOfComplex </li><li>`terAttentieVan` - terAttentieVan </li><li>`correspondentieAdresWOZ` - correspondentieAdresWOZ </li><li>`aandeel__zakelijkRechtEigenaar_` - aandeel (zakelijkRechtEigenaar) </li><li>`aardZakelijkRecht` - aardZakelijkRecht </li><li>`identificatieKadastraalObject__zakelijkRechtEigenaar_` - identificatieKadastraalObject (zakelijkRechtEigenaar) </li><li>`beginRelatie` - beginRelatie </li><li>`eindRelatie` - eindRelatie </li></ul></body>",
+      "enum": [
+        "WOZPRS",
+        "aanduidingEigenaarGebruiker",
+        "aanduidingAfdelingOfComplex",
+        "terAttentieVan",
+        "correspondentieAdresWOZ",
+        "aandeel__zakelijkRechtEigenaar_",
+        "aardZakelijkRecht",
+        "identificatieKadastraalObject__zakelijkRechtEigenaar_",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZPRSVES": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZPRSVES",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZSWO": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZSWO",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekWOZWSP": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "WOZWSP",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "IndicatieLigging": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "A1",
+        "A2",
+        "B1",
+        "B2",
+        "C",
+        "D"
+      ]
+    },
+    "KeuzeAdresBinnenBuitenland": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "OZBVrijstelling": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    "Postcode": {
+      "type": "string",
+      "description": "",
+      "pattern": "^[1-9][0-9]{3}[A-Z]{2}$"
+    },
+    "RedenInBewerking": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "ingangsdatum",
+        "redenInBewerking"
+      ],
+      "properties": {
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        },
+        "redenInBewerking": {
+          "type": "string",
+          "title": "redenInBewerking",
+          "description": "",
+          "maxLength": 50,
+          "minLength": 1
+        }
+      }
+    },
+    "Sleutel": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40,
+      "minLength": 1
+    },
+    "StatusInBewerking": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "ingangsdatum",
+        "statusInBewerking"
+      ],
+      "properties": {
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        },
+        "statusInBewerking": {
+          "type": "string",
+          "title": "statusInBewerking",
+          "description": "",
+          "maxLength": 50,
+          "minLength": 1
+        }
+      }
+    },
+    "StatusObject": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "0",
+        "1",
+        "8",
+        "9"
+      ]
+    },
+    "TijdvakRelatie": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "beginRelatie",
+        "eindRelatie"
+      ],
+      "properties": {
+        "beginRelatie": {
+          "type": "string",
+          "title": "beginRelatie",
+          "description": "",
+          "format": "date"
+        },
+        "eindRelatie": {
+          "type": "string",
+          "title": "eindRelatie",
+          "description": "",
+          "format": "date"
+        }
+      }
+    },
+    "TypeBreuk": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "noemer",
+        "teller"
+      ],
+      "properties": {
+        "noemer": {
+          "type": "integer",
+          "title": "noemer",
+          "description": ""
+        },
+        "teller": {
+          "type": "integer",
+          "title": "teller",
+          "description": ""
+        }
+      }
+    },
+    "TypeWOZObject": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "ingangsdatum",
+        "omschrijvingTypeWozObject",
+        "omschrijvingTypeWozObjectVerkort",
+        "typeWozObject"
+      ],
+      "properties": {
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        },
+        "omschrijvingTypeWozObject": {
+          "type": "string",
+          "title": "omschrijvingTypeWozObject",
+          "description": "",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "omschrijvingTypeWozObjectVerkort": {
+          "type": "string",
+          "title": "omschrijvingTypeWozObjectVerkort",
+          "description": "",
+          "maxLength": 12,
+          "minLength": 1
+        },
+        "typeWozObject": {
+          "type": "string",
+          "title": "TypeWozObject",
+          "description": "",
+          "maxLength": 4,
+          "minLength": 1
+        }
+      }
+    },
+    "TypeWOZObjectOptioneel": {
+      "type": "object",
+      "description": "<body><p>Voor de aanduiding van de soort woning heeft de Waarderingskamer in samenwerking met de Vereniging van Nederlandse Gemeenten en diversie branche-organisaties van makelaars en taxateurs een Fotowijzer woningen opgesteld. In deze Fotowijzer woningen worden definities van soorten woningen geïllustreerd met foto's. Deze fotowijzer woningen is opgenomen in deze referentielijst. Voor de niet-woningen is de referentielijst uitgebreid met standaardcoderingen voor de diverse typen niet-woningen. Het gebruik van landelijk uniforme objectcodes is van belang doordat deze codes via de LV WOZ ook landelijk beschikbaar komen.</p></body>",
+      "required": [
+        "ingangsdatum",
+        "omschrijvingTypeWozObjectOptioneel",
+        "omschrijvingTypeWozObjectOptioneelVerkort",
+        "typeWOZObjectOptioneel"
+      ],
+      "properties": {
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        },
+        "omschrijvingTypeWozObjectOptioneel": {
+          "type": "string",
+          "title": "omschrijvingTypeWozObjectOptioneel",
+          "description": "",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "omschrijvingTypeWozObjectOptioneelVerkort": {
+          "type": "string",
+          "title": "omschrijvingTypeWozObjectOptioneelVerkort",
+          "description": "<body><p>Dit betreft een verkorte naam die als trefwoord door de direct betrokkenen wordt gehanteerd.</p></body>",
+          "maxLength": 12,
+          "minLength": 1
+        },
+        "typeWOZObjectOptioneel": {
+          "type": "string",
+          "title": "typeWOZObjectOptioneel",
+          "description": "",
+          "maxLength": 4,
+          "minLength": 1
+        }
+      }
+    },
+    "WOZObject": {
+      "type": "object",
+      "description": "<body><p>Dit objecttype komt voort uit de objectafbakeningsvoorschriften van artikel 16 van de Wet WOZ. In de Basisregistratie WOZ kunnen ook WOZ-objecten worden geregistreerd met de status `gevormd, niet actief`. Binnen de gegevens van het WOZ-object komt de groep `adresBagPlusLocatieOmschrijving` voor. Dit de officiële aanduiding van de onroerende zaak, zoals deze op de beschikking wordt vermeld. Meestal is deze afgeleid van een adres uit de Basisregistratie Adressen en Gebouwen (BAG). Wanneer dit het geval is, is er sprake van een relatie WOZAOTAND die verwijst naar een verblijfsobject, een ligplaats of een standplaats en een relatie WOZNUM die verwijst naar het hoofdadres of eventueel een nevenadres van deze AOT dat gebruikt wordt als aanduiding van het WOZ-object.</p></body>",
+      "required": [
+        "aanduidingInAanbouw",
+        "aanduidingWOZobject",
+        "codeGebouwdOngebouwd",
+        "einddatumObject",
+        "functieWOZObject",
+        "gebruikscode",
+        "ingangsdatumObject",
+        "ozbVrijstelling",
+        "soortObjectCode",
+        "statusWozObject",
+        "typeWOZObject",
+        "verantwoordelijkeGemeente",
+        "wozObjectnummer",
+        "wozwsp"
+      ],
+      "properties": {
+        "aanduidingBouwstroom": {
+          "type": "string",
+          "title": "aanduidingBouwstroom",
+          "description": "",
+          "maxLength": 6,
+          "minLength": 1
+        },
+        "aanduidingInAanbouw": {
+          "type": "boolean",
+          "title": "aanduidingInAanbouw",
+          "description": ""
+        },
+        "aanduidingRepeterend": {
+          "type": "boolean",
+          "title": "aanduidingRepeterend",
+          "description": "<body><p>Dit aanduidingRepeterend helpt om te waarborgen dat direct vergelijkbare objecten consistent geregistreerd blijven. Wanneer kenmerken van een WOZ-object gewijzigd worden die is aangemerkt als repeterend moet beoordeeld worden of dezelfde wijziging ook aan de orde is bij direct vergelijkbare objecten.</p></body>"
+        },
+        "aanduidingWOZobject": {
+          "$ref": "#/$defs/AdresBagPlusLocatieOmschrijving"
+        },
+        "aanwezigheidLift": {
+          "type": "boolean",
+          "title": "aanwezigheidLift",
+          "description": "<body><p>Dit gegeven is met name gericht op de bereikbaarheid van woningen. Voor de aanduiding van de bereikbaarheid van bijvoorbeeld kantoorruimte of winkelruimte is een aanduiding per verdieping noodzakelijk. Daarom wordt voor deze objecten het gegeven `ontsluiting verdieping` gebruikt.</p></body>"
+        },
+        "codeGebouwdOngebouwd": {
+          "$ref": "#/$defs/CodeGebouwdOngebouwd"
+        },
+        "codeOmzetBelasting": {
+          "$ref": "#/$defs/CodeOmzetBelasting"
+        },
+        "codeOntbrekenNutsvoorzieningen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/CodeOntbrekenNutsvoorzieningen"
+          }
+        },
+        "documentIdentificatie": {
+          "type": "array",
+          "title": "documentIdentificatie",
+          "description": "<body><p>Er zijn diverse typen niet formele documenten die kunnen worden vastgelegd. Hierbij kan ook gedacht worden aan foto's etc. De verwijzing naar deze documenten geschiedt op overeenkomstige wijze als de verwijzing naar formele brondocumenten. De unieke aanduiding van de vindplaats van een document binnen een organisatie zal ook vaak besaan uit een uri voor een digitaal archief. Naast numerieke tekens kan dus ook gebruik worden gemaakt van letters uit het alfabet en bijzondere leestekens als verbindingsstreepjes en scheidingstekens om documenten binnen een organisatie vindbaar te maken.</p></body>",
+          "minItems": 0,
+          "items": {
+            "type": "string",
+            "maxLength": 512,
+            "minLength": 1
+          }
+        },
+        "einddatumObject": {
+          "type": "string",
+          "title": "einddatumObject",
+          "description": "<body><p>Wanneer WOZ-object de status 'ten onrechte opgevoerd' krijgt wordt de einddatumObject geljik aan ingangsdatumObject.</p></body>",
+          "format": "date"
+        },
+        "functieWOZObject": {
+          "$ref": "#/$defs/FunctieWOZObject"
+        },
+        "gebruikscode": {
+          "$ref": "#/$defs/Gebruikscode"
+        },
+        "groepaanduiding": {
+          "type": "string",
+          "title": "groepaanduiding",
+          "description": "<body><p>Deze groepaanduiding kan bijvoorbeeld betrekking hebben op een project van woningen, die bouwkundig en architectonisch gelijksoortig zijn en daarom onderling goed vergelijkbaar zijn voor de waardebepaling. Voor de courante niet-woningen kan een groep bestaan uit objecten waarvoor op grond van de marktgegevens dezelfde kengetallen voor bijvoorbeeld de huurprijzen per vierkante meter gehanteerd kunnen worden.</p></body>",
+          "maxLength": 8,
+          "minLength": 1
+        },
+        "grondoppervlakte": {
+          "type": "integer",
+          "title": "grondoppervlakte",
+          "description": "<body><p>Dit gegeven is van belang om te controleren of de sommatie van de kadastrale oppervlakten van alle kadastrale percelen en delen van kadastrale percelen die gekoppeld zijn aan dit WOZ-object, overeenstemt met de totale grondoppervlakte die behoort tot het WOZ-object. In verband met het grote belang van het oppervlakte gegeven voor de watersysteemheffing is deze controlemogelijkheid noodzakelijk. Bij (kadastrale) appartementen en andere WOZ-objecten waarvoor niet eenduidig een grondoppervlakte kan worden aangewezen wordt het gegeven grondoppervlakte niet gebruikt. Voor deze WOZ-objecten geldt de voorwaarde dat deze gekoppeld zijn aan een sluimerend WOZ-object via de relatie 'WOZ-object' heeftSluimerendWOZObject 'Sluimerend WOZ-object'. Dit gegeven is verplicht als het WOZ-object niet aan een sluimerend WOZ-object is gekoppeld.</p></body>"
+        },
+        "identificatieTaxatie": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sleutel"
+          }
+        },
+        "identificatieWaarde": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sleutel"
+          }
+        },
+        "identificatieWaardebepaling": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Sleutel"
+          }
+        },
+        "inBewerking": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InBewerking"
+          }
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZ"
+          }
+        },
+        "indicatieLigging": {
+          "$ref": "#/$defs/IndicatieLigging"
+        },
+        "ingangsdatumObject": {
+          "type": "string",
+          "title": "ingangsdatumObject",
+          "description": "<body><p>De ingangsdatum betreft de datum vanaf welke het object relevant is voor de registratie. Daarbij kan het object in eerste instantie geregistreerd worden met statusObject `gevormd, niet actief`.</p></body>",
+          "format": "date"
+        },
+        "meegetaxeerdeOppervlakteGebouwd": {
+          "type": "integer",
+          "title": "meegetaxeerdeOppervlakteGebouwd",
+          "description": "<body><p>Dit gegeven wordt verplicht gevuld voor WOZ-objecten met de `Code gebouwd / ongebouwd` gelijk aan `B`. Overeenkomstig het gegeven `grondoppervlakte` functioneert dit gegeven mede als controle. Voor de WOZ-objecten die zijn aangemerkt als gedeeltelijk gebouwd, gedeeltelijk ongebouwd is het gegeven meegetaxeerdeOppervlakteGebouwd` gelijk aan de sommatie van alle gegevens meegetaxeerdeOppervlakteGebouwd op de relatie WOZObject bevat KadastraleObjecten. Ook in deze situatie is deze controlemogelijkheid noodzakelijk.</p></body>"
+        },
+        "monumentaanduiding": {
+          "$ref": "#/$defs/CodeMonumentAanduiding"
+        },
+        "omschrijving": {
+          "type": "string",
+          "title": "omschrijving",
+          "description": "<body><p>Dit gegeven is bedoeld voor opmerkingen van de taxateur en niet om systematisch een nieuw gegeven kwijt te kunnen. Dit gegeven is geheel vrij in te vullen.</p></body>",
+          "maxLength": 100,
+          "minLength": 1
+        },
+        "ozbVrijstelling": {
+          "$ref": "#/$defs/OZBVrijstelling"
+        },
+        "soortObjectCode": {
+          "type": "string",
+          "title": "soortObjectCode",
+          "description": "<body><p>In het kader van de uniformering wordt de soortObjectCode vervangen door de uniforme typeWOZObject, met het oog van bewaren van historische gegevens en een soepele transitie bestaan beide attributen naast elkaar in het informatiemodel. De soortObjectCode is verplicht tot 1 januari 2022. De betekenis van de soortObjectCode staat in het afzonderlijke objectype SoortObjectCode. Omdat deze soortObjectCode alleen voor de historie relevant is is geen relatie gedefinieerd tussen WOZ-object en soortObjectCode.</p></body>",
+          "maxLength": 4,
+          "minLength": 1
+        },
+        "statusWozObject": {
+          "$ref": "#/$defs/StatusObject"
+        },
+        "typeWOZObject": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/TypeWOZObject"
+            },
+            {
+              "title": "typeWOZObject",
+              "description": "<body><p>Voor het type WOZ-oject wordt gebruik gemaakt van een uniforme landelijke lijst. Het type WOZ-object wordt vermeld op het WOZ-taxatieverslag en wordt ook opgenomen in de LV WOZ en het WOZ-waardeloket. Type WOZ-object is verplicht vanaf 1 januari 2022. De historische typering blijft vastgelegd in de soort object code.</p></body>"
+            }
+          ]
+        },
+        "typeWOZObjectOptioneel": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/TypeWOZObjectOptioneel"
+            },
+            {
+              "title": "typeWOZObjectOptioneel",
+              "description": "<body><p>Ook voor optionele binnengemeentelijke uitbreiding van het type WOZ-oject wordt gebruik gemaakt van een uniforme landelijke lijst. Als de organisatie kiest voor het registeren van de optionele uitbreiding van type WOZ-object, wordt deze niet eerder geregistreerd dan vanaf 1 januari 2022. De historische typering blijft vastgelegd in de soort object code.</p></body>"
+            }
+          ]
+        },
+        "verantwoordelijkeGemeente": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Gemeente"
+            },
+            {
+              "title": "verantwoordelijkeGemeente",
+              "description": "<body><p>Voor dit attribuut wordt alleen de historie vastgelegd vanaf het moment dat de gemeente is aangesloten op de LV WOZ. Op basis van dit gegeven kan men beoordelen welke gemeente verantwoordelijk is voor de (bijhouding van de) geregistreerde gegevens.</p></body>"
+            }
+          ]
+        },
+        "waardegebied": {
+          "type": "string",
+          "title": "waardegebied",
+          "description": "<body><p>Dit veld wordt gebruikt in sommige typen taxatiemodellen om (met name) de woningen (maar ook courante niet-woningen) in een gemeente in groepen in te delen op basis van soort objectcode en geografische kenmerken.</p></body>",
+          "maxLength": 8,
+          "minLength": 1
+        },
+        "wozObjectGeometrie": {
+          "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/geojson.yaml#/MultiPolygon"
+        },
+        "wozObjectnummer": {
+          "type": "string",
+          "title": "wozObjectnummer",
+          "description": "<body><p>Elk WOZ-object wordt uniek aangeduid door middel van een identificatiecode. Deze identificatiecode bestaat uit de gemeentecode volgens de landelijke GBA-tabel 33 ' Gemeente' in combinatie met een voor de registrerende gemeente uniek volgnummer. Het WOZ-objectnummer verandert niet bij gemeentelijke herindeling, naamswijziging of bij grenscorrectie. Dit betekent dat in de gemeentelijke WOZ-administratie ook (actieve) WOZ-objecten en sluimerende WOZ-objecten kunnen voorkomen, waarvan de eerste vier cijfers niet overeenkomen met de actuele gemeentecode van de desbetreffende gemeente. Wanneer een nieuw WOZ-object wordt geregistreerd moeten de eerste vier posities wel verplicht overeenkomen met de gemeentecode van de gemeente die het object opvoert. Een WOZ-objectnummer mag niet voor zowel een WOZ-object als voor een Sluimerend WOZ-object gebruikt worden als identificerend nummer.</p></body>",
+          "pattern": "^[0-9]{12}$",
+          "maxLength": 12
+        },
+        "wozaotand": {
+          "$ref": "#/$defs/Wozaotand"
+        },
+        "wozaotond": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wozaotond"
+          }
+        },
+        "wozctl": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wozctl"
+          }
+        },
+        "wozkoz": {
+          "$ref": "#/$defs/Wozkoz"
+        },
+        "woznum": {
+          "$ref": "#/$defs/Woznum"
+        },
+        "wozopr": {
+          "$ref": "#/$defs/Wozopr"
+        },
+        "wozpnd": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wozpnd"
+          }
+        },
+        "wozprs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wozprs"
+          }
+        },
+        "wozswo": {
+          "$ref": "#/$defs/Wozswo"
+        },
+        "woztrn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Woztrn"
+          }
+        },
+        "woztxk": {
+          "$ref": "#/$defs/Woztxk"
+        },
+        "wozwdo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wozwdo"
+          }
+        },
+        "wozwpl": {
+          "$ref": "#/$defs/Wozwpl"
+        },
+        "wozwsp": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Wozwsp"
+          }
+        }
+      }
+    },
+    "WOZObject_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+        },
+        "heeftsluimerendobject": {
+          "allOf": [
+            {
+              "title": "heeftsluimerendobject",
+              "type": "object",
+              "description": "<body><p>Omdat de relatie tussen een WOZ-object en een sluimerend WOZ-object in de tijd kan veranderen, is het bijhouden van de tijdvakRelatie van belang.</p></body>"
+            },
+            {
+              "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+            }
+          ]
+        },
+        "WOZDeelobjecten": {
+          "title": "heeftdeelobject",
+          "type": "array",
+          "description": "<body><p>Omdat de relatie tussen een WOZ-object en de betrokken WOZ-deelobjecten in de tijd kan veranderen, is het bijhouden van de tijdvakRelatie van belang.</p></body>",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "openbareruimten": {
+          "allOf": [
+            {
+              "title": "ligtaan",
+              "type": "object",
+              "description": "<body><p>Deze relatie is met name van belang als een eenduidige relatie naar NUM niet mogelijk is.</p></body>"
+            },
+            {
+              "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+            }
+          ]
+        },
+        "aanduidingAdresseerbaarObjecten": {
+          "allOf": [
+            {
+              "title": "ontleentaanduidingaan",
+              "type": "object",
+              "description": ""
+            },
+            {
+              "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+            }
+          ]
+        },
+        "nummeraanduidingen": {
+          "allOf": [
+            {
+              "title": "heeftalsaanduiding",
+              "type": "object",
+              "description": ""
+            },
+            {
+              "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+            }
+          ]
+        },
+        "kadastraleonroerendezaken": {
+          "title": "bevatkadastraleobjecten",
+          "type": "array",
+          "description": "<body><p>Bewaakt moet worden dat de gegevens per kadastraal object aansluiten op de totale gegevens voor het (sluimerend) WOZ-object. Bijvoorbeeld wanneer een (sluimerend) WOZ-object overeenkomt met een kadastraal object, bevat WOZKOZ/toegekendeOppervlakte de kadastrale oppervlakte van het desbetreffende kadastrale perceel. Indien een kadastraal object tot meerdere (sluimerende) WOZ-objecten behoort, geeft de som van de gegevens WOZKOZ/toegekendeOppervlakte behorend bij een kadastraal object de kadastrale oppervlakte van dat kadastrale object. Indien een (sluimerend) WOZ-object uit (delen van) meerdere kadastrale objecten bestaat, geeft de som van de gegevens WOZKOZ/toegekendeOppervlakte behorend bij een (sluimerend) WOZ-object de grondoppervlakte van dat (sluimerend) WOZ-object. De relatie tussen een (sluimerend) WOZ-object en de betrokken kadastrale objecten kan veranderen. Daarom heeft de relatie materiële en formele historie en is het bijhouden van de tijdvakRelatie van belang. Deze relatie legt niet alleen vast welke kadastrale objecten (kadastrale percelen en/of kadastrale appartementen) betrokken zijn bij het WOZ-object, maar legt tevens vast voor welk deel het desbetreffende kadastrale object bijdraagt aan de totale grondoppervlakte van het WOZ-object (WOZKOZ/toegekendeOppervlakte) en in voorkomende gevallen aan de totale meegetaxeerde oppervlakte gebouwd van het WOZobject WOZKOZ/meegetaxeerdeOppervlakteGebouwd.</p></body>",
+          "minItems": 1,
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "waardebepalingen": {
+          "title": "heeftwaardebepaling",
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "waterschappen": {
+          "title": "ligtin",
+          "type": "array",
+          "description": "<body><p>Door deze relatie wordt ook aan de Landelijke Voorziening WOZ gemeld in welk waterschap een object gelegen is. De relatie tussen een (sluimerend) WOZ-object en het waterschap kan veranderen, bijvoorbeeld door herindelingen van waterschappen of door grenscorrecties. Daarom is het bijhouden van de tijdvakRelatie van belang. In het informatiemodel is de aanduiding van het betrokken waterschap gemodelleerd met deze relatie-entiteit WOZWSP. Voor gemeenten die geheel gelegen zijn in het gebied van één waterschap hoeft de historie van deze relatie alleen vastgelegd te worden vanaf het moment dat de gemeente is aangesloten op de LV WOZ.</p></body>",
+          "minItems": 1,
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "panden": {
+          "title": "heeftpand",
+          "type": "array",
+          "description": "<body><p>Omdat de relatie tussen een WOZ-object en een pand in de tijd kan veranderen zijn materiële en formele historie en het bijhouden van de tijdvakRelatie van belang. De relatie tussen WOZ-object en pand wordt alleen gelegd wanneer sprake is van een pand zonder verblijfsobject of wanneer het WOZ-object alleen een gedeelte van een pand betreft waarin zich geen verblijfsobject bevindt.</p></body>",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "ligtin": {
+          "allOf": [
+            {
+              "title": "ligtin",
+              "type": "object",
+              "description": "<body><p>Deze relatie is met name van belang als een eenduidige relatie naar NUM niet mogelijk is.</p></body>"
+            },
+            {
+              "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+            }
+          ]
+        },
+        "taxaties": {
+          "title": "heefttaxatie",
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "controleObjectkenmerken": {
+          "title": "isgecontroleerd",
+          "type": "array",
+          "description": "<body><p>Met deze relatie kunnen we snel achterhalen wanneer en op welke wijze de laatste controle(s) van het object hebben plaatsgevonden en in welk kader. Deze relatie behoort daarmee tot de metagegevens.</p></body>",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "personen": {
+          "title": "heeftbelanghebbende",
+          "type": "array",
+          "description": "<body><p>De belanghebbende wordt in de Basisregistratie WOZ, opgenomen, zodra deze bekend is. Opname wordt door eerstvolgende WOZ-beschikking aan de belanghebbende kenbaar gemaakt. Een belang bestaat als deze zakelijk gerechtigde of gebruiker door de bevoegde ambtenaar is aangewezen als de `belanghebbende eigenaar`, respectievelijk `belanghebbende gebruiker`. Omdat de relatie tussen een WOZ-object en een belanghebbende in de tijd kan veranderen, zijn materiële en formele historie en het bijhouden van tijdvakRelatie van belang. Een medebelanghebbende wordt alleen geregistreerd voor het jaar waarvoor ook daadwerkelijk een WOZ-beschikking is bekend gemaakt. Daarom wordt bij registratie van een medebelanghebbende ook altijd gelijk een eindRelatie geregistreerd. De Basisregistratie WOZ bevat voor de geregistreerde onroerende zaken (WOZ-objecten) de belanghebbenden. De gegevens over belanghebbenden blijven in de Basisregistratie WOZ aanwezig, ook indien het belang wordt beëindigd. De Basisregistratie WOZ bevat geen gegevens over belanghebbenden die voor 1 januari 2009 hun belang hebben verloren. Omdat eenzelfde persoon zowel als belanghebbende eigenaar als belanghebbende gebruiker bij een WOZ-object geregistreerd kan zijn is het attribuut aanduidingEigenaarGebruiker van belang om deze twee relaties van elkaar te onderscheiden.</p></body>",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "taxatiekenmerken": {
+          "allOf": [
+            {
+              "title": "heefttaxatiekenmerken",
+              "type": "object",
+              "description": ""
+            },
+            {
+              "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+            }
+          ]
+        },
+        "waarden": {
+          "title": "heeftwaarde",
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "transacties": {
+          "title": "heefttransacties",
+          "type": "array",
+          "description": "<body><p>Er kunnen meerdere relaties met transacties (marktgegevens) van het desbetreffende WOZ-object zelf gelijk actief zijn. Om te kunnen aangeven dat een bepaald (ouder) marktgegeven niet meer van belang is, kan de relatie met behulp van tijdvakRelatie worden beëindigd.</p></body>",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "verbondenAdresseerbaarObjecten": {
+          "title": "isverbondenmet",
+          "type": "array",
+          "description": "<body><p>De entiteit AOT (Adresseerbaar object) is een supertype van VBO (Verblijfsobject), STA (Standplaats) en LIG (Ligplaats). Omdat de relatie tussen een WOZ-object en een adresseerbaar object in de tijd kan veranderen is materiële en formele historie en het bijhouden van de tijdvakRelatie van belang.</p></body>",
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        }
+      }
+    },
+    "Waterschapstabel": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "codeWaterschap",
+        "ingangsdatum"
+      ],
+      "properties": {
+        "codeWaterschap": {
+          "type": "string",
+          "title": "codeWaterschap",
+          "description": "<body><p>De verzameling van waarden die gegevens van deze attribuutsoort kunnen hebben oftewel het waardenbereik, uitgedrukt in een specifieke structuur.</p></body>",
+          "pattern": "^[0-9]{4}$",
+          "maxLength": 4
+        },
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        }
+      }
+    },
+    "Wozaotand": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieAdresseerbaarObject",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieAdresseerbaarObject": {
+          "$ref": "#/$defs/IdentificatieBAG"
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZAOTAND"
+          }
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozaotond": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieAdresseerbaarObject",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieAdresseerbaarObject": {
+          "$ref": "#/$defs/IdentificatieBAG"
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZAOTOND"
+          }
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozctl": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieControleObjectkenmerken",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieControleObjectkenmerken": {
+          "$ref": "#/$defs/Sleutel"
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozkoz": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "kadastraleIdentificatie",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZKOZ"
+          }
+        },
+        "kadastraleIdentificatie": {
+          "type": "string",
+          "title": "kadastraleIdentificatie",
+          "description": "",
+          "minLength": 1
+        },
+        "meegetaxeerdeOppervlakte": {
+          "type": "integer",
+          "title": "meegetaxeerdeOppervlakte",
+          "description": "<body><p>Dit gegeven wordt alleen gebruikt als het desbetreffende WOZ-object is aangemerkt als gedeeltelijk gebouwd en gedeeltelijk ongebouwd. Dit gegeven wordt op overeenkomstige wijze gebruikt als het gegeven `toegekende oppervlakte`. De som per WOZ-object betreft echter niet de totale grondoppervlakte van het WOZ-object, maar de meegetaxeerde oppervlakte gebouwd. Dit gegeven wordt verplicht gevuld voor WOZ-objecten met de `Code gebouwd / ongebouwd` gelijk aan `B`. Dit gegeven wordt in die gevallen verplicht gevuld voor elk gerelateerd perceel.</p></body>"
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        },
+        "toegekendeOppervlakte": {
+          "type": "integer",
+          "title": "toegekendeOppervlakte",
+          "description": "<body><p>Dit gegeven wordt verplicht gevuld voor elk gerelateerd kadastraal perceel. Dit gegeven wordt niet gevuld voor gerelateerde kadastrale appartementsrechten. Dit gegeven wordt gebruikt om de relatie tussen het WOZ-object en het kadastrale object te specificeren. Indien een WOZ-object overeenkomt met een kadastraal object, bevat dit gegeven de kadastrale oppervlakte. Indien een kadastraal object tot meerdere WOZ-objecten behoort, geeft de som van de gegevens WOZKOZ/toegekendeOppervlakte behorend bij een kadastraal object de kadastrale oppervlakte van dat kadastrale object. Indien een WOZ-object uit (delen van) meerdere kadastrale objecten bestaat, geeft de som van het gegeven WOZKOZ/toegekendeOppervlakte behorend bij een WOZ-object de kadastrale oppervlakte (`grondoppervlakte`) van dat WOZ-object.</p></body>"
+        }
+      }
+    },
+    "Woznum": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieNummeraanduiding",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieNummeraanduiding": {
+          "$ref": "#/$defs/IdentificatieBAG"
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZNUM"
+          }
+        },
+        "locatieomschrijving": {
+          "type": "string",
+          "title": "locatieomschrijving",
+          "description": "<body><p>De waarde van dit attribuut moet gelijk zijn aan de waarde van het attribuut locatieomschrijving in de gegevensgroep aanduidingWOZobject voor het onderhavige WOZ-object. Indien aan een WOZ-object geen unieke aanduiding kan worden gegeven door gebruik te maken van het hoofdadres van een in het WOZ-object betrokken verblijfsobject, standplaats of ligplaats, wordt in veel gevallen een unieke aanduiding verkregen door een `authentiek` adres te combineren met een locatieomschrijving. In de gevallen dat de locatieomschrijving aanvullend is op een nummeraanduiding, wordt deze locatieomschrijving ook vastgelegd als onderdeel van de WOZNUM relatie (heeftAlsAanduiding). De verschillende vormen die de unieke aanduiding van een WOZ-object, zoals vermeld wordt op de WOZ-beschikking, kan aannemen en de eventuele rol van de locatieomschrijving daarbij, staat in de toelichting op de Gegevensgroep aanduidingWOZobject.</p></body>",
+          "maxLength": 40,
+          "minLength": 1
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozopr": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieOPR",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieOPR": {
+          "$ref": "#/$defs/IdentificatieBAG"
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozpnd": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatiePand",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatiePand": {
+          "$ref": "#/$defs/IdentificatieBAG"
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZPND"
+          }
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozprs": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "aanduidingEigenaarGebruiker",
+        "correspondentieAdresWOZ",
+        "identificatiePersoon",
+        "tijdvakRelatie",
+        "wozprsves"
+      ],
+      "properties": {
+        "aanduidingAfdelingOfComplex": {
+          "type": "string",
+          "title": "aanduidingAfdelingOfComplex",
+          "description": "<body><p>Het attribuut 'aanduiding afdelingOfComplex' maakt het mogelijk om voor belanghebbende met een groot aantal WOZ-objecten een onderverdeling te maken. Hierdoor kunnen bijvoorbeeld WOZ-objecten gekoppeld worden aan de `afdeling Sport` van een gemeente, of kunnen een groep woningen van een woningcooperatie als één complex worden aangeduid.</p></body>",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "aanduidingEigenaarGebruiker": {
+          "$ref": "#/$defs/AanduidingEigenaarGebruiker"
+        },
+        "correspondentieAdresWOZ": {
+          "$ref": "#/$defs/KeuzeAdresBinnenBuitenland"
+        },
+        "identificatiePersoon": {
+          "$ref": "#/$defs/IdentificatiePersoon"
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZPRS"
+          }
+        },
+        "terAttentieVan": {
+          "type": "string",
+          "title": "terAttentieVan",
+          "description": "",
+          "maxLength": 50,
+          "minLength": 1
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        },
+        "wozprsves": {
+          "$ref": "#/$defs/Wozprsves"
+        },
+        "zakelijkRechtEigenaar": {
+          "$ref": "#/$defs/ZakelijkRechtEigenaar"
+        }
+      }
+    },
+    "Wozprsves": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieVestiging",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieVestiging": {
+          "$ref": "#/$defs/Sleutel"
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZPRSVES"
+          }
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozswo": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "tijdvakRelatie",
+        "wozObjectnummer"
+      ],
+      "properties": {
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZSWO"
+          }
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        },
+        "wozObjectnummer": {
+          "type": "string",
+          "title": "wozObjectnummer",
+          "description": "<body><p>Elk WOZ-object wordt uniek aangeduid door middel van een identificatiecode. Deze identificatiecode bestaat uit de gemeentecode volgens de landelijke GBA-tabel 33 ' Gemeente' in combinatie met een voor de registrerende gemeente uniek volgnummer. Het WOZ-objectnummer verandert niet bij gemeentelijke herindeling, naamswijziging of bij grenscorrectie. Dit betekent dat in de gemeentelijke WOZ-administratie ook (actieve) WOZ-objecten en sluimerende WOZ-objecten kunnen voorkomen, waarvan de eerste vier cijfers niet overeenkomen met de actuele gemeentecode van de desbetreffende gemeente. Wanneer een nieuw WOZ-object wordt geregistreerd moeten de eerste vier posities wel verplicht overeenkomen met de gemeentecode van de gemeente die het object opvoert. Een WOZ-objectnummer mag niet voor zowel een WOZ-object als voor een Sluimerend WOZ-object gebruikt worden als identificerend nummer.</p></body>",
+          "pattern": "^[0-9]{12}$",
+          "maxLength": 12
+        }
+      }
+    },
+    "Woztrn": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieTransactie",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieTransactie": {
+          "$ref": "#/$defs/Sleutel"
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Woztxk": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "taxatiekenmerknummer",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "taxatiekenmerknummer": {
+          "type": "string",
+          "title": "taxatiekenmerknummer",
+          "description": "<body><p>Elk Taxatiekenmerk wordt uniek aangeduid door middel van een identificatiecode. Deze identificatiecode bestaat uit de gemeentecode volgens de landelijke GBA-tabel 33 ' Gemeente' in combinatie met op de vijfde positie het cijfer 2 en daarna een voor de registrerende gemeente uniek volgnummer.</p></body><body><p>[0-9]{16}</p></body>",
+          "maxLength": 16,
+          "minLength": 1
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozwdo": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "tijdvakRelatie",
+        "wozDeelobjectnummer"
+      ],
+      "properties": {
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        },
+        "wozDeelobjectnummer": {
+          "type": "string",
+          "title": "wozDeelobjectnummer",
+          "description": "<body><p>Elk WOZDeelobject wordt uniek aangeduid door middel van een identificatiecode. Deze identificatiecode bestaat uit de gemeentecode volgens de landelijke GBA-tabel 33 ' Gemeente' in combinatie met op de vijfde positie het cijfer 1 en daarna een voor de registrerende gemeente uniek volgnummer.</p></body><body><p>[0-9]{16}</p></body>",
+          "maxLength": 16,
+          "minLength": 1
+        }
+      }
+    },
+    "Wozwpl": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "identificatieWoonplaats",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "identificatieWoonplaats": {
+          "$ref": "#/$defs/IdentificatieBAG"
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "Wozwsp": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "codeWaterschap",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "codeWaterschap": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Waterschapstabel"
+            },
+            {
+              "title": "codeWaterschap",
+              "description": "<body><p>Met het oog op uniformering is binnen het IMWOZ een waardelijst opgesteld met toegestane waterschapscodes (met aanduiding bij welk waterschap deze hoort), inclusief historie vanaf 1 januari 2009.</p></body>"
+            }
+          ]
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekWOZWSP"
+          }
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "ZakelijkRechtEigenaar": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "aandeel",
+        "aardZakelijkRecht",
+        "identificatieKadastraalObject"
+      ],
+      "properties": {
+        "aandeel": {
+          "$ref": "#/$defs/TypeBreuk"
+        },
+        "aardZakelijkRecht": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/AardZakelijkRecht"
+            },
+            {
+              "title": "aardZakelijkRecht",
+              "description": "<body><p>In aanvulling op de codelijst van de Basisregistratie Kadaster is ook de code 99 betekenis `bezit` toegestaan.</p></body>"
+            }
+          ]
+        },
+        "identificatieKadastraalObject": {
+          "type": "string",
+          "title": "identificatieKadastraalObject",
+          "description": "",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

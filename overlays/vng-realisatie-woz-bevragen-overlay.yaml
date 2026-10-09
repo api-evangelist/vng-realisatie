@@ -1,0 +1,48 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for BG IMWOZ WOZ bevragen API
+  version: 1.0.0
+extends: ../openapi/_original/vng-realisatie-woz-bevragen-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/vng-realisatie-woz-bevragen-openapi.yml
+x-rationale: Adds provider metadata, the documentation link recorded in apis.yml, and an x-agent-safe marker on every GET
+  operation. Derived only from the saved contract and apis.yml; the original OpenAPI is not modified.
+actions:
+- target: $.info
+  description: Attach API Evangelist provider metadata without mutating the contract.
+  update:
+    x-provider: VNG Realisatie
+    x-provider-slug: vng-realisatie
+    x-apis-json-name: BG IMWOZ WOZ bevragen API
+    x-provider-hosted-openapi: https://raw.githubusercontent.com/VNG-Realisatie/IMWOZ-bevragingen/main/specificatie/WOZ/openapi.yaml
+- target: $
+  description: Point to the provider documentation recorded in apis.yml.
+  update:
+    externalDocs:
+      description: BG IMWOZ WOZ bevragen API documentation (VNG Realisatie)
+      url: https://vng-realisatie.github.io/IMWOZ-bevragingen/
+- target: $.paths['/sluimerendwozobjecten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/sluimerendwozobjecten/{wozobjectnummer}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/waterschappen'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/waterschappen/{codewaterschap}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/wozobjecten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/wozobjecten/{wozobjectnummer}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true

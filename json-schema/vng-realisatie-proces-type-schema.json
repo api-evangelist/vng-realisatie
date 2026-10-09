@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-proces-type-schema.json",
+  "title": "ProcesType",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-referentielijsten-openapi.yml#/components/schemas/ProcesType",
+  "required": [
+    "jaar",
+    "naam",
+    "nummer",
+    "omschrijving",
+    "procesobject",
+    "toelichting",
+    "url"
+  ],
+  "type": "object",
+  "properties": {
+    "jaar": {
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "type": "integer",
+      "description": "Nummer van de selectielijstcategorie",
+      "format": "int32"
+    },
+    "naam": {
+      "maxLength": 100,
+      "type": "string",
+      "description": "Benaming van het procestype"
+    },
+    "nummer": {
+      "maximum": 2147483647,
+      "minimum": -2147483648,
+      "type": "integer",
+      "description": "Het jaartal waartoe dit ProcesType behoort",
+      "format": "int32"
+    },
+    "omschrijving": {
+      "maxLength": 300,
+      "type": "string",
+      "description": "Omschrijving van het procestype"
+    },
+    "procesobject": {
+      "maxLength": 80,
+      "type": "string",
+      "description": "Object waar de uitvoering van het proces op van toepassing\nis en waarvan de bestaans- of geldigheidsduur eventueel van belang is\nbij het bepalen van de start van de bewaartermijn"
+    },
+    "toelichting": {
+      "type": "string",
+      "description": "Toelichting van het procestype"
+    },
+    "url": {
+      "type": "string",
+      "description": "Interne referentie naar de url",
+      "readOnly": true
+    }
+  }
+}

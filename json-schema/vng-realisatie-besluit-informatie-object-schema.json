@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-besluit-informatie-object-schema.json",
+  "title": "BesluitInformatieObject",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-besluiten-openapi.yml#/components/schemas/BesluitInformatieObject",
+  "required": [
+    "informatieobject",
+    "besluit"
+  ],
+  "type": "object",
+  "properties": {
+    "url": {
+      "title": "Url",
+      "description": "URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.",
+      "type": "string",
+      "format": "uri",
+      "readOnly": true,
+      "maxLength": 1000,
+      "minLength": 1
+    },
+    "informatieobject": {
+      "title": "Informatieobject",
+      "description": "URL-referentie naar het INFORMATIEOBJECT (in de Documenten API) waarin (een deel van) het besluit beschreven is.",
+      "type": "string",
+      "format": "uri",
+      "maxLength": 1000,
+      "minLength": 1
+    },
+    "besluit": {
+      "title": "Besluit",
+      "description": "URL-referentie naar het BESLUIT.",
+      "type": "string",
+      "format": "uri"
+    }
+  }
+}

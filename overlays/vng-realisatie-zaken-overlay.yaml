@@ -1,0 +1,120 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Zaken API
+  version: 1.0.0
+extends: ../openapi/_original/vng-realisatie-zaken-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/vng-realisatie-zaken-openapi.yml
+x-rationale: Adds provider metadata, the documentation link recorded in apis.yml, and an x-agent-safe marker on every GET
+  operation. Derived only from the saved contract and apis.yml; the original OpenAPI is not modified.
+actions:
+- target: $.info
+  description: Attach API Evangelist provider metadata without mutating the contract.
+  update:
+    x-provider: VNG Realisatie
+    x-provider-slug: vng-realisatie
+    x-apis-json-name: Zaken API
+    x-provider-hosted-openapi: https://raw.githubusercontent.com/VNG-Realisatie/zaken-api/develop/src/openapi.yaml
+- target: $
+  description: Point to the provider documentation recorded in apis.yml.
+  update:
+    externalDocs:
+      description: Zaken API documentation (VNG Realisatie)
+      url: https://vng-realisatie.github.io/gemma-zaken/
+- target: $.paths['/klantcontacten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/klantcontacten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/resultaten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/resultaten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/rollen'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/rollen/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/statussen'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/statussen/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakcontactmomenten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakcontactmomenten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakinformatieobjecten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakinformatieobjecten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakobjecten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakobjecten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakverzoeken'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaakverzoeken/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken/{zaak_uuid}/audittrail'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken/{zaak_uuid}/audittrail/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken/{zaak_uuid}/besluiten'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken/{zaak_uuid}/besluiten/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken/{zaak_uuid}/zaakeigenschappen'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true
+- target: $.paths['/zaken/{zaak_uuid}/zaakeigenschappen/{uuid}'].get
+  description: Mark read-only (safe for agent use without side effects).
+  update:
+    x-agent-safe: true

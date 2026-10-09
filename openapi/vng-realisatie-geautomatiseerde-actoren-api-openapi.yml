@@ -1,0 +1,280 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Geautomatiseerde actoren API
+  version: 00.01.00
+  contact:
+    url: http://www.verzoeken.nl
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
+  description: 'Operations tagged Geautomatiseerde actoren across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+- description: Referentie-implementatie
+  url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+tags:
+- name: Geautomatiseerde actoren
+paths:
+  /_registreer_geautomatiseerde_actor:
+    post:
+      operationId: registreergeautomatiseerdeactor
+      description: De operatie waarmee gegevens van een geautomatiseerde actor kunnen worden geregistreerd. De id, de soort actor (in dit geval default `geautomatiseerde actor`) en de indicatie actief (default `True`) worden door de provider bepaald op het moment van registeren.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistreerGeautomatiseerdeActor_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeautomatiseerdeActor'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Geautomatiseerde actoren
+      summary: Registreergeautomatiseerdeactor
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_wijzig_geautomatiseerde_actor:
+    post:
+      operationId: wijziggeautomatiseerdeactor
+      description: De operatie waarmee gegevens van een geautomatiseerde actor kunnen worden gewijzigd. De id, de soort actor (in dit geval `geautomatiseerde actor`) en de indicatie actief kunnen niet gewijzigd worden. Het deactiveren van de geautomatiseerde actor is een beheer-functie.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WijzigGeautomatiseerdeActor_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeautomatiseerdeActor'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Geautomatiseerde actoren
+      summary: Wijziggeautomatiseerdeactor
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_zoek_geautomatiseerde_actor:
+    post:
+      operationId: zoekgeautomatiseerdeactor
+      description: De operatie waarmee gegevens van geautomatiseerde actoren kunnen worden gezocht.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoekGeautomatiseerdeActor_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeautomatiseerdeActor'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Geautomatiseerde actoren
+      summary: Zoekgeautomatiseerdeactor
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+components:
+  schemas:
+    RegistreerGeautomatiseerdeActor_parameters:
+      type: object
+      description: ''
+      required:
+      - functie
+      - naam
+      - omschrijving
+      properties:
+        functie:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvinglang'
+    GeautomatiseerdeActor:
+      allOf:
+      - $ref: '#/components/schemas/Actor'
+      - type: object
+        description: Systeemcomponent dat voor de gemeente werkzaamheden verricht.
+        required:
+        - functie
+        - omschrijving
+        properties:
+          functie:
+            $ref: '#/components/schemas/Omschrijvingkort'
+          omschrijving:
+            $ref: '#/components/schemas/Omschrijvinglang'
+    SoortActor:
+      type: string
+      description: De typering van de actor.<body><ul><li>`medewerker` - medewerker </li><li>`geautomatiseerde_actor` - geautomatiseerde actor </li><li>`organisatorische_eenheid` - organisatorische eenheid </li></ul></body>
+      enum:
+      - medewerker
+      - geautomatiseerde_actor
+      - organisatorische_eenheid
+    Omschrijvingkort:
+      type: string
+      description: ''
+      maxLength: 40
+    IndicatieJaNee:
+      type: boolean
+      description: ''
+    WijzigGeautomatiseerdeActor_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      properties:
+        functie:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvinglang'
+    Naamlang:
+      type: string
+      description: ''
+      maxLength: 200
+    Omschrijvinglang:
+      type: string
+      description: ''
+      maxLength: 200
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
+    Actor:
+      type: object
+      description: De acor handelt in een interne taak of een klantcontact.
+      required:
+      - id
+      - indicatieActief
+      - naam
+      - soortActor
+      properties:
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        soortActor:
+          $ref: '#/components/schemas/SoortActor'
+    ZoekGeautomatiseerdeActor_parameters:
+      type: object
+      description: ''
+      required:
+      - functie
+      - naam
+      - omschrijving
+      properties:
+        functie:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvinglang'
+x-refined-from:
+- vng-realisatie-klantinteracties-openapi.yml
+- vng-realisatie-klantinteracties-openapi.yml

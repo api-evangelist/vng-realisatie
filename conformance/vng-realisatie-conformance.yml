@@ -1,0 +1,49 @@
+name: VNG Realisatie Conformance
+generated: '2026-10-09'
+method: searched
+source:
+- https://vng-realisatie.github.io/gemma-zaken/standaard/
+- https://vng-realisatie.github.io/gemma-zaken/themas/achtergronddocumentatie/authenticatie-autorisatie
+- openapi/
+standards:
+- id: zgw-api-standaarden
+  conforms: true
+  evidence: VNG Realisatie is the publisher of the Dutch municipal ZGW API standards (Zaken, Documenten, Catalogi, Besluiten, Autorisaties, Notificaties);
+    each component MUST implement its openapi.yaml and run-time behaviour (https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/zrc/1.8.x/1.8.0/specification.html).
+  kind: domain-standard
+- id: rfc7807
+  conforms: true
+  evidence: Error responses use application/problem+json with Fout schema (type, code, title, status, detail, instance) in zaken/documenten/catalogi/besluiten/autorisaties/notificaties
+    specs.
+- id: jwt-rfc7519
+  conforms: true
+  evidence: 'Docs: tokens are JSON Web Tokens carrying client_id, signed with a shared secret; spec scheme JWT-Claims (http bearer, bearerFormat
+    JWT).'
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme; docs state the municipality is free to use OAUTH2, SAML or Active Directory internally, the APIs only accept
+    the signed JWT.
+- id: eupl-1.2
+  conforms: true
+  evidence: info.license EUPL 1.2 in all nine specs.
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.0
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.1
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.3
+- id: rfc9457
+  conforms: true
+  evidence: application/problem+json on 1621 response(s), e.g. GET /applicaties 400
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take page
+- id: ratelimit-headers
+  conforms: true
+  evidence: responses declare X-Rate-Limit-Limit, X-Rate-Limit-Remaining, X-Rate-Limit-Reset

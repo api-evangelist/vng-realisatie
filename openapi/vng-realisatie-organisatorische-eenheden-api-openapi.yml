@@ -1,0 +1,313 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Organisatorische eenheden API
+  version: 00.01.00
+  contact:
+    url: http://www.verzoeken.nl
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: European Union Public License, version 1.2 (EUPL-1.2)
+    url: https://eupl.eu/1.2/nl/
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
+  description: 'Operations tagged Organisatorische eenheden across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- description: SwaggerHub API Auto Mocking
+  url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+- description: Referentie-implementatie
+  url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+tags:
+- name: Organisatorische eenheden
+paths:
+  /_registreer_organisatorische_eenheid:
+    post:
+      operationId: registreerorganisatorischeeenheid
+      description: De operatie waarmee gegevens van een organisatorische eenheid kunnen worden geregistreerd. De id, de soort actor (in dit geval default `organisatorische eenheid`) en de indicatie actief (default `True`) worden door de provider bepaald op het moment van registeren.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistreerOrganisatorischeEenheid_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisatorischeEenheid'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Organisatorische eenheden
+      summary: Registreerorganisatorischeeenheid
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_wijzig_organisatorische_eenheid:
+    post:
+      operationId: wijzigorganisatorischeeenheid
+      description: De operatie waarmee gegevens van een organisatorische eenheid actor kunnen worden gewijzigd. De id, de soort actor (in dit geval `organisatoriesche eenheid`) en de indicatie actief kunnen niet gewijzigd worden. Het deactiveren van de organisatorische eenheid is een beheer-functie.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WijzigOrganisatorischeEenheid_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisatorischeEenheid'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Organisatorische eenheden
+      summary: Wijzigorganisatorischeeenheid
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+  /_zoek_organisatorische_eenheid:
+    post:
+      operationId: zoekorganisatorischeeenheid
+      description: De operatie waarmee gegevens van organisatorische eenheid kunnen worden gezocht.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ZoekOrganisatorischeEenheid_parameters'
+      responses:
+        200:
+          description: OK
+          headers:
+            api-version:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/api_version
+            warning:
+              $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/headers/warning
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganisatorischeEenheid'
+        400:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/400
+        401:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/401
+        403:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/403
+        409:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/409
+        410:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/410
+        415:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/415
+        429:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/429
+        500:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/500
+        501:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/501
+        503:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/503
+        default:
+          $ref: https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/responses/default
+      tags:
+      - Organisatorische eenheden
+      summary: Zoekorganisatorischeeenheid
+      x-summary-source: derived
+    servers:
+    - description: SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
+    - description: Referentie-implementatie
+      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
+components:
+  schemas:
+    SoortActor:
+      type: string
+      description: De typering van de actor.<body><ul><li>`medewerker` - medewerker </li><li>`geautomatiseerde_actor` - geautomatiseerde actor </li><li>`organisatorische_eenheid` - organisatorische eenheid </li></ul></body>
+      enum:
+      - medewerker
+      - geautomatiseerde_actor
+      - organisatorische_eenheid
+    Omschrijvingkort:
+      type: string
+      description: ''
+      maxLength: 40
+    OrganisatorischeEenheid:
+      allOf:
+      - $ref: '#/components/schemas/Actor'
+      - type: object
+        description: 'Het deel van een functioneel afgebakend onderdeel binnen de organisatie dat haar activiteiten uitvoert binnen een VESTIGING VAN ZAAKBEHANDELENDE ORGANISATIE en die verantwoordelijk is voor de behandeling van zaken.
+
+
+          Alleen ORGANISATORISCHE EENHEden van de organisaties die zaken behandelen worden hier bedoeld (bijvoorbeeld afdelingen van gemeenten). Dus niet organisatorische eenheden van andere organisaties zoals de externe initiatoren van zaken (bijvoorbeeld de afdeling van een bedrijf die een vergunning aanvraagt). De ORGANISATORISCHE EENHEID zoals hier bedoeld is gehuisvest binnen ????n fysieke vestiging van de organisatie. Als een functioneel afgebakend onderdeel van de organisatie haar activiteiten uitvoert in meerdere vestigingen dan wordt die uitgewisseld als evenveel ORGANISATORISCHE EENHEden als die vestigingen. Door de relatie naar VESTIGING VAN ZAAKBEHANDELENDE ORGANISATIE en daarmee via VESTIGING naar NIET NATUURLIJK PERSOON is bekend om welke zaakbehandelende organisatie het gaat. Een ORGANISATORISCHE EENHEID kan zowel groot als klein zijn. De ene ORGANISATORISCHE EENHEID mag andere ORGANISATORISCHE EENHEden bevatten, maar dit wordt niet gemodelleerd. We beperken ons tot het aangeven welke ORGANISATORISCHE EENHEID welke rol heeft in een ZAAK en welke gegevens daarvan vanuit het oogpunt van een zaak relevant zijn. ORGANISATORISCHE EENHEID is een specialisatie (''subtype'') van BETROKKENE.'
+        required:
+        - externId
+        - externRegister
+        properties:
+          eMailadres:
+            $ref: '#/components/schemas/Emailadres'
+          externId:
+            $ref: '#/components/schemas/Identificatiecode'
+          externRegister:
+            $ref: '#/components/schemas/Omschrijvingkort'
+          faxnummer:
+            $ref: '#/components/schemas/Telefoonnummer'
+          omschrijving:
+            $ref: '#/components/schemas/Omschrijvingkort'
+          telefoonnummer:
+            $ref: '#/components/schemas/Telefoonnummer'
+    ZoekOrganisatorischeEenheid_parameters:
+      type: object
+      description: ''
+      properties:
+        eMailadres:
+          $ref: '#/components/schemas/Emailadres'
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        externRegister:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        faxnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        telefoonnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+    WijzigOrganisatorischeEenheid_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      properties:
+        eMailadres:
+          $ref: '#/components/schemas/Emailadres'
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        externRegister:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        faxnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        telefoonnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+    RegistreerOrganisatorischeEenheid_parameters:
+      type: object
+      description: ''
+      required:
+      - naam
+      properties:
+        eMailadres:
+          $ref: '#/components/schemas/Emailadres'
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        externRegister:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        faxnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        telefoonnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+    Telefoonnummer:
+      type: string
+      description: ''
+      maxLength: 20
+    IndicatieJaNee:
+      type: boolean
+      description: ''
+    Emailadres:
+      type: string
+      description: Een geldig email-adres, maximaal 20 karakters lang en minimaal een @ en een . opgenomen.
+      maxLength: 200
+    Naamlang:
+      type: string
+      description: ''
+      maxLength: 200
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
+    Actor:
+      type: object
+      description: De acor handelt in een interne taak of een klantcontact.
+      required:
+      - id
+      - indicatieActief
+      - naam
+      - soortActor
+      properties:
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        soortActor:
+          $ref: '#/components/schemas/SoortActor'
+x-refined-from:
+- vng-realisatie-klantinteracties-openapi.yml
+- vng-realisatie-klantinteracties-openapi.yml

@@ -1,0 +1,332 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json",
+  "title": "SluimerendWOZObjectHal",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-woz-bevragen-openapi.yml#/components/schemas/SluimerendWOZObjectHal",
+  "allOf": [
+    {
+      "$ref": "#/$defs/SluimerendWOZObject"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "_links": {
+          "$ref": "#/$defs/SluimerendWOZObject_links"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "CodeGebouwdOngebouwd": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "B",
+        "G",
+        "O"
+      ]
+    },
+    "Gemeente": {
+      "type": "object",
+      "description": "<body><p>In de WOZ wordt alleen de gemeentecode opgenomen in de registratie. De naam kan worden afgeleid vanuit deze referentielijst.</p></body>",
+      "required": [
+        "code",
+        "ingangsdatum"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "code",
+          "description": "",
+          "pattern": "^[0-9]{4}$",
+          "maxLength": 4
+        },
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        }
+      }
+    },
+    "InOnderzoekSWO": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "statusWozObject",
+        "grondoppervlakte",
+        "codeGebouwdOngebouwd",
+        "meegetaxeerdeOppervlakteGebouwd",
+        "ingangsdatumObject",
+        "einddatumObject",
+        "wozObjectGeometrie"
+      ]
+    },
+    "InOnderzoekSWOKOZ": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "SWOKOZ",
+        "toegekendeOppervlakte",
+        "meegetaxeerdeOppervlakte",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "InOnderzoekSWOWSP": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "SWOWSP",
+        "beginRelatie",
+        "eindRelatie"
+      ]
+    },
+    "SluimerendWOZObject": {
+      "type": "object",
+      "description": "<body><p>Dit objecttype is alleen van belang voor een sluitende relatie tussen WOZ-objecten en kadastrale percelen. Van sluimerende WOZ-objecten wordt geen waarde bepaald. Over sluimerende WOZ-objecten wordt niet gecommuniceerd met belanghebbenden.</p></body>",
+      "required": [
+        "codeGebouwdOngebouwd",
+        "einddatumObject",
+        "grondoppervlakte",
+        "ingangsdatumObject",
+        "statusWozObject",
+        "swokoz",
+        "swowsp",
+        "verantwoordelijkeGemeente",
+        "wozObjectnummer"
+      ],
+      "properties": {
+        "codeGebouwdOngebouwd": {
+          "$ref": "#/$defs/CodeGebouwdOngebouwd"
+        },
+        "einddatumObject": {
+          "type": "string",
+          "title": "einddatumObject",
+          "description": "<body><p>Wanneer WOZ-object de status 'ten onrechte opgevoerd' krijgt wordt de einddatumObject geljik aan ingangsdatumObject.</p></body>",
+          "format": "date"
+        },
+        "grondoppervlakte": {
+          "type": "integer",
+          "title": "grondoppervlakte",
+          "description": "<body><p>Dit gegeven is van belang om te controleren of de sommatie van de kadastrale oppervlakten van alle kadastrale percelen en delen van kadastrale percelen die gekoppeld zijn aan dit WOZ-object, overeenstemt met de totale grondoppervlakte die behoort tot het WOZ-object. In verband met het grote belang van het oppervlakte gegeven voor de watersysteemheffing is deze controlemogelijkheid noodzakelijk. Bij (kadastrale) appartementen en andere WOZ-objecten waarvoor niet eenduidig een grondoppervlakte kan worden aangewezen wordt het gegeven grondoppervlakte niet gebruikt. Voor deze WOZ-objecten geldt de voorwaarde dat deze gekoppeld zijn aan een sluimerend WOZ-object via de relatie 'WOZ-object' heeftSluimerendWOZObject 'Sluimerend WOZ-object'.</p></body>"
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekSWO"
+          }
+        },
+        "ingangsdatumObject": {
+          "type": "string",
+          "title": "ingangsdatumObject",
+          "description": "<body><p>De ingangsdatum betreft de datum vanaf welke het object relevant is voor de registratie. Daarbij kan het object in eerste instantie geregistreerd worden met statusObject `gevormd, niet actief`.</p></body>",
+          "format": "date"
+        },
+        "meegetaxeerdeOppervlakteGebouwd": {
+          "type": "integer",
+          "title": "meegetaxeerdeOppervlakteGebouwd",
+          "description": "<body><p>Dit gegeven wordt verplicht gevuld voor WOZ-objecten met de `Code gebouwd / ongebouwd` gelijk aan `B`. Overeenkomstig het gegeven `grondoppervlakte` functioneert dit gegeven mede als controle. Voor de WOZ-objecten die zijn aangemerkt als gedeeltelijk gebouwd, gedeeltelijk ongebouwd is het gegeven meegetaxeerdeOppervlakteGebouwd` gelijk aan de sommatie van alle gegevens meegetaxeerdeOppervlakteGebouwd op de relatie SluimerendWOZObject bevat KadastraleObjecten. Ook in deze situatie is deze controlemogelijkheid noodzakelijk.</p></body>"
+        },
+        "statusWozObject": {
+          "$ref": "#/$defs/StatusObject"
+        },
+        "swokoz": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Swokoz"
+          }
+        },
+        "swowsp": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Swowsp"
+          }
+        },
+        "verantwoordelijkeGemeente": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Gemeente"
+            },
+            {
+              "title": "verantwoordelijkeGemeente",
+              "description": "<body><p>Voor dit attribuut wordt alleen de historie vastgelegd vanaf het moment dat de gemeente is aangesloten op de LV WOZ. Op basis van dit gegeven kan men beoordelen welke gemeente verantwoordelijk is voor de (bijhouding van de) geregistreerde gegevens.</p></body>"
+            }
+          ]
+        },
+        "wozObjectGeometrie": {
+          "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/geojson.yaml#/MultiPolygon"
+        },
+        "wozObjectnummer": {
+          "type": "string",
+          "title": "wozObjectnummer",
+          "description": "<body><p>Elk WOZ-object wordt uniek aangeduid door middel van een identificatiecode. Deze identificatiecode bestaat uit de gemeentecode volgens de landelijke GBA-tabel 33 ' Gemeente' in combinatie met een voor de registrerende gemeente uniek volgnummer. Het WOZ-objectnummer verandert niet bij gemeentelijke herindeling, naamswijziging of bij grenscorrectie. Dit betekent dat in de gemeentelijke WOZ-administratie ook (actieve) WOZ-objecten en sluimerende WOZ-objecten kunnen voorkomen, waarvan de eerste vier cijfers niet overeenkomen met de actuele gemeentecode van de desbetreffende gemeente. Wanneer een nieuw WOZ-object wordt geregistreerd moeten de eerste vier posities wel verplicht overeenkomen met de gemeentecode van de gemeente die het object opvoert. Een WOZ-objectnummer mag niet voor zowel een WOZ-object als voor een Sluimerend WOZ-object gebruikt worden als identificerend nummer.</p></body>",
+          "pattern": "^[0-9]{12}$",
+          "maxLength": 12
+        }
+      }
+    },
+    "SluimerendWOZObject_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+        },
+        "kadastraleonroerendezaken": {
+          "title": "bevatkadastraleobjecten",
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        },
+        "waterschappen": {
+          "title": "ligtin",
+          "type": "array",
+          "description": "",
+          "minItems": 1,
+          "items": {
+            "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+          }
+        }
+      }
+    },
+    "StatusObject": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "0",
+        "1",
+        "8",
+        "9"
+      ]
+    },
+    "Swokoz": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "kadastraleIdentificatie",
+        "tijdvakRelatie",
+        "toegekendeOppervlakte"
+      ],
+      "properties": {
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekSWOKOZ"
+          }
+        },
+        "kadastraleIdentificatie": {
+          "type": "string",
+          "title": "kadastraleIdentificatie",
+          "description": "",
+          "minLength": 1
+        },
+        "meegetaxeerdeOppervlakte": {
+          "type": "integer",
+          "title": "meegetaxeerdeOppervlakte",
+          "description": "<body><p>Dit gegeven wordt alleen gebruikt als het desbetreffende WOZ-object is aangemerkt als gedeeltelijk gebouwd en gedeeltelijk ongebouwd. Dit gegeven wordt op overeenkomstige wijze gebruikt als het gegeven `toegekende oppervlakte`. De som per WOZ-object betreft echter niet de totale grondoppervlakte van het WOZ-object, maar de meegetaxeerde oppervlakte gebouwd. Dit gegeven wordt verplicht gevuld voor WOZ-objecten met de `Code gebouwd / ongebouwd` gelijk aan `B`. Dit gegeven wordt in die gevallen verplicht gevuld voor elk gerelateerd perceel.</p></body>"
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        },
+        "toegekendeOppervlakte": {
+          "type": "integer",
+          "title": "toegekendeOppervlakte",
+          "description": "<body><p>Dit gegeven wordt verplicht gevuld voor elk gerelateerd kadastraal perceel. Dit gegeven wordt niet gevuld voor gerelateerde kadastrale appartementsrechten. Dit gegeven wordt gebruikt om de relatie tussen het WOZ-object en het kadastrale object te specificeren. Indien een WOZ-object overeenkomt met een kadastraal object, bevat dit gegeven de kadastrale oppervlakte. Indien een kadastraal object tot meerdere WOZ-objecten behoort, geeft de som van de gegevens WOZKOZ/toegekendeOppervlakte behorend bij een kadastraal object de kadastrale oppervlakte van dat kadastrale object. Indien een WOZ-object uit (delen van) meerdere kadastrale objecten bestaat, geeft de som van het gegeven WOZKOZ/toegekendeOppervlakte behorend bij een WOZ-object de kadastrale oppervlakte (`grondoppervlakte`) van dat WOZ-object.</p></body>"
+        }
+      }
+    },
+    "Swowsp": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "codeWaterschap",
+        "tijdvakRelatie"
+      ],
+      "properties": {
+        "codeWaterschap": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Waterschapstabel"
+            },
+            {
+              "title": "codeWaterschap",
+              "description": "<body><p>Met het oog op uniformering is binnen het IMWOZ een waardelijst opgesteld met toegestane waterschapscodes (met aanduiding bij welk waterschap deze hoort), inclusief historie vanaf 1 januari 2009.</p></body>"
+            }
+          ]
+        },
+        "inOnderzoek": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/InOnderzoekSWOWSP"
+          }
+        },
+        "tijdvakRelatie": {
+          "$ref": "#/$defs/TijdvakRelatie"
+        }
+      }
+    },
+    "TijdvakRelatie": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "beginRelatie",
+        "eindRelatie"
+      ],
+      "properties": {
+        "beginRelatie": {
+          "type": "string",
+          "title": "beginRelatie",
+          "description": "",
+          "format": "date"
+        },
+        "eindRelatie": {
+          "type": "string",
+          "title": "eindRelatie",
+          "description": "",
+          "format": "date"
+        }
+      }
+    },
+    "Waterschapstabel": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "codeWaterschap",
+        "ingangsdatum"
+      ],
+      "properties": {
+        "codeWaterschap": {
+          "type": "string",
+          "title": "codeWaterschap",
+          "description": "<body><p>De verzameling van waarden die gegevens van deze attribuutsoort kunnen hebben oftewel het waardenbereik, uitgedrukt in een specifieke structuur.</p></body>",
+          "pattern": "^[0-9]{4}$",
+          "maxLength": 4
+        },
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        }
+      }
+    }
+  }
+}

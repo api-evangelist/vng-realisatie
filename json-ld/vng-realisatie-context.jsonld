@@ -1,0 +1,1140 @@
+{
+  "@context": {
+    "@vocab": "https://vng.nl/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "vng": "https://vng.nl/schema#",
+    "AutorisatieBase": "vng:AutorisatieBase",
+    "component": {
+      "@id": "vng:component",
+      "@type": "xsd:string"
+    },
+    "componentWeergave": {
+      "@id": "vng:componentWeergave",
+      "@type": "xsd:string"
+    },
+    "scopes": {
+      "@id": "vng:scopes",
+      "@container": "@list"
+    },
+    "zrcAutorisatie": "vng:zrcAutorisatie",
+    "zaaktype": {
+      "@id": "vng:zaaktype",
+      "@type": "@id"
+    },
+    "maxVertrouwelijkheidaanduiding": {
+      "@id": "vng:maxVertrouwelijkheidaanduiding",
+      "@type": "xsd:string"
+    },
+    "drcAutorisatie": "vng:drcAutorisatie",
+    "informatieobjecttype": {
+      "@id": "vng:informatieobjecttype",
+      "@type": "@id"
+    },
+    "brcAutorisatie": "vng:brcAutorisatie",
+    "besluittype": {
+      "@id": "vng:besluittype",
+      "@type": "@id"
+    },
+    "Applicatie": "vng:Applicatie",
+    "url": {
+      "@id": "vng:url",
+      "@type": "@id"
+    },
+    "clientIds": {
+      "@id": "vng:clientIds",
+      "@container": "@list"
+    },
+    "label": {
+      "@id": "vng:label",
+      "@type": "xsd:string"
+    },
+    "heeftAlleAutorisaties": {
+      "@id": "vng:heeftAlleAutorisaties",
+      "@type": "xsd:boolean"
+    },
+    "autorisaties": {
+      "@id": "vng:autorisaties",
+      "@container": "@list"
+    },
+    "Fout": "vng:Fout",
+    "type": {
+      "@id": "vng:type",
+      "@type": "xsd:string"
+    },
+    "code": {
+      "@id": "vng:code",
+      "@type": "xsd:string"
+    },
+    "title": {
+      "@id": "vng:title",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "vng:status",
+      "@type": "xsd:integer"
+    },
+    "detail": {
+      "@id": "vng:detail",
+      "@type": "xsd:string"
+    },
+    "instance": {
+      "@id": "vng:instance",
+      "@type": "xsd:string"
+    },
+    "FieldValidationError": "vng:FieldValidationError",
+    "name": {
+      "@id": "vng:name",
+      "@type": "xsd:string"
+    },
+    "reason": {
+      "@id": "vng:reason",
+      "@type": "xsd:string"
+    },
+    "ValidatieFout": "vng:ValidatieFout",
+    "invalidParams": {
+      "@id": "vng:invalidParams",
+      "@container": "@list"
+    },
+    "Besluit": "vng:Besluit",
+    "identificatie": {
+      "@id": "vng:identificatie",
+      "@type": "xsd:string"
+    },
+    "verantwoordelijkeOrganisatie": {
+      "@id": "vng:verantwoordelijkeOrganisatie",
+      "@type": "xsd:string"
+    },
+    "zaak": {
+      "@id": "vng:zaak",
+      "@type": "@id"
+    },
+    "datum": {
+      "@id": "vng:datum",
+      "@type": "xsd:date"
+    },
+    "toelichting": {
+      "@id": "vng:toelichting",
+      "@type": "xsd:string"
+    },
+    "bestuursorgaan": {
+      "@id": "vng:bestuursorgaan",
+      "@type": "xsd:string"
+    },
+    "ingangsdatum": {
+      "@id": "vng:ingangsdatum",
+      "@type": "xsd:date"
+    },
+    "vervaldatum": {
+      "@id": "vng:vervaldatum",
+      "@type": "xsd:date"
+    },
+    "vervalreden": {
+      "@id": "vng:vervalreden",
+      "@type": "xsd:string"
+    },
+    "vervalredenWeergave": {
+      "@id": "vng:vervalredenWeergave",
+      "@type": "xsd:string"
+    },
+    "publicatiedatum": {
+      "@id": "vng:publicatiedatum",
+      "@type": "xsd:date"
+    },
+    "verzenddatum": {
+      "@id": "vng:verzenddatum",
+      "@type": "xsd:date"
+    },
+    "uiterlijkeReactiedatum": {
+      "@id": "vng:uiterlijkeReactiedatum",
+      "@type": "xsd:date"
+    },
+    "Wijzigingen": "vng:Wijzigingen",
+    "oud": {
+      "@id": "vng:oud"
+    },
+    "nieuw": {
+      "@id": "vng:nieuw"
+    },
+    "AuditTrail": "vng:AuditTrail",
+    "uuid": {
+      "@id": "vng:uuid",
+      "@type": "xsd:string"
+    },
+    "bron": {
+      "@id": "vng:bron",
+      "@type": "xsd:string"
+    },
+    "applicatieId": {
+      "@id": "vng:applicatieId",
+      "@type": "xsd:string"
+    },
+    "applicatieWeergave": {
+      "@id": "vng:applicatieWeergave",
+      "@type": "xsd:string"
+    },
+    "gebruikersId": {
+      "@id": "vng:gebruikersId",
+      "@type": "xsd:string"
+    },
+    "gebruikersWeergave": {
+      "@id": "vng:gebruikersWeergave",
+      "@type": "xsd:string"
+    },
+    "actie": {
+      "@id": "vng:actie",
+      "@type": "xsd:string"
+    },
+    "actieWeergave": {
+      "@id": "vng:actieWeergave",
+      "@type": "xsd:string"
+    },
+    "resultaat": {
+      "@id": "vng:resultaat",
+      "@type": "xsd:integer"
+    },
+    "hoofdObject": {
+      "@id": "vng:hoofdObject",
+      "@type": "@id"
+    },
+    "resource": {
+      "@id": "vng:resource",
+      "@type": "xsd:string"
+    },
+    "resourceUrl": {
+      "@id": "vng:resourceUrl",
+      "@type": "@id"
+    },
+    "resourceWeergave": {
+      "@id": "vng:resourceWeergave",
+      "@type": "xsd:string"
+    },
+    "aanmaakdatum": {
+      "@id": "vng:aanmaakdatum",
+      "@type": "xsd:dateTime"
+    },
+    "wijzigingen": {
+      "@id": "vng:wijzigingen",
+      "@type": "@id"
+    },
+    "BesluitInformatieObject": "vng:BesluitInformatieObject",
+    "informatieobject": {
+      "@id": "vng:informatieobject",
+      "@type": "@id"
+    },
+    "besluit": {
+      "@id": "vng:besluit",
+      "@type": "@id"
+    },
+    "AardRelatieEnum": "vng:AardRelatieEnum",
+    "AfleidingswijzeEnum": "vng:AfleidingswijzeEnum",
+    "ArchiefnominatieEnum": "vng:ArchiefnominatieEnum",
+    "BesluitType": "vng:BesluitType",
+    "catalogus": {
+      "@id": "vng:catalogus",
+      "@type": "@id"
+    },
+    "zaaktypen": {
+      "@id": "vng:zaaktypen",
+      "@container": "@list"
+    },
+    "omschrijving": {
+      "@id": "vng:omschrijving",
+      "@type": "xsd:string"
+    },
+    "omschrijvingGeneriek": {
+      "@id": "vng:omschrijvingGeneriek",
+      "@type": "xsd:string"
+    },
+    "besluitcategorie": {
+      "@id": "vng:besluitcategorie",
+      "@type": "xsd:string"
+    },
+    "reactietermijn": {
+      "@id": "vng:reactietermijn",
+      "@type": "xsd:string"
+    },
+    "publicatieIndicatie": {
+      "@id": "vng:publicatieIndicatie",
+      "@type": "xsd:boolean"
+    },
+    "publicatietekst": {
+      "@id": "vng:publicatietekst",
+      "@type": "xsd:string"
+    },
+    "publicatietermijn": {
+      "@id": "vng:publicatietermijn",
+      "@type": "xsd:string"
+    },
+    "informatieobjecttypen": {
+      "@id": "vng:informatieobjecttypen",
+      "@container": "@list"
+    },
+    "beginGeldigheid": {
+      "@id": "vng:beginGeldigheid",
+      "@type": "xsd:date"
+    },
+    "eindeGeldigheid": {
+      "@id": "vng:eindeGeldigheid",
+      "@type": "xsd:date"
+    },
+    "beginObject": {
+      "@id": "vng:beginObject",
+      "@type": "xsd:date"
+    },
+    "eindeObject": {
+      "@id": "vng:eindeObject",
+      "@type": "xsd:date"
+    },
+    "concept": {
+      "@id": "vng:concept",
+      "@type": "xsd:boolean"
+    },
+    "resultaattypen": {
+      "@id": "vng:resultaattypen",
+      "@container": "@list"
+    },
+    "resultaattypenOmschrijving": {
+      "@id": "vng:resultaattypenOmschrijving",
+      "@container": "@list"
+    },
+    "vastgelegdIn": {
+      "@id": "vng:vastgelegdIn",
+      "@container": "@list"
+    },
+    "BesluitTypeCreate": "vng:BesluitTypeCreate",
+    "BesluitTypeUpdate": "vng:BesluitTypeUpdate",
+    "BlankEnum": "vng:BlankEnum",
+    "BronCatalogus": "vng:BronCatalogus",
+    "domein": {
+      "@id": "vng:domein",
+      "@type": "xsd:string"
+    },
+    "rsin": {
+      "@id": "vng:rsin",
+      "@type": "xsd:string"
+    },
+    "BronZaaktype": "vng:BronZaaktype",
+    "BrondatumArchiefprocedure": "vng:BrondatumArchiefprocedure",
+    "afleidingswijze": {
+      "@id": "vng:afleidingswijze"
+    },
+    "datumkenmerk": {
+      "@id": "vng:datumkenmerk",
+      "@type": "xsd:string"
+    },
+    "einddatumBekend": {
+      "@id": "vng:einddatumBekend",
+      "@type": "xsd:boolean"
+    },
+    "objecttype": {
+      "@id": "vng:objecttype"
+    },
+    "registratie": {
+      "@id": "vng:registratie",
+      "@type": "xsd:string"
+    },
+    "procestermijn": {
+      "@id": "vng:procestermijn",
+      "@type": "xsd:string"
+    },
+    "Catalogus": "vng:Catalogus",
+    "contactpersoonBeheerNaam": {
+      "@id": "vng:contactpersoonBeheerNaam",
+      "@type": "xsd:string"
+    },
+    "contactpersoonBeheerTelefoonnummer": {
+      "@id": "vng:contactpersoonBeheerTelefoonnummer",
+      "@type": "xsd:string"
+    },
+    "contactpersoonBeheerEmailadres": {
+      "@id": "vng:contactpersoonBeheerEmailadres",
+      "@type": "xsd:string"
+    },
+    "besluittypen": {
+      "@id": "vng:besluittypen",
+      "@container": "@list"
+    },
+    "naam": {
+      "@id": "vng:naam",
+      "@type": "xsd:string"
+    },
+    "versie": {
+      "@id": "vng:versie",
+      "@type": "xsd:string"
+    },
+    "begindatumVersie": {
+      "@id": "vng:begindatumVersie",
+      "@type": "xsd:date"
+    },
+    "CheckListItem": "vng:CheckListItem",
+    "itemnaam": {
+      "@id": "vng:itemnaam",
+      "@type": "xsd:string"
+    },
+    "vraagstelling": {
+      "@id": "vng:vraagstelling",
+      "@type": "xsd:string"
+    },
+    "verplicht": {
+      "@id": "vng:verplicht",
+      "@type": "xsd:boolean"
+    },
+    "Eigenschap": "vng:Eigenschap",
+    "definitie": {
+      "@id": "vng:definitie",
+      "@type": "xsd:string"
+    },
+    "specificatie": {
+      "@id": "vng:specificatie"
+    },
+    "zaaktypeIdentificatie": {
+      "@id": "vng:zaaktypeIdentificatie",
+      "@type": "xsd:string"
+    },
+    "statustype": {
+      "@id": "vng:statustype",
+      "@type": "@id"
+    },
+    "EigenschapSpecificatie": "vng:EigenschapSpecificatie",
+    "groep": {
+      "@id": "vng:groep",
+      "@type": "xsd:string"
+    },
+    "formaat": {
+      "@id": "vng:formaat"
+    },
+    "lengte": {
+      "@id": "vng:lengte",
+      "@type": "xsd:string"
+    },
+    "kardinaliteit": {
+      "@id": "vng:kardinaliteit",
+      "@type": "xsd:string"
+    },
+    "waardenverzameling": {
+      "@id": "vng:waardenverzameling",
+      "@container": "@list"
+    },
+    "FormaatEnum": "vng:FormaatEnum",
+    "IndicatieInternOfExternEnum": "vng:IndicatieInternOfExternEnum",
+    "InformatieObjectType": "vng:InformatieObjectType",
+    "vertrouwelijkheidaanduiding": {
+      "@id": "vng:vertrouwelijkheidaanduiding"
+    },
+    "informatieobjectcategorie": {
+      "@id": "vng:informatieobjectcategorie",
+      "@type": "xsd:string"
+    },
+    "trefwoord": {
+      "@id": "vng:trefwoord",
+      "@container": "@list"
+    },
+    "InformatieObjectTypeOmschrijvingGeneriek": "vng:InformatieObjectTypeOmschrijvingGeneriek",
+    "informatieobjecttypeOmschrijvingGeneriek": {
+      "@id": "vng:informatieobjecttypeOmschrijvingGeneriek",
+      "@type": "xsd:string"
+    },
+    "definitieInformatieobjecttypeOmschrijvingGeneriek": {
+      "@id": "vng:definitieInformatieobjecttypeOmschrijvingGeneriek",
+      "@type": "xsd:string"
+    },
+    "herkomstInformatieobjecttypeOmschrijvingGeneriek": {
+      "@id": "vng:herkomstInformatieobjecttypeOmschrijvingGeneriek",
+      "@type": "xsd:string"
+    },
+    "hierarchieInformatieobjecttypeOmschrijvingGeneriek": {
+      "@id": "vng:hierarchieInformatieobjecttypeOmschrijvingGeneriek",
+      "@type": "xsd:string"
+    },
+    "opmerkingInformatieobjecttypeOmschrijvingGeneriek": {
+      "@id": "vng:opmerkingInformatieobjecttypeOmschrijvingGeneriek",
+      "@type": "xsd:string"
+    },
+    "ObjecttypeEnum": "vng:ObjecttypeEnum",
+    "OmschrijvingGeneriekEnum": "vng:OmschrijvingGeneriekEnum",
+    "PaginatedCatalogusList": "vng:PaginatedCatalogusList",
+    "count": {
+      "@id": "vng:count",
+      "@type": "xsd:integer"
+    },
+    "next": {
+      "@id": "vng:next",
+      "@type": "@id"
+    },
+    "previous": {
+      "@id": "vng:previous",
+      "@type": "@id"
+    },
+    "results": {
+      "@id": "vng:results",
+      "@container": "@list"
+    },
+    "PaginatedEigenschapList": "vng:PaginatedEigenschapList",
+    "PaginatedResultaatTypeList": "vng:PaginatedResultaatTypeList",
+    "PaginatedRolTypeList": "vng:PaginatedRolTypeList",
+    "PaginatedStatusTypeList": "vng:PaginatedStatusTypeList",
+    "PaginatedZaakObjectTypeList": "vng:PaginatedZaakObjectTypeList",
+    "PaginatedZaakTypeInformatieObjectTypeList": "vng:PaginatedZaakTypeInformatieObjectTypeList",
+    "PatchedEigenschap": "vng:PatchedEigenschap",
+    "PatchedResultaatType": "vng:PatchedResultaatType",
+    "resultaattypeomschrijving": {
+      "@id": "vng:resultaattypeomschrijving",
+      "@type": "@id"
+    },
+    "selectielijstklasse": {
+      "@id": "vng:selectielijstklasse",
+      "@type": "@id"
+    },
+    "archiefnominatie": {
+      "@id": "vng:archiefnominatie"
+    },
+    "archiefactietermijn": {
+      "@id": "vng:archiefactietermijn",
+      "@type": "xsd:string"
+    },
+    "brondatumArchiefprocedure": {
+      "@id": "vng:brondatumArchiefprocedure"
+    },
+    "procesobjectaard": {
+      "@id": "vng:procesobjectaard",
+      "@type": "xsd:string"
+    },
+    "indicatieSpecifiek": {
+      "@id": "vng:indicatieSpecifiek",
+      "@type": "xsd:boolean"
+    },
+    "besluittypeOmschrijving": {
+      "@id": "vng:besluittypeOmschrijving",
+      "@container": "@list"
+    },
+    "informatieobjecttypeOmschrijving": {
+      "@id": "vng:informatieobjecttypeOmschrijving",
+      "@container": "@list"
+    },
+    "zaakobjecttypen": {
+      "@id": "vng:zaakobjecttypen",
+      "@container": "@list"
+    },
+    "PatchedRolType": "vng:PatchedRolType",
+    "PatchedStatusType": "vng:PatchedStatusType",
+    "statustekst": {
+      "@id": "vng:statustekst",
+      "@type": "xsd:string"
+    },
+    "volgnummer": {
+      "@id": "vng:volgnummer",
+      "@type": "xsd:integer"
+    },
+    "isEindstatus": {
+      "@id": "vng:isEindstatus",
+      "@type": "xsd:boolean"
+    },
+    "informeren": {
+      "@id": "vng:informeren",
+      "@type": "xsd:boolean"
+    },
+    "doorlooptijd": {
+      "@id": "vng:doorlooptijd",
+      "@type": "xsd:string"
+    },
+    "checklistitemStatustype": {
+      "@id": "vng:checklistitemStatustype",
+      "@container": "@list"
+    },
+    "eigenschappen": {
+      "@id": "vng:eigenschappen",
+      "@container": "@list"
+    },
+    "zaakobjecttype": {
+      "@id": "vng:zaakobjecttype",
+      "@type": "@id"
+    },
+    "PatchedZaakObjectType": "vng:PatchedZaakObjectType",
+    "anderObjecttype": {
+      "@id": "vng:anderObjecttype",
+      "@type": "xsd:boolean"
+    },
+    "relatieOmschrijving": {
+      "@id": "vng:relatieOmschrijving",
+      "@type": "xsd:string"
+    },
+    "statustypen": {
+      "@id": "vng:statustypen",
+      "@container": "@list"
+    },
+    "PatchedZaakTypeInformatieObjectType": "vng:PatchedZaakTypeInformatieObjectType",
+    "richting": {
+      "@id": "vng:richting"
+    },
+    "ReferentieProces": "vng:ReferentieProces",
+    "link": {
+      "@id": "vng:link",
+      "@type": "@id"
+    },
+    "ResultaatType": "vng:ResultaatType",
+    "ResultaatTypeCreate": "vng:ResultaatTypeCreate",
+    "ResultaatTypeUpdate": "vng:ResultaatTypeUpdate",
+    "RichtingEnum": "vng:RichtingEnum",
+    "RolType": "vng:RolType",
+    "StatusType": "vng:StatusType",
+    "VertrouwelijkheidaanduidingEnum": "vng:VertrouwelijkheidaanduidingEnum",
+    "ZaakObjectType": "vng:ZaakObjectType",
+    "ZaakType": "vng:ZaakType",
+    "doel": {
+      "@id": "vng:doel",
+      "@type": "xsd:string"
+    },
+    "aanleiding": {
+      "@id": "vng:aanleiding",
+      "@type": "xsd:string"
+    },
+    "indicatieInternOfExtern": {
+      "@id": "vng:indicatieInternOfExtern"
+    },
+    "handelingInitiator": {
+      "@id": "vng:handelingInitiator",
+      "@type": "xsd:string"
+    },
+    "onderwerp": {
+      "@id": "vng:onderwerp",
+      "@type": "xsd:string"
+    },
+    "handelingBehandelaar": {
+      "@id": "vng:handelingBehandelaar",
+      "@type": "xsd:string"
+    },
+    "servicenorm": {
+      "@id": "vng:servicenorm",
+      "@type": "xsd:string"
+    },
+    "opschortingEnAanhoudingMogelijk": {
+      "@id": "vng:opschortingEnAanhoudingMogelijk",
+      "@type": "xsd:boolean"
+    },
+    "verlengingMogelijk": {
+      "@id": "vng:verlengingMogelijk",
+      "@type": "xsd:boolean"
+    },
+    "verlengingstermijn": {
+      "@id": "vng:verlengingstermijn",
+      "@type": "xsd:string"
+    },
+    "trefwoorden": {
+      "@id": "vng:trefwoorden",
+      "@container": "@list"
+    },
+    "verantwoordingsrelatie": {
+      "@id": "vng:verantwoordingsrelatie",
+      "@container": "@list"
+    },
+    "productenOfDiensten": {
+      "@id": "vng:productenOfDiensten",
+      "@container": "@list"
+    },
+    "selectielijstProcestype": {
+      "@id": "vng:selectielijstProcestype",
+      "@type": "@id"
+    },
+    "referentieproces": {
+      "@id": "vng:referentieproces"
+    },
+    "verantwoordelijke": {
+      "@id": "vng:verantwoordelijke",
+      "@type": "xsd:string"
+    },
+    "broncatalogus": {
+      "@id": "vng:broncatalogus"
+    },
+    "bronzaaktype": {
+      "@id": "vng:bronzaaktype"
+    },
+    "roltypen": {
+      "@id": "vng:roltypen",
+      "@container": "@list"
+    },
+    "deelzaaktypen": {
+      "@id": "vng:deelzaaktypen",
+      "@container": "@list"
+    },
+    "gerelateerdeZaaktypen": {
+      "@id": "vng:gerelateerdeZaaktypen",
+      "@container": "@list"
+    },
+    "versiedatum": {
+      "@id": "vng:versiedatum",
+      "@type": "xsd:date"
+    },
+    "ZaakTypeCreate": "vng:ZaakTypeCreate",
+    "ZaakTypeInformatieObjectType": "vng:ZaakTypeInformatieObjectType",
+    "ZaakTypeUpdate": "vng:ZaakTypeUpdate",
+    "ZaakTypenRelatie": "vng:ZaakTypenRelatie",
+    "aardRelatie": {
+      "@id": "vng:aardRelatie"
+    },
+    "ZaakTypenRelatieCreate": "vng:ZaakTypenRelatieCreate",
+    "AlgoritmeEnum": "vng:AlgoritmeEnum",
+    "BestandsDeel": "vng:BestandsDeel",
+    "omvang": {
+      "@id": "vng:omvang",
+      "@type": "xsd:integer"
+    },
+    "voltooid": {
+      "@id": "vng:voltooid",
+      "@type": "xsd:boolean"
+    },
+    "lock": {
+      "@id": "vng:lock",
+      "@type": "xsd:string"
+    },
+    "BestandsDeelRequest": "vng:BestandsDeelRequest",
+    "inhoud": {
+      "@id": "vng:inhoud",
+      "@type": "xsd:string"
+    },
+    "BestandsDeelResponse": "vng:BestandsDeelResponse",
+    "BinnenlandsCorrespondentieadresVerzending": "vng:BinnenlandsCorrespondentieadresVerzending",
+    "huisletter": {
+      "@id": "vng:huisletter",
+      "@type": "xsd:string"
+    },
+    "huisnummer": {
+      "@id": "vng:huisnummer",
+      "@type": "xsd:integer"
+    },
+    "huisnummerToevoeging": {
+      "@id": "vng:huisnummerToevoeging",
+      "@type": "xsd:string"
+    },
+    "naamOpenbareRuimte": {
+      "@id": "vng:naamOpenbareRuimte",
+      "@type": "xsd:string"
+    },
+    "postcode": {
+      "@id": "vng:postcode",
+      "@type": "xsd:string"
+    },
+    "woonplaatsnaam": {
+      "@id": "vng:woonplaatsnaam",
+      "@type": "xsd:string"
+    },
+    "BinnenlandsCorrespondentieadresVerzendingRequest": "vng:BinnenlandsCorrespondentieadresVerzendingRequest",
+    "BronEnum": "vng:BronEnum",
+    "BuitenlandsCorrespondentieadresVerzending": "vng:BuitenlandsCorrespondentieadresVerzending",
+    "adresBuitenland1": {
+      "@id": "vng:adresBuitenland1",
+      "@type": "xsd:string"
+    },
+    "adresBuitenland2": {
+      "@id": "vng:adresBuitenland2",
+      "@type": "xsd:string"
+    },
+    "adresBuitenland3": {
+      "@id": "vng:adresBuitenland3",
+      "@type": "xsd:string"
+    },
+    "landPostadres": {
+      "@id": "vng:landPostadres",
+      "@type": "@id"
+    },
+    "BuitenlandsCorrespondentieadresVerzendingRequest": "vng:BuitenlandsCorrespondentieadresVerzendingRequest",
+    "BuitenlandsCorrespondentiepostadresVerzending": "vng:BuitenlandsCorrespondentiepostadresVerzending",
+    "postBusOfAntwoordnummer": {
+      "@id": "vng:postBusOfAntwoordnummer",
+      "@type": "xsd:integer"
+    },
+    "postadresPostcode": {
+      "@id": "vng:postadresPostcode",
+      "@type": "xsd:string"
+    },
+    "postadresType": {
+      "@id": "vng:postadresType"
+    },
+    "BuitenlandsCorrespondentiepostadresVerzendingRequest": "vng:BuitenlandsCorrespondentiepostadresVerzendingRequest",
+    "EIOZoekRequest": "vng:EIOZoekRequest",
+    "uuid_In": {
+      "@id": "vng:uuid_In",
+      "@container": "@list"
+    },
+    "expand": {
+      "@id": "vng:expand",
+      "@type": "xsd:string"
+    },
+    "EnkelvoudigInformatieObject": "vng:EnkelvoudigInformatieObject",
+    "bronorganisatie": {
+      "@id": "vng:bronorganisatie",
+      "@type": "xsd:string"
+    },
+    "creatiedatum": {
+      "@id": "vng:creatiedatum",
+      "@type": "xsd:date"
+    },
+    "titel": {
+      "@id": "vng:titel",
+      "@type": "xsd:string"
+    },
+    "auteur": {
+      "@id": "vng:auteur",
+      "@type": "xsd:string"
+    },
+    "taal": {
+      "@id": "vng:taal",
+      "@type": "xsd:string"
+    },
+    "beginRegistratie": {
+      "@id": "vng:beginRegistratie",
+      "@type": "xsd:dateTime"
+    },
+    "bestandsnaam": {
+      "@id": "vng:bestandsnaam",
+      "@type": "xsd:string"
+    },
+    "bestandsomvang": {
+      "@id": "vng:bestandsomvang",
+      "@type": "xsd:integer"
+    },
+    "beschrijving": {
+      "@id": "vng:beschrijving",
+      "@type": "xsd:string"
+    },
+    "ontvangstdatum": {
+      "@id": "vng:ontvangstdatum",
+      "@type": "xsd:date"
+    },
+    "indicatieGebruiksrecht": {
+      "@id": "vng:indicatieGebruiksrecht",
+      "@type": "xsd:boolean"
+    },
+    "verschijningsvorm": {
+      "@id": "vng:verschijningsvorm",
+      "@type": "xsd:string"
+    },
+    "ondertekening": {
+      "@id": "vng:ondertekening"
+    },
+    "integriteit": {
+      "@id": "vng:integriteit"
+    },
+    "locked": {
+      "@id": "vng:locked",
+      "@type": "xsd:boolean"
+    },
+    "bestandsdelen": {
+      "@id": "vng:bestandsdelen",
+      "@container": "@list"
+    },
+    "inhoudIsVervallen": {
+      "@id": "vng:inhoudIsVervallen",
+      "@type": "xsd:boolean"
+    },
+    "EnkelvoudigInformatieObjectCreateLockRequest": "vng:EnkelvoudigInformatieObjectCreateLockRequest",
+    "EnkelvoudigInformatieObjectWithLock": "vng:EnkelvoudigInformatieObjectWithLock",
+    "EnkelvoudigInformatieObjectWithLockRequest": "vng:EnkelvoudigInformatieObjectWithLockRequest",
+    "Gebruiksrechten": "vng:Gebruiksrechten",
+    "startdatum": {
+      "@id": "vng:startdatum",
+      "@type": "xsd:dateTime"
+    },
+    "einddatum": {
+      "@id": "vng:einddatum",
+      "@type": "xsd:dateTime"
+    },
+    "omschrijvingVoorwaarden": {
+      "@id": "vng:omschrijvingVoorwaarden",
+      "@type": "xsd:string"
+    },
+    "GebruiksrechtenRequest": "vng:GebruiksrechtenRequest",
+    "Integriteit": "vng:Integriteit",
+    "algoritme": {
+      "@id": "vng:algoritme"
+    },
+    "waarde": {
+      "@id": "vng:waarde",
+      "@type": "xsd:string"
+    },
+    "IntegriteitRequest": "vng:IntegriteitRequest",
+    "LockEnkelvoudigInformatieObject": "vng:LockEnkelvoudigInformatieObject",
+    "ObjectInformatieObject": "vng:ObjectInformatieObject",
+    "object": {
+      "@id": "vng:object",
+      "@type": "@id"
+    },
+    "objectType": {
+      "@id": "vng:objectType"
+    },
+    "ObjectInformatieObjectRequest": "vng:ObjectInformatieObjectRequest",
+    "ObjectTypeEnum": "vng:ObjectTypeEnum",
+    "Ondertekening": "vng:Ondertekening",
+    "soort": {
+      "@id": "vng:soort"
+    },
+    "OndertekeningRequest": "vng:OndertekeningRequest",
+    "PaginatedEnkelvoudigInformatieObjectList": "vng:PaginatedEnkelvoudigInformatieObjectList",
+    "PaginatedVerzendingList": "vng:PaginatedVerzendingList",
+    "PatchedEnkelvoudigInformatieObjectWithLockRequest": "vng:PatchedEnkelvoudigInformatieObjectWithLockRequest",
+    "PatchedGebruiksrechtenRequest": "vng:PatchedGebruiksrechtenRequest",
+    "PatchedVerzendingRequest": "vng:PatchedVerzendingRequest",
+    "betrokkene": {
+      "@id": "vng:betrokkene",
+      "@type": "@id"
+    },
+    "contactPersoon": {
+      "@id": "vng:contactPersoon",
+      "@type": "@id"
+    },
+    "contactpersoonnaam": {
+      "@id": "vng:contactpersoonnaam",
+      "@type": "xsd:string"
+    },
+    "binnenlandsCorrespondentieadres": {
+      "@id": "vng:binnenlandsCorrespondentieadres"
+    },
+    "buitenlandsCorrespondentieadres": {
+      "@id": "vng:buitenlandsCorrespondentieadres"
+    },
+    "correspondentiePostadres": {
+      "@id": "vng:correspondentiePostadres"
+    },
+    "faxnummer": {
+      "@id": "vng:faxnummer",
+      "@type": "xsd:string"
+    },
+    "emailadres": {
+      "@id": "vng:emailadres",
+      "@type": "xsd:string"
+    },
+    "mijnOverheid": {
+      "@id": "vng:mijnOverheid",
+      "@type": "xsd:boolean"
+    },
+    "telefoonnummer": {
+      "@id": "vng:telefoonnummer",
+      "@type": "xsd:string"
+    },
+    "PostadresTypeEnum": "vng:PostadresTypeEnum",
+    "SchemaBestandsDeel": "vng:SchemaBestandsDeel",
+    "SchemaEIO": "vng:SchemaEIO",
+    "SoortEnum": "vng:SoortEnum",
+    "StatusEnum": "vng:StatusEnum",
+    "UnlockEnkelvoudigInformatieObjectRequest": "vng:UnlockEnkelvoudigInformatieObjectRequest",
+    "Verzending": "vng:Verzending",
+    "VerzendingRequest": "vng:VerzendingRequest",
+    "CorrigeerInterneTaak_parameters": "vng:CorrigeerInterneTaak_parameters",
+    "actorId": {
+      "@id": "vng:actorId",
+      "@type": "@id"
+    },
+    "gevraagdeHandeling": {
+      "@id": "vng:gevraagdeHandeling",
+      "@type": "@id"
+    },
+    "id": {
+      "@id": "vng:id",
+      "@type": "@id"
+    },
+    "DigitaalAdres": "vng:DigitaalAdres",
+    "adres": {
+      "@id": "vng:adres",
+      "@type": "@id"
+    },
+    "indicatieActief": {
+      "@id": "vng:indicatieActief",
+      "@type": "@id"
+    },
+    "partijId": {
+      "@id": "vng:partijId",
+      "@type": "@id"
+    },
+    "soortDigitaalAdres": {
+      "@id": "vng:soortDigitaalAdres",
+      "@type": "@id"
+    },
+    "InterneTaak": "vng:InterneTaak",
+    "geregistreerdOp": {
+      "@id": "vng:geregistreerdOp",
+      "@type": "@id"
+    },
+    "nummer": {
+      "@id": "vng:nummer",
+      "@type": "@id"
+    },
+    "Kanaal_parameters": "vng:Kanaal_parameters",
+    "Klantcontact": "vng:Klantcontact",
+    "betrokkeneBijKlantcontact": {
+      "@id": "vng:betrokkeneBijKlantcontact",
+      "@container": "@list"
+    },
+    "indicatieContactGelukt": {
+      "@id": "vng:indicatieContactGelukt",
+      "@type": "@id"
+    },
+    "inhoudsdelen": {
+      "@id": "vng:inhoudsdelen",
+      "@container": "@list"
+    },
+    "initiatiefnemer": {
+      "@id": "vng:initiatiefnemer",
+      "@type": "@id"
+    },
+    "kanaal": {
+      "@id": "vng:kanaal",
+      "@type": "@id"
+    },
+    "plaatsgevondenOp": {
+      "@id": "vng:plaatsgevondenOp",
+      "@type": "@id"
+    },
+    "Land_parameters": "vng:Land_parameters",
+    "landcode": {
+      "@id": "vng:landcode",
+      "@type": "xsd:string"
+    },
+    "MarkeerInterneTaakVerwerkt_parameters": "vng:MarkeerInterneTaakVerwerkt_parameters",
+    "ObjectVanKlantcontact": "vng:ObjectVanKlantcontact",
+    "externId": {
+      "@id": "vng:externId",
+      "@type": "@id"
+    },
+    "externRegister": {
+      "@id": "vng:externRegister",
+      "@type": "@id"
+    },
+    "interneTaakId": {
+      "@id": "vng:interneTaakId",
+      "@type": "@id"
+    },
+    "klantcontactId": {
+      "@id": "vng:klantcontactId",
+      "@type": "@id"
+    },
+    "ontstaanUitKlantcontact": {
+      "@id": "vng:ontstaanUitKlantcontact",
+      "@type": "@id"
+    },
+    "soortObject": {
+      "@id": "vng:soortObject",
+      "@type": "@id"
+    },
+    "InterneTaken": {
+      "@id": "vng:InterneTaken",
+      "@type": "@id"
+    },
+    "AndereObjecten": {
+      "@id": "vng:AndereObjecten",
+      "@container": "@list"
+    },
+    "Zaken": {
+      "@id": "vng:Zaken",
+      "@type": "@id"
+    },
+    "Klanttaken": {
+      "@id": "vng:Klanttaken",
+      "@type": "@id"
+    },
+    "Klantcontacten": {
+      "@id": "vng:Klantcontacten",
+      "@type": "@id"
+    },
+    "Referentielijstbody": "vng:Referentielijstbody",
+    "kanalen": {
+      "@id": "vng:kanalen",
+      "@container": "@list"
+    },
+    "landen": {
+      "@id": "vng:landen",
+      "@container": "@list"
+    },
+    "soortenDigitaalAdres": {
+      "@id": "vng:soortenDigitaalAdres",
+      "@container": "@list"
+    },
+    "soortenExternId": {
+      "@id": "vng:soortenExternId",
+      "@container": "@list"
+    },
+    "soortenObject": {
+      "@id": "vng:soortenObject",
+      "@container": "@list"
+    },
+    "voorkeurstalen": {
+      "@id": "vng:voorkeurstalen",
+      "@container": "@list"
+    },
+    "Referentielijsten_parameters": "vng:Referentielijsten_parameters",
+    "land": {
+      "@id": "vng:land",
+      "@type": "@id"
+    },
+    "soortExternId": {
+      "@id": "vng:soortExternId",
+      "@type": "@id"
+    },
+    "voorkeurstaal": {
+      "@id": "vng:voorkeurstaal",
+      "@type": "@id"
+    },
+    "RegistreerDigitaalAdres_parameters": "vng:RegistreerDigitaalAdres_parameters",
+    "codeSoortDigitaalAdres": {
+      "@id": "vng:codeSoortDigitaalAdres",
+      "@type": "xsd:string"
+    },
+    "RegistreerGeautomatiseerdeActor_parameters": "vng:RegistreerGeautomatiseerdeActor_parameters",
+    "functie": {
+      "@id": "vng:functie",
+      "@type": "@id"
+    },
+    "RegistreerInterneTaak_parameters": "vng:RegistreerInterneTaak_parameters",
+    "RegistreerKlantcontactGaatOverInterneTaak_parameters": "vng:RegistreerKlantcontactGaatOverInterneTaak_parameters",
+    "RegistreerKlantcontactGaatOverObject_parameters": "vng:RegistreerKlantcontactGaatOverObject_parameters",
+    "RegistreerMedewerker_parameters": "vng:RegistreerMedewerker_parameters",
+    "eMailadres": {
+      "@id": "vng:eMailadres",
+      "@type": "@id"
+    },
+    "RegistreerOrganisatie_parameters": "vng:RegistreerOrganisatie_parameters",
+    "bezoekadres": {
+      "@id": "vng:bezoekadres",
+      "@type": "@id"
+    },
+    "correspondentieadres": {
+      "@id": "vng:correspondentieadres",
+      "@type": "@id"
+    },
+    "digitaalAdres": {
+      "@id": "vng:digitaalAdres",
+      "@container": "@list"
+    },
+    "interneNotitie": {
+      "@id": "vng:interneNotitie",
+      "@type": "@id"
+    },
+    "voorkeurskanaal": {
+      "@id": "vng:voorkeurskanaal",
+      "@type": "@id"
+    },
+    "RegistreerOrganisatorischeEenheid_parameters": "vng:RegistreerOrganisatorischeEenheid_parameters",
+    "RegistreerPersoon_parameters": "vng:RegistreerPersoon_parameters",
+    "Registreerkeukentafelgesprek_parameters": "vng:Registreerkeukentafelgesprek_parameters",
+    "indicatieHergebruikPartij": {
+      "@id": "vng:indicatieHergebruikPartij",
+      "@type": "@id"
+    },
+    "inhoudsdeel": {
+      "@id": "vng:inhoudsdeel",
+      "@container": "@list"
+    },
+    "Registreerklantcontact_parameters": "vng:Registreerklantcontact_parameters"
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "VNG Realisatie API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects VNG Realisatie's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-09) from openapi/vng-realisatie-autorisaties-openapi.yml, openapi/vng-realisatie-besluiten-openapi.yml, openapi/vng-realisatie-catalogi-openapi.yml.",
+  "dcterms:created": "2026-10-09",
+  "dcterms:source": [
+    "openapi/vng-realisatie-autorisaties-openapi.yml",
+    "openapi/vng-realisatie-besluiten-openapi.yml",
+    "openapi/vng-realisatie-catalogi-openapi.yml",
+    "openapi/vng-realisatie-documenten-openapi.yml",
+    "openapi/vng-realisatie-klantinteracties-openapi.yml"
+  ]
+}

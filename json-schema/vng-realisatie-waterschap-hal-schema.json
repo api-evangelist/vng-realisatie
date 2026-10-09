@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-waterschap-hal-schema.json",
+  "title": "WaterschapHal",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-woz-bevragen-openapi.yml#/components/schemas/WaterschapHal",
+  "allOf": [
+    {
+      "$ref": "#/$defs/Waterschap"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "_links": {
+          "$ref": "#/$defs/Waterschap_links"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "Waterschap": {
+      "type": "object",
+      "description": "<body><p>Door de relatie van het WOZ-object naar deze entiteit wordt aangeduid in het gebied van welk(e) waterschap(pen) het desbetreffende WOZ-object is gelegen.</p></body>",
+      "required": [
+        "codeWaterschap",
+        "einddatumObject",
+        "ingangsdatumObject"
+      ],
+      "properties": {
+        "codeWaterschap": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/Waterschapstabel"
+            },
+            {
+              "title": "codeWaterschap",
+              "description": "<body><p>Met het oog op uniformering is binnen het IMWOZ een waardelijst opgesteld met toegestane waterschapscodes (met aanduiding bij welk waterschap deze hoort), inclusief historie vanaf 1 januari 2009.</p></body>"
+            }
+          ]
+        },
+        "einddatumObject": {
+          "type": "string",
+          "title": "einddatumObject",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatumObject": {
+          "type": "string",
+          "title": "ingangsdatumObject",
+          "description": "",
+          "format": "date"
+        }
+      }
+    },
+    "Waterschap_links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "$ref": "https://raw.githubusercontent.com/VNG-Realisatie/API-Kennisbank/master/common/common.yaml#/components/schemas/HalLink"
+        }
+      }
+    },
+    "Waterschapstabel": {
+      "type": "object",
+      "description": "",
+      "required": [
+        "codeWaterschap",
+        "ingangsdatum"
+      ],
+      "properties": {
+        "codeWaterschap": {
+          "type": "string",
+          "title": "codeWaterschap",
+          "description": "<body><p>De verzameling van waarden die gegevens van deze attribuutsoort kunnen hebben oftewel het waardenbereik, uitgedrukt in een specifieke structuur.</p></body>",
+          "pattern": "^[0-9]{4}$",
+          "maxLength": 4
+        },
+        "einddatum": {
+          "type": "string",
+          "title": "einddatum",
+          "description": "",
+          "format": "date"
+        },
+        "ingangsdatum": {
+          "type": "string",
+          "title": "ingangsdatum",
+          "description": "",
+          "format": "date"
+        }
+      }
+    }
+  }
+}

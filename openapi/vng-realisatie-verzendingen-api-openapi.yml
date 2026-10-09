@@ -1,0 +1,1590 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Verzendingen API
+  version: 1.5.0
+  contact:
+    email: standaarden.ondersteuning@vng.nl
+    url: https://vng-realisatie.github.io/gemma-zaken
+  license:
+    name: EUPL 1.2
+    url: https://opensource.org/licenses/EUPL-1.2
+  description: 'Operations tagged verzendingen across 2 of this provider''s published API definitions: vng-realisatie-documenten-openapi.yml, vng-realisatie-documenten-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://documenten-api.vng.cloud/api/v1
+  description: Productie Omgeving
+tags:
+- name: verzendingen
+  description: Opvragen en bewerken van VERZENDINGen.
+paths:
+  /verzendingen:
+    get:
+      operationId: verzending_list
+      description: Deze lijst kan gefilterd wordt met query-string parameters.
+      summary: Alle VERZENDINGen opvragen
+      parameters:
+      - name: aardRelatie
+        required: false
+        in: query
+        description: Omschrijving van de aard van de relatie van de BETROKKENE tot het INFORMATIEOBJECT.
+        schema:
+          type: string
+          enum:
+          - afzender
+          - geadresseerde
+      - name: informatieobject
+        required: false
+        in: query
+        description: URL-referentie naar het informatieobject dat is ontvangen of verzonden.
+        schema:
+          type: string
+          format: uri
+      - name: betrokkene
+        required: false
+        in: query
+        description: URL-referentie naar de betrokkene waarvan het informatieobject is ontvangen of waaraan dit is verzonden.
+        schema:
+          type: string
+          format: uri
+      - name: expand
+        required: false
+        in: query
+        description: "Examples: \n`expand=zaaktype, status, status.statustype, hoofdzaak.status.statustype, hoofdzaak.deelzaken.status.statustype`\nHaal details van gelinkte resources direct op. Als je meerdere resources tegelijk wilt ophalen kun je deze scheiden met een komma. Voor het ophalen van resources die een laag dieper genest zijn wordt de punt-notatie gebruikt."
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: Een pagina binnen de gepagineerde set resultaten.
+        schema:
+          type: integer
+      tags:
+      - verzendingen
+      responses:
+        '200':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedVerzendingList'
+          description: OK
+        '400':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidatieFout'
+          description: Bad request
+        '401':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unauthorized
+        '403':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Forbidden
+        '406':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not acceptable
+        '409':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Conflict
+        '410':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Gone
+        '415':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unsupported media type
+        '429':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Too many requests
+        '500':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Internal server error
+    post:
+      operationId: verzending_create
+      description: Voeg VERZENDINGen toe voor een INFORMATIEOBJECT en een BETROKKENE.
+      summary: Maak een VERZENDING aan
+      parameters:
+      - in: header
+        name: Content-Type
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: Content type van de verzoekinhoud.
+        required: true
+      tags:
+      - verzendingen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerzendingRequest'
+        required: true
+      responses:
+        '201':
+          headers:
+            Location:
+              schema:
+                type: string
+                format: uri
+              description: URL waar de resource leeft.
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verzending'
+          description: Created
+        '400':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidatieFout'
+          description: Bad request
+        '401':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unauthorized
+        '403':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Forbidden
+        '406':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not acceptable
+        '409':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Conflict
+        '410':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Gone
+        '415':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unsupported media type
+        '429':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Too many requests
+        '500':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Internal server error
+    servers:
+    - url: https://documenten-api.vng.cloud/api/v1
+      description: Productie Omgeving
+  /verzendingen/{uuid}:
+    get:
+      operationId: verzending_retrieve
+      description: Een specifieke VERZENDING opvragen.
+      summary: Een specifieke VERZENDING opvragen
+      parameters:
+      - in: path
+        name: uuid
+        schema:
+          type: string
+          format: uuid
+          description: Unieke resource identifier (UUID4)
+          title: uuid
+        required: true
+      - in: header
+        name: If-None-Match
+        schema:
+          type: string
+        description: Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie.
+        examples:
+          OneValue:
+            value: '"79054025255fb1a26e4bc422aef54eb4"'
+            summary: Eén ETag-waarde
+          MultipleValues:
+            value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
+            summary: Meerdere ETag-waardes
+      - in: query
+        name: expand
+        schema:
+          type: string
+        description: Haal details van gelinkte resources direct op. Als je meerdere resources tegelijk wilt ophalen kun je deze scheiden met een komma. Voor het ophalen van resources die een laag dieper genest zijn wordt de punt-notatie gebruikt.
+        examples:
+          ExpandZaaktype:
+            value: zaaktype
+            summary: expand zaaktype
+          ExpandStatus:
+            value: status
+            summary: expand status
+          ExpandStatus.statustype:
+            value: status.statustype
+            summary: expand status.statustype
+          ExpandHoofdzaak.status.statustype:
+            value: hoofdzaak.status.statustype
+            summary: expand hoofdzaak.status.statustype
+          ExpandHoofdzaak.deelzaken.status.statustype:
+            value: hoofdzaak.deelzaken.status.statustype
+            summary: expand hoofdzaak.deelzaken.status.statustype
+      tags:
+      - verzendingen
+      responses:
+        '200':
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: De ETag berekend op de response body JSON. Indien twee resources exact dezelfde ETag hebben, dan zijn deze resources identiek aan elkaar. Je kan de ETag gebruiken om caching te implementeren.
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verzending'
+          description: OK
+        '401':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unauthorized
+        '403':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Forbidden
+        '404':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not found
+        '406':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not acceptable
+        '409':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Conflict
+        '410':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Gone
+        '415':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unsupported media type
+        '429':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Too many requests
+        '500':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Internal server error
+    put:
+      operationId: verzending_update
+      description: Werk een VERZENDING in zijn geheel bij.
+      summary: Werk een VERZENDING in zijn geheel bij
+      parameters:
+      - in: path
+        name: uuid
+        schema:
+          type: string
+          format: uuid
+          description: Unieke resource identifier (UUID4)
+          title: uuid
+        required: true
+      - in: header
+        name: Content-Type
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: Content type van de verzoekinhoud.
+        required: true
+      tags:
+      - verzendingen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerzendingRequest'
+        required: true
+      responses:
+        '200':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verzending'
+          description: OK
+        '400':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidatieFout'
+          description: Bad request
+        '401':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unauthorized
+        '403':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Forbidden
+        '404':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not found
+        '406':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not acceptable
+        '409':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Conflict
+        '410':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Gone
+        '415':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unsupported media type
+        '429':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Too many requests
+        '500':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Internal server error
+    patch:
+      operationId: verzending_partial_update
+      description: Werk een VERZENDING relatie deels bij.
+      summary: Werk een VERZENDING relatie deels bij
+      parameters:
+      - in: path
+        name: uuid
+        schema:
+          type: string
+          format: uuid
+          description: Unieke resource identifier (UUID4)
+          title: uuid
+        required: true
+      - in: header
+        name: Content-Type
+        schema:
+          type: string
+          enum:
+          - application/json
+        description: Content type van de verzoekinhoud.
+        required: true
+      tags:
+      - verzendingen
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedVerzendingRequest'
+      responses:
+        '200':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verzending'
+          description: OK
+        '400':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ValidatieFout'
+          description: Bad request
+        '401':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unauthorized
+        '403':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Forbidden
+        '404':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not found
+        '406':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not acceptable
+        '409':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Conflict
+        '410':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Gone
+        '415':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unsupported media type
+        '429':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Too many requests
+        '500':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Internal server error
+    delete:
+      operationId: verzending_destroy
+      description: Verwijder een VERZENDING.
+      summary: Verwijder een VERZENDING
+      parameters:
+      - in: path
+        name: uuid
+        schema:
+          type: string
+          format: uuid
+          description: Unieke resource identifier (UUID4)
+          title: uuid
+        required: true
+      tags:
+      - verzendingen
+      responses:
+        '204':
+          description: No content
+        '401':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unauthorized
+        '403':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Forbidden
+        '404':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not found
+        '406':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Not acceptable
+        '409':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Conflict
+        '410':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Gone
+        '415':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Unsupported media type
+        '429':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Too many requests
+        '500':
+          headers:
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+          description: Internal server error
+    head:
+      operationId: verzending_headers
+      description: Vraag de headers op die je bij een GET request zou krijgen.
+      summary: De headers voor een specifiek(e) VERZENDING opvragen
+      parameters:
+      - in: path
+        name: uuid
+        schema:
+          type: string
+          format: uuid
+          description: Unieke resource identifier (UUID4)
+          title: uuid
+        required: true
+      - in: header
+        name: If-None-Match
+        schema:
+          type: string
+        description: Voer een voorwaardelijk verzoek uit. Deze header moet één of meerdere ETag-waardes bevatten van resources die de consumer gecached heeft. Indien de waarde van de ETag van de huidige resource voorkomt in deze set, dan antwoordt de provider met een lege HTTP 304 request. Zie [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/If-None-Match) voor meer informatie.
+        examples:
+          OneValue:
+            value: '"79054025255fb1a26e4bc422aef54eb4"'
+            summary: Eén ETag-waarde
+          MultipleValues:
+            value: '"79054025255fb1a26e4bc422aef54eb4", "e4d909c290d0fb1ca068ffaddf22cbd0"'
+            summary: Meerdere ETag-waardes
+      tags:
+      - verzendingen
+      responses:
+        '200':
+          headers:
+            ETag:
+              schema:
+                type: string
+              description: De ETag berekend op de response body JSON. Indien twee resources exact dezelfde ETag hebben, dan zijn deze resources identiek aan elkaar. Je kan de ETag gebruiken om caching te implementeren.
+            API-version:
+              schema:
+                type: string
+              description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verzending'
+          description: OK
+    servers:
+    - url: https://documenten-api.vng.cloud/api/v1
+      description: Productie Omgeving
+components:
+  schemas:
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
+    BinnenlandsCorrespondentieadresVerzendingRequest:
+      type:
+      - object
+      - 'null'
+      description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+      properties:
+        huisletter:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
+          title: huisletter
+          maxLength: 1
+        huisnummer:
+          type: integer
+          maximum: 99999
+          minimum: 1
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nummering.
+          title: huisnummer
+        huisnummerToevoeging:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
+          title: huisnummer toevoeging
+          maxLength: 4
+        naamOpenbareRuimte:
+          type: string
+          minLength: 1
+          description: Een door het bevoegde gemeentelijke orgaan aan een GEMEENTELIJKE  OPENBARE RUIMTE toegekende benaming.
+          title: naam openbare ruimte
+          maxLength: 80
+        postcode:
+          type: string
+          description: De door TNT Post vastgestelde code behorende bij een bepaalde combinatie van een naam van een woonplaats, naam van een openbare ruimte en een huisnummer.
+          title: postcode
+          maxLength: 6
+        woonplaatsnaam:
+          type: string
+          minLength: 1
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
+      required:
+      - huisnummer
+      - naamOpenbareRuimte
+      - woonplaatsnaam
+    Fout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+      required:
+      - code
+      - detail
+      - instance
+      - status
+      - title
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+    BuitenlandsCorrespondentieadresVerzendingRequest:
+      type:
+      - object
+      - 'null'
+      description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      properties:
+        adresBuitenland1:
+          type: string
+          minLength: 1
+          description: Het eerste deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 1
+          maxLength: 35
+        adresBuitenland2:
+          type: string
+          description: Het tweede deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 2
+          maxLength: 35
+        adresBuitenland3:
+          type: string
+          description: Het derde deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 3
+          maxLength: 35
+        landPostadres:
+          type: string
+          format: uri
+          minLength: 1
+          description: Het LAND dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: land postadres
+          maxLength: 200
+      required:
+      - adresBuitenland1
+      - landPostadres
+    Verzending:
+      type: object
+      description: 'Set gegevensgroepdata from validated nested data.
+
+
+        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        betrokkene:
+          type: string
+          format: uri
+          description: URL-referentie naar de betrokkene waarvan het informatieobject is ontvangen of waaraan dit is verzonden.
+          title: betrokkene
+          maxLength: 200
+        informatieobject:
+          type: string
+          format: uri
+          description: URL-referentie naar het informatieobject dat is ontvangen of verzonden.
+          title: informatieobject
+        aardRelatie:
+          allOf:
+          - $ref: '#/components/schemas/AardRelatieEnum'
+          description: Omschrijving van de aard van de relatie van de BETROKKENE tot het INFORMATIEOBJECT.
+          title: aard relatie
+        toelichting:
+          type: string
+          description: Verduidelijking van de afzender- of geadresseerde-relatie.
+          title: toelichting
+          maxLength: 200
+        ontvangstdatum:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het INFORMATIEOBJECT ontvangen is. Verplicht te registreren voor INFORMATIEOBJECTen die van buiten de zaakbehandelende organisatie(s) ontvangen zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'afzender' heeft.
+          title: ontvangstdatum
+        verzenddatum:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het INFORMATIEOBJECT verzonden is, zoals deze op het INFORMATIEOBJECT vermeld is. Dit geldt voor zowel inkomende als uitgaande INFORMATIEOBJECTen. Eenzelfde informatieobject kan niet tegelijk inkomend en uitgaand zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'geadresseerde' heeft.
+          title: verzenddatum
+        contactPersoon:
+          type: string
+          format: uri
+          title: Contactpersoon
+          description: URL-referentie naar de persoon die als aanspreekpunt fungeert voor de BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.
+          maxLength: 1000
+        contactpersoonnaam:
+          type: string
+          description: De opgemaakte naam van de persoon die als aanspreekpunt fungeert voorde BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.
+          title: contactpersoonnaam
+          maxLength: 40
+        binnenlandsCorrespondentieadres:
+          allOf:
+          - $ref: '#/components/schemas/BinnenlandsCorrespondentieadresVerzending'
+          description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+          title: binnenlandsCorrespondentieadres
+        buitenlandsCorrespondentieadres:
+          allOf:
+          - $ref: '#/components/schemas/BuitenlandsCorrespondentieadresVerzending'
+          description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+          title: buitenlandsCorrespondentieadres
+        correspondentiePostadres:
+          allOf:
+          - $ref: '#/components/schemas/BuitenlandsCorrespondentiepostadresVerzending'
+          description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+          title: correspondentiePostadres
+        faxnummer:
+          type:
+          - string
+          - 'null'
+          description: faxnummer van de ontvanger of afzender.
+          title: faxnummer
+          maxLength: 15
+        emailadres:
+          type:
+          - string
+          - 'null'
+          description: emailadres van de ontvanger of afzender.
+          title: emailadres
+          maxLength: 100
+        mijnOverheid:
+          type: boolean
+          description: is het informatieobject verzonden via mijnOverheid naar de ontvanger.
+          title: mijn overheid
+        telefoonnummer:
+          type:
+          - string
+          - 'null'
+          description: telefoonnummer van de ontvanger of afzender.
+          title: telefoonnummer
+          maxLength: 15
+      required:
+      - aardRelatie
+      - betrokkene
+      - contactPersoon
+      - informatieobject
+      - url
+    BuitenlandsCorrespondentieadresVerzending:
+      type:
+      - object
+      - 'null'
+      description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      properties:
+        adresBuitenland1:
+          type: string
+          description: Het eerste deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 1
+          maxLength: 35
+        adresBuitenland2:
+          type: string
+          description: Het tweede deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 2
+          maxLength: 35
+        adresBuitenland3:
+          type: string
+          description: Het derde deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 3
+          maxLength: 35
+        landPostadres:
+          type: string
+          format: uri
+          description: Het LAND dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: land postadres
+          maxLength: 200
+      required:
+      - adresBuitenland1
+      - landPostadres
+    BinnenlandsCorrespondentieadresVerzending:
+      type:
+      - object
+      - 'null'
+      description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+      properties:
+        huisletter:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
+          title: huisletter
+          maxLength: 1
+        huisnummer:
+          type: integer
+          maximum: 99999
+          minimum: 1
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nummering.
+          title: huisnummer
+        huisnummerToevoeging:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
+          title: huisnummer toevoeging
+          maxLength: 4
+        naamOpenbareRuimte:
+          type: string
+          description: Een door het bevoegde gemeentelijke orgaan aan een GEMEENTELIJKE  OPENBARE RUIMTE toegekende benaming.
+          title: naam openbare ruimte
+          maxLength: 80
+        postcode:
+          type: string
+          description: De door TNT Post vastgestelde code behorende bij een bepaalde combinatie van een naam van een woonplaats, naam van een openbare ruimte en een huisnummer.
+          title: postcode
+          maxLength: 6
+        woonplaatsnaam:
+          type: string
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
+      required:
+      - huisnummer
+      - naamOpenbareRuimte
+      - woonplaatsnaam
+    AardRelatieEnum:
+      enum:
+      - afzender
+      - geadresseerde
+      type: string
+    PatchedVerzendingRequest:
+      type: object
+      description: 'Set gegevensgroepdata from validated nested data.
+
+
+        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+      properties:
+        betrokkene:
+          type: string
+          format: uri
+          minLength: 1
+          description: URL-referentie naar de betrokkene waarvan het informatieobject is ontvangen of waaraan dit is verzonden.
+          title: betrokkene
+          maxLength: 200
+        informatieobject:
+          type: string
+          format: uri
+          description: URL-referentie naar het informatieobject dat is ontvangen of verzonden.
+          title: informatieobject
+        aardRelatie:
+          allOf:
+          - $ref: '#/components/schemas/AardRelatieEnum'
+          description: Omschrijving van de aard van de relatie van de BETROKKENE tot het INFORMATIEOBJECT.
+          title: aard relatie
+        toelichting:
+          type: string
+          description: Verduidelijking van de afzender- of geadresseerde-relatie.
+          title: toelichting
+          maxLength: 200
+        ontvangstdatum:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het INFORMATIEOBJECT ontvangen is. Verplicht te registreren voor INFORMATIEOBJECTen die van buiten de zaakbehandelende organisatie(s) ontvangen zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'afzender' heeft.
+          title: ontvangstdatum
+        verzenddatum:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het INFORMATIEOBJECT verzonden is, zoals deze op het INFORMATIEOBJECT vermeld is. Dit geldt voor zowel inkomende als uitgaande INFORMATIEOBJECTen. Eenzelfde informatieobject kan niet tegelijk inkomend en uitgaand zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'geadresseerde' heeft.
+          title: verzenddatum
+        contactPersoon:
+          type: string
+          format: uri
+          minLength: 1
+          title: Contactpersoon
+          description: URL-referentie naar de persoon die als aanspreekpunt fungeert voor de BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.
+          maxLength: 1000
+        contactpersoonnaam:
+          type: string
+          description: De opgemaakte naam van de persoon die als aanspreekpunt fungeert voorde BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.
+          title: contactpersoonnaam
+          maxLength: 40
+        binnenlandsCorrespondentieadres:
+          allOf:
+          - $ref: '#/components/schemas/BinnenlandsCorrespondentieadresVerzendingRequest'
+          description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+          title: binnenlandsCorrespondentieadres
+        buitenlandsCorrespondentieadres:
+          allOf:
+          - $ref: '#/components/schemas/BuitenlandsCorrespondentieadresVerzendingRequest'
+          description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+          title: buitenlandsCorrespondentieadres
+        correspondentiePostadres:
+          allOf:
+          - $ref: '#/components/schemas/BuitenlandsCorrespondentiepostadresVerzendingRequest'
+          description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+          title: correspondentiePostadres
+        faxnummer:
+          type:
+          - string
+          - 'null'
+          description: faxnummer van de ontvanger of afzender.
+          title: faxnummer
+          maxLength: 15
+        emailadres:
+          type:
+          - string
+          - 'null'
+          description: emailadres van de ontvanger of afzender.
+          title: emailadres
+          maxLength: 100
+        mijnOverheid:
+          type: boolean
+          description: is het informatieobject verzonden via mijnOverheid naar de ontvanger.
+          title: mijn overheid
+        telefoonnummer:
+          type:
+          - string
+          - 'null'
+          description: telefoonnummer van de ontvanger of afzender.
+          title: telefoonnummer
+          maxLength: 15
+    PostadresTypeEnum:
+      enum:
+      - antwoordnummer
+      - postbusnummer
+      type: string
+    BuitenlandsCorrespondentiepostadresVerzending:
+      type:
+      - object
+      - 'null'
+      description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      properties:
+        postBusOfAntwoordnummer:
+          type: integer
+          maximum: 9999
+          minimum: 1
+          title: Postbus-of antwoordnummer
+          description: De numerieke aanduiding zoals deze door de Nederlandse PTT is vastgesteld voor postbusadressen en antwoordnummeradressen.
+        postadresPostcode:
+          type: string
+          description: De officiële Nederlandse PTT codering, bestaande uit een numerieke woonplaatscode en een alfabetische lettercode.
+          title: postadres postcode
+          maxLength: 6
+        postadresType:
+          allOf:
+          - $ref: '#/components/schemas/PostadresTypeEnum'
+          title: Postadrestype
+          description: Aanduiding van het soort postadres.
+        woonplaatsnaam:
+          type: string
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
+      required:
+      - postBusOfAntwoordnummer
+      - postadresPostcode
+      - postadresType
+      - woonplaatsnaam
+    BuitenlandsCorrespondentiepostadresVerzendingRequest:
+      type:
+      - object
+      - 'null'
+      description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      properties:
+        postBusOfAntwoordnummer:
+          type: integer
+          maximum: 9999
+          minimum: 1
+          title: Postbus-of antwoordnummer
+          description: De numerieke aanduiding zoals deze door de Nederlandse PTT is vastgesteld voor postbusadressen en antwoordnummeradressen.
+        postadresPostcode:
+          type: string
+          minLength: 1
+          description: De officiële Nederlandse PTT codering, bestaande uit een numerieke woonplaatscode en een alfabetische lettercode.
+          title: postadres postcode
+          maxLength: 6
+        postadresType:
+          allOf:
+          - $ref: '#/components/schemas/PostadresTypeEnum'
+          title: Postadrestype
+          description: Aanduiding van het soort postadres.
+        woonplaatsnaam:
+          type: string
+          minLength: 1
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
+      required:
+      - postBusOfAntwoordnummer
+      - postadresPostcode
+      - postadresType
+      - woonplaatsnaam
+    PaginatedVerzendingList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Verzending'
+    VerzendingRequest:
+      type: object
+      description: 'Set gegevensgroepdata from validated nested data.
+
+
+        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+      properties:
+        betrokkene:
+          type: string
+          format: uri
+          minLength: 1
+          description: URL-referentie naar de betrokkene waarvan het informatieobject is ontvangen of waaraan dit is verzonden.
+          title: betrokkene
+          maxLength: 200
+        informatieobject:
+          type: string
+          format: uri
+          description: URL-referentie naar het informatieobject dat is ontvangen of verzonden.
+          title: informatieobject
+        aardRelatie:
+          allOf:
+          - $ref: '#/components/schemas/AardRelatieEnum'
+          description: Omschrijving van de aard van de relatie van de BETROKKENE tot het INFORMATIEOBJECT.
+          title: aard relatie
+        toelichting:
+          type: string
+          description: Verduidelijking van de afzender- of geadresseerde-relatie.
+          title: toelichting
+          maxLength: 200
+        ontvangstdatum:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het INFORMATIEOBJECT ontvangen is. Verplicht te registreren voor INFORMATIEOBJECTen die van buiten de zaakbehandelende organisatie(s) ontvangen zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'afzender' heeft.
+          title: ontvangstdatum
+        verzenddatum:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het INFORMATIEOBJECT verzonden is, zoals deze op het INFORMATIEOBJECT vermeld is. Dit geldt voor zowel inkomende als uitgaande INFORMATIEOBJECTen. Eenzelfde informatieobject kan niet tegelijk inkomend en uitgaand zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'geadresseerde' heeft.
+          title: verzenddatum
+        contactPersoon:
+          type: string
+          format: uri
+          minLength: 1
+          title: Contactpersoon
+          description: URL-referentie naar de persoon die als aanspreekpunt fungeert voor de BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.
+          maxLength: 1000
+        contactpersoonnaam:
+          type: string
+          description: De opgemaakte naam van de persoon die als aanspreekpunt fungeert voorde BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.
+          title: contactpersoonnaam
+          maxLength: 40
+        binnenlandsCorrespondentieadres:
+          allOf:
+          - $ref: '#/components/schemas/BinnenlandsCorrespondentieadresVerzendingRequest'
+          description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+          title: binnenlandsCorrespondentieadres
+        buitenlandsCorrespondentieadres:
+          allOf:
+          - $ref: '#/components/schemas/BuitenlandsCorrespondentieadresVerzendingRequest'
+          description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+          title: buitenlandsCorrespondentieadres
+        correspondentiePostadres:
+          allOf:
+          - $ref: '#/components/schemas/BuitenlandsCorrespondentiepostadresVerzendingRequest'
+          description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+          title: correspondentiePostadres
+        faxnummer:
+          type:
+          - string
+          - 'null'
+          description: faxnummer van de ontvanger of afzender.
+          title: faxnummer
+          maxLength: 15
+        emailadres:
+          type:
+          - string
+          - 'null'
+          description: emailadres van de ontvanger of afzender.
+          title: emailadres
+          maxLength: 100
+        mijnOverheid:
+          type: boolean
+          description: is het informatieobject verzonden via mijnOverheid naar de ontvanger.
+          title: mijn overheid
+        telefoonnummer:
+          type:
+          - string
+          - 'null'
+          description: telefoonnummer van de ontvanger of afzender.
+          title: telefoonnummer
+          maxLength: 15
+      required:
+      - aardRelatie
+      - betrokkene
+      - contactPersoon
+      - informatieobject
+  securitySchemes:
+    JWT-Claims:
+      type: http
+      bearerFormat: JWT
+      scheme: bearer
+x-refined-from:
+- vng-realisatie-documenten-openapi.yml
+- vng-realisatie-documenten-openapi.yml

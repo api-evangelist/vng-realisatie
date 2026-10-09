@@ -1,23 +1,4157 @@
 aid: vng-realisatie
+
 name: VNG Realisatie
-description: 'VNG Realisatie is a company surfaced via the API Evangelist harvest backlog (source: spectral-ruleset-github)
-  and added to the network as a stub for full-pipeline profiling.'
+
+description: VNG Realisatie is the implementation organisation of the Vereniging van Nederlandse Gemeenten (VNG, the Association of Netherlands
+  Municipalities). It supports municipal development, delivery and enforcement (merged with VNG Naleving on 1 January 2023), and publishes the
+  municipal API standards, information models and StUF standards catalogued at standaarden.vng.nl — including Haal Centraal, ZGW (gemma-zaken)
+  and Klantinteracties APIs built on the Dutch REST API Design Rules — with source, specifications and Spectral rulesets maintained in the VNG-Realisatie
+  GitHub organization.
+
 url: https://raw.githubusercontent.com/api-evangelist/vng-realisatie/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:spectral-ruleset-github
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-09 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-09'
+
 modified: '2026-10-09'
+
 tags:
 - Company
-apis: []
+- Government
+- Municipalities
+- Netherlands
+- API Standards
+- Common Ground
+- Open Standards
+- Public Sector
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
+image: https://avatars.githubusercontent.com/u/34739001?s=280&v=4
+
 common:
+- type: AgenticAccess
+  url: agentic-access/vng-realisatie-agentic-access.yml
+- type: Spectral
+  url: rules/vng-realisatie-rules.yml
+- type: Spectral
+  url: rules/vng-realisatie-haal-centraal-common-spectral-rules.yml
+- type: JSONLD
+  url: json-ld/vng-realisatie-context.jsonld
+- type: Vocabulary
+  url: vocabulary/vng-realisatie-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/vng-realisatie-data-model.yml
+- type: ChangeLog
+  url: changelog/vng-realisatie-changelog.yml
+- type: Conventions
+  url: conventions/vng-realisatie-conventions.yml
+- type: Sandbox
+  url: sandbox/vng-realisatie-sandbox.yml
+- type: Security
+  url: https://www.informatiebeveiligingsdienst.nl/responsible-disclosure-english/
+- type: OAuthScopes
+  url: scopes/vng-realisatie-scopes.yml
+- type: Deprecation
+  url: lifecycle/vng-realisatie-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/vng-realisatie-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/vng-realisatie-problem-types.yml
+- type: Conformance
+  url: conformance/vng-realisatie-conformance.yml
+- type: Overlay
+  url: overlays/vng-realisatie-autorisaties-overlay.yaml
+- type: SecurityTxt
+  url: well-known/vng-realisatie-vng-security.txt
+- type: WellKnown
+  url: well-known/vng-realisatie-well-known.yml
+- type: Hosts
+  url: hosts/vng-realisatie-hosts.yml
+- type: Vendors
+  url: vendors/vng-realisatie-vendors.yml
+- type: Authentication
+  url: authentication/vng-realisatie-authentication.yml
+- type: VulnerabilityDisclosure
+  url: security/vng-realisatie-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/vng-realisatie-domain-security.yml
 - type: Website
   url: https://standaarden.vng.nl/
+- type: SpectralRules
+  url: https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/48fe071b9e2ece2900b7e84dd9f2d6ec5da87a6c/.spectral.yml
+- type: Documentation
+  url: https://standaarden.vng.nl/API-standaarden
+- type: GitHubOrganization
+  url: https://github.com/VNG-Realisatie
+- type: About
+  url: https://vng.nl/artikelen/vng-realisatie
+- type: Support
+  url: https://vng.nl/contact
+- type: Blog
+  url: https://vng.nl/nieuws
+- type: PrivacyPolicy
+  url: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+- type: Accessibility
+  url: https://vng.nl/toegankelijkheid
+- type: LinkedIn
+  url: https://www.linkedin.com/company/vng
+
+apis:
+- aid: vng-realisatie:vng-realisatie-applicaties-api
+  name: VNG Realisatie Applicaties API
+  description: The applicaties API from VNG Realisatie — 3 operation(s) for applicaties.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - applicaties
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-applicaties-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-besluiten-api
+  name: VNG Realisatie Besluiten API
+  description: The besluiten API from VNG Realisatie — 4 operation(s) for besluiten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - besluiten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-besluiten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-besluitinformatieobjecten-api
+  name: VNG Realisatie Besluitinformatieobjecten API
+  description: >-
+    The besluitinformatieobjecten API from VNG Realisatie — 2 operation(s) for besluitinformatieobjecten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - besluitinformatieobjecten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-besluitinformatieobjecten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-besluittypen-api
+  name: VNG Realisatie Besluittypen API
+  description: >-
+    Opvragen en bewerken van BESLUITTYPEn nodig voor BESLUITEN in de Besluiten API. Alle BESLUITTYPEn
+    van de besluiten die het resultaat kunnen zijn van het zaakgericht werken van de behandelende organisatie(s).
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - besluittypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-besluittypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-bestandsdelen-api
+  name: VNG Realisatie Bestandsdelen API
+  description: The bestandsdelen API from VNG Realisatie — 1 operation(s) for bestandsdelen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - bestandsdelen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-bestandsdelen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-catalogussen-api
+  name: VNG Realisatie Catalogussen API
+  description: >-
+    Opvragen en bewerken van CATALOGUSsen. De verzameling van ZAAKTYPEn, INFORMATIEOBJECTTYPEn en BESLUITTYPEn
+    voor een domein die als één geheel beheerd wordt.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - catalogussen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-catalogussen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-digitale-adressen-api
+  name: VNG Realisatie Digitale adressen API
+  description: The Digitale adressen API from VNG Realisatie — 3 operation(s) for digitale adressen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Digitale adressen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-digitale-adressen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-domains-api
+  name: VNG Realisatie Domains API
+  description: The domains API from VNG Realisatie — 2 operation(s) for domains.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - domains
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-domains-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-eigenschappen-api
+  name: VNG Realisatie Eigenschappen API
+  description: >-
+    Opvragen en bewerken van EIGENSCHAPpen van een ZAAKTYPE. Een relevant inhoudelijk gegeven dat bij
+    ZAAKen van dit ZAAKTYPE geregistreerd moet kunnen worden en geen standaard kenmerk is van een zaak.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - eigenschappen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-eigenschappen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-enkelvoudiginformatieobjecten-api
+  name: VNG Realisatie Enkelvoudiginformatieobjecten API
+  description: Opvragen en bewerken van (ENKELVOUDIG) INFORMATIEOBJECTen (documenten).
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - enkelvoudiginformatieobjecten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-enkelvoudiginformatieobjecten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-events-api
+  name: VNG Realisatie Events API
+  description: The events API from VNG Realisatie — 1 operation(s) for events.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-events-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-geautomatiseerde-actoren-api
+  name: VNG Realisatie Geautomatiseerde actoren API
+  description: >-
+    The Geautomatiseerde actoren API from VNG Realisatie — 3 operation(s) for geautomatiseerde actoren.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Geautomatiseerde actoren
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-geautomatiseerde-actoren-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-gebruiksrechten-api
+  name: VNG Realisatie Gebruiksrechten API
+  description: Opvragen en bewerken van GEBRUIKSRECHTen bij een INFORMATIEOBJECT.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - gebruiksrechten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-gebruiksrechten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-health-api
+  name: VNG Realisatie Health API
+  description: The health API from VNG Realisatie — 1 operation(s) for health.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-health-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-informatieobjecttypen-api
+  name: VNG Realisatie Informatieobjecttypen API
+  description: >-
+    Opvragen en bewerken van INFORMATIEOBJECTTYPEn nodig voor INFORMATIEOBJECTen in de Documenten API.
+    Een INFORMATIEOBJECTTYPE beschijft de karakteristieken van een document of ander object dat informatie
+    bevat.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - informatieobjecttypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-informatieobjecttypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-interne-taken-api
+  name: VNG Realisatie Interne taken API
+  description: The Interne taken API from VNG Realisatie — 4 operation(s) for interne taken.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Interne taken
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-interne-taken-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-klantcontacten-api
+  name: VNG Realisatie Klantcontacten API
+  description: The Klantcontacten API from VNG Realisatie — 8 operation(s) for klantcontacten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Klantcontacten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-klantcontacten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-medewerkers-api
+  name: VNG Realisatie Medewerkers API
+  description: The Medewerkers API from VNG Realisatie — 3 operation(s) for medewerkers.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Medewerkers
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-medewerkers-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-objectinformatieobjecten-api
+  name: VNG Realisatie Objectinformatieobjecten API
+  description: >-
+    Opvragen en verwijderen van OBJECT-INFORMATIEOBJECT relaties. Het betreft een relatie tussen een willekeurig
+    OBJECT, bijvoorbeeld een ZAAK in de Zaken API, en een INFORMATIEOBJECT.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - objectinformatieobjecten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-objectinformatieobjecten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-organisaties-api
+  name: VNG Realisatie Organisaties API
+  description: The Organisaties API from VNG Realisatie — 3 operation(s) for organisaties.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Organisaties
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-organisaties-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-organisatorische-eenheden-api
+  name: VNG Realisatie Organisatorische eenheden API
+  description: >-
+    The Organisatorische eenheden API from VNG Realisatie — 3 operation(s) for organisatorische eenheden.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Organisatorische eenheden
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-organisatorische-eenheden-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-personen-api
+  name: VNG Realisatie Personen API
+  description: The Personen API from VNG Realisatie — 3 operation(s) for personen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Personen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-personen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-procestypen-api
+  name: VNG Realisatie Procestypen API
+  description: The procestypen API from VNG Realisatie — 2 operation(s) for procestypen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - procestypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-procestypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-referentielijsten-api
+  name: VNG Realisatie Referentielijsten API
+  description: The Referentielijsten API from VNG Realisatie — 7 operation(s) for referentielijsten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Referentielijsten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-referentielijsten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-resultaattypen-api
+  name: VNG Realisatie Resultaattypen API
+  description: >-
+    Opvragen en bewerken van RESULTAATTYPEn van een ZAAKTYPE. Het betreft de indeling of groepering van
+    resultaten van zaken van hetzelfde ZAAKTYPE naar hun aard, zoals 'verleend', 'geweigerd', 'verwerkt',
+    etc.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - resultaattypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-resultaattypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-resultaattypeomschrijvingen-api
+  name: VNG Realisatie Resultaattypeomschrijvingen API
+  description: >-
+    The resultaattypeomschrijvingen API from VNG Realisatie — 2 operation(s) for resultaattypeomschrijvingen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - resultaattypeomschrijvingen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-resultaattypeomschrijvingen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-resultaten-api
+  name: VNG Realisatie Resultaten API
+  description: The resultaten API from VNG Realisatie — 2 operation(s) for resultaten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - resultaten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-resultaten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-rollen-api
+  name: VNG Realisatie Rollen API
+  description: The rollen API from VNG Realisatie — 2 operation(s) for rollen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - rollen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-rollen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-roltypen-api
+  name: VNG Realisatie Roltypen API
+  description: >-
+    Opvragen en bewerken van ROLTYPEn van een ZAAKTYPE. Generieke aanduiding van de aard van een ROL die
+    een BETROKKENE kan uitoefenen in ZAAKen van een ZAAKTYPE.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - roltypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-roltypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-statussen-api
+  name: VNG Realisatie Statussen API
+  description: The statussen API from VNG Realisatie — 2 operation(s) for statussen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - statussen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-statussen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-statustypen-api
+  name: VNG Realisatie Statustypen API
+  description: >-
+    Opvragen en bewerken van STATUSTYPEn van een ZAAKTYPE. Generieke aanduiding van de aard van een status.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - statustypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-statustypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-subscriptions-api
+  name: VNG Realisatie Subscriptions API
+  description: The subscriptions API from VNG Realisatie — 2 operation(s) for subscriptions.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-subscriptions-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-verzendingen-api
+  name: VNG Realisatie Verzendingen API
+  description: Opvragen en bewerken van VERZENDINGen.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - verzendingen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-verzendingen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-wozobject-woz-api
+  name: VNG Realisatie Wozobject (WOZ) API
+  description: The Wozobject (WOZ) API from VNG Realisatie — 6 operation(s) for wozobject (woz).
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - Wozobject (WOZ)
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-wozobject-woz-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaakcontactmomenten-api
+  name: VNG Realisatie Zaakcontactmomenten API
+  description: >-
+    The zaakcontactmomenten API from VNG Realisatie — 2 operation(s) for zaakcontactmomenten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaakcontactmomenten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaakcontactmomenten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaakinformatieobjecten-api
+  name: VNG Realisatie Zaakinformatieobjecten API
+  description: >-
+    The zaakinformatieobjecten API from VNG Realisatie — 2 operation(s) for zaakinformatieobjecten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaakinformatieobjecten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaakinformatieobjecten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaakobjecten-api
+  name: VNG Realisatie Zaakobjecten API
+  description: The zaakobjecten API from VNG Realisatie — 2 operation(s) for zaakobjecten.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaakobjecten
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaakobjecten-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaakobjecttypen-api
+  name: VNG Realisatie Zaakobjecttypen API
+  description: >-
+    Opvragen en bewerken van ZAAKOBJECTTYPEn. Er wordt gevalideerd op:
+     - `zaaktype` behoort tot dezelfde `catalogus`
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaakobjecttypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaakobjecttypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaaktype-informatieobjecttypen-api
+  name: VNG Realisatie Zaaktype Informatieobjecttypen API
+  description: >-
+    Opvragen en bewerken van ZAAKTYPE-INFORMATIEOBJECTTYPE relaties. Geeft aan welke INFORMATIEOBJECTTYPEn
+    binnen een ZAAKTYPE mogelijk zijn en hoe de richting is.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaaktype-informatieobjecttypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaaktype-informatieobjecttypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaaktypen-api
+  name: VNG Realisatie Zaaktypen API
+  description: >-
+    Opvragen en bewerken van ZAAKTYPEn nodig voor ZAKEN in de Zaken API.Een ZAAKTYPE beschrijft het geheel
+    van karakteristieke eigenschappen van zaken van eenzelfde soort.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaaktypen
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaaktypen-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaakverzoeken-api
+  name: VNG Realisatie Zaakverzoeken API
+  description: The zaakverzoeken API from VNG Realisatie — 2 operation(s) for zaakverzoeken.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaakverzoeken
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaakverzoeken-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+- aid: vng-realisatie:vng-realisatie-zaken-api
+  name: VNG Realisatie Zaken API
+  description: >-
+    Een zaak mag (in principe) niet meer gewijzigd worden als de `archiefstatus` een andere status heeft
+    dan "nog_te_archiveren". Voor praktische redenen is er geen harde validatie regel aan de provider
+    kant.
+  humanURL: https://vng-realisatie.github.io/gemma-zaken/
+  baseURL: https://zaken-api.vng.cloud/api/v1
+  tags:
+  - zaken
+  properties:
+  - type: OpenAPI
+    url: openapi/vng-realisatie-zaken-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-zoek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-patched-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-rol-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-schema-eio-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/vng-realisatie-patched-enkelvoudig-informatie-object-with-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-enkelvoudig-informatie-object-create-lock-request-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-verzending-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-zaak-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-create-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-type-update-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-audit-trail-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-besluit-informatie-object-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-event-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-subscription-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-domain-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-applicatie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-object-van-klantcontact-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-organisatorische-eenheid-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-digitaal-adres-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-registreerklantcontact-parameters-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-land-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaat-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-proces-type-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaten-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-resultaattype-omschrijving-generiek-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-health-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-collectie-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-sluimerend-wozobject-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-waterschap-hal-schema.json
+  - type: JSONSchema
+    url: json-schema/vng-realisatie-wozobject-hal-schema.json
+x-enrichment:
+  date: '2026-10-09'
+  status: enriched
+  artifacts_added: 102
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: 'Enriched 2026-10-09: website and identity verified (verified) from the provider''s own pages; probed URLs below.'
+  evidence:
+  - url: https://standaarden.vng.nl/
+    status: 200
+  - url: https://vng.nl/artikelen/vng-realisatie
+    status: 200
+  - url: https://www.vngrealisatie.nl/
+    status: null
+  - url: https://github.com/VNG-Realisatie
+    status: 200
+  - url: https://vng.nl/disclaimer
+    status: 404

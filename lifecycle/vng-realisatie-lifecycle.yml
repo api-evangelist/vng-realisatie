@@ -1,0 +1,29 @@
+name: VNG Realisatie Lifecycle
+generated: '2026-10-09'
+method: searched
+source:
+- https://vng-realisatie.github.io/gemma-zaken/standaard/
+- https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/release_notes.html
+- https://vng-realisatie.github.io/gemma-zaken/beheer/
+- openapi/vng-realisatie-zaken-openapi.yml
+versioning:
+  scheme: Semantic version per API, grouped in named ZGW releases (1.6 on 20-03-2026, 1.7 on 09-06-2026); URL major version
+    (/api/v1); every response carries an API-version header.
+  docs: https://vng-realisatie.github.io/gemma-zaken/standaard/
+deprecation:
+  policy: null
+  note: No written deprecation policy or Sunset/Deprecation headers found. Standaard page marks Contactmomenten, Klanten and
+    Verzoeken API specs "niet meer in gebruik"; Zaken API 1.2.1 was withdrawn (30-08-2023).
+  deprecated_operations:
+  - path: /klantcontacten
+    method: get
+  - path: /klantcontacten
+    method: post
+  - path: /klantcontacten/{uuid}
+    method: get
+  deprecated_operations_source: openapi/vng-realisatie-zaken-openapi.yml
+governance: Functional and technical user groups (gemeenten, leveranciers) prioritise issues; releases tracked as milestones
+  at https://github.com/VNG-Realisatie/gemma-zaken/milestones; new releases go through a public consultation (14 days for
+  the September 2026 concept).
+sla: null
+status_page: null

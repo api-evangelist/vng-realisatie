@@ -1,0 +1,31 @@
+generated: '2026-10-09'
+method: searched
+source:
+- https://vng-realisatie.github.io/gemma-zaken/themas/achtergronddocumentatie/authenticatie-autorisatie
+- https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/handleidingen-en-tutorials/api-guides
+- openapi/vng-realisatie-autorisaties-openapi.yml, openapi/vng-realisatie-besluiten-openapi.yml, openapi/vng-realisatie-catalogi-openapi.yml,
+  openapi/vng-realisatie-documenten-openapi.yml, openapi/vng-realisatie-notificaties-openapi.yml, openapi/vng-realisatie-zaken-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: JWT-Claims
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/vng-realisatie-autorisaties-openapi.yml
+  - openapi/vng-realisatie-besluiten-openapi.yml
+  - openapi/vng-realisatie-catalogi-openapi.yml
+  - openapi/vng-realisatie-documenten-openapi.yml
+  - openapi/vng-realisatie-notificaties-openapi.yml
+  - openapi/vng-realisatie-zaken-openapi.yml
+docs: https://vng-realisatie.github.io/gemma-zaken/themas/achtergronddocumentatie/authenticatie-autorisatie
+flow: 'Applications register out-of-band with a provider and receive a client_id and secret; they sign a JWT (shared secret,
+  HMAC) carrying client_id, sent as "Authorization: Bearer <JWT>". The provider validates the JWT and queries the Autorisaties
+  API (AC) for that client_id''s authorisations; failures return HTTP 403. User authentication is out of scope and left to
+  the municipality.'
+token_tool: https://github.com/VNG-Realisatie/token-issuer
+notes:
+- 'Docs: "JWT kunnen niet gerevoked worden - daarom is het wenselijk om een korte expiry toe te kennen (bijvoorbeeld 24h)."'
+- Klantinteracties, WOZ-bevragen and Referentielijsten specs declare no securitySchemes.

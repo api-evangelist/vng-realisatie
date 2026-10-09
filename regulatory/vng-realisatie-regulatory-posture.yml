@@ -1,0 +1,72 @@
+generated: '2026-10-09'
+method: searched
+probe: true
+source: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+scope_note: >-
+  VNG Realisatie is part of the Vereniging van Nederlandse Gemeenten (VNG); vngrealisatie.nl
+  redirects to https://vng.nl/, so the legal pages read here are VNG's, linked from the vng.nl
+  footer. They cover the vng.nl website and VNG's own processing, not specifically the GEMMA /
+  ZGW API standards (standaarden.vng.nl publishes no legal pages of its own). Quotes are Dutch,
+  copied verbatim. Checked and not recorded: subprocessors (the privacy statement mentions
+  processor agreements but publishes no list), SBOM, AI transparency, data residency, incident
+  notification, GPC, exit assistance, notice-and-action, transparency report, age assurance,
+  support lifetime.
+signals:
+  data_subject_request:
+    url: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+    section: Uw privacyrechten
+    evidence:
+    - source: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        U hebt het recht om uw persoonsgegevens in te zien, te laten corrigeren, te laten verwijderen
+        of verwerking te beperken.
+    - source: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        Als u vragen heeft over de verwerking van uw persoonsgegevens, deze wil aanpassen of
+        toestemming in wil trekken, neem dan contact met ons op via
+    note: >-
+      Data subject rights (access, rectification, erasure, restriction) are stated and exercised by
+      email to PO@vng.nl, with the Functionaris Gegevensbescherming (fg@vng.nl) and the Autoriteit
+      Persoonsgegevens named for escalation. No request API or portal is documented.
+  data_retention:
+    url: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+    section: Bewaartermijn
+    stated_period: 'niet langer dan noodzakelijk voor het doel waaraan de gegevens zijn gerelateerd, of zo lang als nodig voor een wettelijke verplichting'
+    evidence:
+    - source: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        We bewaren persoonsgegevens niet langer dan noodzakelijk voor het doel waaraan de gegevens
+        zijn gerelateerd, of zo lang als nodig voor een wettelijke verplichting.
+    - source: https://vng.nl/privacyverklaring-vereniging-van-nederlandse-gemeenten
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: 'De contactgegevens zullen na 5 jaar worden verwijderd.'
+    note: >-
+      A general purpose-limited retention rule, plus specific periods for some categories (member
+      question contact details deleted after 5 years; visitor data deleted the day after the visit).
+  accessibility_conformance:
+    url: https://vng.nl/toegankelijkheid
+    standard: [WCAG 2.1 AA]
+    statement_register: https://www.toegankelijkheidsverklaring.nl/register/27523
+    compliance_status: voldoet gedeeltelijk
+    evidence:
+    - source: https://vng.nl/toegankelijkheid
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: 'De VNG streeft ernaar te voldoen aan de overheidsstandaard WCAG versie 2.1 op niveau AA.'
+    - source: https://www.toegankelijkheidsverklaring.nl/register/27523
+      http_status: 200
+      fetched: '2026-10-09'
+      quote: >-
+        Uit de door VNG gepubliceerde informatie blijkt dat de website VNG website gedeeltelijk
+        voldoet aan het besluit digitale toegankelijkheid overheid.
+    note: >-
+      A registered Dutch government accessibility statement for the vng.nl website, status
+      "partially compliant", with listed exceptions (some PDFs, video captions, podcasts). It covers
+      the website, not the API documentation sites.

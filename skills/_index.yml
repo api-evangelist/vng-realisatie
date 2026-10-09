@@ -1,0 +1,63 @@
+generated: '2026-10-09'
+method: generated
+source: Packaged Agent Skills generated from the VNG Realisatie OpenAPI contracts in openapi/. No provider-published skills
+  or AGENTS.md found (vng-realisatie.github.io/AGENTS.md 404).
+skills:
+- file: vng-realisatie-register-a-zaak.md
+  name: register-a-zaak
+  api: openapi/vng-realisatie-zaken-openapi.yml
+  operations:
+  - zaak_create
+  - status_create
+  - rol_create
+  - zaakinformatieobject_create
+  - zaak_retrieve
+  - zaak__zoek
+- file: vng-realisatie-store-a-document.md
+  name: store-a-document
+  api: openapi/vng-realisatie-documenten-openapi.yml
+  operations:
+  - enkelvoudiginformatieobject_create
+  - enkelvoudiginformatieobject_lock
+  - bestandsdeel_update
+  - enkelvoudiginformatieobject_unlock
+  - enkelvoudiginformatieobject_download
+  - enkelvoudiginformatieobject_partial_update
+- file: vng-realisatie-record-a-besluit.md
+  name: record-a-besluit
+  api: openapi/vng-realisatie-besluiten-openapi.yml
+  operations:
+  - besluit_create
+  - besluitinformatieobject_create
+  - besluit_read
+- file: vng-realisatie-subscribe-to-notifications.md
+  name: subscribe-to-notifications
+  api: openapi/vng-realisatie-notificaties-openapi.yml
+  operations:
+  - domain_list
+  - subscription_create
+  - subscription_read
+- file: vng-realisatie-publish-a-zaaktype.md
+  name: publish-a-zaaktype
+  api: openapi/vng-realisatie-catalogi-openapi.yml
+  operations:
+  - catalogus_list
+  - zaaktype_create
+  - statustype_create
+  - roltype_create
+  - resultaattype_create
+  - zaaktype_publish
+- file: vng-realisatie-register-a-klantcontact.md
+  name: register-a-klantcontact
+  api: openapi/vng-realisatie-klantinteracties-openapi.yml
+  operations:
+  - registreerklantcontact
+  - registreerinternetaak
+  - zoekinternetaak
+  - markeerinternetaakverwerkt
+- file: vng-realisatie-look-up-a-woz-object.md
+  name: look-up-a-woz-object
+  api: openapi/vng-realisatie-woz-bevragen-openapi.yml
+  operations:
+  - getwozobjecten
+  - getwozobject

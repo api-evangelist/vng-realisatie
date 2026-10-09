@@ -1,0 +1,125 @@
+generated: '2026-10-09'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/vng-realisatie-autorisaties-openapi.yml
+- openapi/vng-realisatie-besluiten-openapi.yml
+- openapi/vng-realisatie-catalogi-openapi.yml
+- openapi/vng-realisatie-documenten-openapi.yml
+- openapi/vng-realisatie-klantinteracties-openapi.yml
+- openapi/vng-realisatie-notificaties-openapi.yml
+- openapi/vng-realisatie-referentielijsten-openapi.yml
+- openapi/vng-realisatie-woz-bevragen-openapi.yml
+- openapi/vng-realisatie-zaken-openapi.yml
+format: rfc9457
+envelope:
+  media_type: application/problem+json
+  schema: Fout
+coverage:
+  operations: 245
+  statuses_declared: 15
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad request
+  operations: 152
+  media_types:
+  - application/problem+json
+  - application/json
+  schema: ValidatieFout
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  operations: 216
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  operations: 216
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 404
+  title: Not Found
+  description: Not found
+  operations: 116
+  media_types:
+  - application/problem+json
+  - application/json
+  schema: Fout
+- status: 405
+  title: Method Not Allowed
+  description: Fout
+  operations: 6
+  media_types:
+  - application/json
+  schema: Fout
+- status: 406
+  title: Not Acceptable
+  description: Not acceptable
+  operations: 181
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 409
+  title: Conflict
+  description: Conflict
+  operations: 213
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 410
+  title: Gone
+  description: Gone
+  operations: 216
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 412
+  title: Precondition Failed
+  description: Precondition failed
+  operations: 11
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 415
+  title: Unsupported Media Type
+  description: Unsupported media type
+  operations: 216
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 429
+  title: Too Many Requests
+  description: Too many requests
+  operations: 216
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 500
+  title: Internal Server Error
+  description: Internal server error
+  operations: 216
+  media_types:
+  - application/problem+json
+  schema: Fout
+- status: 501
+  title: Not Implemented
+  description: null
+  operations: 41
+  media_types: []
+  schema: null
+- status: 503
+  title: Service Unavailable
+  description: null
+  operations: 41
+  media_types: []
+  schema: null
+- status: default
+  title: null
+  description: null
+  operations: 41
+  media_types: []
+  schema: null

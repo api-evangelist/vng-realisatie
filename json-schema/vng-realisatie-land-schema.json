@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-land-schema.json",
+  "title": "Land",
+  "description": "Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-klantinteracties-openapi.yml#/components/schemas/Land",
+  "type": "object",
+  "required": [
+    "einddatumLand",
+    "ingangsdatumLand",
+    "landcode",
+    "landnaam"
+  ],
+  "properties": {
+    "einddatumLand": {
+      "type": "string",
+      "title": "Einddatum land",
+      "description": "De datum waarop het land/gebied is opgeheven.",
+      "format": "date"
+    },
+    "ingangsdatumLand": {
+      "type": "string",
+      "title": "Ingangsdatum land",
+      "description": "De datum waarop het land/gebied is ontstaan.",
+      "format": "date"
+    },
+    "landcode": {
+      "type": "string",
+      "title": "Landcode",
+      "description": "De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.",
+      "minLength": 1
+    },
+    "landnaam": {
+      "type": "string",
+      "title": "Landnaam",
+      "description": "De naam van het land, zoals opgenomen in de Landentabel van de GBA.",
+      "minLength": 1
+    }
+  }
+}

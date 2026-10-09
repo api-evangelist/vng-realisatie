@@ -1,0 +1,54 @@
+name: VNG Realisatie ZGW Changelog
+generated: '2026-10-09'
+method: searched
+source:
+- https://vng-realisatie.github.io/gemma-zaken/standaard/
+- https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/release_notes.html
+scheme: semver per API, bundled into ZGW releases
+current_version: ZGW 1.7 (Zaken API 1.7.0); ZGW September 2026 release in concept (Zaken API 1.8.0)
+entries:
+- version: ZGW September 2026 (concept)
+  date: '2026-09-16'
+  breaking: false
+  highlights:
+  - Concept consultation opened Wednesday 16 September with feedback deadline 30 September
+  - Zaken 1.8.0, Catalogi 1.4.0, Documenten 1.8.0, Notificaties 1.1.0
+  - 'Zaken 1.8.0: PUT operation added to /rollen; obsolete business rule zrc-025 (expand scope) removed'
+  note: Date is the consultation opening ("woensdag 16 september") for the concept release, not a final release date.
+- version: ZGW 1.7
+  date: '2026-06-09'
+  breaking: false
+  highlights:
+  - 'Zaken API 1.7.0: warning when a zaakeigenschap does not meet its Catalogi specification; endpoint to reserve zaaknummer(s);
+    endpoint for notes on a zaak'
+  - Catalogi 1.3.3, Documenten 1.7.0, Autorisaties 1.1.0
+- version: ZGW 1.6
+  date: '2026-03-20'
+  breaking: false
+  highlights:
+  - Zaken 1.6.0, Catalogi 1.3.2, Documenten 1.6.0
+- version: Zaken API 1.5.1
+  date: '2023-09-26'
+  breaking: false
+  highlights:
+  - HEAD operation response body removed (#2328)
+  - Required fields made optional in PATCH (#2067)
+  - expand parameter added to _zoek (#2345)
+- version: Zaken API 1.2.1
+  date: '2023-08-30'
+  breaking: false
+  highlights:
+  - Zaken API versie 1.2.1 withdrawn (teruggetrokken)
+- version: Zaken API 1.5.0
+  date: '2023-08-22'
+  breaking: false
+  highlights:
+  - expand functionality to fetch related data in one call
+  - Zaaktype can be changed (#2223)
+- version: Zaken API 1.4.0
+  date: '2023-03-21'
+  breaking: false
+  highlights:
+  - Filter zaken to be archived (#2139)
+  - Filter on more than one zaaktype (#2072)
+note: Breaking flags are false because the release notes do not mark any change as breaking; not independently verified.

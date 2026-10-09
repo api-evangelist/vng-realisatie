@@ -1,0 +1,115 @@
+name: VNG Realisatie ZGW Scopes
+generated: '2026-10-09'
+method: searched
+source:
+- https://vng-realisatie.github.io/gemma-zaken/themas/achtergronddocumentatie/authenticatie-autorisatie
+- openapi/ (security requirements on the JWT-Claims scheme)
+docs: https://vng-realisatie.github.io/gemma-zaken/themas/achtergronddocumentatie/authenticatie-autorisatie
+mechanism: 'Not OAuth2. Scopes are named on the http-bearer JWT-Claims scheme in each spec and are granted per application
+  (client_id) in the Autorisaties API, per component, optionally restricted by zaaktype and maxVertrouwelijkheidaanduiding.
+  Docs: "De APIs kennen scopes - dit zijn sets van permissies die gegroepeerd worden, in een generieke vorm."'
+scopes:
+- name: audittrails.lezen
+  apis:
+  - besluiten
+  - documenten
+  - zaken
+- name: autorisaties.bijwerken
+  apis:
+  - autorisaties
+- name: autorisaties.lezen
+  apis:
+  - autorisaties
+- name: besluiten.aanmaken
+  apis:
+  - besluiten
+- name: besluiten.bijwerken
+  apis:
+  - besluiten
+- name: besluiten.lezen
+  apis:
+  - besluiten
+- name: besluiten.verwijderen
+  apis:
+  - besluiten
+- name: catalogi.geforceerd-schrijven
+  apis:
+  - catalogi
+- name: catalogi.geforceerd-verwijderen
+  apis:
+  - catalogi
+- name: catalogi.lezen
+  apis:
+  - catalogi
+- name: catalogi.schrijven
+  apis:
+  - catalogi
+- name: documenten.aanmaken
+  apis:
+  - documenten
+- name: documenten.bijwerken
+  apis:
+  - documenten
+- name: documenten.geforceerd-bijwerken
+  apis:
+  - documenten
+- name: documenten.geforceerd-unlock
+  apis:
+  - documenten
+- name: documenten.lezen
+  apis:
+  - documenten
+- name: documenten.lock
+  apis:
+  - documenten
+- name: documenten.verwijderen
+  apis:
+  - documenten
+- name: domains.create
+  apis:
+  - notificaties
+- name: domains.delete
+  apis:
+  - notificaties
+- name: domains.read
+  apis:
+  - notificaties
+- name: domains.update
+  apis:
+  - notificaties
+- name: events.publish
+  apis:
+  - notificaties
+- name: subscriptions.create
+  apis:
+  - notificaties
+- name: subscriptions.delete
+  apis:
+  - notificaties
+- name: subscriptions.read
+  apis:
+  - notificaties
+- name: subscriptions.update
+  apis:
+  - notificaties
+- name: zaken.aanmaken
+  apis:
+  - zaken
+- name: zaken.bijwerken
+  apis:
+  - zaken
+- name: zaken.geforceerd-bijwerken
+  apis:
+  - zaken
+- name: zaken.heropenen
+  apis:
+  - zaken
+- name: zaken.lezen
+  apis:
+  - zaken
+- name: zaken.statussen.toevoegen
+  apis:
+  - zaken
+- name: zaken.verwijderen
+  apis:
+  - zaken

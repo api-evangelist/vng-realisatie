@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-digitaal-adres-schema.json",
+  "title": "DigitaalAdres",
+  "description": "Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.\n\nDigitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-klantinteracties-openapi.yml#/components/schemas/DigitaalAdres",
+  "type": "object",
+  "required": [
+    "adres",
+    "id",
+    "indicatieActief",
+    "omschrijving",
+    "partijId",
+    "soortDigitaalAdres"
+  ],
+  "properties": {
+    "adres": {
+      "$ref": "#/$defs/Adresregel"
+    },
+    "id": {
+      "$ref": "#/$defs/Identificatiecode"
+    },
+    "indicatieActief": {
+      "$ref": "#/$defs/IndicatieJaNee"
+    },
+    "omschrijving": {
+      "$ref": "#/$defs/Omschrijvingkort"
+    },
+    "partijId": {
+      "$ref": "#/$defs/Identificatiecode"
+    },
+    "soortDigitaalAdres": {
+      "$ref": "#/$defs/SoortDigitaalAdres"
+    }
+  },
+  "$defs": {
+    "Adresregel": {
+      "type": "string",
+      "description": "Een generieke regel om adresgegevens in op te nemen.",
+      "maxLength": 80
+    },
+    "Identificatiecode": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "IndicatieJaNee": {
+      "type": "boolean",
+      "description": ""
+    },
+    "Omschrijvingkort": {
+      "type": "string",
+      "description": "",
+      "maxLength": 40
+    },
+    "SoortDigitaalAdres": {
+      "type": "object",
+      "description": "Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.",
+      "required": [
+        "code",
+        "indicatieActief",
+        "naam"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "title": "Code",
+          "description": "De code, behorende bij het soort digitaal adres.",
+          "minLength": 1
+        },
+        "indicatieActief": {
+          "$ref": "#/$defs/IndicatieJaNee"
+        },
+        "naam": {
+          "type": "string",
+          "title": "Naam",
+          "description": "De naam van het soort digitaal adres.",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

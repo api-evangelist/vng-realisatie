@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Klantinteracties API
+  version: 1.0.0
+extends: ../openapi/_original/vng-realisatie-klantinteracties-openapi.yml
+x-generated: '2026-10-09'
+x-method: generated
+x-source: openapi/vng-realisatie-klantinteracties-openapi.yml
+x-rationale: Adds provider metadata, the documentation link recorded in apis.yml, and an x-agent-safe marker on every GET
+  operation. Derived only from the saved contract and apis.yml; the original OpenAPI is not modified.
+actions:
+- target: $.info
+  description: Attach API Evangelist provider metadata without mutating the contract.
+  update:
+    x-provider: VNG Realisatie
+    x-provider-slug: vng-realisatie
+    x-apis-json-name: Klantinteracties API
+    x-provider-hosted-openapi: https://raw.githubusercontent.com/VNG-Realisatie/klantinteracties/main/docs/api_familie_klantinteracties/klantinteracties/openapi.yaml
+- target: $
+  description: Point to the provider documentation recorded in apis.yml.
+  update:
+    externalDocs:
+      description: Klantinteracties API documentation (VNG Realisatie)
+      url: https://vng-realisatie.github.io/klantinteracties/

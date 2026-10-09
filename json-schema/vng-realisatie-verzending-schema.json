@@ -1,0 +1,298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vng-realisatie/main/json-schema/vng-realisatie-verzending-schema.json",
+  "title": "Verzending",
+  "description": "Set gegevensgroepdata from validated nested data.\n\nUsage: include the mixin on the ModelSerializer that has gegevensgroepen.",
+  "x-generated": "2026-10-09",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/vng-realisatie-documenten-openapi.yml#/components/schemas/Verzending",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "readOnly": true,
+      "title": "url",
+      "description": "URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "betrokkene": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL-referentie naar de betrokkene waarvan het informatieobject is ontvangen of waaraan dit is verzonden.",
+      "title": "betrokkene",
+      "maxLength": 200
+    },
+    "informatieobject": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL-referentie naar het informatieobject dat is ontvangen of verzonden.",
+      "title": "informatieobject"
+    },
+    "aardRelatie": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/AardRelatieEnum"
+        }
+      ],
+      "description": "Omschrijving van de aard van de relatie van de BETROKKENE tot het INFORMATIEOBJECT.",
+      "title": "aard relatie"
+    },
+    "toelichting": {
+      "type": "string",
+      "description": "Verduidelijking van de afzender- of geadresseerde-relatie.",
+      "title": "toelichting",
+      "maxLength": 200
+    },
+    "ontvangstdatum": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "De datum waarop het INFORMATIEOBJECT ontvangen is. Verplicht te registreren voor INFORMATIEOBJECTen die van buiten de zaakbehandelende organisatie(s) ontvangen zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'afzender' heeft.",
+      "title": "ontvangstdatum"
+    },
+    "verzenddatum": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date",
+      "description": "De datum waarop het INFORMATIEOBJECT verzonden is, zoals deze op het INFORMATIEOBJECT vermeld is. Dit geldt voor zowel inkomende als uitgaande INFORMATIEOBJECTen. Eenzelfde informatieobject kan niet tegelijk inkomend en uitgaand zijn. Ontvangst en verzending is voorbehouden aan documenten die van of naar andere personen ontvangen of verzonden zijn waarbij die personen niet deel uit maken van de behandeling van de zaak waarin het document een rol speelt. Vervangt het gelijknamige attribuut uit Informatieobject. Verplicht gevuld wanneer aardRelatie de waarde 'geadresseerde' heeft.",
+      "title": "verzenddatum"
+    },
+    "contactPersoon": {
+      "type": "string",
+      "format": "uri",
+      "title": "Contactpersoon",
+      "description": "URL-referentie naar de persoon die als aanspreekpunt fungeert voor de BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.",
+      "maxLength": 1000
+    },
+    "contactpersoonnaam": {
+      "type": "string",
+      "description": "De opgemaakte naam van de persoon die als aanspreekpunt fungeert voorde BETROKKENE inzake het ontvangen of verzonden INFORMATIEOBJECT.",
+      "title": "contactpersoonnaam",
+      "maxLength": 40
+    },
+    "binnenlandsCorrespondentieadres": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/BinnenlandsCorrespondentieadresVerzending"
+        }
+      ],
+      "nullable": true,
+      "description": "Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.",
+      "title": "binnenlandsCorrespondentieadres"
+    },
+    "buitenlandsCorrespondentieadres": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/BuitenlandsCorrespondentieadresVerzending"
+        }
+      ],
+      "nullable": true,
+      "description": "De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.",
+      "title": "buitenlandsCorrespondentieadres"
+    },
+    "correspondentiePostadres": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/BuitenlandsCorrespondentiepostadresVerzending"
+        }
+      ],
+      "nullable": true,
+      "description": "De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.",
+      "title": "correspondentiePostadres"
+    },
+    "faxnummer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "faxnummer van de ontvanger of afzender.",
+      "title": "faxnummer",
+      "maxLength": 15
+    },
+    "emailadres": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "emailadres van de ontvanger of afzender.",
+      "title": "emailadres",
+      "maxLength": 100
+    },
+    "mijnOverheid": {
+      "type": "boolean",
+      "description": "is het informatieobject verzonden via mijnOverheid naar de ontvanger.",
+      "title": "mijn overheid"
+    },
+    "telefoonnummer": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "telefoonnummer van de ontvanger of afzender.",
+      "title": "telefoonnummer",
+      "maxLength": 15
+    }
+  },
+  "required": [
+    "aardRelatie",
+    "betrokkene",
+    "contactPersoon",
+    "informatieobject",
+    "url"
+  ],
+  "$defs": {
+    "AardRelatieEnum": {
+      "enum": [
+        "afzender",
+        "geadresseerde"
+      ],
+      "type": "string"
+    },
+    "BinnenlandsCorrespondentieadresVerzending": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.",
+      "properties": {
+        "huisletter": {
+          "type": "string",
+          "description": "Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.",
+          "title": "huisletter",
+          "maxLength": 1
+        },
+        "huisnummer": {
+          "type": "integer",
+          "maximum": 99999,
+          "minimum": 1,
+          "description": "Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nummering.",
+          "title": "huisnummer"
+        },
+        "huisnummerToevoeging": {
+          "type": "string",
+          "description": "Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.",
+          "title": "huisnummer toevoeging",
+          "maxLength": 4
+        },
+        "naamOpenbareRuimte": {
+          "type": "string",
+          "description": "Een door het bevoegde gemeentelijke orgaan aan een GEMEENTELIJKE  OPENBARE RUIMTE toegekende benaming.",
+          "title": "naam openbare ruimte",
+          "maxLength": 80
+        },
+        "postcode": {
+          "type": "string",
+          "description": "De door TNT Post vastgestelde code behorende bij een bepaalde combinatie van een naam van een woonplaats, naam van een openbare ruimte en een huisnummer.",
+          "title": "postcode",
+          "maxLength": 6
+        },
+        "woonplaatsnaam": {
+          "type": "string",
+          "description": "De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.",
+          "title": "woonplaatsnaam",
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "huisnummer",
+        "naamOpenbareRuimte",
+        "woonplaatsnaam"
+      ]
+    },
+    "BuitenlandsCorrespondentieadresVerzending": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.",
+      "properties": {
+        "adresBuitenland1": {
+          "type": "string",
+          "description": "Het eerste deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.",
+          "title": "adres buitenland 1",
+          "maxLength": 35
+        },
+        "adresBuitenland2": {
+          "type": "string",
+          "description": "Het tweede deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.",
+          "title": "adres buitenland 2",
+          "maxLength": 35
+        },
+        "adresBuitenland3": {
+          "type": "string",
+          "description": "Het derde deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.",
+          "title": "adres buitenland 3",
+          "maxLength": 35
+        },
+        "landPostadres": {
+          "type": "string",
+          "format": "uri",
+          "description": "Het LAND dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.",
+          "title": "land postadres",
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "adresBuitenland1",
+        "landPostadres"
+      ]
+    },
+    "BuitenlandsCorrespondentiepostadresVerzending": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.",
+      "properties": {
+        "postBusOfAntwoordnummer": {
+          "type": "integer",
+          "maximum": 9999,
+          "minimum": 1,
+          "title": "Postbus-of antwoordnummer",
+          "description": "De numerieke aanduiding zoals deze door de Nederlandse PTT is vastgesteld voor postbusadressen en antwoordnummeradressen."
+        },
+        "postadresPostcode": {
+          "type": "string",
+          "description": "De officiële Nederlandse PTT codering, bestaande uit een numerieke woonplaatscode en een alfabetische lettercode.",
+          "title": "postadres postcode",
+          "maxLength": 6
+        },
+        "postadresType": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/PostadresTypeEnum"
+            }
+          ],
+          "title": "Postadrestype",
+          "description": "Aanduiding van het soort postadres."
+        },
+        "woonplaatsnaam": {
+          "type": "string",
+          "description": "De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.",
+          "title": "woonplaatsnaam",
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "postBusOfAntwoordnummer",
+        "postadresPostcode",
+        "postadresType",
+        "woonplaatsnaam"
+      ]
+    },
+    "PostadresTypeEnum": {
+      "enum": [
+        "antwoordnummer",
+        "postbusnummer"
+      ],
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+name: VNG Realisatie Plans
+generated: '2026-10-09'
+method: none
+source:
+- https://vng-realisatie.github.io/gemma-zaken/standaard/
+- https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/
+audience: unclear
+pricing_basis: none
+published: false
+plan_count: 0
+plans: []
+delivery:
+  model: self-hosted
+  evidence: Each municipality or vendor implements the standard; specs are licensed EUPL 1.2 and VNG hosts reference implementations
+    for testing.
+  open_source_license: EUPL-1.2
+note: VNG Realisatie publishes open API standards (EUPL 1.2) and reference implementations, not a priced API product; no pricing
+  or plans page exists.

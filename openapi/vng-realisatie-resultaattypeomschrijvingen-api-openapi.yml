@@ -1,0 +1,153 @@
+openapi: 3.2.0
+info:
+  title: Vng Realisatie Resultaattypeomschrijvingen API
+  version: 0.0.1
+  contact:
+    url: https://github.com/VNG-Realisatie/referentielijsten-api
+    email: standaarden.ondersteuning@vng.nl
+  license:
+    name: EUPL 1.2
+    url: https://opensource.org/licenses/EUPL-1.2
+  description: 'Operations tagged resultaattypeomschrijvingen across 2 of this provider''s published API definitions: vng-realisatie-referentielijsten-openapi.yml, vng-realisatie-referentielijsten-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: http://referentielijsten-api.internal/api/v1
+- url: https://referentielijsten-api.internal/api/v1
+tags:
+- name: resultaattypeomschrijvingen
+paths:
+  /resultaattypeomschrijvingen:
+    get:
+      tags:
+      - resultaattypeomschrijvingen
+      summary: Raadpleeg de generieke resultaattypeomschrijvingen
+      operationId: resultaattypeomschrijvinggeneriek_list
+      responses:
+        200:
+          description: ResultaattypeOmschrijvingGeneriek
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultaattypeOmschrijvingGeneriek'
+        405:
+          description: Fout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+    servers:
+    - url: http://referentielijsten-api.internal/api/v1
+    - url: https://referentielijsten-api.internal/api/v1
+  /resultaattypeomschrijvingen/{uuid}:
+    get:
+      tags:
+      - resultaattypeomschrijvingen
+      summary: Raadpleeg de generieke resultaattypeomschrijvingen
+      operationId: resultaattypeomschrijvinggeneriek_retrieve
+      parameters:
+      - name: uuid
+        in: path
+        description: uuid van de resultaattypeomschrijving
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        200:
+          description: ResultaattypeOmschrijvingGeneriek
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResultaattypeOmschrijvingGeneriek'
+        400:
+          description: FieldValidationError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FieldValidationError'
+        404:
+          description: Fout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+        405:
+          description: Fout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fout'
+    servers:
+    - url: http://referentielijsten-api.internal/api/v1
+    - url: https://referentielijsten-api.internal/api/v1
+components:
+  schemas:
+    Fout:
+      title: Fout represents an error
+      required:
+      - code
+      - detail
+      - instance
+      - status
+      - title
+      type: object
+      properties:
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+        status:
+          type: integer
+          description: De HTTP status code
+          format: int64
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+      description: Formaat van HTTP 4xx en 5xx fouten.
+    FieldValidationError:
+      title: FieldValidationError represents an error
+      required:
+      - code
+      - name
+      - reason
+      type: object
+      properties:
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+      description: Formaat van validatiefouten.
+    ResultaattypeOmschrijvingGeneriek:
+      required:
+      - definitie
+      - omschrijving
+      - url
+      type: object
+      properties:
+        definitie:
+          type: string
+          description: Nauwkeurige beschrijving van het generieke type resultaat.
+        omschrijving:
+          type: string
+          description: Algemeen gehanteerde omschrijvingen van de aard van het resultaat
+        opmerking:
+          type: string
+          description: Zinvolle toelichting bij de waarde van de generieke omschrijving
+        url:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+x-refined-from:
+- vng-realisatie-referentielijsten-openapi.yml
+- vng-realisatie-referentielijsten-openapi.yml

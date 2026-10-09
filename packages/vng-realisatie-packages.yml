@@ -1,0 +1,19 @@
+name: VNG Realisatie Packages
+generated: '2026-10-09'
+method: none
+source:
+- https://pypi.org/pypi/gemma-zds-client/json
+- https://pypi.org/pypi/vng-api-common/json
+- https://pypi.org/pypi/zgw-consumers/json
+packages: []
+note: 'no first-party package: every candidate a model listed was unowned (harvest-packages.py --audit)'
+rejected:
+- name: gemma-zds-client
+  registry: pypi
+  reason: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: vng-api-common
+  registry: pypi
+  reason: 'registry metadata names neither the provider''s domain nor its GitHub org: official downgraded (harvest-packages.py --audit)'
+- name: zgw-consumers
+  registry: pypi
+  reason: 'official: false as written'

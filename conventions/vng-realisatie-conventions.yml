@@ -1,0 +1,79 @@
+name: VNG Realisatie ZGW Conventions
+generated: '2026-10-09'
+method: searched
+source:
+- https://vng-realisatie.github.io/gemma-zaken/themas/achtergronddocumentatie/authenticatie-autorisatie
+- https://vng-realisatie.github.io/gemma-zaken/ontwikkelaars/handleidingen-en-tutorials/api-guides
+- https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/zrc/1.8.x/1.8.0/specification.html
+- openapi/vng-realisatie-zaken-openapi.yml
+authentication:
+  style: 'Authorization: Bearer <JWT> (HMAC shared secret, client_id claim); authorisations held in the Autorisaties API'
+  ref: authentication/vng-realisatie-authentication.yml
+idempotency:
+  coverage: none
+  note: No idempotency key in the contracts or docs. ETag / If-None-Match are declared for conditional GETs only.
+pagination:
+  style: page-number
+  params:
+  - page
+  note: page query parameter on list operations (Zaken spec).
+expansion:
+  param: expand
+  note: expand may be nested to arbitrary depth (zrc-026); added to Zaken API 1.5.0 using JSON/HAL.
+  docs: https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/zrc/1.8.x/1.8.0/specification.html
+request_tracing:
+  headers:
+  - X-NLX-Logrecord-ID
+  - X-Audit-Toelichting
+  note: NLX log record id and audit explanation request headers; audittrails readable with audittrails.lezen.
+geo:
+  headers:
+  - Accept-Crs
+  - Content-Crs
+  note: 'Required on zaak geo operations, e.g. Accept-Crs: EPSG:4326.'
+versioning:
+  header: API-version
+  url: /api/v1
+  ref: lifecycle/vng-realisatie-lifecycle.yml
+errors:
+  media_type: application/problem+json
+  envelope:
+  - type
+  - code
+  - title
+  - status
+  - detail
+  - instance
+  validation_extra:
+  - invalidParams
+  statuses:
+  - 400
+  - 401
+  - 403
+  - 404
+  - 406
+  - 409
+  - 410
+  - 412
+  - 415
+  - 429
+  - 500
+rate_limit_signaling:
+  status: 429
+  note: 429 declared in contracts; no limits or rate-limit headers documented.
+  ref: rate-limits/vng-realisatie-rate-limits.yml
+runtime_behaviour: Each component MUST implement both its openapi.yaml and the run-time behaviour rules (e.g. zrc-001..zrc-026)
+  in the specification page.
+reversibility:
+  status: none-documented
+  surfaces:
+  - surface: zaak delete (zrc-023)
+    reversal: null
+    window: null
+    evidence: '"Bij het verwijderen van een Zaak MOETEN de zaak en gerelateerde objecten daadwerkelijk uit de opslag verwijderd
+      worden. Zogenaamde “soft-deletes” zijn NIET TOEGESTAAN."'
+    docs: https://vng-realisatie.github.io/gemma-zaken/standaard/zaken/zrc/1.8.x/1.8.0/specification.html
+  note: Deletes are hard by rule. The contracts define a zaken.heropenen scope (reopen a closed zaak), but no reversal window
+    is stated anywhere; documents use lock/unlock, which is concurrency control rather than reversal.
+dry_run:
+  supported: false
