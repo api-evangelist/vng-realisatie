@@ -1,11 +1,13 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Events API
-  version: 2.0.0-alpha13
+  title: Notification Events API
+  description: 'The API consists of three parts:
+
+    1.'
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged events across 2 of this provider''s published API definitions: vng-realisatie-notificaties-openapi.yml, vng-realisatie-notificaties-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: 2.0.0-alpha13
 servers:
 - url: /api/v1
 security:
@@ -54,8 +56,6 @@ paths:
       security:
       - JWT-Claims:
         - events.publish
-    servers:
-    - url: /api/v1
 components:
   schemas:
     Event:
@@ -175,6 +175,3 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- vng-realisatie-notificaties-openapi.yml
-- vng-realisatie-notificaties-openapi.yml

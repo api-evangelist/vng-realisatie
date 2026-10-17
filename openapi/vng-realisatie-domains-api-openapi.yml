@@ -1,11 +1,13 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Domains API
-  version: 2.0.0-alpha13
+  title: Notification Domains API
+  description: 'The API consists of three parts:
+
+    1.'
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged domains across 2 of this provider''s published API definitions: vng-realisatie-notificaties-openapi.yml, vng-realisatie-notificaties-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: 2.0.0-alpha13
 servers:
 - url: /api/v1
 security:
@@ -121,8 +123,6 @@ paths:
         - domains.create
       summary: Domain create
       x-summary-source: derived
-    servers:
-    - url: /api/v1
   /domains/{uuid}:
     parameters:
     - name: uuid
@@ -314,143 +314,8 @@ paths:
         - domains.delete
       summary: Domain delete
       x-summary-source: derived
-    servers:
-    - url: /api/v1
 components:
-  responses:
-    '404':
-      description: Not found
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '415':
-      description: Unsupported media type
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '500':
-      description: Internal server error
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '410':
-      description: Gone
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '403':
-      description: Forbidden
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '401':
-      description: Unauthorized
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '429':
-      description: Too many requests
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '406':
-      description: Not acceptable
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '400':
-      description: Bad request
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/ValidatieFout'
-    '409':
-      description: Conflict
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
   schemas:
-    FieldValidationError:
-      required:
-      - name
-      - code
-      - reason
-      type: object
-      properties:
-        name:
-          title: Name
-          description: Naam van het veld met ongeldige gegevens
-          type: string
-          minLength: 1
-        code:
-          title: Code
-          description: Systeemcode die het type fout aangeeft
-          type: string
-          minLength: 1
-        reason:
-          title: Reason
-          description: Uitleg wat er precies fout is met de gegevens
-          type: string
-          minLength: 1
     Fout:
       required:
       - code
@@ -487,45 +352,6 @@ components:
           title: Instance
           description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
           type: string
-          minLength: 1
-    Domain:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          title: Naam
-          description: Name of the domain.
-          type: string
-          maxLength: 255
-          minLength: 1
-        documentationLink:
-          title: Documentatie link
-          description: Link to human readable information about the domain and its notifications.
-          type: string
-          format: uri
-          maxLength: 200
-        filterAttributes:
-          description: Filter attributes offered by the domain.
-          type: array
-          items:
-            title: Filter attributes
-            type: string
-            maxLength: 255
-            minLength: 1
-        uuid:
-          title: Uuid
-          description: UUID of the domain.
-          type: string
-          format: uuid
-          readOnly: true
-        url:
-          title: Url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          type: string
-          format: uri
-          readOnly: true
-          maxLength: 1000
           minLength: 1
     ValidatieFout:
       required:
@@ -569,6 +395,178 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/FieldValidationError'
+    Domain:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          title: Naam
+          description: Name of the domain.
+          type: string
+          maxLength: 255
+          minLength: 1
+        documentationLink:
+          title: Documentatie link
+          description: Link to human readable information about the domain and its notifications.
+          type: string
+          format: uri
+          maxLength: 200
+        filterAttributes:
+          description: Filter attributes offered by the domain.
+          type: array
+          items:
+            title: Filter attributes
+            type: string
+            maxLength: 255
+            minLength: 1
+        uuid:
+          title: Uuid
+          description: UUID of the domain.
+          type: string
+          format: uuid
+          readOnly: true
+        url:
+          title: Url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          type: string
+          format: uri
+          readOnly: true
+          maxLength: 1000
+          minLength: 1
+    FieldValidationError:
+      required:
+      - name
+      - code
+      - reason
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Naam van het veld met ongeldige gegevens
+          type: string
+          minLength: 1
+        code:
+          title: Code
+          description: Systeemcode die het type fout aangeeft
+          type: string
+          minLength: 1
+        reason:
+          title: Reason
+          description: Uitleg wat er precies fout is met de gegevens
+          type: string
+          minLength: 1
+  responses:
+    '500':
+      description: Internal server error
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '410':
+      description: Gone
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '406':
+      description: Not acceptable
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '401':
+      description: Unauthorized
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '415':
+      description: Unsupported media type
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '404':
+      description: Not found
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '400':
+      description: Bad request
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ValidatieFout'
+    '403':
+      description: Forbidden
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '409':
+      description: Conflict
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '429':
+      description: Too many requests
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
   requestBodies:
     Domain:
       content:
@@ -581,6 +579,3 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- vng-realisatie-notificaties-openapi.yml
-- vng-realisatie-notificaties-openapi.yml

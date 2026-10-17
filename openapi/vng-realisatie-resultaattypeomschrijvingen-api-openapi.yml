@@ -1,14 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Resultaattypeomschrijvingen API
-  version: 0.0.1
+  title: Referentielijsten & Selectielijst…
+  description: '"Een API om referentielijstwaarden en de gemeentelijke selectielijst
+
+    tebenaderen.'
   contact:
     url: https://github.com/VNG-Realisatie/referentielijsten-api
     email: standaarden.ondersteuning@vng.nl
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged resultaattypeomschrijvingen across 2 of this provider''s published API definitions: vng-realisatie-referentielijsten-openapi.yml, vng-realisatie-referentielijsten-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: 0.0.1
 servers:
 - url: http://referentielijsten-api.internal/api/v1
 - url: https://referentielijsten-api.internal/api/v1
@@ -34,9 +36,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fout'
-    servers:
-    - url: http://referentielijsten-api.internal/api/v1
-    - url: https://referentielijsten-api.internal/api/v1
   /resultaattypeomschrijvingen/{uuid}:
     get:
       tags:
@@ -76,11 +75,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fout'
-    servers:
-    - url: http://referentielijsten-api.internal/api/v1
-    - url: https://referentielijsten-api.internal/api/v1
 components:
   schemas:
+    FieldValidationError:
+      title: FieldValidationError represents an error
+      required:
+      - code
+      - name
+      - reason
+      type: object
+      properties:
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+      description: Formaat van validatiefouten.
     Fout:
       title: Fout represents an error
       required:
@@ -111,24 +125,6 @@ components:
           type: string
           description: URI referentie naar het type fout, bedoeld voor developers
       description: Formaat van HTTP 4xx en 5xx fouten.
-    FieldValidationError:
-      title: FieldValidationError represents an error
-      required:
-      - code
-      - name
-      - reason
-      type: object
-      properties:
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-      description: Formaat van validatiefouten.
     ResultaattypeOmschrijvingGeneriek:
       required:
       - definitie
@@ -148,6 +144,3 @@ components:
         url:
           type: string
           description: Naam van het veld met ongeldige gegevens
-x-refined-from:
-- vng-realisatie-referentielijsten-openapi.yml
-- vng-realisatie-referentielijsten-openapi.yml

@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Resultaattypen API
+  title: Catalogi Resultaattypen API
   version: 1.3.1
+  description: Een API om een zaaktypecatalogus (ZTC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged resultaattypen across 2 of this provider''s published API definitions: vng-realisatie-catalogi-openapi.yml, vng-realisatie-catalogi-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://catalogi-api.vng.cloud/api/v1
   description: Productie Omgeving
@@ -308,9 +308,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /resultaattypen/{uuid}:
     get:
       operationId: resultaattype_retrieve
@@ -927,31 +924,114 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResultaatType'
           description: OK
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
 components:
   schemas:
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
+    BrondatumArchiefprocedure:
+      type:
+      - object
+      - 'null'
+      description: Specificatie voor het bepalen van de brondatum voor de start van de Archiefactietermijn (=brondatum) van het zaakdossier.
       properties:
-        name:
+        afleidingswijze:
+          allOf:
+          - $ref: '#/components/schemas/AfleidingswijzeEnum'
+          title: Afleidingswijze brondatum
+          description: "Wijze van bepalen van de brondatum.\n\nUitleg bij mogelijke waarden:\n\n* `afgehandeld` - (Afgehandeld) De termijn start op de datum waarop de zaak is afgehandeld (ZAAK.Einddatum in het RGBZ).\n* `ander_datumkenmerk` - (Ander datumkenmerk) De termijn start op de datum die is vastgelegd in een ander datumveld dan de datumvelden waarop de overige waarden (van deze attribuutsoort) betrekking hebben. `Objecttype`, `Registratie` en `Datumkenmerk` zijn niet leeg.\n* `eigenschap` - (Eigenschap) De termijn start op de datum die vermeld is in een zaaktype-specifieke eigenschap (zijnde een `datumveld`). `ResultaatType.ZaakType` heeft een `Eigenschap`; `Objecttype`, en `Datumkenmerk` zijn niet leeg.\n* `gerelateerde_zaak` - (Gerelateerde zaak) De termijn start op de datum waarop de gerelateerde zaak is afgehandeld (`ZAAK.Einddatum` of `ZAAK.Gerelateerde_zaak.Einddatum` in het RGBZ). `ResultaatType.ZaakType` heeft gerelateerd `ZaakType`\n* `hoofdzaak` - (Hoofdzaak) De termijn start op de datum waarop de gerelateerde zaak is afgehandeld, waarvan de zaak een deelzaak is (`ZAAK.Einddatum` van de hoofdzaak in het RGBZ). ResultaatType.ZaakType is deelzaaktype van ZaakType.\n* `ingangsdatum_besluit` - (Ingangsdatum besluit) De termijn start op de datum waarop het besluit van kracht wordt (`BESLUIT.Ingangsdatum` in het RGBZ).\tResultaatType.ZaakType heeft relevant BesluitType\n* `termijn` - (Termijn) De termijn start een vast aantal jaren na de datum waarop de zaak is afgehandeld (`ZAAK.Einddatum` in het RGBZ).\n* `vervaldatum_besluit` - (Vervaldatum besluit) De termijn start op de dag na de datum waarop het besluit vervalt (`BESLUIT.Vervaldatum` in het RGBZ). ResultaatType.ZaakType heeft relevant BesluitType\n* `zaakobject` - (Zaakobject) De termijn start op de einddatum geldigheid van het zaakobject waarop de zaak betrekking heeft (bijvoorbeeld de overlijdendatum van een Persoon). M.b.v. de attribuutsoort `Objecttype` wordt vastgelegd om welke zaakobjecttype het gaat; m.b.v. de attribuutsoort `Datumkenmerk` wordt vastgelegd welke datum-attribuutsoort van het zaakobjecttype het betreft."
+        datumkenmerk:
           type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
+          description: Naam van de attribuutsoort van het procesobject dat bepalend is voor het einde van de procestermijn.
+          title: datumkenmerk
+          maxLength: 80
+        einddatumBekend:
+          type: boolean
+          description: Indicatie dat de einddatum van het procesobject gedurende de uitvoering van de zaak bekend moet worden. Indien deze nog niet bekend is en deze waarde staat op `true`, dan kan de zaak (nog) niet afgesloten worden.
+          title: einddatum bekend
+        objecttype:
+          description: 'Het soort object in de registratie dat het procesobject representeert.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `adres` - Adres
+
+            * `besluit` - Besluit
+
+            * `buurt` - Buurt
+
+            * `enkelvoudig_document` - Enkelvoudig document
+
+            * `gemeente` - Gemeente
+
+            * `gemeentelijke_openbare_ruimte` - Gemeentelijke openbare ruimte
+
+            * `huishouden` - Huishouden
+
+            * `inrichtingselement` - Inrichtingselement
+
+            * `kadastrale_onroerende_zaak` - Kadastrale onroerende zaak
+
+            * `kunstwerkdeel` - Kunstwerkdeel
+
+            * `maatschappelijke_activiteit` - Maatschappelijke activiteit
+
+            * `medewerker` - Medewerker
+
+            * `natuurlijk_persoon` - Natuurlijk persoon
+
+            * `niet_natuurlijk_persoon` - Niet-natuurlijk persoon
+
+            * `openbare_ruimte` - Openbare ruimte
+
+            * `organisatorische_eenheid` - Organisatorische eenheid
+
+            * `pand` - Pand
+
+            * `spoorbaandeel` - Spoorbaandeel
+
+            * `status` - Status
+
+            * `terreindeel` - Terreindeel
+
+            * `terrein_gebouwd_object` - Terrein gebouwd object
+
+            * `vestiging` - Vestiging
+
+            * `waterdeel` - Waterdeel
+
+            * `wegdeel` - Wegdeel
+
+            * `wijk` - Wijk
+
+            * `woonplaats` - Woonplaats
+
+            * `woz_deelobject` - Woz deel object
+
+            * `woz_object` - Woz object
+
+            * `woz_waarde` - Woz waarde
+
+            * `zakelijk_recht` - Zakelijk recht
+
+            * `overige` - Overige'
+          title: objecttype
+          oneOf:
+          - $ref: '#/components/schemas/ObjecttypeEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        registratie:
           type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
+          description: De naam van de registratie waarvan het procesobject deel uit maakt.
+          title: registratie
+          maxLength: 80
+        procestermijn:
+          type:
+          - string
+          - 'null'
+          title: Brondatum procestermijn
+          description: De periode dat het zaakdossier na afronding van de zaak actief gebruikt en/of geraadpleegd wordt ter ondersteuning van de taakuitoefening van de organisatie. Enkel relevant indien de afleidingswijze 'termijn' is.
+          format: duration
       required:
-      - code
-      - name
-      - reason
+      - afleidingswijze
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -984,500 +1064,6 @@ components:
       - code
       - detail
       - instance
-      - status
-      - title
-    ObjecttypeEnum:
-      enum:
-      - adres
-      - besluit
-      - buurt
-      - enkelvoudig_document
-      - gemeente
-      - gemeentelijke_openbare_ruimte
-      - huishouden
-      - inrichtingselement
-      - kadastrale_onroerende_zaak
-      - kunstwerkdeel
-      - maatschappelijke_activiteit
-      - medewerker
-      - natuurlijk_persoon
-      - niet_natuurlijk_persoon
-      - openbare_ruimte
-      - organisatorische_eenheid
-      - pand
-      - spoorbaandeel
-      - status
-      - terreindeel
-      - terrein_gebouwd_object
-      - vestiging
-      - waterdeel
-      - wegdeel
-      - wijk
-      - woonplaats
-      - woz_deelobject
-      - woz_object
-      - woz_waarde
-      - zakelijk_recht
-      - overige
-      type: string
-    ArchiefnominatieEnum:
-      enum:
-      - blijvend_bewaren
-      - vernietigen
-      type: string
-    ResultaatTypeCreate:
-      type: object
-      description: 'Set gegevensgroepdata from validated nested data.
-
-
-        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
-      properties:
-        url:
-          type: string
-          format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
-        zaaktype:
-          type: string
-          format: uri
-          title: is van
-          description: URL-referentie naar het ZAAKTYPE van ZAAKen waarin resultaten van dit RESULTAATTYPE bereikt kunnen worden.
-        zaaktypeIdentificatie:
-          type: string
-          readOnly: true
-          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
-          title: is relevant voor
-        omschrijving:
-          type: string
-          description: Omschrijving van de aard van resultaten van het RESULTAATTYPE.
-          title: omschrijving
-          maxLength: 30
-        resultaattypeomschrijving:
-          type: string
-          format: uri
-          description: Algemeen gehanteerde omschrijving van de aard van resultaten van het RESULTAATTYPE. Dit moet een URL-referentie zijn naar de referenlijst van generieke resultaattypeomschrijvingen. Im ImZTC heet dit 'omschrijving generiek'
-          title: resultaattypeomschrijving
-          maxLength: 1000
-        omschrijvingGeneriek:
-          type: string
-          readOnly: true
-          description: Waarde van de omschrijving-generiek referentie (attribuut `omschrijving`)
-          title: omschrijving generiek
-        selectielijstklasse:
-          type: string
-          format: uri
-          description: URL-referentie naar de, voor het archiefregime bij het RESULTAATTYPE relevante, categorie in de Selectielijst Archiefbescheiden (RESULTAAT in de Selectielijst API) van de voor het ZAAKTYPE verantwoordelijke overheidsorganisatie.
-          title: selectielijstklasse
-          maxLength: 1000
-        toelichting:
-          type: string
-          description: Een toelichting op dit RESULTAATTYPE en het belang hiervan voor ZAAKen waarin een resultaat van dit RESULTAATTYPE wordt geselecteerd.
-          title: toelichting
-        archiefnominatie:
-          description: 'Aanduiding die aangeeft of ZAAKen met een resultaat van dit RESULTAATTYPE blijvend moeten worden bewaard of (op termijn) moeten worden vernietigd. Indien niet expliciet opgegeven wordt dit gevuld vanuit de selectielijst.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `blijvend_bewaren` - Het zaakdossier moet bewaard blijven en op de Archiefactiedatum overgedragen worden naar een archiefbewaarplaats.
-
-            * `vernietigen` - Het zaakdossier moet op of na de Archiefactiedatum vernietigd worden.'
-          title: archiefnominatie
-          oneOf:
-          - $ref: '#/components/schemas/ArchiefnominatieEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-        archiefactietermijn:
-          type:
-          - string
-          - 'null'
-          description: De termijn, na het vervallen van het bedrjfsvoeringsbelang, waarna het zaakdossier (de ZAAK met alle bijbehorende INFORMATIEOBJECTen) van een ZAAK met een resultaat van dit RESULTAATTYPE vernietigd of overgebracht (naar een archiefbewaarplaats) moet worden. Voor te vernietigen dossiers betreft het de in die Selectielijst genoemde bewaartermjn. Voor blijvend te bewaren zaakdossiers betreft het de termijn vanaf afronding van de zaak tot overbrenging (de procestermijn is dan nihil).
-          title: archiefactietermijn
-          format: duration
-        brondatumArchiefprocedure:
-          allOf:
-          - $ref: '#/components/schemas/BrondatumArchiefprocedure'
-          description: Specificatie voor het bepalen van de brondatum voor de start van de Archiefactietermijn (=brondatum) van het zaakdossier.
-          title: brondatumArchiefprocedure
-        procesobjectaard:
-          type:
-          - string
-          - 'null'
-          description: Omschrijving van het object, subject of gebeurtenis waarop, vanuit archiveringsoptiek, het resultaattype bij zaken van dit type betrekking heeft.
-          title: procesobjectaard
-          maxLength: 200
-        catalogus:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL-referentie naar de CATALOGUS waartoe dit RESULTAATTYPE behoort.
-          title: catalogus
-        beginGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de RESULTAATTYPE is ontstaan.
-          title: datum begin geldigheid
-        eindeGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de RESULTAATTYPE is opgeheven.
-          title: datum einde geldigheid
-        beginObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de eerst versie van het object ontstaan is.
-          title: datum begin object
-        eindeObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum van de aller laatste versie van het object.
-          title: datum einde object
-        indicatieSpecifiek:
-          type:
-          - boolean
-          - 'null'
-          description: Aanduiding of het, vanuit archiveringsoptiek, een resultaattype betreft dat specifiek is voor een bepaalde procesobjectaard.
-          title: indicatie specifiek
-        procestermijn:
-          type:
-          - string
-          - 'null'
-          description: De periode dat het zaakdossier na afronding van de zaak actief gebruikt en/of geraadpleegd wordt ter ondersteuning van de taakuitoefening van de organisatie.
-          title: procestermijn
-          format: duration
-        besluittypen:
-          type: array
-          items:
-            type: string
-            title: ''
-          title: besluittypen
-        besluittypeOmschrijving:
-          type: array
-          items:
-            type: string
-            title: ''
-          readOnly: true
-          description: Omschrijving van de aard van BESLUITen van het BESLUITTYPE.
-          title: is resultaat van
-          uniqueItems: true
-        informatieobjecttypen:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-            format: uri
-            title: ''
-          description: De INFORMATIEOBJECTTYPEn die verplicht aanwezig moeten zijn in het zaakdossier van ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
-          title: informatieobjecttypen
-          uniqueItems: true
-        informatieobjecttypeOmschrijving:
-          type: array
-          items:
-            type: string
-            title: ''
-          readOnly: true
-          description: Omschrijving van de aard van informatieobjecten van dit INFORMATIEOBJECTTYPE.
-          title: informatieobjecttypen
-          uniqueItems: true
-        zaakobjecttypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: De ZAAKOBJECTTYPEn die verplicht gerelateerd moeten zijn aan ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
-          title: Zaakobjecttypen
-          uniqueItems: true
-      required:
-      - besluittypeOmschrijving
-      - besluittypen
-      - informatieobjecttypeOmschrijving
-      - omschrijving
-      - omschrijvingGeneriek
-      - resultaattypeomschrijving
-      - selectielijstklasse
-      - url
-      - zaakobjecttypen
-      - zaaktype
-      - zaaktypeIdentificatie
-    PaginatedResultaatTypeList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResultaatType'
-    ResultaatTypeUpdate:
-      type: object
-      description: 'Set gegevensgroepdata from validated nested data.
-
-
-        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
-      properties:
-        url:
-          type: string
-          format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
-        zaaktype:
-          type: string
-          format: uri
-          title: is van
-          description: URL-referentie naar het ZAAKTYPE van ZAAKen waarin resultaten van dit RESULTAATTYPE bereikt kunnen worden.
-        zaaktypeIdentificatie:
-          type: string
-          readOnly: true
-          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
-          title: is relevant voor
-        omschrijving:
-          type: string
-          description: Omschrijving van de aard van resultaten van het RESULTAATTYPE.
-          title: omschrijving
-          maxLength: 30
-        resultaattypeomschrijving:
-          type: string
-          format: uri
-          description: Algemeen gehanteerde omschrijving van de aard van resultaten van het RESULTAATTYPE. Dit moet een URL-referentie zijn naar de referenlijst van generieke resultaattypeomschrijvingen. Im ImZTC heet dit 'omschrijving generiek'
-          title: resultaattypeomschrijving
-          maxLength: 1000
-        omschrijvingGeneriek:
-          type: string
-          readOnly: true
-          description: Waarde van de omschrijving-generiek referentie (attribuut `omschrijving`)
-          title: omschrijving generiek
-        selectielijstklasse:
-          type: string
-          format: uri
-          description: URL-referentie naar de, voor het archiefregime bij het RESULTAATTYPE relevante, categorie in de Selectielijst Archiefbescheiden (RESULTAAT in de Selectielijst API) van de voor het ZAAKTYPE verantwoordelijke overheidsorganisatie.
-          title: selectielijstklasse
-          maxLength: 1000
-        toelichting:
-          type: string
-          description: Een toelichting op dit RESULTAATTYPE en het belang hiervan voor ZAAKen waarin een resultaat van dit RESULTAATTYPE wordt geselecteerd.
-          title: toelichting
-        archiefnominatie:
-          description: 'Aanduiding die aangeeft of ZAAKen met een resultaat van dit RESULTAATTYPE blijvend moeten worden bewaard of (op termijn) moeten worden vernietigd. Indien niet expliciet opgegeven wordt dit gevuld vanuit de selectielijst.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `blijvend_bewaren` - Het zaakdossier moet bewaard blijven en op de Archiefactiedatum overgedragen worden naar een archiefbewaarplaats.
-
-            * `vernietigen` - Het zaakdossier moet op of na de Archiefactiedatum vernietigd worden.'
-          title: archiefnominatie
-          oneOf:
-          - $ref: '#/components/schemas/ArchiefnominatieEnum'
-          - $ref: '#/components/schemas/BlankEnum'
-        archiefactietermijn:
-          type:
-          - string
-          - 'null'
-          description: De termijn, na het vervallen van het bedrjfsvoeringsbelang, waarna het zaakdossier (de ZAAK met alle bijbehorende INFORMATIEOBJECTen) van een ZAAK met een resultaat van dit RESULTAATTYPE vernietigd of overgebracht (naar een archiefbewaarplaats) moet worden. Voor te vernietigen dossiers betreft het de in die Selectielijst genoemde bewaartermjn. Voor blijvend te bewaren zaakdossiers betreft het de termijn vanaf afronding van de zaak tot overbrenging (de procestermijn is dan nihil).
-          title: archiefactietermijn
-          format: duration
-        brondatumArchiefprocedure:
-          allOf:
-          - $ref: '#/components/schemas/BrondatumArchiefprocedure'
-          description: Specificatie voor het bepalen van de brondatum voor de start van de Archiefactietermijn (=brondatum) van het zaakdossier.
-          title: brondatumArchiefprocedure
-        procesobjectaard:
-          type:
-          - string
-          - 'null'
-          description: Omschrijving van het object, subject of gebeurtenis waarop, vanuit archiveringsoptiek, het resultaattype bij zaken van dit type betrekking heeft.
-          title: procesobjectaard
-          maxLength: 200
-        catalogus:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL-referentie naar de CATALOGUS waartoe dit RESULTAATTYPE behoort.
-          title: catalogus
-        beginGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de RESULTAATTYPE is ontstaan.
-          title: datum begin geldigheid
-        eindeGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de RESULTAATTYPE is opgeheven.
-          title: datum einde geldigheid
-        beginObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de eerst versie van het object ontstaan is.
-          title: datum begin object
-        eindeObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum van de aller laatste versie van het object.
-          title: datum einde object
-        indicatieSpecifiek:
-          type:
-          - boolean
-          - 'null'
-          description: Aanduiding of het, vanuit archiveringsoptiek, een resultaattype betreft dat specifiek is voor een bepaalde procesobjectaard.
-          title: indicatie specifiek
-        procestermijn:
-          type:
-          - string
-          - 'null'
-          description: De periode dat het zaakdossier na afronding van de zaak actief gebruikt en/of geraadpleegd wordt ter ondersteuning van de taakuitoefening van de organisatie.
-          title: procestermijn
-          format: duration
-        besluittypen:
-          type: array
-          items:
-            type: string
-            title: ''
-          title: besluittypen
-        besluittypeOmschrijving:
-          type: array
-          items:
-            type: string
-            title: ''
-          readOnly: true
-          description: Omschrijving van de aard van BESLUITen van het BESLUITTYPE.
-          title: is resultaat van
-          uniqueItems: true
-        informatieobjecttypen:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-            format: uri
-            title: ''
-          description: De INFORMATIEOBJECTTYPEn die verplicht aanwezig moeten zijn in het zaakdossier van ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
-          title: informatieobjecttypen
-          uniqueItems: true
-        informatieobjecttypeOmschrijving:
-          type: array
-          items:
-            type: string
-            title: ''
-          readOnly: true
-          description: Omschrijving van de aard van informatieobjecten van dit INFORMATIEOBJECTTYPE.
-          title: informatieobjecttypen
-          uniqueItems: true
-        zaakobjecttypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: De ZAAKOBJECTTYPEn die verplicht gerelateerd moeten zijn aan ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
-          title: Zaakobjecttypen
-          uniqueItems: true
-      required:
-      - besluittypeOmschrijving
-      - besluittypen
-      - informatieobjecttypeOmschrijving
-      - omschrijving
-      - omschrijvingGeneriek
-      - resultaattypeomschrijving
-      - selectielijstklasse
-      - url
-      - zaakobjecttypen
-      - zaaktype
-      - zaaktypeIdentificatie
-    BlankEnum:
-      enum:
-      - ''
-    AfleidingswijzeEnum:
-      enum:
-      - afgehandeld
-      - ander_datumkenmerk
-      - eigenschap
-      - gerelateerde_zaak
-      - hoofdzaak
-      - ingangsdatum_besluit
-      - termijn
-      - vervaldatum_besluit
-      - zaakobject
-      type: string
-    ValidatieFout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
-          type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
-      required:
-      - code
-      - detail
-      - instance
-      - invalidParams
       - status
       - title
     PatchedResultaatType:
@@ -1661,6 +1247,91 @@ components:
           description: De ZAAKOBJECTTYPEn die verplicht gerelateerd moeten zijn aan ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
           title: Zaakobjecttypen
           uniqueItems: true
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+    PaginatedResultaatTypeList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResultaatType'
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
+    BlankEnum:
+      enum:
+      - ''
     ResultaatType:
       type: object
       description: 'Set gegevensgroepdata from validated nested data.
@@ -1853,117 +1524,437 @@ components:
       - zaakobjecttypen
       - zaaktype
       - zaaktypeIdentificatie
-    BrondatumArchiefprocedure:
-      type:
-      - object
-      - 'null'
-      description: Specificatie voor het bepalen van de brondatum voor de start van de Archiefactietermijn (=brondatum) van het zaakdossier.
+    ResultaatTypeCreate:
+      type: object
+      description: 'Set gegevensgroepdata from validated nested data.
+
+
+        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
       properties:
-        afleidingswijze:
-          allOf:
-          - $ref: '#/components/schemas/AfleidingswijzeEnum'
-          title: Afleidingswijze brondatum
-          description: "Wijze van bepalen van de brondatum.\n\nUitleg bij mogelijke waarden:\n\n* `afgehandeld` - (Afgehandeld) De termijn start op de datum waarop de zaak is afgehandeld (ZAAK.Einddatum in het RGBZ).\n* `ander_datumkenmerk` - (Ander datumkenmerk) De termijn start op de datum die is vastgelegd in een ander datumveld dan de datumvelden waarop de overige waarden (van deze attribuutsoort) betrekking hebben. `Objecttype`, `Registratie` en `Datumkenmerk` zijn niet leeg.\n* `eigenschap` - (Eigenschap) De termijn start op de datum die vermeld is in een zaaktype-specifieke eigenschap (zijnde een `datumveld`). `ResultaatType.ZaakType` heeft een `Eigenschap`; `Objecttype`, en `Datumkenmerk` zijn niet leeg.\n* `gerelateerde_zaak` - (Gerelateerde zaak) De termijn start op de datum waarop de gerelateerde zaak is afgehandeld (`ZAAK.Einddatum` of `ZAAK.Gerelateerde_zaak.Einddatum` in het RGBZ). `ResultaatType.ZaakType` heeft gerelateerd `ZaakType`\n* `hoofdzaak` - (Hoofdzaak) De termijn start op de datum waarop de gerelateerde zaak is afgehandeld, waarvan de zaak een deelzaak is (`ZAAK.Einddatum` van de hoofdzaak in het RGBZ). ResultaatType.ZaakType is deelzaaktype van ZaakType.\n* `ingangsdatum_besluit` - (Ingangsdatum besluit) De termijn start op de datum waarop het besluit van kracht wordt (`BESLUIT.Ingangsdatum` in het RGBZ).\tResultaatType.ZaakType heeft relevant BesluitType\n* `termijn` - (Termijn) De termijn start een vast aantal jaren na de datum waarop de zaak is afgehandeld (`ZAAK.Einddatum` in het RGBZ).\n* `vervaldatum_besluit` - (Vervaldatum besluit) De termijn start op de dag na de datum waarop het besluit vervalt (`BESLUIT.Vervaldatum` in het RGBZ). ResultaatType.ZaakType heeft relevant BesluitType\n* `zaakobject` - (Zaakobject) De termijn start op de einddatum geldigheid van het zaakobject waarop de zaak betrekking heeft (bijvoorbeeld de overlijdendatum van een Persoon). M.b.v. de attribuutsoort `Objecttype` wordt vastgelegd om welke zaakobjecttype het gaat; m.b.v. de attribuutsoort `Datumkenmerk` wordt vastgelegd welke datum-attribuutsoort van het zaakobjecttype het betreft."
-        datumkenmerk:
+        url:
           type: string
-          description: Naam van de attribuutsoort van het procesobject dat bepalend is voor het einde van de procestermijn.
-          title: datumkenmerk
-          maxLength: 80
-        einddatumBekend:
-          type: boolean
-          description: Indicatie dat de einddatum van het procesobject gedurende de uitvoering van de zaak bekend moet worden. Indien deze nog niet bekend is en deze waarde staat op `true`, dan kan de zaak (nog) niet afgesloten worden.
-          title: einddatum bekend
-        objecttype:
-          description: 'Het soort object in de registratie dat het procesobject representeert.
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        zaaktype:
+          type: string
+          format: uri
+          title: is van
+          description: URL-referentie naar het ZAAKTYPE van ZAAKen waarin resultaten van dit RESULTAATTYPE bereikt kunnen worden.
+        zaaktypeIdentificatie:
+          type: string
+          readOnly: true
+          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
+          title: is relevant voor
+        omschrijving:
+          type: string
+          description: Omschrijving van de aard van resultaten van het RESULTAATTYPE.
+          title: omschrijving
+          maxLength: 30
+        resultaattypeomschrijving:
+          type: string
+          format: uri
+          description: Algemeen gehanteerde omschrijving van de aard van resultaten van het RESULTAATTYPE. Dit moet een URL-referentie zijn naar de referenlijst van generieke resultaattypeomschrijvingen. Im ImZTC heet dit 'omschrijving generiek'
+          title: resultaattypeomschrijving
+          maxLength: 1000
+        omschrijvingGeneriek:
+          type: string
+          readOnly: true
+          description: Waarde van de omschrijving-generiek referentie (attribuut `omschrijving`)
+          title: omschrijving generiek
+        selectielijstklasse:
+          type: string
+          format: uri
+          description: URL-referentie naar de, voor het archiefregime bij het RESULTAATTYPE relevante, categorie in de Selectielijst Archiefbescheiden (RESULTAAT in de Selectielijst API) van de voor het ZAAKTYPE verantwoordelijke overheidsorganisatie.
+          title: selectielijstklasse
+          maxLength: 1000
+        toelichting:
+          type: string
+          description: Een toelichting op dit RESULTAATTYPE en het belang hiervan voor ZAAKen waarin een resultaat van dit RESULTAATTYPE wordt geselecteerd.
+          title: toelichting
+        archiefnominatie:
+          description: 'Aanduiding die aangeeft of ZAAKen met een resultaat van dit RESULTAATTYPE blijvend moeten worden bewaard of (op termijn) moeten worden vernietigd. Indien niet expliciet opgegeven wordt dit gevuld vanuit de selectielijst.
 
 
             Uitleg bij mogelijke waarden:
 
 
-            * `adres` - Adres
+            * `blijvend_bewaren` - Het zaakdossier moet bewaard blijven en op de Archiefactiedatum overgedragen worden naar een archiefbewaarplaats.
 
-            * `besluit` - Besluit
-
-            * `buurt` - Buurt
-
-            * `enkelvoudig_document` - Enkelvoudig document
-
-            * `gemeente` - Gemeente
-
-            * `gemeentelijke_openbare_ruimte` - Gemeentelijke openbare ruimte
-
-            * `huishouden` - Huishouden
-
-            * `inrichtingselement` - Inrichtingselement
-
-            * `kadastrale_onroerende_zaak` - Kadastrale onroerende zaak
-
-            * `kunstwerkdeel` - Kunstwerkdeel
-
-            * `maatschappelijke_activiteit` - Maatschappelijke activiteit
-
-            * `medewerker` - Medewerker
-
-            * `natuurlijk_persoon` - Natuurlijk persoon
-
-            * `niet_natuurlijk_persoon` - Niet-natuurlijk persoon
-
-            * `openbare_ruimte` - Openbare ruimte
-
-            * `organisatorische_eenheid` - Organisatorische eenheid
-
-            * `pand` - Pand
-
-            * `spoorbaandeel` - Spoorbaandeel
-
-            * `status` - Status
-
-            * `terreindeel` - Terreindeel
-
-            * `terrein_gebouwd_object` - Terrein gebouwd object
-
-            * `vestiging` - Vestiging
-
-            * `waterdeel` - Waterdeel
-
-            * `wegdeel` - Wegdeel
-
-            * `wijk` - Wijk
-
-            * `woonplaats` - Woonplaats
-
-            * `woz_deelobject` - Woz deel object
-
-            * `woz_object` - Woz object
-
-            * `woz_waarde` - Woz waarde
-
-            * `zakelijk_recht` - Zakelijk recht
-
-            * `overige` - Overige'
-          title: objecttype
+            * `vernietigen` - Het zaakdossier moet op of na de Archiefactiedatum vernietigd worden.'
+          title: archiefnominatie
           oneOf:
-          - $ref: '#/components/schemas/ObjecttypeEnum'
+          - $ref: '#/components/schemas/ArchiefnominatieEnum'
           - $ref: '#/components/schemas/BlankEnum'
-        registratie:
-          type: string
-          description: De naam van de registratie waarvan het procesobject deel uit maakt.
-          title: registratie
-          maxLength: 80
+        archiefactietermijn:
+          type:
+          - string
+          - 'null'
+          description: De termijn, na het vervallen van het bedrjfsvoeringsbelang, waarna het zaakdossier (de ZAAK met alle bijbehorende INFORMATIEOBJECTen) van een ZAAK met een resultaat van dit RESULTAATTYPE vernietigd of overgebracht (naar een archiefbewaarplaats) moet worden. Voor te vernietigen dossiers betreft het de in die Selectielijst genoemde bewaartermjn. Voor blijvend te bewaren zaakdossiers betreft het de termijn vanaf afronding van de zaak tot overbrenging (de procestermijn is dan nihil).
+          title: archiefactietermijn
+          format: duration
+        brondatumArchiefprocedure:
+          allOf:
+          - $ref: '#/components/schemas/BrondatumArchiefprocedure'
+          description: Specificatie voor het bepalen van de brondatum voor de start van de Archiefactietermijn (=brondatum) van het zaakdossier.
+          title: brondatumArchiefprocedure
+        procesobjectaard:
+          type:
+          - string
+          - 'null'
+          description: Omschrijving van het object, subject of gebeurtenis waarop, vanuit archiveringsoptiek, het resultaattype bij zaken van dit type betrekking heeft.
+          title: procesobjectaard
+          maxLength: 200
+        catalogus:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL-referentie naar de CATALOGUS waartoe dit RESULTAATTYPE behoort.
+          title: catalogus
+        beginGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de RESULTAATTYPE is ontstaan.
+          title: datum begin geldigheid
+        eindeGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de RESULTAATTYPE is opgeheven.
+          title: datum einde geldigheid
+        beginObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de eerst versie van het object ontstaan is.
+          title: datum begin object
+        eindeObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum van de aller laatste versie van het object.
+          title: datum einde object
+        indicatieSpecifiek:
+          type:
+          - boolean
+          - 'null'
+          description: Aanduiding of het, vanuit archiveringsoptiek, een resultaattype betreft dat specifiek is voor een bepaalde procesobjectaard.
+          title: indicatie specifiek
         procestermijn:
           type:
           - string
           - 'null'
-          title: Brondatum procestermijn
-          description: De periode dat het zaakdossier na afronding van de zaak actief gebruikt en/of geraadpleegd wordt ter ondersteuning van de taakuitoefening van de organisatie. Enkel relevant indien de afleidingswijze 'termijn' is.
+          description: De periode dat het zaakdossier na afronding van de zaak actief gebruikt en/of geraadpleegd wordt ter ondersteuning van de taakuitoefening van de organisatie.
+          title: procestermijn
           format: duration
+        besluittypen:
+          type: array
+          items:
+            type: string
+            title: ''
+          title: besluittypen
+        besluittypeOmschrijving:
+          type: array
+          items:
+            type: string
+            title: ''
+          readOnly: true
+          description: Omschrijving van de aard van BESLUITen van het BESLUITTYPE.
+          title: is resultaat van
+          uniqueItems: true
+        informatieobjecttypen:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+            format: uri
+            title: ''
+          description: De INFORMATIEOBJECTTYPEn die verplicht aanwezig moeten zijn in het zaakdossier van ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
+          title: informatieobjecttypen
+          uniqueItems: true
+        informatieobjecttypeOmschrijving:
+          type: array
+          items:
+            type: string
+            title: ''
+          readOnly: true
+          description: Omschrijving van de aard van informatieobjecten van dit INFORMATIEOBJECTTYPE.
+          title: informatieobjecttypen
+          uniqueItems: true
+        zaakobjecttypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: De ZAAKOBJECTTYPEn die verplicht gerelateerd moeten zijn aan ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
+          title: Zaakobjecttypen
+          uniqueItems: true
       required:
-      - afleidingswijze
+      - besluittypeOmschrijving
+      - besluittypen
+      - informatieobjecttypeOmschrijving
+      - omschrijving
+      - omschrijvingGeneriek
+      - resultaattypeomschrijving
+      - selectielijstklasse
+      - url
+      - zaakobjecttypen
+      - zaaktype
+      - zaaktypeIdentificatie
+    AfleidingswijzeEnum:
+      enum:
+      - afgehandeld
+      - ander_datumkenmerk
+      - eigenschap
+      - gerelateerde_zaak
+      - hoofdzaak
+      - ingangsdatum_besluit
+      - termijn
+      - vervaldatum_besluit
+      - zaakobject
+      type: string
+    ResultaatTypeUpdate:
+      type: object
+      description: 'Set gegevensgroepdata from validated nested data.
+
+
+        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        zaaktype:
+          type: string
+          format: uri
+          title: is van
+          description: URL-referentie naar het ZAAKTYPE van ZAAKen waarin resultaten van dit RESULTAATTYPE bereikt kunnen worden.
+        zaaktypeIdentificatie:
+          type: string
+          readOnly: true
+          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
+          title: is relevant voor
+        omschrijving:
+          type: string
+          description: Omschrijving van de aard van resultaten van het RESULTAATTYPE.
+          title: omschrijving
+          maxLength: 30
+        resultaattypeomschrijving:
+          type: string
+          format: uri
+          description: Algemeen gehanteerde omschrijving van de aard van resultaten van het RESULTAATTYPE. Dit moet een URL-referentie zijn naar de referenlijst van generieke resultaattypeomschrijvingen. Im ImZTC heet dit 'omschrijving generiek'
+          title: resultaattypeomschrijving
+          maxLength: 1000
+        omschrijvingGeneriek:
+          type: string
+          readOnly: true
+          description: Waarde van de omschrijving-generiek referentie (attribuut `omschrijving`)
+          title: omschrijving generiek
+        selectielijstklasse:
+          type: string
+          format: uri
+          description: URL-referentie naar de, voor het archiefregime bij het RESULTAATTYPE relevante, categorie in de Selectielijst Archiefbescheiden (RESULTAAT in de Selectielijst API) van de voor het ZAAKTYPE verantwoordelijke overheidsorganisatie.
+          title: selectielijstklasse
+          maxLength: 1000
+        toelichting:
+          type: string
+          description: Een toelichting op dit RESULTAATTYPE en het belang hiervan voor ZAAKen waarin een resultaat van dit RESULTAATTYPE wordt geselecteerd.
+          title: toelichting
+        archiefnominatie:
+          description: 'Aanduiding die aangeeft of ZAAKen met een resultaat van dit RESULTAATTYPE blijvend moeten worden bewaard of (op termijn) moeten worden vernietigd. Indien niet expliciet opgegeven wordt dit gevuld vanuit de selectielijst.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `blijvend_bewaren` - Het zaakdossier moet bewaard blijven en op de Archiefactiedatum overgedragen worden naar een archiefbewaarplaats.
+
+            * `vernietigen` - Het zaakdossier moet op of na de Archiefactiedatum vernietigd worden.'
+          title: archiefnominatie
+          oneOf:
+          - $ref: '#/components/schemas/ArchiefnominatieEnum'
+          - $ref: '#/components/schemas/BlankEnum'
+        archiefactietermijn:
+          type:
+          - string
+          - 'null'
+          description: De termijn, na het vervallen van het bedrjfsvoeringsbelang, waarna het zaakdossier (de ZAAK met alle bijbehorende INFORMATIEOBJECTen) van een ZAAK met een resultaat van dit RESULTAATTYPE vernietigd of overgebracht (naar een archiefbewaarplaats) moet worden. Voor te vernietigen dossiers betreft het de in die Selectielijst genoemde bewaartermjn. Voor blijvend te bewaren zaakdossiers betreft het de termijn vanaf afronding van de zaak tot overbrenging (de procestermijn is dan nihil).
+          title: archiefactietermijn
+          format: duration
+        brondatumArchiefprocedure:
+          allOf:
+          - $ref: '#/components/schemas/BrondatumArchiefprocedure'
+          description: Specificatie voor het bepalen van de brondatum voor de start van de Archiefactietermijn (=brondatum) van het zaakdossier.
+          title: brondatumArchiefprocedure
+        procesobjectaard:
+          type:
+          - string
+          - 'null'
+          description: Omschrijving van het object, subject of gebeurtenis waarop, vanuit archiveringsoptiek, het resultaattype bij zaken van dit type betrekking heeft.
+          title: procesobjectaard
+          maxLength: 200
+        catalogus:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL-referentie naar de CATALOGUS waartoe dit RESULTAATTYPE behoort.
+          title: catalogus
+        beginGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de RESULTAATTYPE is ontstaan.
+          title: datum begin geldigheid
+        eindeGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de RESULTAATTYPE is opgeheven.
+          title: datum einde geldigheid
+        beginObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de eerst versie van het object ontstaan is.
+          title: datum begin object
+        eindeObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum van de aller laatste versie van het object.
+          title: datum einde object
+        indicatieSpecifiek:
+          type:
+          - boolean
+          - 'null'
+          description: Aanduiding of het, vanuit archiveringsoptiek, een resultaattype betreft dat specifiek is voor een bepaalde procesobjectaard.
+          title: indicatie specifiek
+        procestermijn:
+          type:
+          - string
+          - 'null'
+          description: De periode dat het zaakdossier na afronding van de zaak actief gebruikt en/of geraadpleegd wordt ter ondersteuning van de taakuitoefening van de organisatie.
+          title: procestermijn
+          format: duration
+        besluittypen:
+          type: array
+          items:
+            type: string
+            title: ''
+          title: besluittypen
+        besluittypeOmschrijving:
+          type: array
+          items:
+            type: string
+            title: ''
+          readOnly: true
+          description: Omschrijving van de aard van BESLUITen van het BESLUITTYPE.
+          title: is resultaat van
+          uniqueItems: true
+        informatieobjecttypen:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+            format: uri
+            title: ''
+          description: De INFORMATIEOBJECTTYPEn die verplicht aanwezig moeten zijn in het zaakdossier van ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
+          title: informatieobjecttypen
+          uniqueItems: true
+        informatieobjecttypeOmschrijving:
+          type: array
+          items:
+            type: string
+            title: ''
+          readOnly: true
+          description: Omschrijving van de aard van informatieobjecten van dit INFORMATIEOBJECTTYPE.
+          title: informatieobjecttypen
+          uniqueItems: true
+        zaakobjecttypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: De ZAAKOBJECTTYPEn die verplicht gerelateerd moeten zijn aan ZAAKen van dit ZAAKTYPE voordat een resultaat van dit RESULTAATTYPE kan worden gezet.
+          title: Zaakobjecttypen
+          uniqueItems: true
+      required:
+      - besluittypeOmschrijving
+      - besluittypen
+      - informatieobjecttypeOmschrijving
+      - omschrijving
+      - omschrijvingGeneriek
+      - resultaattypeomschrijving
+      - selectielijstklasse
+      - url
+      - zaakobjecttypen
+      - zaaktype
+      - zaaktypeIdentificatie
+    ArchiefnominatieEnum:
+      enum:
+      - blijvend_bewaren
+      - vernietigen
+      type: string
+    ObjecttypeEnum:
+      enum:
+      - adres
+      - besluit
+      - buurt
+      - enkelvoudig_document
+      - gemeente
+      - gemeentelijke_openbare_ruimte
+      - huishouden
+      - inrichtingselement
+      - kadastrale_onroerende_zaak
+      - kunstwerkdeel
+      - maatschappelijke_activiteit
+      - medewerker
+      - natuurlijk_persoon
+      - niet_natuurlijk_persoon
+      - openbare_ruimte
+      - organisatorische_eenheid
+      - pand
+      - spoorbaandeel
+      - status
+      - terreindeel
+      - terrein_gebouwd_object
+      - vestiging
+      - waterdeel
+      - wegdeel
+      - wijk
+      - woonplaats
+      - woz_deelobject
+      - woz_object
+      - woz_waarde
+      - zakelijk_recht
+      - overige
+      type: string
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-catalogi-openapi.yml
-- vng-realisatie-catalogi-openapi.yml

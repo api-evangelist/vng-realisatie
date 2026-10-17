@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Verzendingen API
+  title: Documenten Verzendingen API
   version: 1.5.0
+  description: Een API om een documentregistratiecomponent (DRC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged verzendingen across 2 of this provider''s published API definitions: vng-realisatie-documenten-openapi.yml, vng-realisatie-documenten-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://documenten-api.vng.cloud/api/v1
   description: Productie Omgeving
@@ -307,9 +307,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://documenten-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /verzendingen/{uuid}:
     get:
       operationId: verzending_retrieve
@@ -935,74 +932,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Verzending'
           description: OK
-    servers:
-    - url: https://documenten-api.vng.cloud/api/v1
-      description: Productie Omgeving
 components:
   schemas:
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
-      required:
-      - code
-      - name
-      - reason
-    BinnenlandsCorrespondentieadresVerzendingRequest:
-      type:
-      - object
-      - 'null'
-      description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
-      properties:
-        huisletter:
-          type: string
-          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
-          title: huisletter
-          maxLength: 1
-        huisnummer:
-          type: integer
-          maximum: 99999
-          minimum: 1
-          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nummering.
-          title: huisnummer
-        huisnummerToevoeging:
-          type: string
-          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
-          title: huisnummer toevoeging
-          maxLength: 4
-        naamOpenbareRuimte:
-          type: string
-          minLength: 1
-          description: Een door het bevoegde gemeentelijke orgaan aan een GEMEENTELIJKE  OPENBARE RUIMTE toegekende benaming.
-          title: naam openbare ruimte
-          maxLength: 80
-        postcode:
-          type: string
-          description: De door TNT Post vastgestelde code behorende bij een bepaalde combinatie van een naam van een woonplaats, naam van een openbare ruimte en een huisnummer.
-          title: postcode
-          maxLength: 6
-        woonplaatsnaam:
-          type: string
-          minLength: 1
-          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
-          title: woonplaatsnaam
-          maxLength: 80
-      required:
-      - huisnummer
-      - naamOpenbareRuimte
-      - woonplaatsnaam
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -1037,78 +968,38 @@ components:
       - instance
       - status
       - title
-    ValidatieFout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
-          type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
-      required:
-      - code
-      - detail
-      - instance
-      - invalidParams
-      - status
-      - title
-    BuitenlandsCorrespondentieadresVerzendingRequest:
+    BuitenlandsCorrespondentiepostadresVerzending:
       type:
       - object
       - 'null'
-      description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
       properties:
-        adresBuitenland1:
+        postBusOfAntwoordnummer:
+          type: integer
+          maximum: 9999
+          minimum: 1
+          title: Postbus-of antwoordnummer
+          description: De numerieke aanduiding zoals deze door de Nederlandse PTT is vastgesteld voor postbusadressen en antwoordnummeradressen.
+        postadresPostcode:
           type: string
-          minLength: 1
-          description: Het eerste deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: adres buitenland 1
-          maxLength: 35
-        adresBuitenland2:
+          description: De officiële Nederlandse PTT codering, bestaande uit een numerieke woonplaatscode en een alfabetische lettercode.
+          title: postadres postcode
+          maxLength: 6
+        postadresType:
+          allOf:
+          - $ref: '#/components/schemas/PostadresTypeEnum'
+          title: Postadrestype
+          description: Aanduiding van het soort postadres.
+        woonplaatsnaam:
           type: string
-          description: Het tweede deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: adres buitenland 2
-          maxLength: 35
-        adresBuitenland3:
-          type: string
-          description: Het derde deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: adres buitenland 3
-          maxLength: 35
-        landPostadres:
-          type: string
-          format: uri
-          minLength: 1
-          description: Het LAND dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: land postadres
-          maxLength: 200
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
       required:
-      - adresBuitenland1
-      - landPostadres
+      - postBusOfAntwoordnummer
+      - postadresPostcode
+      - postadresType
+      - woonplaatsnaam
     Verzending:
       type: object
       description: 'Set gegevensgroepdata from validated nested data.
@@ -1216,82 +1107,6 @@ components:
       - contactPersoon
       - informatieobject
       - url
-    BuitenlandsCorrespondentieadresVerzending:
-      type:
-      - object
-      - 'null'
-      description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
-      properties:
-        adresBuitenland1:
-          type: string
-          description: Het eerste deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: adres buitenland 1
-          maxLength: 35
-        adresBuitenland2:
-          type: string
-          description: Het tweede deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: adres buitenland 2
-          maxLength: 35
-        adresBuitenland3:
-          type: string
-          description: Het derde deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: adres buitenland 3
-          maxLength: 35
-        landPostadres:
-          type: string
-          format: uri
-          description: Het LAND dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
-          title: land postadres
-          maxLength: 200
-      required:
-      - adresBuitenland1
-      - landPostadres
-    BinnenlandsCorrespondentieadresVerzending:
-      type:
-      - object
-      - 'null'
-      description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
-      properties:
-        huisletter:
-          type: string
-          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
-          title: huisletter
-          maxLength: 1
-        huisnummer:
-          type: integer
-          maximum: 99999
-          minimum: 1
-          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nummering.
-          title: huisnummer
-        huisnummerToevoeging:
-          type: string
-          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
-          title: huisnummer toevoeging
-          maxLength: 4
-        naamOpenbareRuimte:
-          type: string
-          description: Een door het bevoegde gemeentelijke orgaan aan een GEMEENTELIJKE  OPENBARE RUIMTE toegekende benaming.
-          title: naam openbare ruimte
-          maxLength: 80
-        postcode:
-          type: string
-          description: De door TNT Post vastgestelde code behorende bij een bepaalde combinatie van een naam van een woonplaats, naam van een openbare ruimte en een huisnummer.
-          title: postcode
-          maxLength: 6
-        woonplaatsnaam:
-          type: string
-          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
-          title: woonplaatsnaam
-          maxLength: 80
-      required:
-      - huisnummer
-      - naamOpenbareRuimte
-      - woonplaatsnaam
-    AardRelatieEnum:
-      enum:
-      - afzender
-      - geadresseerde
-      type: string
     PatchedVerzendingRequest:
       type: object
       description: 'Set gegevensgroepdata from validated nested data.
@@ -1387,99 +1202,46 @@ components:
           description: telefoonnummer van de ontvanger of afzender.
           title: telefoonnummer
           maxLength: 15
-    PostadresTypeEnum:
-      enum:
-      - antwoordnummer
-      - postbusnummer
-      type: string
-    BuitenlandsCorrespondentiepostadresVerzending:
-      type:
-      - object
-      - 'null'
-      description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
-      properties:
-        postBusOfAntwoordnummer:
-          type: integer
-          maximum: 9999
-          minimum: 1
-          title: Postbus-of antwoordnummer
-          description: De numerieke aanduiding zoals deze door de Nederlandse PTT is vastgesteld voor postbusadressen en antwoordnummeradressen.
-        postadresPostcode:
-          type: string
-          description: De officiële Nederlandse PTT codering, bestaande uit een numerieke woonplaatscode en een alfabetische lettercode.
-          title: postadres postcode
-          maxLength: 6
-        postadresType:
-          allOf:
-          - $ref: '#/components/schemas/PostadresTypeEnum'
-          title: Postadrestype
-          description: Aanduiding van het soort postadres.
-        woonplaatsnaam:
-          type: string
-          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
-          title: woonplaatsnaam
-          maxLength: 80
-      required:
-      - postBusOfAntwoordnummer
-      - postadresPostcode
-      - postadresType
-      - woonplaatsnaam
-    BuitenlandsCorrespondentiepostadresVerzendingRequest:
-      type:
-      - object
-      - 'null'
-      description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
-      properties:
-        postBusOfAntwoordnummer:
-          type: integer
-          maximum: 9999
-          minimum: 1
-          title: Postbus-of antwoordnummer
-          description: De numerieke aanduiding zoals deze door de Nederlandse PTT is vastgesteld voor postbusadressen en antwoordnummeradressen.
-        postadresPostcode:
-          type: string
-          minLength: 1
-          description: De officiële Nederlandse PTT codering, bestaande uit een numerieke woonplaatscode en een alfabetische lettercode.
-          title: postadres postcode
-          maxLength: 6
-        postadresType:
-          allOf:
-          - $ref: '#/components/schemas/PostadresTypeEnum'
-          title: Postadrestype
-          description: Aanduiding van het soort postadres.
-        woonplaatsnaam:
-          type: string
-          minLength: 1
-          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
-          title: woonplaatsnaam
-          maxLength: 80
-      required:
-      - postBusOfAntwoordnummer
-      - postadresPostcode
-      - postadresType
-      - woonplaatsnaam
-    PaginatedVerzendingList:
+    ValidatieFout:
       type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
       properties:
-        count:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
           type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
           type: array
           items:
-            $ref: '#/components/schemas/Verzending'
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
     VerzendingRequest:
       type: object
       description: 'Set gegevensgroepdata from validated nested data.
@@ -1580,11 +1342,240 @@ components:
       - betrokkene
       - contactPersoon
       - informatieobject
+    BinnenlandsCorrespondentieadresVerzendingRequest:
+      type:
+      - object
+      - 'null'
+      description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+      properties:
+        huisletter:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
+          title: huisletter
+          maxLength: 1
+        huisnummer:
+          type: integer
+          maximum: 99999
+          minimum: 1
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nummering.
+          title: huisnummer
+        huisnummerToevoeging:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
+          title: huisnummer toevoeging
+          maxLength: 4
+        naamOpenbareRuimte:
+          type: string
+          minLength: 1
+          description: Een door het bevoegde gemeentelijke orgaan aan een GEMEENTELIJKE  OPENBARE RUIMTE toegekende benaming.
+          title: naam openbare ruimte
+          maxLength: 80
+        postcode:
+          type: string
+          description: De door TNT Post vastgestelde code behorende bij een bepaalde combinatie van een naam van een woonplaats, naam van een openbare ruimte en een huisnummer.
+          title: postcode
+          maxLength: 6
+        woonplaatsnaam:
+          type: string
+          minLength: 1
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
+      required:
+      - huisnummer
+      - naamOpenbareRuimte
+      - woonplaatsnaam
+    PaginatedVerzendingList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Verzending'
+    AardRelatieEnum:
+      enum:
+      - afzender
+      - geadresseerde
+      type: string
+    PostadresTypeEnum:
+      enum:
+      - antwoordnummer
+      - postbusnummer
+      type: string
+    BuitenlandsCorrespondentiepostadresVerzendingRequest:
+      type:
+      - object
+      - 'null'
+      description: De gegevens die tezamen een postbusadres of antwoordnummeradres vormen van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      properties:
+        postBusOfAntwoordnummer:
+          type: integer
+          maximum: 9999
+          minimum: 1
+          title: Postbus-of antwoordnummer
+          description: De numerieke aanduiding zoals deze door de Nederlandse PTT is vastgesteld voor postbusadressen en antwoordnummeradressen.
+        postadresPostcode:
+          type: string
+          minLength: 1
+          description: De officiële Nederlandse PTT codering, bestaande uit een numerieke woonplaatscode en een alfabetische lettercode.
+          title: postadres postcode
+          maxLength: 6
+        postadresType:
+          allOf:
+          - $ref: '#/components/schemas/PostadresTypeEnum'
+          title: Postadrestype
+          description: Aanduiding van het soort postadres.
+        woonplaatsnaam:
+          type: string
+          minLength: 1
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
+      required:
+      - postBusOfAntwoordnummer
+      - postadresPostcode
+      - postadresType
+      - woonplaatsnaam
+    BuitenlandsCorrespondentieadresVerzending:
+      type:
+      - object
+      - 'null'
+      description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      properties:
+        adresBuitenland1:
+          type: string
+          description: Het eerste deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 1
+          maxLength: 35
+        adresBuitenland2:
+          type: string
+          description: Het tweede deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 2
+          maxLength: 35
+        adresBuitenland3:
+          type: string
+          description: Het derde deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 3
+          maxLength: 35
+        landPostadres:
+          type: string
+          format: uri
+          description: Het LAND dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: land postadres
+          maxLength: 200
+      required:
+      - adresBuitenland1
+      - landPostadres
+    BuitenlandsCorrespondentieadresVerzendingRequest:
+      type:
+      - object
+      - 'null'
+      description: De gegevens van het adres in het buitenland van BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT en dat afwijkt van de reguliere correspondentiegegevens van BETROKKENE.
+      properties:
+        adresBuitenland1:
+          type: string
+          minLength: 1
+          description: Het eerste deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 1
+          maxLength: 35
+        adresBuitenland2:
+          type: string
+          description: Het tweede deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 2
+          maxLength: 35
+        adresBuitenland3:
+          type: string
+          description: Het derde deel dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: adres buitenland 3
+          maxLength: 35
+        landPostadres:
+          type: string
+          format: uri
+          minLength: 1
+          description: Het LAND dat behoort bij het afwijkend buitenlandse correspondentieadres van de betrokkene in zijn/haar rol bij de zaak.
+          title: land postadres
+          maxLength: 200
+      required:
+      - adresBuitenland1
+      - landPostadres
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
+    BinnenlandsCorrespondentieadresVerzending:
+      type:
+      - object
+      - 'null'
+      description: Het correspondentieadres, betreffende een adresseerbaar object, van de BETROKKENE, zijnde afzender of geadresseerde, zoals vermeld in het ontvangen of verzonden INFORMATIEOBJECT indien dat afwijkt van het reguliere binnenlandse correspondentieadres van BETROKKENE.
+      properties:
+        huisletter:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende toevoeging aan een huisnummer in de vorm van een alfanumeriek teken.
+          title: huisletter
+          maxLength: 1
+        huisnummer:
+          type: integer
+          maximum: 99999
+          minimum: 1
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nummering.
+          title: huisnummer
+        huisnummerToevoeging:
+          type: string
+          description: Een door of namens het bevoegd gemeentelijk orgaan ten aanzien van een adresseerbaar object toegekende nadere toevoeging aan een huisnummer of een combinatie van huisnummer en huisletter.
+          title: huisnummer toevoeging
+          maxLength: 4
+        naamOpenbareRuimte:
+          type: string
+          description: Een door het bevoegde gemeentelijke orgaan aan een GEMEENTELIJKE  OPENBARE RUIMTE toegekende benaming.
+          title: naam openbare ruimte
+          maxLength: 80
+        postcode:
+          type: string
+          description: De door TNT Post vastgestelde code behorende bij een bepaalde combinatie van een naam van een woonplaats, naam van een openbare ruimte en een huisnummer.
+          title: postcode
+          maxLength: 6
+        woonplaatsnaam:
+          type: string
+          description: De door het bevoegde gemeentelijke orgaan aan een WOONPLAATS toegekende benaming.
+          title: woonplaatsnaam
+          maxLength: 80
+      required:
+      - huisnummer
+      - naamOpenbareRuimte
+      - woonplaatsnaam
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-documenten-openapi.yml
-- vng-realisatie-documenten-openapi.yml

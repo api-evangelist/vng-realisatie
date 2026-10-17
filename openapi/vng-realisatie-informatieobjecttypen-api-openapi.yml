@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Informatieobjecttypen API
+  title: Catalogi Informatieobjecttypen API
   version: 1.3.1
+  description: Een API om een zaaktypecatalogus (ZTC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged informatieobjecttypen across 2 of this provider''s published API definitions: vng-realisatie-catalogi-openapi.yml, vng-realisatie-catalogi-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://catalogi-api.vng.cloud/api/v1
   description: Productie Omgeving
@@ -337,9 +337,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /informatieobjecttypen/{uuid}:
     get:
       operationId: informatieobjecttype_retrieve
@@ -976,9 +973,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/InformatieObjectType'
           description: OK
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /informatieobjecttypen/{uuid}/publish:
     post:
       operationId: informatieobjecttype_publish
@@ -1078,42 +1072,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
 components:
   schemas:
-    VertrouwelijkheidaanduidingEnum:
-      enum:
-      - openbaar
-      - beperkt_openbaar
-      - intern
-      - zaakvertrouwelijk
-      - vertrouwelijk
-      - confidentieel
-      - geheim
-      - zeer_geheim
-      type: string
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
-      required:
-      - code
-      - name
-      - reason
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -1146,81 +1106,6 @@ components:
       - code
       - detail
       - instance
-      - status
-      - title
-    InformatieObjectTypeOmschrijvingGeneriek:
-      type: object
-      properties:
-        informatieobjecttypeOmschrijvingGeneriek:
-          type: string
-          description: Algemeen gehanteerde omschrijving van het type informatieobject.
-          title: informatieobjecttype omschrijving generiek
-          maxLength: 80
-        definitieInformatieobjecttypeOmschrijvingGeneriek:
-          type: string
-          title: Definitie
-          description: Nauwkeurige beschrijving van het generieke type informatieobject
-          maxLength: 255
-        herkomstInformatieobjecttypeOmschrijvingGeneriek:
-          type: string
-          title: Herkomst
-          description: De naam van de waardenverzameling, of van de beherende organisatie daarvan, waaruit de waarde is overgenomen.
-          maxLength: 12
-        hierarchieInformatieobjecttypeOmschrijvingGeneriek:
-          type: string
-          title: Hierarchie
-          description: De plaats in de rangorde van het informatieobjecttype.
-          maxLength: 80
-        opmerkingInformatieobjecttypeOmschrijvingGeneriek:
-          type:
-          - string
-          - 'null'
-          title: Opmerking
-          description: Zinvolle toelichting bij het informatieobjecttype
-          maxLength: 255
-      required:
-      - definitieInformatieobjecttypeOmschrijvingGeneriek
-      - herkomstInformatieobjecttypeOmschrijvingGeneriek
-      - hierarchieInformatieobjecttypeOmschrijvingGeneriek
-      - informatieobjecttypeOmschrijvingGeneriek
-    ValidatieFout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
-          type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
-      required:
-      - code
-      - detail
-      - instance
-      - invalidParams
       - status
       - title
     InformatieObjectType:
@@ -1341,11 +1226,114 @@ components:
       - url
       - vertrouwelijkheidaanduiding
       - zaaktypen
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+    InformatieObjectTypeOmschrijvingGeneriek:
+      type: object
+      properties:
+        informatieobjecttypeOmschrijvingGeneriek:
+          type: string
+          description: Algemeen gehanteerde omschrijving van het type informatieobject.
+          title: informatieobjecttype omschrijving generiek
+          maxLength: 80
+        definitieInformatieobjecttypeOmschrijvingGeneriek:
+          type: string
+          title: Definitie
+          description: Nauwkeurige beschrijving van het generieke type informatieobject
+          maxLength: 255
+        herkomstInformatieobjecttypeOmschrijvingGeneriek:
+          type: string
+          title: Herkomst
+          description: De naam van de waardenverzameling, of van de beherende organisatie daarvan, waaruit de waarde is overgenomen.
+          maxLength: 12
+        hierarchieInformatieobjecttypeOmschrijvingGeneriek:
+          type: string
+          title: Hierarchie
+          description: De plaats in de rangorde van het informatieobjecttype.
+          maxLength: 80
+        opmerkingInformatieobjecttypeOmschrijvingGeneriek:
+          type:
+          - string
+          - 'null'
+          title: Opmerking
+          description: Zinvolle toelichting bij het informatieobjecttype
+          maxLength: 255
+      required:
+      - definitieInformatieobjecttypeOmschrijvingGeneriek
+      - herkomstInformatieobjecttypeOmschrijvingGeneriek
+      - hierarchieInformatieobjecttypeOmschrijvingGeneriek
+      - informatieobjecttypeOmschrijvingGeneriek
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
+    VertrouwelijkheidaanduidingEnum:
+      enum:
+      - openbaar
+      - beperkt_openbaar
+      - intern
+      - zaakvertrouwelijk
+      - vertrouwelijk
+      - confidentieel
+      - geheim
+      - zeer_geheim
+      type: string
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-catalogi-openapi.yml
-- vng-realisatie-catalogi-openapi.yml

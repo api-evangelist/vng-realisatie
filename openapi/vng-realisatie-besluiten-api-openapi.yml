@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Besluiten API
-  version: 1.0.2
+  title: Besluiten API
+  description: Een API om een besluitregistratiecomponent (BRC) te benaderen.
   contact:
     url: https://vng-realisatie.github.io/gemma-zaken
     email: standaarden.ondersteuning@vng.nl
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged besluiten across 2 of this provider''s published API definitions: vng-realisatie-besluiten-openapi.yml, vng-realisatie-besluiten-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: 1.0.2
 servers:
 - url: /api/v1
 security:
@@ -199,8 +199,6 @@ paths:
       security:
       - JWT-Claims:
         - besluiten.aanmaken
-    servers:
-    - url: /api/v1
   /besluiten/{besluit_uuid}/audittrail:
     parameters:
     - name: besluit_uuid
@@ -249,8 +247,6 @@ paths:
       security:
       - JWT-Claims:
         - audittrails.lezen
-    servers:
-    - url: /api/v1
   /besluiten/{besluit_uuid}/audittrail/{uuid}:
     parameters:
     - name: besluit_uuid
@@ -306,8 +302,6 @@ paths:
       security:
       - JWT-Claims:
         - audittrails.lezen
-    servers:
-    - url: /api/v1
   /besluiten/{uuid}:
     parameters:
     - name: uuid
@@ -566,143 +560,8 @@ paths:
       security:
       - JWT-Claims:
         - besluiten.verwijderen
-    servers:
-    - url: /api/v1
 components:
-  responses:
-    '404':
-      description: Not found
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '415':
-      description: Unsupported media type
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '500':
-      description: Internal server error
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '410':
-      description: Gone
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '403':
-      description: Forbidden
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '429':
-      description: Too many requests
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '401':
-      description: Unauthorized
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '406':
-      description: Not acceptable
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '400':
-      description: Bad request
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/ValidatieFout'
-    '409':
-      description: Conflict
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
   schemas:
-    FieldValidationError:
-      required:
-      - name
-      - code
-      - reason
-      type: object
-      properties:
-        name:
-          title: Name
-          description: Naam van het veld met ongeldige gegevens
-          type: string
-          minLength: 1
-        code:
-          title: Code
-          description: Systeemcode die het type fout aangeeft
-          type: string
-          minLength: 1
-        reason:
-          title: Reason
-          description: Uitleg wat er precies fout is met de gegevens
-          type: string
-          minLength: 1
     Fout:
       required:
       - code
@@ -740,127 +599,48 @@ components:
           description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
           type: string
           minLength: 1
-    Wijzigingen:
-      type: object
-      properties:
-        oud:
-          title: Oud
-          description: Volledige JSON body van het object zoals dat bestond voordat de actie heeft plaatsgevonden.
-          type: object
-        nieuw:
-          title: Nieuw
-          description: Volledige JSON body van het object na de actie.
-          type: object
-    Besluit:
+    ValidatieFout:
       required:
-      - verantwoordelijkeOrganisatie
-      - besluittype
-      - datum
-      - ingangsdatum
+      - code
+      - title
+      - status
+      - detail
+      - instance
+      - invalidParams
       type: object
       properties:
-        url:
-          title: Url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+        type:
+          title: Type
+          description: URI referentie naar het type fout, bedoeld voor developers
           type: string
-          format: uri
-          readOnly: true
-          maxLength: 1000
+        code:
+          title: Code
+          description: Systeemcode die het type fout aangeeft
+          type: string
           minLength: 1
-        identificatie:
-          title: Identificatie
-          description: Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Indien deze niet opgegeven is, dan wordt die gegenereerd.
+        title:
+          title: Title
+          description: Generieke titel voor het type fout
           type: string
-          maxLength: 50
-        verantwoordelijkeOrganisatie:
-          title: Verantwoordelijke organisatie
-          description: Het RSIN van de niet-natuurlijk persoon zijnde de organisatie die het besluit heeft vastgesteld.
-          type: string
-          maxLength: 9
           minLength: 1
-        besluittype:
-          title: Besluittype
-          description: URL-referentie naar het BESLUITTYPE (in de Catalogi API).
+        status:
+          title: Status
+          description: De HTTP status code
+          type: integer
+        detail:
+          title: Detail
+          description: Extra informatie bij de fout, indien beschikbaar
           type: string
-          format: uri
-          maxLength: 200
           minLength: 1
-        zaak:
-          title: Zaak
-          description: URL-referentie naar de ZAAK (in de Zaken API) waarvan dit besluit uitkomst is.
+        instance:
+          title: Instance
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
           type: string
-          format: uri
-          maxLength: 200
-        datum:
-          title: Datum
-          description: De beslisdatum (AWB) van het besluit.
-          type: string
-          format: date
-        toelichting:
-          title: Toelichting
-          description: Toelichting bij het besluit.
-          type: string
-        bestuursorgaan:
-          title: Bestuursorgaan
-          description: Een orgaan van een rechtspersoon krachtens publiekrecht ingesteld of een persoon of college, met enig openbaar gezag bekleed onder wiens verantwoordelijkheid het besluit vastgesteld is.
-          type: string
-          maxLength: 50
-        ingangsdatum:
-          title: Ingangsdatum
-          description: Ingangsdatum van de werkingsperiode van het besluit.
-          type: string
-          format: date
-        vervaldatum:
-          title: Vervaldatum
-          description: Datum waarop de werkingsperiode van het besluit eindigt.
-          type:
-          - string
-          - 'null'
-          format: date
-        vervalreden:
-          title: Vervalreden
-          description: 'De omschrijving die aangeeft op grond waarvan het besluit is of komt te vervallen.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `tijdelijk` - Besluit met tijdelijke werking
-
-            * `ingetrokken_overheid` - Besluit ingetrokken door overheid
-
-            * `ingetrokken_belanghebbende` - Besluit ingetrokken o.v.v. belanghebbende'
-          type: string
-          enum:
-          - tijdelijk
-          - ingetrokken_overheid
-          - ingetrokken_belanghebbende
-        vervalredenWeergave:
-          title: Vervalreden weergave
-          type: string
-          readOnly: true
           minLength: 1
-        publicatiedatum:
-          title: Publicatiedatum
-          description: Datum waarop het besluit gepubliceerd wordt.
-          type:
-          - string
-          - 'null'
-          format: date
-        verzenddatum:
-          title: Verzenddatum
-          description: Datum waarop het besluit verzonden is.
-          type:
-          - string
-          - 'null'
-          format: date
-        uiterlijkeReactiedatum:
-          title: Uiterlijke reactiedatum
-          description: De datum tot wanneer verweer tegen het besluit mogelijk is.
-          type:
-          - string
-          - 'null'
-          format: date
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
     AuditTrail:
       required:
       - bron
@@ -1008,48 +788,260 @@ components:
           readOnly: true
         wijzigingen:
           $ref: '#/components/schemas/Wijzigingen'
-    ValidatieFout:
+    Besluit:
       required:
-      - code
-      - title
-      - status
-      - detail
-      - instance
-      - invalidParams
+      - verantwoordelijkeOrganisatie
+      - besluittype
+      - datum
+      - ingangsdatum
       type: object
       properties:
-        type:
-          title: Type
-          description: URI referentie naar het type fout, bedoeld voor developers
+        url:
+          title: Url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
           type: string
+          format: uri
+          readOnly: true
+          maxLength: 1000
+          minLength: 1
+        identificatie:
+          title: Identificatie
+          description: Identificatie van het besluit binnen de organisatie die het besluit heeft vastgesteld. Indien deze niet opgegeven is, dan wordt die gegenereerd.
+          type: string
+          maxLength: 50
+        verantwoordelijkeOrganisatie:
+          title: Verantwoordelijke organisatie
+          description: Het RSIN van de niet-natuurlijk persoon zijnde de organisatie die het besluit heeft vastgesteld.
+          type: string
+          maxLength: 9
+          minLength: 1
+        besluittype:
+          title: Besluittype
+          description: URL-referentie naar het BESLUITTYPE (in de Catalogi API).
+          type: string
+          format: uri
+          maxLength: 200
+          minLength: 1
+        zaak:
+          title: Zaak
+          description: URL-referentie naar de ZAAK (in de Zaken API) waarvan dit besluit uitkomst is.
+          type: string
+          format: uri
+          maxLength: 200
+        datum:
+          title: Datum
+          description: De beslisdatum (AWB) van het besluit.
+          type: string
+          format: date
+        toelichting:
+          title: Toelichting
+          description: Toelichting bij het besluit.
+          type: string
+        bestuursorgaan:
+          title: Bestuursorgaan
+          description: Een orgaan van een rechtspersoon krachtens publiekrecht ingesteld of een persoon of college, met enig openbaar gezag bekleed onder wiens verantwoordelijkheid het besluit vastgesteld is.
+          type: string
+          maxLength: 50
+        ingangsdatum:
+          title: Ingangsdatum
+          description: Ingangsdatum van de werkingsperiode van het besluit.
+          type: string
+          format: date
+        vervaldatum:
+          title: Vervaldatum
+          description: Datum waarop de werkingsperiode van het besluit eindigt.
+          type:
+          - string
+          - 'null'
+          format: date
+        vervalreden:
+          title: Vervalreden
+          description: 'De omschrijving die aangeeft op grond waarvan het besluit is of komt te vervallen.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `tijdelijk` - Besluit met tijdelijke werking
+
+            * `ingetrokken_overheid` - Besluit ingetrokken door overheid
+
+            * `ingetrokken_belanghebbende` - Besluit ingetrokken o.v.v. belanghebbende'
+          type: string
+          enum:
+          - tijdelijk
+          - ingetrokken_overheid
+          - ingetrokken_belanghebbende
+        vervalredenWeergave:
+          title: Vervalreden weergave
+          type: string
+          readOnly: true
+          minLength: 1
+        publicatiedatum:
+          title: Publicatiedatum
+          description: Datum waarop het besluit gepubliceerd wordt.
+          type:
+          - string
+          - 'null'
+          format: date
+        verzenddatum:
+          title: Verzenddatum
+          description: Datum waarop het besluit verzonden is.
+          type:
+          - string
+          - 'null'
+          format: date
+        uiterlijkeReactiedatum:
+          title: Uiterlijke reactiedatum
+          description: De datum tot wanneer verweer tegen het besluit mogelijk is.
+          type:
+          - string
+          - 'null'
+          format: date
+    FieldValidationError:
+      required:
+      - name
+      - code
+      - reason
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Naam van het veld met ongeldige gegevens
+          type: string
+          minLength: 1
         code:
           title: Code
           description: Systeemcode die het type fout aangeeft
           type: string
           minLength: 1
-        title:
-          title: Title
-          description: Generieke titel voor het type fout
+        reason:
+          title: Reason
+          description: Uitleg wat er precies fout is met de gegevens
           type: string
           minLength: 1
-        status:
-          title: Status
-          description: De HTTP status code
-          type: integer
-        detail:
-          title: Detail
-          description: Extra informatie bij de fout, indien beschikbaar
-          type: string
-          minLength: 1
-        instance:
-          title: Instance
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          type: string
-          minLength: 1
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
+    Wijzigingen:
+      type: object
+      properties:
+        oud:
+          title: Oud
+          description: Volledige JSON body van het object zoals dat bestond voordat de actie heeft plaatsgevonden.
+          type: object
+        nieuw:
+          title: Nieuw
+          description: Volledige JSON body van het object na de actie.
+          type: object
+  responses:
+    '500':
+      description: Internal server error
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '410':
+      description: Gone
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '401':
+      description: Unauthorized
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '415':
+      description: Unsupported media type
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '404':
+      description: Not found
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '400':
+      description: Bad request
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ValidatieFout'
+    '403':
+      description: Forbidden
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '429':
+      description: Too many requests
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '406':
+      description: Not acceptable
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '409':
+      description: Conflict
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
   requestBodies:
     Besluit:
       content:
@@ -1062,6 +1054,3 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- vng-realisatie-besluiten-openapi.yml
-- vng-realisatie-besluiten-openapi.yml

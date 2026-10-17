@@ -5,7 +5,7 @@ info:
   - x-imvertor-generator-version differs across the merged source definitions and was not carried
   - x-yamlCompiler-stylesheets-version differs across the merged source definitions and was not carried
   version: '1.0'
-  description: 'Operations tagged Klantcontacten across 4 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-zaken-openapi.yml, vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-zaken-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Klantcontacten across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-zaken-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
@@ -805,10 +805,13 @@ paths:
       description: Productie Omgeving
 components:
   schemas:
-    Datumtijd:
+    Initiatiefnemer:
       type: string
-      description: ''
-      format: date-time
+      description: De waarden van de partij die het contact heeft geinitieerd.<body><ul><li>`gemeente` - De gemeente heeft het contact geinitieerd.</li><li>`klant` - De klant heeft het contact geinitieerd.</li><li>`vertegenwoordiger` - </li></ul></body>
+      enum:
+      - gemeente
+      - klant
+      - vertegenwoordiger
     Registreerklantcontact_parameters:
       type: object
       description: ''
@@ -849,68 +852,42 @@ components:
           $ref: '#/components/schemas/Omschrijvingkort'
         plaatsgevondenOp:
           $ref: '#/components/schemas/Datumtijd'
-    Huisnummertoevoeging:
+    Naamlang:
       type: string
       description: ''
-      maxLength: 4
-    SoortObject:
+      maxLength: 200
+    DigitaalAdres:
       type: object
-      description: Een opsomming van de soorten objecten waarmee een koppeling gelegd wordt vanuit het register klantinteracties.
+      description: 'Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.
+
+
+        Digitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.'
       required:
-      - code
+      - adres
+      - id
       - indicatieActief
-      - naam
+      - omschrijving
+      - partijId
+      - soortDigitaalAdres
       properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het soort object.
-          minLength: 1
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
         indicatieActief:
           $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van het soort object.
-          minLength: 1
-    SoortInhoudsdeel:
-      type: string
-      description: De typering van het inhoudsdeel.<body><ul><li>`informatieobject` - informatieobject </li><li>`overig_object` - overig object </li><li>`tekst` - tekst </li></ul></body>
-      enum:
-      - informatieobject
-      - overig_object
-      - tekst
-    Huisnummer:
-      type: integer
-      description: ''
-    Registreertelefoongesprek_parameters:
-      type: object
-      description: ''
-      required:
-      - actorId
-      - betrokkeneBijKlantcontact
-      - indicatieHergebruikPartij
-      - onderwerp
-      properties:
-        actorId:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/Identificatiecode'
-        betrokkeneBijKlantcontact:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/BetrokkeneBijKlantcontact_param'
-        indicatieHergebruikPartij:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        inhoudsdeel:
-          type: array
-          minItems: 0
-          items:
-            $ref: '#/components/schemas/Inhoudsdeel_param'
-        onderwerp:
+        omschrijving:
           $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+        soortDigitaalAdres:
+          $ref: '#/components/schemas/SoortDigitaalAdres'
+    AanduidingBijHuisnummer:
+      type: string
+      description: De aanduiding die gebruikt wordt voor bijvoorbeeld een ligplaats of een standplaats die geen eigen nummeraanduiding heeft.
+      enum:
+      - bij
+      - tegenover
     BetrokkeneBijKlantcontact:
       type: object
       description: 'De betrokkenheid en de rol van een persoon of organisatie bij het klantcontact.
@@ -940,307 +917,32 @@ components:
           $ref: '#/components/schemas/Kanaal'
         voorkeurstaal:
           $ref: '#/components/schemas/Voorkeurstaal'
-    SoortDigitaalAdres:
-      type: object
-      description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het soort digitaal adres.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van het soort digitaal adres.
-          minLength: 1
-    Klantcontact:
-      type: object
-      description: "Een contact tussen een klant of een vertegenwoordiger van een klant en de gemeente.\n\nHet klantcontact is bedoeld om inwoners of ondernemers die contact hebben gehad met de gemeente op een voor hen zo begrijpelijk en relevant mogelijke manier te infomeren over de inhoud van dat contact. Over een klantcontact vastgelegde informatie kan bijvoorbeeld (na inloggen) worden getoond op de gemeentelijke website of telefonisch worden verstrekt door een medewerker van het klantcontactcentrum. Als gevolg hiervan is de volledige inhoud van een klantcontact geschikt voor openbaarmaking aan betrokken inwoners. De definitie van klantcontact is bewust wat 'open' gelaten. Op deze manier passen daarbinnen ook contacten die voortkomen uit nu onvoorziene scenario's of via nog te ontwikkelen kanalen. Uitgangspunt is in alle gevallen dat ????n klantcontact de informatie omvat die een klant of dienst vertegenwoordiger tijdens een voor hen herkenbare handeling of gebeurtenis overbrengt aan de gemeente of vice versa. Zo'n handeling kan bijvoorbeeld het afleggen van baliebezoek zijn, het telefonisch voeren van een gesprek met een medewerker of een interactie met een chatbot op de gemeentelijke website. Maar ook gebeurtenissen als het indienen van een elektronisch formulier of het versturen van een brief door de gemeente aan een klant of vertegenwoordiger resulteren in een klantcontact. Voor het bepalen van het begin en eind van een klantcontact geldt dat informatie die binnen een korte tijdsperiode tussen gemeente en klant wordt uitgewisseld waar mogelijk resulteert in ????n klantcontact, terwijl een verzonden kennisgeving en een uren of dagen later ontvangen reactie daarop resulteren in twee ???losse??? klantcontacten. Dit betekent dat een klantcontact naar aanleiding van een telefoongesprek 'duurt' van het aannemen van het gesprek tot het be??indigen hiervan, terwijl een contact naar aanleiding van een baliebezoek de periode beschrijft vanaf het aan een medewerker verschijnen van een klant of vertegenwoordiger tot aan diens vertrek. In het geval van ontvangst door de gemeente van een brief van een klant waarop de gemeente enige dagen later eveneens schriftelijk reageert, worden beide brieven daarentegen als twee individuele klantcontacten te beschouwd. Tussen de voorbeelden hierboven in ligt een aantal kanalen waarbij informatie minder snel wordt uitgewisseld dan bij een telefoongesprek of baliecontact, maar (veel) sneller dan bij een briefwisseling. Denk aan communicatie via contactformulieren, e-mail of chatapps en -bots. Zeker in de laatste gevallen kan sprake zijn van korte, elkaar snel opvolgende interacties die samen het karakter hebben van een gesprek. Anders dan een telefoon- of baliegesprek kan een interactie via deze kanalen echter voor uren of dagen onderbroken worden, om daarna weer te worden opgepakt. In zo'n geval is het aan medewerkers van de gemeente - in geval van geautomatiseerde interacties samen met systeemontwikkelaars - om te bepalen wat vanuit klantperspectief de meest voor de hand liggende ???omvang??? van een klantcontact is. Tijdens een klantcontact kan duidelijk worden dat een inwoner verschillende verzoeken voor de gemeente heeft. Een klant kan tijdens een telefoongesprek bijvoorbeeld vragen naar een afspraak voor overleg over een te verbouwen woning en daarnaast een verzakking van stoep voor zijn huis melden. Deze verzoeken moeten op uiteenlopende wijze en waarschijnlijk door verschillende afdelingen worden opgevolgd. Met het bepalen welke medewerlkers of afdelingen nodig zijn om aan verzoeken van een klant invulling te geven, begint in feite de behandeling van deze verzoeken. Deze behandeling is nadrukkelijk g????n onderdeel van het klantcontact. Anders dan het registreren van voor het klantcontact relevante onderwerpen biedt het klantcontact dan ook geen mogelijkheden de inhoud daarvan naar verschillende verzoeken, aanvragen of meldingen uit te splitsen. Hiervoor zijn de concepten 'interne taak' en 'zaak' bedoeld. Het klantcontact uit het voorbeeld hierboven zou bijvoorbeeld aanleiding kunnen zijn voor het aanmaken van zowel een zaak van type 'melding openbare ruimte' om de stoep te herstellen, als een interne taak voor een medewerker van de afdeling fysieke leefomgeving om een afspraak te maken voor overleg over de voorgenomen verbouwing.\n\nHet klantcontact is bedoeld om inwoners of ondernemers die contact hebben gehad met de gemeente op een voor hen zo begrijpelijk en relevant mogelijke manier te infomeren over de inhoud van dat contact. Over een klantcontact vastgelegde informatie kan bijvoorbeeld (na inloggen) worden getoond op de gemeentelijke website of telefonisch worden verstrekt door een medewerker van het klantcontactcentrum. Als gevolg hiervan is de volledige inhoud van een klantcontact geschikt voor openbaarmaking aan betrokken inwoners. De definitie van klantcontact is bewust wat 'open' gelaten. Op deze manier passen daarbinnen ook contacten die voortkomen uit nu onvoorziene scenario's of via nog te ontwikkelen kanalen. Uitgangspunt is in alle gevallen dat ????n klantcontact de informatie omvat die een klant of dienst vertegenwoordiger tijdens een voor hen herkenbare handeling of gebeurtenis overbrengt aan de gemeente of vice versa. Zo'n handeling kan bijvoorbeeld het afleggen van baliebezoek zijn, het telefonisch voeren van een gesprek met een medewerker of een interactie met een chatbot op de gemeentelijke website. Maar ook gebeurtenissen als het indienen van een elektronisch formulier of het versturen van een brief door de gemeente aan een klant of vertegenwoordiger resulteren in een klantcontact. Voor het bepalen van het begin en eind van een klantcontact geldt dat informatie die binnen een korte tijdsperiode tussen gemeente en klant wordt uitgewisseld waar mogelijk resulteert in ????n klantcontact, terwijl een verzonden kennisgeving en een uren of dagen later ontvangen reactie daarop resulteren in twee ???losse??? klantcontacten. Dit betekent dat een klantcontact naar aanleiding van een telefoongesprek 'duurt' van het aannemen van het gesprek tot het be??indigen hiervan, terwijl een contact naar aanleiding van een baliebezoek de periode beschrijft vanaf het aan een medewerker verschijnen van een klant of vertegenwoordiger tot aan diens vertrek. In het geval van ontvangst door de gemeente van een brief van een klant waarop de gemeente enige dagen later eveneens schriftelijk reageert, worden beide brieven daarentegen als twee individuele klantcontacten te beschouwd. Tussen de voorbeelden hierboven in ligt een aantal kanalen waarbij informatie minder snel wordt uitgewisseld dan bij een telefoongesprek of baliecontact, maar (veel) sneller dan bij een briefwisseling. Denk aan communicatie via contactformulieren, e-mail of chatapps en -bots. Zeker in de laatste gevallen kan sprake zijn van korte, elkaar snel opvolgende interacties die samen het karakter hebben van een gesprek. Anders dan een telefoon- of baliegesprek kan een interactie via deze kanalen echter voor uren of dagen onderbroken worden, om daarna weer te worden opgepakt. In zo'n geval is het aan medewerkers van de gemeente - in geval van geautomatiseerde interacties samen met systeemontwikkelaars - om te bepalen wat vanuit klantperspectief de meest voor de hand liggende ???omvang??? van een klantcontact is. Tijdens een klantcontact kan duidelijk worden dat een inwoner verschillende verzoeken voor de gemeente heeft. Een klant kan tijdens een telefoongesprek bijvoorbeeld vragen naar een afspraak voor overleg over een te verbouwen woning en daarnaast een verzakking van stoep voor zijn huis melden. Deze verzoeken moeten op uiteenlopende wijze en waarschijnlijk door verschillende afdelingen worden opgevolgd. Met het bepalen welke medewerlkers of afdelingen nodig zijn om aan verzoeken van een klant invulling te geven, begint in feite de behandeling van deze verzoeken. Deze behandeling is nadrukkelijk g????n onderdeel van het klantcontact. Anders dan het registreren van voor het klantcontact relevante onderwerpen biedt het klantcontact dan ook geen mogelijkheden de inhoud daarvan naar verschillende verzoeken, aanvragen of meldingen uit te splitsen. Hiervoor zijn de concepten 'interne taak' en 'zaak' bedoeld. Het klantcontact uit het voorbeeld hierboven zou bijvoorbeeld aanleiding kunnen zijn voor het aanmaken van zowel een zaak van type 'melding openbare ruimte' om de stoep te herstellen, als een interne taak voor een medewerker van de afdeling fysieke leefomgeving om een afspraak te maken voor overleg over de voorgenomen verbouwing. \n\nHet klantcontact is bedoeld om inwoners of ondernemers die contact hebben gehad met de gemeente op een voor hen zo begrijpelijk en relevant mogelijke manier te infomeren over de inhoud van dat contact. Over een klantcontact vastgelegde informatie kan bijvoorbeeld (na inloggen) worden getoond op de gemeentelijke website of telefonisch worden verstrekt door een medewerker van het klantcontactcentrum. Als gevolg hiervan is de volledige inhoud van een klantcontact geschikt voor openbaarmaking aan betrokken inwoners. De definitie van klantcontact is bewust wat 'open' gelaten. Op deze manier passen daarbinnen ook contacten die voortkomen uit nu onvoorziene scenario's of via nog te ontwikkelen kanalen. Uitgangspunt is in alle gevallen dat ????n klantcontact de informatie omvat die een klant of dienst vertegenwoordiger tijdens een voor hen herkenbare handeling of gebeurtenis overbrengt aan de gemeente of vice versa. Zo'n handeling kan bijvoorbeeld het afleggen van baliebezoek zijn, het telefonisch voeren van een gesprek met een medewerker of een interactie met een chatbot op de gemeentelijke website. Maar ook gebeurtenissen als het indienen van een elektronisch formulier of het versturen van een brief door de gemeente aan een klant of vertegenwoordiger resulteren in een klantcontact. Voor het bepalen van het begin en eind van een klantcontact geldt dat informatie die binnen een korte tijdsperiode tussen gemeente en klant wordt uitgewisseld waar mogelijk resulteert in ????n klantcontact, terwijl een verzonden kennisgeving en een uren of dagen later ontvangen reactie daarop resulteren in twee ???losse??? klantcontacten. Dit betekent dat een klantcontact naar aanleiding van een telefoongesprek 'duurt' van het aannemen van het gesprek tot het be??indigen hiervan, terwijl een contact naar aanleiding van een baliebezoek de periode beschrijft vanaf het aan een medewerker verschijnen van een klant of vertegenwoordiger tot aan diens vertrek. In het geval van ontvangst door de gemeente van een brief van een klant waarop de gemeente enige dagen later eveneens schriftelijk reageert, worden beide brieven daarentegen als twee individuele klantcontacten te beschouwd. Tussen de voorbeelden hierboven in ligt een aantal kanalen waarbij informatie minder snel wordt uitgewisseld dan bij een telefoongesprek of baliecontact, maar (veel) sneller dan bij een briefwisseling. Denk aan communicatie via contactformulieren, e-mail of chatapps en -bots. Zeker in de laatste gevallen kan sprake zijn van korte, elkaar snel opvolgende interacties die samen het karakter hebben van een gesprek. Anders dan een telefoon- of baliegesprek kan een interactie via deze kanalen echter voor uren of dagen onderbroken worden, om daarna weer te worden opgepakt. In zo'n geval is het aan medewerkers van de gemeente - in geval van geautomatiseerde interacties samen met systeemontwikkelaars - om te bepalen wat vanuit klantperspectief de meest voor de hand liggende ???omvang??? van een klantcontact is. Tijdens een klantcontact kan duidelijk worden dat een inwoner verschillende verzoeken voor de gemeente heeft. Een klant kan tijdens een telefoongesprek bijvoorbeeld vragen naar een afspraak voor overleg over een te verbouwen woning en daarnaast een verzakking van stoep voor zijn huis melden. Deze verzoeken moeten op uiteenlopende wijze en waarschijnlijk door verschillende afdelingen worden opgevolgd. Met het bepalen welke medewerlkers of afdelingen nodig zijn om aan verzoeken van een klant invulling te geven, begint in feite de behandeling van deze verzoeken. Deze behandeling is nadrukkelijk g????n onderdeel van het klantcontact. Anders dan het registreren van voor het klantcontact relevante onderwerpen biedt het klantcontact dan ook geen mogelijkheden de inhoud daarvan naar verschillende verzoeken, aanvragen of meldingen uit te splitsen. Hiervoor zijn de concepten 'interne taak' en 'zaak' bedoeld. Het klantcontact uit het voorbeeld hierboven zou bijvoorbeeld aanleiding kunnen zijn voor het aanmaken van zowel een zaak van type 'melding openbare ruimte' om de stoep te herstellen, als een interne taak voor een medewerker van de afdeling fysieke leefomgeving om een afspraak te maken voor overleg over de voorgenomen verbouwing."
-      required:
-      - actorId
-      - betrokkeneBijKlantcontact
-      - geregistreerdOp
-      - id
-      - indicatieContactGelukt
-      - initiatiefnemer
-      - kanaal
-      - nummer
-      - onderwerp
-      - plaatsgevondenOp
-      properties:
-        actorId:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/Identificatiecode'
-        betrokkeneBijKlantcontact:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/BetrokkeneBijKlantcontact'
-        geregistreerdOp:
-          $ref: '#/components/schemas/Datumtijd'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        indicatieContactGelukt:
-          $ref: '#/components/schemas/IndicatieJaNeeOnbekend'
-        inhoudsdelen:
-          type: array
-          minItems: 0
-          items:
-            $ref: '#/components/schemas/Inhoudsdeel'
-        initiatiefnemer:
-          $ref: '#/components/schemas/Initiatiefnemer'
-        kanaal:
-          $ref: '#/components/schemas/Kanaal'
-        nummer:
-          $ref: '#/components/schemas/Identificerendnummer'
-        onderwerp:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        plaatsgevondenOp:
-          $ref: '#/components/schemas/Datumtijd'
-    VerwijderKlantcontactGaatOver_parameters:
-      type: object
-      description: ''
-      required:
-      - id
-      properties:
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-    RegistreerKlantcontactGaatOverObject_parameters:
-      type: object
-      description: ''
-      required:
-      - externId
-      - externRegister
-      - klantcontactId
-      - ontstaanUitKlantcontact
-      - soortObject
-      properties:
-        externId:
-          $ref: '#/components/schemas/Identificatiecode'
-        externRegister:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        klantcontactId:
-          $ref: '#/components/schemas/Identificatiecode'
-        ontstaanUitKlantcontact:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        soortObject:
-          $ref: '#/components/schemas/SoortObject'
-    AanduidingBijHuisnummer:
+    Huisnummertoevoeging:
       type: string
-      description: De aanduiding die gebruikt wordt voor bijvoorbeeld een ligplaats of een standplaats die geen eigen nummeraanduiding heeft.
+      description: ''
+      maxLength: 4
+    Persoonsnaamgegevens:
+      type: object
+      description: De naamgegevens van een persoon.
+      properties:
+        achternaam:
+          type: string
+          title: Achternaam
+          description: De axhternaam waarmee de persoon aangesproken wnest te worden. Deze zal over het algemeen gelijk zijn aan de (geslachts)naam waarvan de eventueel aanwezige voorvoegsels en adellijke titel/predikaat zijn afgesplitst.
+        voornaam:
+          type: string
+          title: Voornaam
+          description: De roepnaam waarmee de persoon wenst aangeproken te worden.
+        voorvoegselAchternaam:
+          type: string
+          title: Voorvoegsel achternaam
+          description: Dat deel van de achternaam dat voorkomt in de Voorvoegseltabel en, gescheiden door een spatie, vooraf gaat aan de rest van de achternaam.
+    SoortBezoekadres:
+      type: string
+      description: Typering waarmee aangegeven of het bezoekadres een binnenlands - of een buitenlands adres is.<body><ul><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
       enum:
-      - bij
-      - tegenover
-    Identificatiecode:
-      type: string
-      description: ''
-      maxLength: 40
-    Correspondentieadres:
-      type: object
-      description: Het adres waarnaar de persoon of de organisatie de voor hen bestemde correspondentie laat verzenden.
-      required:
-      - soortCorrespondentieadres
-      properties:
-        aanduidingBijHuisnummer:
-          $ref: '#/components/schemas/AanduidingBijHuisnummer'
-        adresregelBuitenland1:
-          $ref: '#/components/schemas/Adresregel'
-        adresregelBuitenland2:
-          $ref: '#/components/schemas/Adresregel'
-        adresregelBuitenland3:
-          $ref: '#/components/schemas/Adresregel'
-        antwoordnummer:
-          $ref: '#/components/schemas/Antwoordnummer'
-        huisletter:
-          $ref: '#/components/schemas/Huisletter'
-        huisnummer:
-          $ref: '#/components/schemas/Huisnummer'
-        huisnummertoevoeging:
-          $ref: '#/components/schemas/Huisnummertoevoeging'
-        land:
-          $ref: '#/components/schemas/Land'
-        postbusnummer:
-          $ref: '#/components/schemas/Postbusnummer'
-        postcode:
-          $ref: '#/components/schemas/Postcode'
-        soortCorrespondentieadres:
-          $ref: '#/components/schemas/SoortCorrespondentieadres'
-        straat:
-          $ref: '#/components/schemas/Straat'
-        woonplaats:
-          $ref: '#/components/schemas/Woonplaats'
-    Initiatiefnemer:
-      type: string
-      description: De waarden van de partij die het contact heeft geinitieerd.<body><ul><li>`gemeente` - De gemeente heeft het contact geinitieerd.</li><li>`klant` - De klant heeft het contact geinitieerd.</li><li>`vertegenwoordiger` - </li></ul></body>
-      enum:
-      - gemeente
-      - klant
-      - vertegenwoordiger
-    Klantcontactrol:
-      type: string
-      description: De typering van de rol van de persoon of organisatie in het klantcontact.
-      enum:
-      - vertegenwoordiger
-      - klant
-    Voorkeurstaal:
-      type: object
-      description: Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij de voorkeurstaal.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van de voorkeurstaal.
-          minLength: 1
-    Antwoordnummer:
-      type: integer
-      description: ''
-    Registreerkeukentafelgesprek_parameters:
-      type: object
-      description: ''
-      required:
-      - actorId
-      - betrokkeneBijKlantcontact
-      - indicatieHergebruikPartij
-      - initiatiefnemer
-      - onderwerp
-      properties:
-        actorId:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/Identificatiecode'
-        betrokkeneBijKlantcontact:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/BetrokkeneBijKlantcontact_param'
-        indicatieHergebruikPartij:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        inhoudsdeel:
-          type: array
-          minItems: 0
-          items:
-            $ref: '#/components/schemas/Inhoudsdeel_param'
-        initiatiefnemer:
-          $ref: '#/components/schemas/Initiatiefnemer'
-        onderwerp:
-          $ref: '#/components/schemas/Omschrijvingkort'
-    Huisletter:
-      type: string
-      description: ''
-      maxLength: 1
-    Inhoudsdeel:
-      type: object
-      description: (Een deel van) de inhoud van een klantcontact. Deze inhoud kan bestaan uit stuk tekst dat in het element tekst is opgenomen of een verwijzing naar een object zoals een informatie-object, een object uit de overige objectenregistratie of een ander object.
-      required:
-      - externId
-      - externRegister
-      - id
-      - indicatieWeerTeGeven
-      - omschrijving
-      - soortInhoudsdeel
-      properties:
-        externId:
-          $ref: '#/components/schemas/Identificatiecode'
-        externRegister:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        indicatieWeerTeGeven:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        omschrijving:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        soortInhoudsdeel:
-          $ref: '#/components/schemas/SoortInhoudsdeel'
-        tekst:
-          $ref: '#/components/schemas/Omschrijvinglang'
-    Woonplaats:
-      type: string
-      description: ''
-      maxLength: 80
-    Adresregel:
-      type: string
-      description: Een generieke regel om adresgegevens in op te nemen.
-      maxLength: 80
-    DigitaalAdres:
-      type: object
-      description: 'Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.
-
-
-        Digitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.'
-      required:
-      - adres
-      - id
-      - indicatieActief
-      - omschrijving
-      - partijId
-      - soortDigitaalAdres
-      properties:
-        adres:
-          $ref: '#/components/schemas/Adresregel'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        omschrijving:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        partijId:
-          $ref: '#/components/schemas/Identificatiecode'
-        soortDigitaalAdres:
-          $ref: '#/components/schemas/SoortDigitaalAdres'
-    Land:
-      type: object
-      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
-      required:
-      - einddatumLand
-      - ingangsdatumLand
-      - landcode
-      - landnaam
-      properties:
-        einddatumLand:
-          type: string
-          title: Einddatum land
-          description: De datum waarop het land/gebied is opgeheven.
-          format: date
-        ingangsdatumLand:
-          type: string
-          title: Ingangsdatum land
-          description: De datum waarop het land/gebied is ontstaan.
-          format: date
-        landcode:
-          type: string
-          title: Landcode
-          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
-          minLength: 1
-        landnaam:
-          type: string
-          title: Landnaam
-          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
-          minLength: 1
-    Omschrijvingkort:
-      type: string
-      description: ''
-      maxLength: 40
+      - binnenlands_adres
+      - buitenlands_adres
     ObjectVanKlantcontact:
       type: object
       description: De relatie tussen het klantcontact en de Zaak, Klanttaak of ander object waar dit klantcontact betrekking op heeft.
@@ -1305,23 +1007,13 @@ components:
           format: uri
           readOnly: true
           example: datapunt.voorbeeldgemeente.nl/api/v1/Klantcontacten/123456789
-    RegistreerKlantcontactGaatOverInterneTaak_parameters:
+    Inhoudsdeel:
       type: object
-      description: ''
-      required:
-      - interneTaakId
-      - klantcontactId
-      properties:
-        interneTaakId:
-          $ref: '#/components/schemas/Identificatiecode'
-        klantcontactId:
-          $ref: '#/components/schemas/Identificatiecode'
-    Inhoudsdeel_param:
-      type: object
-      description: ''
+      description: (Een deel van) de inhoud van een klantcontact. Deze inhoud kan bestaan uit stuk tekst dat in het element tekst is opgenomen of een verwijzing naar een object zoals een informatie-object, een object uit de overige objectenregistratie of een ander object.
       required:
       - externId
       - externRegister
+      - id
       - indicatieWeerTeGeven
       - omschrijving
       - soortInhoudsdeel
@@ -1330,6 +1022,8 @@ components:
           $ref: '#/components/schemas/Identificatiecode'
         externRegister:
           $ref: '#/components/schemas/Omschrijvingkort'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
         indicatieWeerTeGeven:
           $ref: '#/components/schemas/IndicatieJaNee'
         omschrijving:
@@ -1338,66 +1032,6 @@ components:
           $ref: '#/components/schemas/SoortInhoudsdeel'
         tekst:
           $ref: '#/components/schemas/Omschrijvinglang'
-    Identificerendnummer:
-      type: integer
-      description: ''
-    SoortBezoekadres:
-      type: string
-      description: Typering waarmee aangegeven of het bezoekadres een binnenlands - of een buitenlands adres is.<body><ul><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
-      enum:
-      - binnenlands_adres
-      - buitenlands_adres
-    Straat:
-      type: string
-      description: ''
-      maxLength: 80
-    Postcode:
-      type: string
-      description: ''
-      maxLength: 7
-    Kanaal:
-      type: object
-      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het kanaal.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van het kanaal.
-          minLength: 1
-    BetrokkeneBijKlantcontact_param:
-      type: object
-      description: ''
-      required:
-      - digitaalAdres
-      - rol
-      properties:
-        bezoekadres:
-          $ref: '#/components/schemas/Bezoekadres'
-        correspondentieadres:
-          $ref: '#/components/schemas/Correspondentieadres'
-        digitaalAdres:
-          $ref: '#/components/schemas/DigitaalAdres'
-        organisatienaam:
-          $ref: '#/components/schemas/Naamlang'
-        persoonsnaam:
-          $ref: '#/components/schemas/Persoonsnaamgegevens'
-        rol:
-          $ref: '#/components/schemas/Klantcontactrol'
-        voorkeurskanaal:
-          $ref: '#/components/schemas/Kanaal'
-        voorkeurstaal:
-          $ref: '#/components/schemas/Voorkeurstaal'
     Bezoekadres:
       type: object
       description: Een bezoekadres is een adres waar een persoon of een bedrijf bezoekers ontvangt.
@@ -1428,42 +1062,264 @@ components:
           $ref: '#/components/schemas/Straat'
         woonplaats:
           $ref: '#/components/schemas/Woonplaats'
-    Postbusnummer:
+    Identificerendnummer:
       type: integer
       description: ''
+    SoortDigitaalAdres:
+      type: object
+      description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort digitaal adres.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort digitaal adres.
+          minLength: 1
     IndicatieJaNeeOnbekend:
       type: string
       description: Deze enumeratie is toegevoegd omdat de ingevulde waarde geen boolean kan zijn (waar of niet waar). De gewenste waarden zijn ja,nee of onbekend.<body><ul><li>`onbekend` - </li><li>`ja` - Het verzoek is afgehandeld.</li></ul></body>
       enum:
       - onbekend
       - ja
-    IndicatieJaNee:
-      type: boolean
+    Registreerkeukentafelgesprek_parameters:
+      type: object
       description: ''
+      required:
+      - actorId
+      - betrokkeneBijKlantcontact
+      - indicatieHergebruikPartij
+      - initiatiefnemer
+      - onderwerp
+      properties:
+        actorId:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Identificatiecode'
+        betrokkeneBijKlantcontact:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/BetrokkeneBijKlantcontact_param'
+        indicatieHergebruikPartij:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        inhoudsdeel:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/Inhoudsdeel_param'
+        initiatiefnemer:
+          $ref: '#/components/schemas/Initiatiefnemer'
+        onderwerp:
+          $ref: '#/components/schemas/Omschrijvingkort'
+    Huisnummer:
+      type: integer
+      description: ''
+    Postbusnummer:
+      type: integer
+      description: ''
+    Correspondentieadres:
+      type: object
+      description: Het adres waarnaar de persoon of de organisatie de voor hen bestemde correspondentie laat verzenden.
+      required:
+      - soortCorrespondentieadres
+      properties:
+        aanduidingBijHuisnummer:
+          $ref: '#/components/schemas/AanduidingBijHuisnummer'
+        adresregelBuitenland1:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland2:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland3:
+          $ref: '#/components/schemas/Adresregel'
+        antwoordnummer:
+          $ref: '#/components/schemas/Antwoordnummer'
+        huisletter:
+          $ref: '#/components/schemas/Huisletter'
+        huisnummer:
+          $ref: '#/components/schemas/Huisnummer'
+        huisnummertoevoeging:
+          $ref: '#/components/schemas/Huisnummertoevoeging'
+        land:
+          $ref: '#/components/schemas/Land'
+        postbusnummer:
+          $ref: '#/components/schemas/Postbusnummer'
+        postcode:
+          $ref: '#/components/schemas/Postcode'
+        soortCorrespondentieadres:
+          $ref: '#/components/schemas/SoortCorrespondentieadres'
+        straat:
+          $ref: '#/components/schemas/Straat'
+        woonplaats:
+          $ref: '#/components/schemas/Woonplaats'
+    SoortInhoudsdeel:
+      type: string
+      description: De typering van het inhoudsdeel.<body><ul><li>`informatieobject` - informatieobject </li><li>`overig_object` - overig object </li><li>`tekst` - tekst </li></ul></body>
+      enum:
+      - informatieobject
+      - overig_object
+      - tekst
+    Postcode:
+      type: string
+      description: ''
+      maxLength: 7
+    Antwoordnummer:
+      type: integer
+      description: ''
+    Kanaal:
+      type: object
+      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het kanaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het kanaal.
+          minLength: 1
+    Klantcontactrol:
+      type: string
+      description: De typering van de rol van de persoon of organisatie in het klantcontact.
+      enum:
+      - vertegenwoordiger
+      - klant
+    RegistreerKlantcontactGaatOverInterneTaak_parameters:
+      type: object
+      description: ''
+      required:
+      - interneTaakId
+      - klantcontactId
+      properties:
+        interneTaakId:
+          $ref: '#/components/schemas/Identificatiecode'
+        klantcontactId:
+          $ref: '#/components/schemas/Identificatiecode'
     Omschrijvinglang:
       type: string
       description: ''
       maxLength: 200
-    Persoonsnaamgegevens:
+    Inhoudsdeel_param:
       type: object
-      description: De naamgegevens van een persoon.
+      description: ''
+      required:
+      - externId
+      - externRegister
+      - indicatieWeerTeGeven
+      - omschrijving
+      - soortInhoudsdeel
       properties:
-        achternaam:
-          type: string
-          title: Achternaam
-          description: De axhternaam waarmee de persoon aangesproken wnest te worden. Deze zal over het algemeen gelijk zijn aan de (geslachts)naam waarvan de eventueel aanwezige voorvoegsels en adellijke titel/predikaat zijn afgesplitst.
-        voornaam:
-          type: string
-          title: Voornaam
-          description: De roepnaam waarmee de persoon wenst aangeproken te worden.
-        voorvoegselAchternaam:
-          type: string
-          title: Voorvoegsel achternaam
-          description: Dat deel van de achternaam dat voorkomt in de Voorvoegseltabel en, gescheiden door een spatie, vooraf gaat aan de rest van de achternaam.
-    Naamlang:
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        externRegister:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        indicatieWeerTeGeven:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        soortInhoudsdeel:
+          $ref: '#/components/schemas/SoortInhoudsdeel'
+        tekst:
+          $ref: '#/components/schemas/Omschrijvinglang'
+    Omschrijvingkort:
       type: string
       description: ''
-      maxLength: 200
+      maxLength: 40
+    Voorkeurstaal:
+      type: object
+      description: Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij de voorkeurstaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van de voorkeurstaal.
+          minLength: 1
+    Land:
+      type: object
+      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
+      required:
+      - einddatumLand
+      - ingangsdatumLand
+      - landcode
+      - landnaam
+      properties:
+        einddatumLand:
+          type: string
+          title: Einddatum land
+          description: De datum waarop het land/gebied is opgeheven.
+          format: date
+        ingangsdatumLand:
+          type: string
+          title: Ingangsdatum land
+          description: De datum waarop het land/gebied is ontstaan.
+          format: date
+        landcode:
+          type: string
+          title: Landcode
+          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
+          minLength: 1
+        landnaam:
+          type: string
+          title: Landnaam
+          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
+          minLength: 1
+    SoortObject:
+      type: object
+      description: Een opsomming van de soorten objecten waarmee een koppeling gelegd wordt vanuit het register klantinteracties.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort object.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort object.
+          minLength: 1
+    VerwijderKlantcontactGaatOver_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      properties:
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
     SoortCorrespondentieadres:
       type: string
       description: Typering waarmee aangegeven wordt of het correspondentieadres een binnenlands - of een buitenlands adres is danwel een postbusnummer of een antwoordnummer.<body><ul><li>`postbusnummer` - postbusnummer </li><li>`antwoordnummer` - antwoordnummer </li><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
@@ -1472,26 +1328,150 @@ components:
       - antwoordnummer
       - binnenlands_adres
       - buitenlands_adres
-    FieldValidationError:
+    Woonplaats:
+      type: string
+      description: ''
+      maxLength: 80
+    Klantcontact:
       type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
+      description: "Een contact tussen een klant of een vertegenwoordiger van een klant en de gemeente.\n\nHet klantcontact is bedoeld om inwoners of ondernemers die contact hebben gehad met de gemeente op een voor hen zo begrijpelijk en relevant mogelijke manier te infomeren over de inhoud van dat contact. Over een klantcontact vastgelegde informatie kan bijvoorbeeld (na inloggen) worden getoond op de gemeentelijke website of telefonisch worden verstrekt door een medewerker van het klantcontactcentrum. Als gevolg hiervan is de volledige inhoud van een klantcontact geschikt voor openbaarmaking aan betrokken inwoners. De definitie van klantcontact is bewust wat 'open' gelaten. Op deze manier passen daarbinnen ook contacten die voortkomen uit nu onvoorziene scenario's of via nog te ontwikkelen kanalen. Uitgangspunt is in alle gevallen dat ????n klantcontact de informatie omvat die een klant of dienst vertegenwoordiger tijdens een voor hen herkenbare handeling of gebeurtenis overbrengt aan de gemeente of vice versa. Zo'n handeling kan bijvoorbeeld het afleggen van baliebezoek zijn, het telefonisch voeren van een gesprek met een medewerker of een interactie met een chatbot op de gemeentelijke website. Maar ook gebeurtenissen als het indienen van een elektronisch formulier of het versturen van een brief door de gemeente aan een klant of vertegenwoordiger resulteren in een klantcontact. Voor het bepalen van het begin en eind van een klantcontact geldt dat informatie die binnen een korte tijdsperiode tussen gemeente en klant wordt uitgewisseld waar mogelijk resulteert in ????n klantcontact, terwijl een verzonden kennisgeving en een uren of dagen later ontvangen reactie daarop resulteren in twee ???losse??? klantcontacten. Dit betekent dat een klantcontact naar aanleiding van een telefoongesprek 'duurt' van het aannemen van het gesprek tot het be??indigen hiervan, terwijl een contact naar aanleiding van een baliebezoek de periode beschrijft vanaf het aan een medewerker verschijnen van een klant of vertegenwoordiger tot aan diens vertrek. In het geval van ontvangst door de gemeente van een brief van een klant waarop de gemeente enige dagen later eveneens schriftelijk reageert, worden beide brieven daarentegen als twee individuele klantcontacten te beschouwd. Tussen de voorbeelden hierboven in ligt een aantal kanalen waarbij informatie minder snel wordt uitgewisseld dan bij een telefoongesprek of baliecontact, maar (veel) sneller dan bij een briefwisseling. Denk aan communicatie via contactformulieren, e-mail of chatapps en -bots. Zeker in de laatste gevallen kan sprake zijn van korte, elkaar snel opvolgende interacties die samen het karakter hebben van een gesprek. Anders dan een telefoon- of baliegesprek kan een interactie via deze kanalen echter voor uren of dagen onderbroken worden, om daarna weer te worden opgepakt. In zo'n geval is het aan medewerkers van de gemeente - in geval van geautomatiseerde interacties samen met systeemontwikkelaars - om te bepalen wat vanuit klantperspectief de meest voor de hand liggende ???omvang??? van een klantcontact is. Tijdens een klantcontact kan duidelijk worden dat een inwoner verschillende verzoeken voor de gemeente heeft. Een klant kan tijdens een telefoongesprek bijvoorbeeld vragen naar een afspraak voor overleg over een te verbouwen woning en daarnaast een verzakking van stoep voor zijn huis melden. Deze verzoeken moeten op uiteenlopende wijze en waarschijnlijk door verschillende afdelingen worden opgevolgd. Met het bepalen welke medewerlkers of afdelingen nodig zijn om aan verzoeken van een klant invulling te geven, begint in feite de behandeling van deze verzoeken. Deze behandeling is nadrukkelijk g????n onderdeel van het klantcontact. Anders dan het registreren van voor het klantcontact relevante onderwerpen biedt het klantcontact dan ook geen mogelijkheden de inhoud daarvan naar verschillende verzoeken, aanvragen of meldingen uit te splitsen. Hiervoor zijn de concepten 'interne taak' en 'zaak' bedoeld. Het klantcontact uit het voorbeeld hierboven zou bijvoorbeeld aanleiding kunnen zijn voor het aanmaken van zowel een zaak van type 'melding openbare ruimte' om de stoep te herstellen, als een interne taak voor een medewerker van de afdeling fysieke leefomgeving om een afspraak te maken voor overleg over de voorgenomen verbouwing.\n\nHet klantcontact is bedoeld om inwoners of ondernemers die contact hebben gehad met de gemeente op een voor hen zo begrijpelijk en relevant mogelijke manier te infomeren over de inhoud van dat contact. Over een klantcontact vastgelegde informatie kan bijvoorbeeld (na inloggen) worden getoond op de gemeentelijke website of telefonisch worden verstrekt door een medewerker van het klantcontactcentrum. Als gevolg hiervan is de volledige inhoud van een klantcontact geschikt voor openbaarmaking aan betrokken inwoners. De definitie van klantcontact is bewust wat 'open' gelaten. Op deze manier passen daarbinnen ook contacten die voortkomen uit nu onvoorziene scenario's of via nog te ontwikkelen kanalen. Uitgangspunt is in alle gevallen dat ????n klantcontact de informatie omvat die een klant of dienst vertegenwoordiger tijdens een voor hen herkenbare handeling of gebeurtenis overbrengt aan de gemeente of vice versa. Zo'n handeling kan bijvoorbeeld het afleggen van baliebezoek zijn, het telefonisch voeren van een gesprek met een medewerker of een interactie met een chatbot op de gemeentelijke website. Maar ook gebeurtenissen als het indienen van een elektronisch formulier of het versturen van een brief door de gemeente aan een klant of vertegenwoordiger resulteren in een klantcontact. Voor het bepalen van het begin en eind van een klantcontact geldt dat informatie die binnen een korte tijdsperiode tussen gemeente en klant wordt uitgewisseld waar mogelijk resulteert in ????n klantcontact, terwijl een verzonden kennisgeving en een uren of dagen later ontvangen reactie daarop resulteren in twee ???losse??? klantcontacten. Dit betekent dat een klantcontact naar aanleiding van een telefoongesprek 'duurt' van het aannemen van het gesprek tot het be??indigen hiervan, terwijl een contact naar aanleiding van een baliebezoek de periode beschrijft vanaf het aan een medewerker verschijnen van een klant of vertegenwoordiger tot aan diens vertrek. In het geval van ontvangst door de gemeente van een brief van een klant waarop de gemeente enige dagen later eveneens schriftelijk reageert, worden beide brieven daarentegen als twee individuele klantcontacten te beschouwd. Tussen de voorbeelden hierboven in ligt een aantal kanalen waarbij informatie minder snel wordt uitgewisseld dan bij een telefoongesprek of baliecontact, maar (veel) sneller dan bij een briefwisseling. Denk aan communicatie via contactformulieren, e-mail of chatapps en -bots. Zeker in de laatste gevallen kan sprake zijn van korte, elkaar snel opvolgende interacties die samen het karakter hebben van een gesprek. Anders dan een telefoon- of baliegesprek kan een interactie via deze kanalen echter voor uren of dagen onderbroken worden, om daarna weer te worden opgepakt. In zo'n geval is het aan medewerkers van de gemeente - in geval van geautomatiseerde interacties samen met systeemontwikkelaars - om te bepalen wat vanuit klantperspectief de meest voor de hand liggende ???omvang??? van een klantcontact is. Tijdens een klantcontact kan duidelijk worden dat een inwoner verschillende verzoeken voor de gemeente heeft. Een klant kan tijdens een telefoongesprek bijvoorbeeld vragen naar een afspraak voor overleg over een te verbouwen woning en daarnaast een verzakking van stoep voor zijn huis melden. Deze verzoeken moeten op uiteenlopende wijze en waarschijnlijk door verschillende afdelingen worden opgevolgd. Met het bepalen welke medewerlkers of afdelingen nodig zijn om aan verzoeken van een klant invulling te geven, begint in feite de behandeling van deze verzoeken. Deze behandeling is nadrukkelijk g????n onderdeel van het klantcontact. Anders dan het registreren van voor het klantcontact relevante onderwerpen biedt het klantcontact dan ook geen mogelijkheden de inhoud daarvan naar verschillende verzoeken, aanvragen of meldingen uit te splitsen. Hiervoor zijn de concepten 'interne taak' en 'zaak' bedoeld. Het klantcontact uit het voorbeeld hierboven zou bijvoorbeeld aanleiding kunnen zijn voor het aanmaken van zowel een zaak van type 'melding openbare ruimte' om de stoep te herstellen, als een interne taak voor een medewerker van de afdeling fysieke leefomgeving om een afspraak te maken voor overleg over de voorgenomen verbouwing. \n\nHet klantcontact is bedoeld om inwoners of ondernemers die contact hebben gehad met de gemeente op een voor hen zo begrijpelijk en relevant mogelijke manier te infomeren over de inhoud van dat contact. Over een klantcontact vastgelegde informatie kan bijvoorbeeld (na inloggen) worden getoond op de gemeentelijke website of telefonisch worden verstrekt door een medewerker van het klantcontactcentrum. Als gevolg hiervan is de volledige inhoud van een klantcontact geschikt voor openbaarmaking aan betrokken inwoners. De definitie van klantcontact is bewust wat 'open' gelaten. Op deze manier passen daarbinnen ook contacten die voortkomen uit nu onvoorziene scenario's of via nog te ontwikkelen kanalen. Uitgangspunt is in alle gevallen dat ????n klantcontact de informatie omvat die een klant of dienst vertegenwoordiger tijdens een voor hen herkenbare handeling of gebeurtenis overbrengt aan de gemeente of vice versa. Zo'n handeling kan bijvoorbeeld het afleggen van baliebezoek zijn, het telefonisch voeren van een gesprek met een medewerker of een interactie met een chatbot op de gemeentelijke website. Maar ook gebeurtenissen als het indienen van een elektronisch formulier of het versturen van een brief door de gemeente aan een klant of vertegenwoordiger resulteren in een klantcontact. Voor het bepalen van het begin en eind van een klantcontact geldt dat informatie die binnen een korte tijdsperiode tussen gemeente en klant wordt uitgewisseld waar mogelijk resulteert in ????n klantcontact, terwijl een verzonden kennisgeving en een uren of dagen later ontvangen reactie daarop resulteren in twee ???losse??? klantcontacten. Dit betekent dat een klantcontact naar aanleiding van een telefoongesprek 'duurt' van het aannemen van het gesprek tot het be??indigen hiervan, terwijl een contact naar aanleiding van een baliebezoek de periode beschrijft vanaf het aan een medewerker verschijnen van een klant of vertegenwoordiger tot aan diens vertrek. In het geval van ontvangst door de gemeente van een brief van een klant waarop de gemeente enige dagen later eveneens schriftelijk reageert, worden beide brieven daarentegen als twee individuele klantcontacten te beschouwd. Tussen de voorbeelden hierboven in ligt een aantal kanalen waarbij informatie minder snel wordt uitgewisseld dan bij een telefoongesprek of baliecontact, maar (veel) sneller dan bij een briefwisseling. Denk aan communicatie via contactformulieren, e-mail of chatapps en -bots. Zeker in de laatste gevallen kan sprake zijn van korte, elkaar snel opvolgende interacties die samen het karakter hebben van een gesprek. Anders dan een telefoon- of baliegesprek kan een interactie via deze kanalen echter voor uren of dagen onderbroken worden, om daarna weer te worden opgepakt. In zo'n geval is het aan medewerkers van de gemeente - in geval van geautomatiseerde interacties samen met systeemontwikkelaars - om te bepalen wat vanuit klantperspectief de meest voor de hand liggende ???omvang??? van een klantcontact is. Tijdens een klantcontact kan duidelijk worden dat een inwoner verschillende verzoeken voor de gemeente heeft. Een klant kan tijdens een telefoongesprek bijvoorbeeld vragen naar een afspraak voor overleg over een te verbouwen woning en daarnaast een verzakking van stoep voor zijn huis melden. Deze verzoeken moeten op uiteenlopende wijze en waarschijnlijk door verschillende afdelingen worden opgevolgd. Met het bepalen welke medewerlkers of afdelingen nodig zijn om aan verzoeken van een klant invulling te geven, begint in feite de behandeling van deze verzoeken. Deze behandeling is nadrukkelijk g????n onderdeel van het klantcontact. Anders dan het registreren van voor het klantcontact relevante onderwerpen biedt het klantcontact dan ook geen mogelijkheden de inhoud daarvan naar verschillende verzoeken, aanvragen of meldingen uit te splitsen. Hiervoor zijn de concepten 'interne taak' en 'zaak' bedoeld. Het klantcontact uit het voorbeeld hierboven zou bijvoorbeeld aanleiding kunnen zijn voor het aanmaken van zowel een zaak van type 'melding openbare ruimte' om de stoep te herstellen, als een interne taak voor een medewerker van de afdeling fysieke leefomgeving om een afspraak te maken voor overleg over de voorgenomen verbouwing."
       required:
-      - code
-      - name
-      - reason
+      - actorId
+      - betrokkeneBijKlantcontact
+      - geregistreerdOp
+      - id
+      - indicatieContactGelukt
+      - initiatiefnemer
+      - kanaal
+      - nummer
+      - onderwerp
+      - plaatsgevondenOp
+      properties:
+        actorId:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Identificatiecode'
+        betrokkeneBijKlantcontact:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/BetrokkeneBijKlantcontact'
+        geregistreerdOp:
+          $ref: '#/components/schemas/Datumtijd'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieContactGelukt:
+          $ref: '#/components/schemas/IndicatieJaNeeOnbekend'
+        inhoudsdelen:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/Inhoudsdeel'
+        initiatiefnemer:
+          $ref: '#/components/schemas/Initiatiefnemer'
+        kanaal:
+          $ref: '#/components/schemas/Kanaal'
+        nummer:
+          $ref: '#/components/schemas/Identificerendnummer'
+        onderwerp:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        plaatsgevondenOp:
+          $ref: '#/components/schemas/Datumtijd'
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
+    Adresregel:
+      type: string
+      description: Een generieke regel om adresgegevens in op te nemen.
+      maxLength: 80
+    Registreertelefoongesprek_parameters:
+      type: object
+      description: ''
+      required:
+      - actorId
+      - betrokkeneBijKlantcontact
+      - indicatieHergebruikPartij
+      - onderwerp
+      properties:
+        actorId:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Identificatiecode'
+        betrokkeneBijKlantcontact:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/BetrokkeneBijKlantcontact_param'
+        indicatieHergebruikPartij:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        inhoudsdeel:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/Inhoudsdeel_param'
+        onderwerp:
+          $ref: '#/components/schemas/Omschrijvingkort'
+    Straat:
+      type: string
+      description: ''
+      maxLength: 80
+    BetrokkeneBijKlantcontact_param:
+      type: object
+      description: ''
+      required:
+      - digitaalAdres
+      - rol
+      properties:
+        bezoekadres:
+          $ref: '#/components/schemas/Bezoekadres'
+        correspondentieadres:
+          $ref: '#/components/schemas/Correspondentieadres'
+        digitaalAdres:
+          $ref: '#/components/schemas/DigitaalAdres'
+        organisatienaam:
+          $ref: '#/components/schemas/Naamlang'
+        persoonsnaam:
+          $ref: '#/components/schemas/Persoonsnaamgegevens'
+        rol:
+          $ref: '#/components/schemas/Klantcontactrol'
+        voorkeurskanaal:
+          $ref: '#/components/schemas/Kanaal'
+        voorkeurstaal:
+          $ref: '#/components/schemas/Voorkeurstaal'
+    Datumtijd:
+      type: string
+      description: ''
+      format: date-time
+    RegistreerKlantcontactGaatOverObject_parameters:
+      type: object
+      description: ''
+      required:
+      - externId
+      - externRegister
+      - klantcontactId
+      - ontstaanUitKlantcontact
+      - soortObject
+      properties:
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        externRegister:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        klantcontactId:
+          $ref: '#/components/schemas/Identificatiecode'
+        ontstaanUitKlantcontact:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        soortObject:
+          $ref: '#/components/schemas/SoortObject'
+    IndicatieJaNee:
+      type: boolean
+      description: ''
+    Huisletter:
+      type: string
+      description: ''
+      maxLength: 1
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -1524,6 +1504,68 @@ components:
       - code
       - detail
       - instance
+      - status
+      - title
+    PaginatedKlantContactList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/KlantContact'
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
       - status
       - title
     KlantContact:
@@ -1580,75 +1622,31 @@ components:
       - url
       - uuid
       - zaak
-    ValidatieFout:
+    FieldValidationError:
       type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
+      description: Formaat van validatiefouten.
       properties:
-        type:
+        name:
           type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
+          description: Naam van het veld met ongeldige gegevens
+          title: name
         code:
           type: string
           description: Systeemcode die het type fout aangeeft
           title: code
-        title:
+        reason:
           type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
       required:
       - code
-      - detail
-      - instance
-      - invalidParams
-      - status
-      - title
-    PaginatedKlantContactList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/KlantContact'
+      - name
+      - reason
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
 x-refined-from:
-- vng-realisatie-klantinteracties-openapi.yml
-- vng-realisatie-zaken-openapi.yml
 - vng-realisatie-klantinteracties-openapi.yml
 - vng-realisatie-zaken-openapi.yml

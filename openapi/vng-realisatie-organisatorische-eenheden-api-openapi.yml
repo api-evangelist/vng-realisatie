@@ -1,16 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Organisatorische eenheden API
+  title: Klantinteracties Organisatorische eenheden API
+  description: Een API om een klantinteractiecomponent (KIC) te benaderen.
   version: 00.01.00
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
   contact:
     url: http://www.verzoeken.nl
     email: standaarden.ondersteuning@vng.nl
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
     url: https://eupl.eu/1.2/nl/
-  x-imvertor-generator-version: 2.0.0
-  x-yamlCompiler-stylesheets-version: '20230512'
-  description: 'Operations tagged Organisatorische eenheden across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
@@ -66,11 +66,6 @@ paths:
       - Organisatorische eenheden
       summary: Registreerorganisatorischeeenheid
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_wijzig_organisatorische_eenheid:
     post:
       operationId: wijzigorganisatorischeeenheid
@@ -118,11 +113,6 @@ paths:
       - Organisatorische eenheden
       summary: Wijzigorganisatorischeeenheid
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_zoek_organisatorische_eenheid:
     post:
       operationId: zoekorganisatorischeeenheid
@@ -170,13 +160,16 @@ paths:
       - Organisatorische eenheden
       summary: Zoekorganisatorischeeenheid
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
 components:
   schemas:
+    Naamlang:
+      type: string
+      description: ''
+      maxLength: 200
+    Telefoonnummer:
+      type: string
+      description: ''
+      maxLength: 20
     SoortActor:
       type: string
       description: De typering van de actor.<body><ul><li>`medewerker` - medewerker </li><li>`geautomatiseerde_actor` - geautomatiseerde actor </li><li>`organisatorische_eenheid` - organisatorische eenheid </li></ul></body>
@@ -184,6 +177,10 @@ components:
       - medewerker
       - geautomatiseerde_actor
       - organisatorische_eenheid
+    Emailadres:
+      type: string
+      description: Een geldig email-adres, maximaal 20 karakters lang en minimaal een @ en een . opgenomen.
+      maxLength: 200
     Omschrijvingkort:
       type: string
       description: ''
@@ -212,6 +209,23 @@ components:
             $ref: '#/components/schemas/Omschrijvingkort'
           telefoonnummer:
             $ref: '#/components/schemas/Telefoonnummer'
+    Actor:
+      type: object
+      description: De acor handelt in een interne taak of een klantcontact.
+      required:
+      - id
+      - indicatieActief
+      - naam
+      - soortActor
+      properties:
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        soortActor:
+          $ref: '#/components/schemas/SoortActor'
     ZoekOrganisatorischeEenheid_parameters:
       type: object
       description: ''
@@ -230,6 +244,9 @@ components:
           $ref: '#/components/schemas/Omschrijvingkort'
         telefoonnummer:
           $ref: '#/components/schemas/Telefoonnummer'
+    IndicatieJaNee:
+      type: boolean
+      description: ''
     WijzigOrganisatorischeEenheid_parameters:
       type: object
       description: ''
@@ -252,6 +269,10 @@ components:
           $ref: '#/components/schemas/Omschrijvingkort'
         telefoonnummer:
           $ref: '#/components/schemas/Telefoonnummer'
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
     RegistreerOrganisatorischeEenheid_parameters:
       type: object
       description: ''
@@ -272,42 +293,3 @@ components:
           $ref: '#/components/schemas/Omschrijvingkort'
         telefoonnummer:
           $ref: '#/components/schemas/Telefoonnummer'
-    Telefoonnummer:
-      type: string
-      description: ''
-      maxLength: 20
-    IndicatieJaNee:
-      type: boolean
-      description: ''
-    Emailadres:
-      type: string
-      description: Een geldig email-adres, maximaal 20 karakters lang en minimaal een @ en een . opgenomen.
-      maxLength: 200
-    Naamlang:
-      type: string
-      description: ''
-      maxLength: 200
-    Identificatiecode:
-      type: string
-      description: ''
-      maxLength: 40
-    Actor:
-      type: object
-      description: De acor handelt in een interne taak of een klantcontact.
-      required:
-      - id
-      - indicatieActief
-      - naam
-      - soortActor
-      properties:
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          $ref: '#/components/schemas/Naamlang'
-        soortActor:
-          $ref: '#/components/schemas/SoortActor'
-x-refined-from:
-- vng-realisatie-klantinteracties-openapi.yml
-- vng-realisatie-klantinteracties-openapi.yml

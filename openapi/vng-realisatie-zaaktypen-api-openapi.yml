@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Zaaktypen API
+  title: Catalogi Zaaktypen API
   version: 1.3.1
+  description: Een API om een zaaktypecatalogus (ZTC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged zaaktypen across 2 of this provider''s published API definitions: vng-realisatie-catalogi-openapi.yml, vng-realisatie-catalogi-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://catalogi-api.vng.cloud/api/v1
   description: Productie Omgeving
@@ -355,9 +355,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /zaaktypen/{uuid}:
     get:
       operationId: zaaktype_retrieve
@@ -1000,9 +997,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ZaakType'
           description: OK
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /zaaktypen/{uuid}/publish:
     post:
       operationId: zaaktype_publish
@@ -1109,81 +1103,340 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
 components:
   schemas:
-    VertrouwelijkheidaanduidingEnum:
-      enum:
-      - openbaar
-      - beperkt_openbaar
-      - intern
-      - zaakvertrouwelijk
-      - vertrouwelijk
-      - confidentieel
-      - geheim
-      - zeer_geheim
-      type: string
-    FieldValidationError:
+    ZaakType:
       type: object
-      description: Formaat van validatiefouten.
+      description: 'Set gegevensgroepdata from validated nested data.
+
+
+        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
       properties:
-        name:
+        url:
           type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        identificatie:
           type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
+          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
+          title: identificatie
+          maxLength: 50
+        omschrijving:
           type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
+          description: Omschrijving van de aard van ZAAKen van het ZAAKTYPE.
+          title: omschrijving
+          maxLength: 80
+        omschrijvingGeneriek:
+          type: string
+          description: Algemeen gehanteerde omschrijving van de aard van ZAAKen van het ZAAKTYPE
+          title: omschrijving generiek
+          maxLength: 80
+        vertrouwelijkheidaanduiding:
+          allOf:
+          - $ref: '#/components/schemas/VertrouwelijkheidaanduidingEnum'
+          description: 'Aanduiding van de mate waarin zaakdossiers van ZAAKen van dit ZAAKTYPE voor de openbaarheid bestemd zijn. Indien de zaak bij het aanmaken geen vertrouwelijkheidaanduiding krijgt, dan wordt deze waarde gezet.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `openbaar` - Openbaar
+
+            * `beperkt_openbaar` - Beperkt openbaar
+
+            * `intern` - Intern
+
+            * `zaakvertrouwelijk` - Zaakvertrouwelijk
+
+            * `vertrouwelijk` - Vertrouwelijk
+
+            * `confidentieel` - Confidentieel
+
+            * `geheim` - Geheim
+
+            * `zeer_geheim` - Zeer geheim'
+          title: vertrouwelijkheidaanduiding
+        doel:
+          type: string
+          description: Een omschrijving van hetgeen beoogd is te bereiken met een zaak van dit zaaktype.
+          title: doel
+        aanleiding:
+          type: string
+          description: Een omschrijving van de gebeurtenis die leidt tot het starten van een ZAAK van dit ZAAKTYPE.
+          title: aanleiding
+        toelichting:
+          type: string
+          description: Een eventuele toelichting op dit zaaktype, zoals een beschrijving van het procesverloop op de hoofdlijnen.
+          title: toelichting
+        indicatieInternOfExtern:
+          allOf:
+          - $ref: '#/components/schemas/IndicatieInternOfExternEnum'
+          description: 'Een aanduiding waarmee onderscheid wordt gemaakt tussen ZAAKTYPEn die Intern respectievelijk Extern geïnitieerd worden. Indien van beide sprake kan zijn, dan prevaleert de externe initiatie.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `inkomend` - Inkomend
+
+            * `intern` - Intern
+
+            * `uitgaand` - Uitgaand'
+          title: indicatie intern of extern
+        handelingInitiator:
+          type: string
+          description: Werkwoord dat hoort bij de handeling die de initiator verricht bij dit zaaktype. Meestal 'aanvragen', 'indienen' of 'melden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_initiator
+          title: handeling initiator
+          maxLength: 20
+        onderwerp:
+          type: string
+          description: 'Het onderwerp van ZAAKen van dit ZAAKTYPE. In veel gevallen nauw gerelateerd aan de product- of dienstnaam uit de Producten- en Dienstencatalogus (PDC). Bijvoorbeeld: ''Evenementenvergunning'', ''Geboorte'', ''Klacht''. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.onderwerp'
+          title: onderwerp
+          maxLength: 80
+        handelingBehandelaar:
+          type: string
+          description: Werkwoord dat hoort bij de handeling die de behandelaar verricht bij het afdoen van ZAAKen van dit ZAAKTYPE. Meestal 'behandelen', 'uitvoeren', 'vaststellen' of 'onderhouden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_behandelaar
+          title: handeling behandelaar
+          maxLength: 20
+        doorlooptijd:
+          type: string
+          description: De periode waarbinnen volgens wet- en regelgeving een ZAAK van het ZAAKTYPE afgerond dient te zijn, in kalenderdagen.
+          title: doorlooptijd behandeling
+          format: duration
+        servicenorm:
+          type:
+          - string
+          - 'null'
+          description: De periode waarbinnen verwacht wordt dat een ZAAK van het ZAAKTYPE afgerond wordt conform de geldende servicenormen van de zaakbehandelende organisatie(s).
+          title: servicenorm behandeling
+          format: duration
+        opschortingEnAanhoudingMogelijk:
+          type: boolean
+          title: Opschorting/aanhouding mogelijk
+          description: Aanduiding die aangeeft of ZAAKen van dit mogelijk ZAAKTYPE kunnen worden opgeschort en/of aangehouden.
+        verlengingMogelijk:
+          type: boolean
+          description: Aanduiding die aangeeft of de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd.
+          title: verlenging mogelijk
+        verlengingstermijn:
+          type:
+          - string
+          - 'null'
+          description: Een tijdsduur in ISO 8601 formaat waarmee de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd. Mag alleen een waarde bevatten als verlenging mogelijk is.
+          title: verlengingstermijn
+          format: duration
+        trefwoorden:
+          type: array
+          items:
+            type: string
+            title: Trefwoord
+            maxLength: 30
+          description: Een trefwoord waarmee ZAAKen van het ZAAKTYPE kunnen worden gekarakteriseerd.
+          title: trefwoorden
+        publicatieIndicatie:
+          type: boolean
+          description: Aanduiding of (het starten van) een ZAAK dit ZAAKTYPE gepubliceerd moet worden.
+          title: publicatie indicatie
+        publicatietekst:
+          type: string
+          description: De generieke tekst van de publicatie van ZAAKen van dit ZAAKTYPE.
+          title: publicatietekst
+        verantwoordingsrelatie:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+          description: De relatie tussen ZAAKen van dit ZAAKTYPE en de beleidsmatige en/of financiële verantwoording.
+          title: verantwoordingsrelatie
+        productenOfDiensten:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: URL naar product/dienst
+            maxLength: 1000
+          description: Het product of de dienst die door ZAAKen van dit ZAAKTYPE wordt voortgebracht.
+          title: producten of diensten
+        selectielijstProcestype:
+          type: string
+          format: uri
+          description: URL-referentie naar een vanuit archiveringsoptiek onderkende groep processen met dezelfde kenmerken (PROCESTYPE in de Selectielijst API).
+          title: selectielijst procestype
+          maxLength: 200
+        referentieproces:
+          allOf:
+          - $ref: '#/components/schemas/ReferentieProces'
+          description: Het Referentieproces dat ten grondslag ligt aan dit ZAAKTYPE.
+          title: referentieproces
+        verantwoordelijke:
+          type: string
+          description: De (soort) organisatorische eenheid of (functie van) medewerker die verantwoordelijk is voor de uitvoering van zaken van het ZAAKTYPE.
+          title: verantwoordelijke
+          maxLength: 50
+        zaakobjecttypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          title: Zaaktype
+          uniqueItems: true
+        broncatalogus:
+          allOf:
+          - $ref: '#/components/schemas/BronCatalogus'
+          description: De CATALOGUS waaraan het ZAAKTYPE is ontleend.
+          title: broncatalogus
+        bronzaaktype:
+          allOf:
+          - $ref: '#/components/schemas/BronZaaktype'
+          description: Het zaaktype binnen de CATALOGUS waaraan dit ZAAKTYPE is ontleend.
+          title: bronzaaktype
+        catalogus:
+          type: string
+          format: uri
+          description: URL-referentie naar de CATALOGUS waartoe dit ZAAKTYPE behoort.
+          title: Catalogus
+        statustypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de STATUSTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
+          title: Zaaktype
+          uniqueItems: true
+        resultaattypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de RESULTAATTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
+          title: is relevant voor
+          uniqueItems: true
+        eigenschappen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de EIGENSCHAPPEN die aanwezig moeten zijn in ZAKEN van dit ZAAKTYPE.
+          title: Zaaktype
+          uniqueItems: true
+        informatieobjecttypen:
+          type: string
+          readOnly: true
+          title: informatieobjecttypen
+        roltypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de ROLTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
+          title: Zaaktype
+          uniqueItems: true
+        besluittypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: heeft relevante besluittypen
+          title: heeft relevante besluittypen
+          description: URL-referenties naar de BESLUITTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
+          uniqueItems: true
+        deelzaaktypen:
+          type: array
+          items:
+            type:
+            - string
+            - 'null'
+            format: uri
+            title: ''
+          description: De ZAAKTYPE(n) waaronder ZAAKen als deelzaak kunnen voorkomen bij ZAAKen van dit ZAAKTYPE.
+          title: deelzaaktypen
+          uniqueItems: true
+        gerelateerdeZaaktypen:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZaakTypenRelatie'
+          description: De ZAAKTYPEn van zaken die relevant zijn voor zaken van dit ZAAKTYPE.
+          title: zaaktype van
+        beginGeldigheid:
+          type: string
+          format: date
+          description: De datum waarop het is ontstaan.
+          title: datum begin geldigheid
+        eindeGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het is opgeheven.
+          title: datum einde geldigheid
+        beginObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de eerst versie van het object ontstaan is.
+          title: datum begin object
+        eindeObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum van de aller laatste versie van het object.
+          title: datum einde object
+        versiedatum:
+          type: string
+          format: date
+          description: De datum waarop de (gewijzigde) kenmerken van het ZAAKTYPE geldig zijn geworden
+          title: versiedatum
+        concept:
+          type: boolean
+          readOnly: true
+          description: Geeft aan of het object een concept betreft. Concepten zijn niet-definitieve versies en zouden niet gebruikt moeten worden buiten deze API.
+          title: concept
       required:
-      - code
-      - name
-      - reason
-    Fout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
-          type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-      required:
-      - code
-      - detail
-      - instance
-      - status
-      - title
-    IndicatieInternOfExternEnum:
-      enum:
-      - intern
-      - extern
-      type: string
+      - aanleiding
+      - beginGeldigheid
+      - besluittypen
+      - catalogus
+      - concept
+      - doel
+      - doorlooptijd
+      - eigenschappen
+      - gerelateerdeZaaktypen
+      - handelingBehandelaar
+      - handelingInitiator
+      - identificatie
+      - indicatieInternOfExtern
+      - informatieobjecttypen
+      - omschrijving
+      - onderwerp
+      - opschortingEnAanhoudingMogelijk
+      - productenOfDiensten
+      - publicatieIndicatie
+      - referentieproces
+      - resultaattypen
+      - roltypen
+      - statustypen
+      - url
+      - verantwoordelijke
+      - verlengingMogelijk
+      - versiedatum
+      - vertrouwelijkheidaanduiding
+      - zaakobjecttypen
     ZaakTypenRelatie:
       type: object
       properties:
@@ -1239,29 +1492,459 @@ components:
       - domein
       - rsin
       - url
-    BronZaaktype:
+    Fout:
       type: object
-      description: Het zaaktype binnen de CATALOGUS waaraan dit ZAAKTYPE is ontleend.
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+      required:
+      - code
+      - detail
+      - instance
+      - status
+      - title
+    ReferentieProces:
+      type: object
+      description: Het Referentieproces dat ten grondslag ligt aan dit ZAAKTYPE.
+      properties:
+        naam:
+          type: string
+          title: Referentieprocesnaam
+          description: De naam van het Referentieproces.
+          maxLength: 80
+        link:
+          type: string
+          format: uri
+          title: Referentieproceslink
+          description: De URL naar de beschrijving van het Referentieproces
+          maxLength: 200
+      required:
+      - naam
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+    IndicatieInternOfExternEnum:
+      enum:
+      - intern
+      - extern
+      type: string
+    ZaakTypeCreate:
+      type: object
+      description: 'Set gegevensgroepdata from validated nested data.
+
+
+        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
       properties:
         url:
           type: string
           format: uri
-          title: URL-referentie bronzaaktype
-          maxLength: 200
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
         identificatie:
           type: string
-          description: De Zaaktype-identificatie van het bronzaaktype binnen de CATALOGUS.
-          title: bronzaaktype identificatie
+          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
+          title: identificatie
           maxLength: 50
         omschrijving:
           type: string
-          description: De Zaaktype-omschrijving van het bronzaaktype, zoals gehanteerd in de Broncatalogus.
-          title: bronzaaktype omschrijving
+          description: Omschrijving van de aard van ZAAKen van het ZAAKTYPE.
+          title: omschrijving
           maxLength: 80
+        omschrijvingGeneriek:
+          type: string
+          description: Algemeen gehanteerde omschrijving van de aard van ZAAKen van het ZAAKTYPE
+          title: omschrijving generiek
+          maxLength: 80
+        vertrouwelijkheidaanduiding:
+          allOf:
+          - $ref: '#/components/schemas/VertrouwelijkheidaanduidingEnum'
+          description: 'Aanduiding van de mate waarin zaakdossiers van ZAAKen van dit ZAAKTYPE voor de openbaarheid bestemd zijn. Indien de zaak bij het aanmaken geen vertrouwelijkheidaanduiding krijgt, dan wordt deze waarde gezet.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `openbaar` - Openbaar
+
+            * `beperkt_openbaar` - Beperkt openbaar
+
+            * `intern` - Intern
+
+            * `zaakvertrouwelijk` - Zaakvertrouwelijk
+
+            * `vertrouwelijk` - Vertrouwelijk
+
+            * `confidentieel` - Confidentieel
+
+            * `geheim` - Geheim
+
+            * `zeer_geheim` - Zeer geheim'
+          title: vertrouwelijkheidaanduiding
+        doel:
+          type: string
+          description: Een omschrijving van hetgeen beoogd is te bereiken met een zaak van dit zaaktype.
+          title: doel
+        aanleiding:
+          type: string
+          description: Een omschrijving van de gebeurtenis die leidt tot het starten van een ZAAK van dit ZAAKTYPE.
+          title: aanleiding
+        toelichting:
+          type: string
+          description: Een eventuele toelichting op dit zaaktype, zoals een beschrijving van het procesverloop op de hoofdlijnen.
+          title: toelichting
+        indicatieInternOfExtern:
+          allOf:
+          - $ref: '#/components/schemas/IndicatieInternOfExternEnum'
+          description: 'Een aanduiding waarmee onderscheid wordt gemaakt tussen ZAAKTYPEn die Intern respectievelijk Extern geïnitieerd worden. Indien van beide sprake kan zijn, dan prevaleert de externe initiatie.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `inkomend` - Inkomend
+
+            * `intern` - Intern
+
+            * `uitgaand` - Uitgaand'
+          title: indicatie intern of extern
+        handelingInitiator:
+          type: string
+          description: Werkwoord dat hoort bij de handeling die de initiator verricht bij dit zaaktype. Meestal 'aanvragen', 'indienen' of 'melden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_initiator
+          title: handeling initiator
+          maxLength: 20
+        onderwerp:
+          type: string
+          description: 'Het onderwerp van ZAAKen van dit ZAAKTYPE. In veel gevallen nauw gerelateerd aan de product- of dienstnaam uit de Producten- en Dienstencatalogus (PDC). Bijvoorbeeld: ''Evenementenvergunning'', ''Geboorte'', ''Klacht''. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.onderwerp'
+          title: onderwerp
+          maxLength: 80
+        handelingBehandelaar:
+          type: string
+          description: Werkwoord dat hoort bij de handeling die de behandelaar verricht bij het afdoen van ZAAKen van dit ZAAKTYPE. Meestal 'behandelen', 'uitvoeren', 'vaststellen' of 'onderhouden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_behandelaar
+          title: handeling behandelaar
+          maxLength: 20
+        doorlooptijd:
+          type: string
+          description: De periode waarbinnen volgens wet- en regelgeving een ZAAK van het ZAAKTYPE afgerond dient te zijn, in kalenderdagen.
+          title: doorlooptijd behandeling
+          format: duration
+        servicenorm:
+          type:
+          - string
+          - 'null'
+          description: De periode waarbinnen verwacht wordt dat een ZAAK van het ZAAKTYPE afgerond wordt conform de geldende servicenormen van de zaakbehandelende organisatie(s).
+          title: servicenorm behandeling
+          format: duration
+        opschortingEnAanhoudingMogelijk:
+          type: boolean
+          title: Opschorting/aanhouding mogelijk
+          description: Aanduiding die aangeeft of ZAAKen van dit mogelijk ZAAKTYPE kunnen worden opgeschort en/of aangehouden.
+        verlengingMogelijk:
+          type: boolean
+          description: Aanduiding die aangeeft of de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd.
+          title: verlenging mogelijk
+        verlengingstermijn:
+          type:
+          - string
+          - 'null'
+          description: Een tijdsduur in ISO 8601 formaat waarmee de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd. Mag alleen een waarde bevatten als verlenging mogelijk is.
+          title: verlengingstermijn
+          format: duration
+        trefwoorden:
+          type: array
+          items:
+            type: string
+            title: Trefwoord
+            maxLength: 30
+          description: Een trefwoord waarmee ZAAKen van het ZAAKTYPE kunnen worden gekarakteriseerd.
+          title: trefwoorden
+        publicatieIndicatie:
+          type: boolean
+          description: Aanduiding of (het starten van) een ZAAK dit ZAAKTYPE gepubliceerd moet worden.
+          title: publicatie indicatie
+        publicatietekst:
+          type: string
+          description: De generieke tekst van de publicatie van ZAAKen van dit ZAAKTYPE.
+          title: publicatietekst
+        verantwoordingsrelatie:
+          type: array
+          items:
+            type: string
+            maxLength: 40
+          description: De relatie tussen ZAAKen van dit ZAAKTYPE en de beleidsmatige en/of financiële verantwoording.
+          title: verantwoordingsrelatie
+        productenOfDiensten:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: URL naar product/dienst
+            maxLength: 1000
+          description: Het product of de dienst die door ZAAKen van dit ZAAKTYPE wordt voortgebracht.
+          title: producten of diensten
+        selectielijstProcestype:
+          type: string
+          format: uri
+          description: URL-referentie naar een vanuit archiveringsoptiek onderkende groep processen met dezelfde kenmerken (PROCESTYPE in de Selectielijst API).
+          title: selectielijst procestype
+          maxLength: 200
+        referentieproces:
+          allOf:
+          - $ref: '#/components/schemas/ReferentieProces'
+          description: Het Referentieproces dat ten grondslag ligt aan dit ZAAKTYPE.
+          title: referentieproces
+        verantwoordelijke:
+          type: string
+          description: De (soort) organisatorische eenheid of (functie van) medewerker die verantwoordelijk is voor de uitvoering van zaken van het ZAAKTYPE.
+          title: verantwoordelijke
+          maxLength: 50
+        zaakobjecttypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          title: Zaaktype
+          uniqueItems: true
+        broncatalogus:
+          allOf:
+          - $ref: '#/components/schemas/BronCatalogus'
+          description: De CATALOGUS waaraan het ZAAKTYPE is ontleend.
+          title: broncatalogus
+        bronzaaktype:
+          allOf:
+          - $ref: '#/components/schemas/BronZaaktype'
+          description: Het zaaktype binnen de CATALOGUS waaraan dit ZAAKTYPE is ontleend.
+          title: bronzaaktype
+        catalogus:
+          type: string
+          format: uri
+          description: URL-referentie naar de CATALOGUS waartoe dit ZAAKTYPE behoort.
+          title: Catalogus
+        statustypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de STATUSTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
+          title: Zaaktype
+          uniqueItems: true
+        resultaattypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de RESULTAATTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
+          title: is relevant voor
+          uniqueItems: true
+        eigenschappen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de EIGENSCHAPPEN die aanwezig moeten zijn in ZAKEN van dit ZAAKTYPE.
+          title: Zaaktype
+          uniqueItems: true
+        informatieobjecttypen:
+          type: string
+          readOnly: true
+          title: informatieobjecttypen
+        roltypen:
+          type: array
+          items:
+            type: string
+            format: uri
+            title: ''
+          readOnly: true
+          description: URL-referenties naar de ROLTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
+          title: Zaaktype
+          uniqueItems: true
+        besluittypen:
+          type: array
+          items:
+            type: string
+            title: ''
+          description: '`Omschrijvingen` van BESLUITTYPEN die mogelijk zijn binnen dit ZAAKTYPE.'
+          title: zaaktypen
+        deelzaaktypen:
+          type: array
+          items:
+            type: string
+            title: ''
+          description: De `zaaktypen.identificaties` waaronder ZAAKen als deelzaak kunnen voorkomen bij ZAAKen van dit ZAAKTYPE.
+          title: deelzaaktypen
+        gerelateerdeZaaktypen:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZaakTypenRelatieCreate'
+          description: De ZAAKTYPEn van zaken die relevant zijn voor zaken van dit ZAAKTYPE.
+          title: zaaktype van
+        beginGeldigheid:
+          type: string
+          format: date
+          description: De datum waarop het is ontstaan.
+          title: datum begin geldigheid
+        eindeGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het is opgeheven.
+          title: datum einde geldigheid
+        beginObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de eerst versie van het object ontstaan is.
+          title: datum begin object
+        eindeObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum van de aller laatste versie van het object.
+          title: datum einde object
+        versiedatum:
+          type: string
+          format: date
+          description: De datum waarop de (gewijzigde) kenmerken van het ZAAKTYPE geldig zijn geworden
+          title: versiedatum
+        concept:
+          type: boolean
+          readOnly: true
+          description: Geeft aan of het object een concept betreft. Concepten zijn niet-definitieve versies en zouden niet gebruikt moeten worden buiten deze API.
+          title: concept
       required:
+      - aanleiding
+      - beginGeldigheid
+      - besluittypen
+      - catalogus
+      - concept
+      - deelzaaktypen
+      - doel
+      - doorlooptijd
+      - eigenschappen
+      - gerelateerdeZaaktypen
+      - handelingBehandelaar
+      - handelingInitiator
       - identificatie
+      - indicatieInternOfExtern
+      - informatieobjecttypen
       - omschrijving
+      - onderwerp
+      - opschortingEnAanhoudingMogelijk
+      - productenOfDiensten
+      - publicatieIndicatie
+      - referentieproces
+      - resultaattypen
+      - roltypen
+      - statustypen
       - url
+      - verantwoordelijke
+      - verlengingMogelijk
+      - versiedatum
+      - vertrouwelijkheidaanduiding
+      - zaakobjecttypen
+    ZaakTypenRelatieCreate:
+      type: object
+      properties:
+        zaaktype:
+          type: string
+          description: '`zaaktype.identificatie` naar het ZAAKTYPE.'
+          title: zaaktype van
+        aardRelatie:
+          allOf:
+          - $ref: '#/components/schemas/AardRelatieEnum'
+          description: 'Omschrijving van de aard van de relatie van zaken van het ZAAKTYPE tot zaken van het andere ZAAKTYPE
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `vervolg` - Vervolg
+
+            * `bijdrage` - Bijdrage
+
+            * `onderwerp` - Onderwerp'
+          title: aard relatie
+        toelichting:
+          type: string
+          description: Een toelichting op de aard van de relatie tussen beide ZAAKTYPEN.
+          title: toelichting
+          maxLength: 255
+      required:
+      - aardRelatie
+      - zaaktype
     AardRelatieEnum:
       enum:
       - vervolg
@@ -1595,757 +2278,62 @@ components:
       - versiedatum
       - vertrouwelijkheidaanduiding
       - zaakobjecttypen
-    ReferentieProces:
+    BronZaaktype:
       type: object
-      description: Het Referentieproces dat ten grondslag ligt aan dit ZAAKTYPE.
-      properties:
-        naam:
-          type: string
-          title: Referentieprocesnaam
-          description: De naam van het Referentieproces.
-          maxLength: 80
-        link:
-          type: string
-          format: uri
-          title: Referentieproceslink
-          description: De URL naar de beschrijving van het Referentieproces
-          maxLength: 200
-      required:
-      - naam
-    ZaakTypeCreate:
-      type: object
-      description: 'Set gegevensgroepdata from validated nested data.
-
-
-        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
+      description: Het zaaktype binnen de CATALOGUS waaraan dit ZAAKTYPE is ontleend.
       properties:
         url:
           type: string
           format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
+          title: URL-referentie bronzaaktype
+          maxLength: 200
         identificatie:
           type: string
-          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
-          title: identificatie
+          description: De Zaaktype-identificatie van het bronzaaktype binnen de CATALOGUS.
+          title: bronzaaktype identificatie
           maxLength: 50
         omschrijving:
           type: string
-          description: Omschrijving van de aard van ZAAKen van het ZAAKTYPE.
-          title: omschrijving
+          description: De Zaaktype-omschrijving van het bronzaaktype, zoals gehanteerd in de Broncatalogus.
+          title: bronzaaktype omschrijving
           maxLength: 80
-        omschrijvingGeneriek:
-          type: string
-          description: Algemeen gehanteerde omschrijving van de aard van ZAAKen van het ZAAKTYPE
-          title: omschrijving generiek
-          maxLength: 80
-        vertrouwelijkheidaanduiding:
-          allOf:
-          - $ref: '#/components/schemas/VertrouwelijkheidaanduidingEnum'
-          description: 'Aanduiding van de mate waarin zaakdossiers van ZAAKen van dit ZAAKTYPE voor de openbaarheid bestemd zijn. Indien de zaak bij het aanmaken geen vertrouwelijkheidaanduiding krijgt, dan wordt deze waarde gezet.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `openbaar` - Openbaar
-
-            * `beperkt_openbaar` - Beperkt openbaar
-
-            * `intern` - Intern
-
-            * `zaakvertrouwelijk` - Zaakvertrouwelijk
-
-            * `vertrouwelijk` - Vertrouwelijk
-
-            * `confidentieel` - Confidentieel
-
-            * `geheim` - Geheim
-
-            * `zeer_geheim` - Zeer geheim'
-          title: vertrouwelijkheidaanduiding
-        doel:
-          type: string
-          description: Een omschrijving van hetgeen beoogd is te bereiken met een zaak van dit zaaktype.
-          title: doel
-        aanleiding:
-          type: string
-          description: Een omschrijving van de gebeurtenis die leidt tot het starten van een ZAAK van dit ZAAKTYPE.
-          title: aanleiding
-        toelichting:
-          type: string
-          description: Een eventuele toelichting op dit zaaktype, zoals een beschrijving van het procesverloop op de hoofdlijnen.
-          title: toelichting
-        indicatieInternOfExtern:
-          allOf:
-          - $ref: '#/components/schemas/IndicatieInternOfExternEnum'
-          description: 'Een aanduiding waarmee onderscheid wordt gemaakt tussen ZAAKTYPEn die Intern respectievelijk Extern geïnitieerd worden. Indien van beide sprake kan zijn, dan prevaleert de externe initiatie.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `inkomend` - Inkomend
-
-            * `intern` - Intern
-
-            * `uitgaand` - Uitgaand'
-          title: indicatie intern of extern
-        handelingInitiator:
-          type: string
-          description: Werkwoord dat hoort bij de handeling die de initiator verricht bij dit zaaktype. Meestal 'aanvragen', 'indienen' of 'melden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_initiator
-          title: handeling initiator
-          maxLength: 20
-        onderwerp:
-          type: string
-          description: 'Het onderwerp van ZAAKen van dit ZAAKTYPE. In veel gevallen nauw gerelateerd aan de product- of dienstnaam uit de Producten- en Dienstencatalogus (PDC). Bijvoorbeeld: ''Evenementenvergunning'', ''Geboorte'', ''Klacht''. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.onderwerp'
-          title: onderwerp
-          maxLength: 80
-        handelingBehandelaar:
-          type: string
-          description: Werkwoord dat hoort bij de handeling die de behandelaar verricht bij het afdoen van ZAAKen van dit ZAAKTYPE. Meestal 'behandelen', 'uitvoeren', 'vaststellen' of 'onderhouden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_behandelaar
-          title: handeling behandelaar
-          maxLength: 20
-        doorlooptijd:
-          type: string
-          description: De periode waarbinnen volgens wet- en regelgeving een ZAAK van het ZAAKTYPE afgerond dient te zijn, in kalenderdagen.
-          title: doorlooptijd behandeling
-          format: duration
-        servicenorm:
-          type:
-          - string
-          - 'null'
-          description: De periode waarbinnen verwacht wordt dat een ZAAK van het ZAAKTYPE afgerond wordt conform de geldende servicenormen van de zaakbehandelende organisatie(s).
-          title: servicenorm behandeling
-          format: duration
-        opschortingEnAanhoudingMogelijk:
-          type: boolean
-          title: Opschorting/aanhouding mogelijk
-          description: Aanduiding die aangeeft of ZAAKen van dit mogelijk ZAAKTYPE kunnen worden opgeschort en/of aangehouden.
-        verlengingMogelijk:
-          type: boolean
-          description: Aanduiding die aangeeft of de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd.
-          title: verlenging mogelijk
-        verlengingstermijn:
-          type:
-          - string
-          - 'null'
-          description: Een tijdsduur in ISO 8601 formaat waarmee de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd. Mag alleen een waarde bevatten als verlenging mogelijk is.
-          title: verlengingstermijn
-          format: duration
-        trefwoorden:
-          type: array
-          items:
-            type: string
-            title: Trefwoord
-            maxLength: 30
-          description: Een trefwoord waarmee ZAAKen van het ZAAKTYPE kunnen worden gekarakteriseerd.
-          title: trefwoorden
-        publicatieIndicatie:
-          type: boolean
-          description: Aanduiding of (het starten van) een ZAAK dit ZAAKTYPE gepubliceerd moet worden.
-          title: publicatie indicatie
-        publicatietekst:
-          type: string
-          description: De generieke tekst van de publicatie van ZAAKen van dit ZAAKTYPE.
-          title: publicatietekst
-        verantwoordingsrelatie:
-          type: array
-          items:
-            type: string
-            maxLength: 40
-          description: De relatie tussen ZAAKen van dit ZAAKTYPE en de beleidsmatige en/of financiële verantwoording.
-          title: verantwoordingsrelatie
-        productenOfDiensten:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: URL naar product/dienst
-            maxLength: 1000
-          description: Het product of de dienst die door ZAAKen van dit ZAAKTYPE wordt voortgebracht.
-          title: producten of diensten
-        selectielijstProcestype:
-          type: string
-          format: uri
-          description: URL-referentie naar een vanuit archiveringsoptiek onderkende groep processen met dezelfde kenmerken (PROCESTYPE in de Selectielijst API).
-          title: selectielijst procestype
-          maxLength: 200
-        referentieproces:
-          allOf:
-          - $ref: '#/components/schemas/ReferentieProces'
-          description: Het Referentieproces dat ten grondslag ligt aan dit ZAAKTYPE.
-          title: referentieproces
-        verantwoordelijke:
-          type: string
-          description: De (soort) organisatorische eenheid of (functie van) medewerker die verantwoordelijk is voor de uitvoering van zaken van het ZAAKTYPE.
-          title: verantwoordelijke
-          maxLength: 50
-        zaakobjecttypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          title: Zaaktype
-          uniqueItems: true
-        broncatalogus:
-          allOf:
-          - $ref: '#/components/schemas/BronCatalogus'
-          description: De CATALOGUS waaraan het ZAAKTYPE is ontleend.
-          title: broncatalogus
-        bronzaaktype:
-          allOf:
-          - $ref: '#/components/schemas/BronZaaktype'
-          description: Het zaaktype binnen de CATALOGUS waaraan dit ZAAKTYPE is ontleend.
-          title: bronzaaktype
-        catalogus:
-          type: string
-          format: uri
-          description: URL-referentie naar de CATALOGUS waartoe dit ZAAKTYPE behoort.
-          title: Catalogus
-        statustypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de STATUSTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
-          title: Zaaktype
-          uniqueItems: true
-        resultaattypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de RESULTAATTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
-          title: is relevant voor
-          uniqueItems: true
-        eigenschappen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de EIGENSCHAPPEN die aanwezig moeten zijn in ZAKEN van dit ZAAKTYPE.
-          title: Zaaktype
-          uniqueItems: true
-        informatieobjecttypen:
-          type: string
-          readOnly: true
-          title: informatieobjecttypen
-        roltypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de ROLTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
-          title: Zaaktype
-          uniqueItems: true
-        besluittypen:
-          type: array
-          items:
-            type: string
-            title: ''
-          description: '`Omschrijvingen` van BESLUITTYPEN die mogelijk zijn binnen dit ZAAKTYPE.'
-          title: zaaktypen
-        deelzaaktypen:
-          type: array
-          items:
-            type: string
-            title: ''
-          description: De `zaaktypen.identificaties` waaronder ZAAKen als deelzaak kunnen voorkomen bij ZAAKen van dit ZAAKTYPE.
-          title: deelzaaktypen
-        gerelateerdeZaaktypen:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZaakTypenRelatieCreate'
-          description: De ZAAKTYPEn van zaken die relevant zijn voor zaken van dit ZAAKTYPE.
-          title: zaaktype van
-        beginGeldigheid:
-          type: string
-          format: date
-          description: De datum waarop het is ontstaan.
-          title: datum begin geldigheid
-        eindeGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop het is opgeheven.
-          title: datum einde geldigheid
-        beginObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de eerst versie van het object ontstaan is.
-          title: datum begin object
-        eindeObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum van de aller laatste versie van het object.
-          title: datum einde object
-        versiedatum:
-          type: string
-          format: date
-          description: De datum waarop de (gewijzigde) kenmerken van het ZAAKTYPE geldig zijn geworden
-          title: versiedatum
-        concept:
-          type: boolean
-          readOnly: true
-          description: Geeft aan of het object een concept betreft. Concepten zijn niet-definitieve versies en zouden niet gebruikt moeten worden buiten deze API.
-          title: concept
       required:
-      - aanleiding
-      - beginGeldigheid
-      - besluittypen
-      - catalogus
-      - concept
-      - deelzaaktypen
-      - doel
-      - doorlooptijd
-      - eigenschappen
-      - gerelateerdeZaaktypen
-      - handelingBehandelaar
-      - handelingInitiator
       - identificatie
-      - indicatieInternOfExtern
-      - informatieobjecttypen
       - omschrijving
-      - onderwerp
-      - opschortingEnAanhoudingMogelijk
-      - productenOfDiensten
-      - publicatieIndicatie
-      - referentieproces
-      - resultaattypen
-      - roltypen
-      - statustypen
       - url
-      - verantwoordelijke
-      - verlengingMogelijk
-      - versiedatum
-      - vertrouwelijkheidaanduiding
-      - zaakobjecttypen
-    ValidatieFout:
+    FieldValidationError:
       type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
+      description: Formaat van validatiefouten.
       properties:
-        type:
+        name:
           type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
+          description: Naam van het veld met ongeldige gegevens
+          title: name
         code:
           type: string
           description: Systeemcode die het type fout aangeeft
           title: code
-        title:
+        reason:
           type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
       required:
       - code
-      - detail
-      - instance
-      - invalidParams
-      - status
-      - title
-    ZaakType:
-      type: object
-      description: 'Set gegevensgroepdata from validated nested data.
-
-
-        Usage: include the mixin on the ModelSerializer that has gegevensgroepen.'
-      properties:
-        url:
-          type: string
-          format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
-        identificatie:
-          type: string
-          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
-          title: identificatie
-          maxLength: 50
-        omschrijving:
-          type: string
-          description: Omschrijving van de aard van ZAAKen van het ZAAKTYPE.
-          title: omschrijving
-          maxLength: 80
-        omschrijvingGeneriek:
-          type: string
-          description: Algemeen gehanteerde omschrijving van de aard van ZAAKen van het ZAAKTYPE
-          title: omschrijving generiek
-          maxLength: 80
-        vertrouwelijkheidaanduiding:
-          allOf:
-          - $ref: '#/components/schemas/VertrouwelijkheidaanduidingEnum'
-          description: 'Aanduiding van de mate waarin zaakdossiers van ZAAKen van dit ZAAKTYPE voor de openbaarheid bestemd zijn. Indien de zaak bij het aanmaken geen vertrouwelijkheidaanduiding krijgt, dan wordt deze waarde gezet.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `openbaar` - Openbaar
-
-            * `beperkt_openbaar` - Beperkt openbaar
-
-            * `intern` - Intern
-
-            * `zaakvertrouwelijk` - Zaakvertrouwelijk
-
-            * `vertrouwelijk` - Vertrouwelijk
-
-            * `confidentieel` - Confidentieel
-
-            * `geheim` - Geheim
-
-            * `zeer_geheim` - Zeer geheim'
-          title: vertrouwelijkheidaanduiding
-        doel:
-          type: string
-          description: Een omschrijving van hetgeen beoogd is te bereiken met een zaak van dit zaaktype.
-          title: doel
-        aanleiding:
-          type: string
-          description: Een omschrijving van de gebeurtenis die leidt tot het starten van een ZAAK van dit ZAAKTYPE.
-          title: aanleiding
-        toelichting:
-          type: string
-          description: Een eventuele toelichting op dit zaaktype, zoals een beschrijving van het procesverloop op de hoofdlijnen.
-          title: toelichting
-        indicatieInternOfExtern:
-          allOf:
-          - $ref: '#/components/schemas/IndicatieInternOfExternEnum'
-          description: 'Een aanduiding waarmee onderscheid wordt gemaakt tussen ZAAKTYPEn die Intern respectievelijk Extern geïnitieerd worden. Indien van beide sprake kan zijn, dan prevaleert de externe initiatie.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `inkomend` - Inkomend
-
-            * `intern` - Intern
-
-            * `uitgaand` - Uitgaand'
-          title: indicatie intern of extern
-        handelingInitiator:
-          type: string
-          description: Werkwoord dat hoort bij de handeling die de initiator verricht bij dit zaaktype. Meestal 'aanvragen', 'indienen' of 'melden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_initiator
-          title: handeling initiator
-          maxLength: 20
-        onderwerp:
-          type: string
-          description: 'Het onderwerp van ZAAKen van dit ZAAKTYPE. In veel gevallen nauw gerelateerd aan de product- of dienstnaam uit de Producten- en Dienstencatalogus (PDC). Bijvoorbeeld: ''Evenementenvergunning'', ''Geboorte'', ''Klacht''. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.onderwerp'
-          title: onderwerp
-          maxLength: 80
-        handelingBehandelaar:
-          type: string
-          description: Werkwoord dat hoort bij de handeling die de behandelaar verricht bij het afdoen van ZAAKen van dit ZAAKTYPE. Meestal 'behandelen', 'uitvoeren', 'vaststellen' of 'onderhouden'. Zie ook het IOB model op https://www.gemmaonline.nl/index.php/Imztc_2.1/doc/attribuutsoort/zaaktype.handeling_behandelaar
-          title: handeling behandelaar
-          maxLength: 20
-        doorlooptijd:
-          type: string
-          description: De periode waarbinnen volgens wet- en regelgeving een ZAAK van het ZAAKTYPE afgerond dient te zijn, in kalenderdagen.
-          title: doorlooptijd behandeling
-          format: duration
-        servicenorm:
-          type:
-          - string
-          - 'null'
-          description: De periode waarbinnen verwacht wordt dat een ZAAK van het ZAAKTYPE afgerond wordt conform de geldende servicenormen van de zaakbehandelende organisatie(s).
-          title: servicenorm behandeling
-          format: duration
-        opschortingEnAanhoudingMogelijk:
-          type: boolean
-          title: Opschorting/aanhouding mogelijk
-          description: Aanduiding die aangeeft of ZAAKen van dit mogelijk ZAAKTYPE kunnen worden opgeschort en/of aangehouden.
-        verlengingMogelijk:
-          type: boolean
-          description: Aanduiding die aangeeft of de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd.
-          title: verlenging mogelijk
-        verlengingstermijn:
-          type:
-          - string
-          - 'null'
-          description: Een tijdsduur in ISO 8601 formaat waarmee de Doorlooptijd behandeling van ZAAKen van dit ZAAKTYPE kan worden verlengd. Mag alleen een waarde bevatten als verlenging mogelijk is.
-          title: verlengingstermijn
-          format: duration
-        trefwoorden:
-          type: array
-          items:
-            type: string
-            title: Trefwoord
-            maxLength: 30
-          description: Een trefwoord waarmee ZAAKen van het ZAAKTYPE kunnen worden gekarakteriseerd.
-          title: trefwoorden
-        publicatieIndicatie:
-          type: boolean
-          description: Aanduiding of (het starten van) een ZAAK dit ZAAKTYPE gepubliceerd moet worden.
-          title: publicatie indicatie
-        publicatietekst:
-          type: string
-          description: De generieke tekst van de publicatie van ZAAKen van dit ZAAKTYPE.
-          title: publicatietekst
-        verantwoordingsrelatie:
-          type: array
-          items:
-            type: string
-            maxLength: 40
-          description: De relatie tussen ZAAKen van dit ZAAKTYPE en de beleidsmatige en/of financiële verantwoording.
-          title: verantwoordingsrelatie
-        productenOfDiensten:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: URL naar product/dienst
-            maxLength: 1000
-          description: Het product of de dienst die door ZAAKen van dit ZAAKTYPE wordt voortgebracht.
-          title: producten of diensten
-        selectielijstProcestype:
-          type: string
-          format: uri
-          description: URL-referentie naar een vanuit archiveringsoptiek onderkende groep processen met dezelfde kenmerken (PROCESTYPE in de Selectielijst API).
-          title: selectielijst procestype
-          maxLength: 200
-        referentieproces:
-          allOf:
-          - $ref: '#/components/schemas/ReferentieProces'
-          description: Het Referentieproces dat ten grondslag ligt aan dit ZAAKTYPE.
-          title: referentieproces
-        verantwoordelijke:
-          type: string
-          description: De (soort) organisatorische eenheid of (functie van) medewerker die verantwoordelijk is voor de uitvoering van zaken van het ZAAKTYPE.
-          title: verantwoordelijke
-          maxLength: 50
-        zaakobjecttypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          title: Zaaktype
-          uniqueItems: true
-        broncatalogus:
-          allOf:
-          - $ref: '#/components/schemas/BronCatalogus'
-          description: De CATALOGUS waaraan het ZAAKTYPE is ontleend.
-          title: broncatalogus
-        bronzaaktype:
-          allOf:
-          - $ref: '#/components/schemas/BronZaaktype'
-          description: Het zaaktype binnen de CATALOGUS waaraan dit ZAAKTYPE is ontleend.
-          title: bronzaaktype
-        catalogus:
-          type: string
-          format: uri
-          description: URL-referentie naar de CATALOGUS waartoe dit ZAAKTYPE behoort.
-          title: Catalogus
-        statustypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de STATUSTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
-          title: Zaaktype
-          uniqueItems: true
-        resultaattypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de RESULTAATTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
-          title: is relevant voor
-          uniqueItems: true
-        eigenschappen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de EIGENSCHAPPEN die aanwezig moeten zijn in ZAKEN van dit ZAAKTYPE.
-          title: Zaaktype
-          uniqueItems: true
-        informatieobjecttypen:
-          type: string
-          readOnly: true
-          title: informatieobjecttypen
-        roltypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: ''
-          readOnly: true
-          description: URL-referenties naar de ROLTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
-          title: Zaaktype
-          uniqueItems: true
-        besluittypen:
-          type: array
-          items:
-            type: string
-            format: uri
-            title: heeft relevante besluittypen
-          title: heeft relevante besluittypen
-          description: URL-referenties naar de BESLUITTYPEN die mogelijk zijn binnen dit ZAAKTYPE.
-          uniqueItems: true
-        deelzaaktypen:
-          type: array
-          items:
-            type:
-            - string
-            - 'null'
-            format: uri
-            title: ''
-          description: De ZAAKTYPE(n) waaronder ZAAKen als deelzaak kunnen voorkomen bij ZAAKen van dit ZAAKTYPE.
-          title: deelzaaktypen
-          uniqueItems: true
-        gerelateerdeZaaktypen:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZaakTypenRelatie'
-          description: De ZAAKTYPEn van zaken die relevant zijn voor zaken van dit ZAAKTYPE.
-          title: zaaktype van
-        beginGeldigheid:
-          type: string
-          format: date
-          description: De datum waarop het is ontstaan.
-          title: datum begin geldigheid
-        eindeGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop het is opgeheven.
-          title: datum einde geldigheid
-        beginObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de eerst versie van het object ontstaan is.
-          title: datum begin object
-        eindeObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum van de aller laatste versie van het object.
-          title: datum einde object
-        versiedatum:
-          type: string
-          format: date
-          description: De datum waarop de (gewijzigde) kenmerken van het ZAAKTYPE geldig zijn geworden
-          title: versiedatum
-        concept:
-          type: boolean
-          readOnly: true
-          description: Geeft aan of het object een concept betreft. Concepten zijn niet-definitieve versies en zouden niet gebruikt moeten worden buiten deze API.
-          title: concept
-      required:
-      - aanleiding
-      - beginGeldigheid
-      - besluittypen
-      - catalogus
-      - concept
-      - doel
-      - doorlooptijd
-      - eigenschappen
-      - gerelateerdeZaaktypen
-      - handelingBehandelaar
-      - handelingInitiator
-      - identificatie
-      - indicatieInternOfExtern
-      - informatieobjecttypen
-      - omschrijving
-      - onderwerp
-      - opschortingEnAanhoudingMogelijk
-      - productenOfDiensten
-      - publicatieIndicatie
-      - referentieproces
-      - resultaattypen
-      - roltypen
-      - statustypen
-      - url
-      - verantwoordelijke
-      - verlengingMogelijk
-      - versiedatum
-      - vertrouwelijkheidaanduiding
-      - zaakobjecttypen
-    ZaakTypenRelatieCreate:
-      type: object
-      properties:
-        zaaktype:
-          type: string
-          description: '`zaaktype.identificatie` naar het ZAAKTYPE.'
-          title: zaaktype van
-        aardRelatie:
-          allOf:
-          - $ref: '#/components/schemas/AardRelatieEnum'
-          description: 'Omschrijving van de aard van de relatie van zaken van het ZAAKTYPE tot zaken van het andere ZAAKTYPE
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `vervolg` - Vervolg
-
-            * `bijdrage` - Bijdrage
-
-            * `onderwerp` - Onderwerp'
-          title: aard relatie
-        toelichting:
-          type: string
-          description: Een toelichting op de aard van de relatie tussen beide ZAAKTYPEN.
-          title: toelichting
-          maxLength: 255
-      required:
-      - aardRelatie
-      - zaaktype
+      - name
+      - reason
+    VertrouwelijkheidaanduidingEnum:
+      enum:
+      - openbaar
+      - beperkt_openbaar
+      - intern
+      - zaakvertrouwelijk
+      - vertrouwelijk
+      - confidentieel
+      - geheim
+      - zeer_geheim
+      type: string
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-catalogi-openapi.yml
-- vng-realisatie-catalogi-openapi.yml

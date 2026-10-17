@@ -1,16 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Interne taken API
+  title: Klantinteracties Interne taken API
+  description: Een API om een klantinteractiecomponent (KIC) te benaderen.
   version: 00.01.00
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
   contact:
     url: http://www.verzoeken.nl
     email: standaarden.ondersteuning@vng.nl
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
     url: https://eupl.eu/1.2/nl/
-  x-imvertor-generator-version: 2.0.0
-  x-yamlCompiler-stylesheets-version: '20230512'
-  description: 'Operations tagged Interne taken across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
@@ -66,11 +66,6 @@ paths:
       - Interne taken
       summary: Wijziginternetaak
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_markeer_interne_taak_verwerkt:
     post:
       operationId: markeerinternetaakverwerkt
@@ -118,11 +113,6 @@ paths:
       - Interne taken
       summary: Markeerinternetaakverwerkt
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_registreer_interne_taak:
     post:
       operationId: registreerinternetaak
@@ -170,11 +160,6 @@ paths:
       - Interne taken
       summary: Registreerinternetaak
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_zoek_interne_taak:
     post:
       operationId: zoekinternetaak
@@ -222,53 +207,8 @@ paths:
       - Interne taken
       summary: Zoekinternetaak
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
 components:
   schemas:
-    Datumtijd:
-      type: string
-      description: ''
-      format: date-time
-    CorrigeerInterneTaak_parameters:
-      type: object
-      description: ''
-      required:
-      - id
-      properties:
-        actorId:
-          $ref: '#/components/schemas/Identificatiecode'
-        gevraagdeHandeling:
-          $ref: '#/components/schemas/Omschrijvinglang'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        status:
-          $ref: '#/components/schemas/Taakstatus'
-        toelichting:
-          $ref: '#/components/schemas/Toelichting'
-    ZoekInterneTaak_parameters:
-      type: object
-      description: ''
-      properties:
-        actorId:
-          $ref: '#/components/schemas/Identificatiecode'
-        geregistreerdOp:
-          $ref: '#/components/schemas/Datumtijd'
-        gevraagdeHandeling:
-          $ref: '#/components/schemas/Omschrijvinglang'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        klantcontactId:
-          $ref: '#/components/schemas/Identificatiecode'
-        nummer:
-          $ref: '#/components/schemas/Identificerendnummer'
-        status:
-          $ref: '#/components/schemas/Taakstatus'
-        toelichting:
-          $ref: '#/components/schemas/Toelichting'
     InterneTaak:
       type: object
       description: Iets dat als onderdeel van opvolging van een klantcontact door een medewerker of organisatie-afdeling moet worden gedaan.
@@ -294,19 +234,41 @@ components:
           $ref: '#/components/schemas/Taakstatus'
         toelichting:
           $ref: '#/components/schemas/Toelichting'
+    CorrigeerInterneTaak_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      properties:
+        actorId:
+          $ref: '#/components/schemas/Identificatiecode'
+        gevraagdeHandeling:
+          $ref: '#/components/schemas/Omschrijvinglang'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        status:
+          $ref: '#/components/schemas/Taakstatus'
+        toelichting:
+          $ref: '#/components/schemas/Toelichting'
+    MarkeerInterneTaakVerwerkt_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      properties:
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+    Omschrijvinglang:
+      type: string
+      description: ''
+      maxLength: 200
     Identificerendnummer:
       type: integer
       description: ''
-    Taakstatus:
+    Datumtijd:
       type: string
-      description: De waarden van de typering van de voortgang van afhandeling van een VERZOEK.<body><ul><li>`te_verwerken` - te verwerken Het verzoek is afgehandeld.</li><li>`verwerkt` - verwerkt Het verzoek id buiten behandeling gesteld.</li></ul></body>
-      enum:
-      - te_verwerken
-      - verwerkt
-    Toelichting:
-      type: string
-      description: Toelichtende tekst
-      maxLength: 400
+      description: ''
+      format: date-time
     RegistreerInterneTaak_parameters:
       type: object
       description: ''
@@ -323,22 +285,37 @@ components:
           $ref: '#/components/schemas/Identificatiecode'
         toelichting:
           $ref: '#/components/schemas/Toelichting'
-    Omschrijvinglang:
+    Taakstatus:
       type: string
-      description: ''
-      maxLength: 200
-    MarkeerInterneTaakVerwerkt_parameters:
-      type: object
-      description: ''
-      required:
-      - id
-      properties:
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
+      description: De waarden van de typering van de voortgang van afhandeling van een VERZOEK.<body><ul><li>`te_verwerken` - te verwerken Het verzoek is afgehandeld.</li><li>`verwerkt` - verwerkt Het verzoek id buiten behandeling gesteld.</li></ul></body>
+      enum:
+      - te_verwerken
+      - verwerkt
+    Toelichting:
+      type: string
+      description: Toelichtende tekst
+      maxLength: 400
     Identificatiecode:
       type: string
       description: ''
       maxLength: 40
-x-refined-from:
-- vng-realisatie-klantinteracties-openapi.yml
-- vng-realisatie-klantinteracties-openapi.yml
+    ZoekInterneTaak_parameters:
+      type: object
+      description: ''
+      properties:
+        actorId:
+          $ref: '#/components/schemas/Identificatiecode'
+        geregistreerdOp:
+          $ref: '#/components/schemas/Datumtijd'
+        gevraagdeHandeling:
+          $ref: '#/components/schemas/Omschrijvinglang'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        klantcontactId:
+          $ref: '#/components/schemas/Identificatiecode'
+        nummer:
+          $ref: '#/components/schemas/Identificerendnummer'
+        status:
+          $ref: '#/components/schemas/Taakstatus'
+        toelichting:
+          $ref: '#/components/schemas/Toelichting'

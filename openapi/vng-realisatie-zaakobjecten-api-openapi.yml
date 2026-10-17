@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Zaakobjecten API
+  title: Zaken Zaakobjecten API
   version: 1.5.1
+  description: Een API om een zaakregistratiecomponent (ZRC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged zaakobjecten across 2 of this provider''s published API definitions: vng-realisatie-zaken-openapi.yml, vng-realisatie-zaken-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://zaken-api.vng.cloud/api/v1/
   description: Productie Omgeving
@@ -353,9 +353,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
   /zaakobjecten/{uuid}:
     get:
       operationId: zaakobject_retrieve
@@ -980,53 +977,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ZaakObject'
           description: OK
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
 components:
   schemas:
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
-      required:
-      - code
-      - name
-      - reason
-    PaginatedZaakObjectList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/ZaakObject'
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -1061,6 +1013,269 @@ components:
       - instance
       - status
       - title
+    PaginatedZaakObjectList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ZaakObject'
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+    PatchedZaakObject:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        uuid:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unieke resource identifier (UUID4)
+          title: uuid
+        zaak:
+          type: string
+          format: uri
+          description: URL-referentie naar de ZAAK.
+          title: zaak
+          minLength: 1
+          maxLength: 1000
+        object:
+          type: string
+          format: uri
+          description: URL-referentie naar de resource die het OBJECT beschrijft.
+          title: object
+          maxLength: 1000
+        zaakobjecttype:
+          type: string
+          format: uri
+          description: URL-referentie naar het ZAAKOBJECTTYPE (in de Catalogi API).
+          title: zaakobjecttype
+          maxLength: 1000
+        objectType:
+          allOf:
+          - $ref: '#/components/schemas/ObjectTypeEnum'
+          description: 'Beschrijft het type OBJECT gerelateerd aan de ZAAK. Als er geen passend type is, dan moet het type worden opgegeven onder `objectTypeOverige`.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `adres` - Adres
+
+            * `besluit` - Besluit
+
+            * `buurt` - Buurt
+
+            * `enkelvoudig_document` - Enkelvoudig document
+
+            * `gemeente` - Gemeente
+
+            * `gemeentelijke_openbare_ruimte` - Gemeentelijke openbare ruimte
+
+            * `huishouden` - Huishouden
+
+            * `inrichtingselement` - Inrichtingselement
+
+            * `kadastrale_onroerende_zaak` - Kadastrale onroerende zaak
+
+            * `kunstwerkdeel` - Kunstwerkdeel
+
+            * `maatschappelijke_activiteit` - Maatschappelijke activiteit
+
+            * `medewerker` - Medewerker
+
+            * `natuurlijk_persoon` - Natuurlijk persoon
+
+            * `niet_natuurlijk_persoon` - Niet-natuurlijk persoon
+
+            * `openbare_ruimte` - Openbare ruimte
+
+            * `organisatorische_eenheid` - Organisatorische eenheid
+
+            * `pand` - Pand
+
+            * `spoorbaandeel` - Spoorbaandeel
+
+            * `status` - Status
+
+            * `terreindeel` - Terreindeel
+
+            * `terrein_gebouwd_object` - Terrein gebouwd object
+
+            * `vestiging` - Vestiging
+
+            * `waterdeel` - Waterdeel
+
+            * `wegdeel` - Wegdeel
+
+            * `wijk` - Wijk
+
+            * `woonplaats` - Woonplaats
+
+            * `woz_deelobject` - Woz deel object
+
+            * `woz_object` - Woz object
+
+            * `woz_waarde` - Woz waarde
+
+            * `zakelijk_recht` - Zakelijk recht
+
+            * `overige` - Overige'
+          title: object type
+        objectTypeOverige:
+          type: string
+          description: Beschrijft het type OBJECT als `objectType` de waarde "overige" heeft.
+          title: object type overige
+          pattern: '[a-z\_]+'
+          maxLength: 100
+        objectTypeOverigeDefinitie:
+          allOf:
+          - $ref: '#/components/schemas/ObjectTypeOverigeDefinitie'
+          title: definitie object type overige
+          description: 'Verwijzing naar het schema van het type OBJECT als `objectType` de waarde "overige" heeft.
+
+
+            * De URL referentie moet naar een JSON endpoint   wijzen waarin het objecttype gedefinieerd is, inclusief het   [JSON-schema](https://json-schema.org/).
+
+            * Gebruik het `schema` attribuut om te verwijzen naar het schema binnen   de objecttype resource (deze gebruikt het   [jq](http://stedolan.github.io/jq/) formaat.
+
+            * Gebruik het `objectData` attribuut om te verwijzen naar de gegevens   binnen het OBJECT. Deze gebruikt ook het   [jq](http://stedolan.github.io/jq/) formaat.
+
+
+            Indien je hier gebruikt van maakt, dan moet je een OBJECT url opgeven en is het gebruik van objectIdentificatie niet mogelijk. De opgegeven OBJECT url wordt gevalideerd tegen het schema van het opgegeven objecttype.'
+        relatieomschrijving:
+          type: string
+          description: Omschrijving van de betrekking tussen de ZAAK en het OBJECT.
+          title: relatieomschrijving
+          maxLength: 80
+      discriminator:
+        propertyName: objectType
+        mapping:
+          adres: '#/components/schemas/adres_PatchedZaakObject'
+          besluit: '#/components/schemas/besluit_PatchedZaakObject'
+          buurt: '#/components/schemas/buurt_PatchedZaakObject'
+          enkelvoudig_document: '#/components/schemas/enkelvoudig_document_PatchedZaakObject'
+          gemeente: '#/components/schemas/gemeente_PatchedZaakObject'
+          gemeentelijke_openbare_ruimte: '#/components/schemas/gemeentelijke_openbare_ruimte_PatchedZaakObject'
+          huishouden: '#/components/schemas/huishouden_PatchedZaakObject'
+          inrichtingselement: '#/components/schemas/inrichtingselement_PatchedZaakObject'
+          kadastrale_onroerende_zaak: '#/components/schemas/kadastrale_onroerende_zaak_PatchedZaakObject'
+          kunstwerkdeel: '#/components/schemas/kunstwerkdeel_PatchedZaakObject'
+          maatschappelijke_activiteit: '#/components/schemas/maatschappelijke_activiteit_PatchedZaakObject'
+          medewerker: '#/components/schemas/medewerker_PatchedZaakObject'
+          natuurlijk_persoon: '#/components/schemas/natuurlijk_persoon_PatchedZaakObject'
+          niet_natuurlijk_persoon: '#/components/schemas/niet_natuurlijk_persoon_PatchedZaakObject'
+          openbare_ruimte: '#/components/schemas/openbare_ruimte_PatchedZaakObject'
+          organisatorische_eenheid: '#/components/schemas/organisatorische_eenheid_PatchedZaakObject'
+          pand: '#/components/schemas/pand_PatchedZaakObject'
+          spoorbaandeel: '#/components/schemas/spoorbaandeel_PatchedZaakObject'
+          status: '#/components/schemas/status_PatchedZaakObject'
+          terreindeel: '#/components/schemas/terreindeel_PatchedZaakObject'
+          terrein_gebouwd_object: '#/components/schemas/terrein_gebouwd_object_PatchedZaakObject'
+          vestiging: '#/components/schemas/vestiging_PatchedZaakObject'
+          waterdeel: '#/components/schemas/waterdeel_PatchedZaakObject'
+          wegdeel: '#/components/schemas/wegdeel_PatchedZaakObject'
+          wijk: '#/components/schemas/wijk_PatchedZaakObject'
+          woonplaats: '#/components/schemas/woonplaats_PatchedZaakObject'
+          woz_deelobject: '#/components/schemas/woz_deelobject_PatchedZaakObject'
+          woz_object: '#/components/schemas/woz_object_PatchedZaakObject'
+          woz_waarde: '#/components/schemas/woz_waarde_PatchedZaakObject'
+          zakelijk_recht: '#/components/schemas/zakelijk_recht_PatchedZaakObject'
+          overige: '#/components/schemas/overige_PatchedZaakObject'
+    ObjectTypeEnum:
+      enum:
+      - adres
+      - besluit
+      - buurt
+      - enkelvoudig_document
+      - gemeente
+      - gemeentelijke_openbare_ruimte
+      - huishouden
+      - inrichtingselement
+      - kadastrale_onroerende_zaak
+      - kunstwerkdeel
+      - maatschappelijke_activiteit
+      - medewerker
+      - natuurlijk_persoon
+      - niet_natuurlijk_persoon
+      - openbare_ruimte
+      - organisatorische_eenheid
+      - pand
+      - spoorbaandeel
+      - status
+      - terreindeel
+      - terrein_gebouwd_object
+      - vestiging
+      - waterdeel
+      - wegdeel
+      - wijk
+      - woonplaats
+      - woz_deelobject
+      - woz_object
+      - woz_waarde
+      - zakelijk_recht
+      - overige
+      type: string
     ZaakObject:
       type: object
       properties:
@@ -1233,247 +1448,26 @@ components:
           woz_waarde: '#/components/schemas/woz_waarde_ZaakObject'
           zakelijk_recht: '#/components/schemas/zakelijk_recht_ZaakObject'
           overige: '#/components/schemas/overige_ZaakObject'
-    PatchedZaakObject:
+    FieldValidationError:
       type: object
+      description: Formaat van validatiefouten.
       properties:
-        url:
+        name:
           type: string
-          format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
-        uuid:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
-        zaak:
-          type: string
-          format: uri
-          description: URL-referentie naar de ZAAK.
-          title: zaak
-          minLength: 1
-          maxLength: 1000
-        object:
-          type: string
-          format: uri
-          description: URL-referentie naar de resource die het OBJECT beschrijft.
-          title: object
-          maxLength: 1000
-        zaakobjecttype:
-          type: string
-          format: uri
-          description: URL-referentie naar het ZAAKOBJECTTYPE (in de Catalogi API).
-          title: zaakobjecttype
-          maxLength: 1000
-        objectType:
-          allOf:
-          - $ref: '#/components/schemas/ObjectTypeEnum'
-          description: 'Beschrijft het type OBJECT gerelateerd aan de ZAAK. Als er geen passend type is, dan moet het type worden opgegeven onder `objectTypeOverige`.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `adres` - Adres
-
-            * `besluit` - Besluit
-
-            * `buurt` - Buurt
-
-            * `enkelvoudig_document` - Enkelvoudig document
-
-            * `gemeente` - Gemeente
-
-            * `gemeentelijke_openbare_ruimte` - Gemeentelijke openbare ruimte
-
-            * `huishouden` - Huishouden
-
-            * `inrichtingselement` - Inrichtingselement
-
-            * `kadastrale_onroerende_zaak` - Kadastrale onroerende zaak
-
-            * `kunstwerkdeel` - Kunstwerkdeel
-
-            * `maatschappelijke_activiteit` - Maatschappelijke activiteit
-
-            * `medewerker` - Medewerker
-
-            * `natuurlijk_persoon` - Natuurlijk persoon
-
-            * `niet_natuurlijk_persoon` - Niet-natuurlijk persoon
-
-            * `openbare_ruimte` - Openbare ruimte
-
-            * `organisatorische_eenheid` - Organisatorische eenheid
-
-            * `pand` - Pand
-
-            * `spoorbaandeel` - Spoorbaandeel
-
-            * `status` - Status
-
-            * `terreindeel` - Terreindeel
-
-            * `terrein_gebouwd_object` - Terrein gebouwd object
-
-            * `vestiging` - Vestiging
-
-            * `waterdeel` - Waterdeel
-
-            * `wegdeel` - Wegdeel
-
-            * `wijk` - Wijk
-
-            * `woonplaats` - Woonplaats
-
-            * `woz_deelobject` - Woz deel object
-
-            * `woz_object` - Woz object
-
-            * `woz_waarde` - Woz waarde
-
-            * `zakelijk_recht` - Zakelijk recht
-
-            * `overige` - Overige'
-          title: object type
-        objectTypeOverige:
-          type: string
-          description: Beschrijft het type OBJECT als `objectType` de waarde "overige" heeft.
-          title: object type overige
-          pattern: '[a-z\_]+'
-          maxLength: 100
-        objectTypeOverigeDefinitie:
-          allOf:
-          - $ref: '#/components/schemas/ObjectTypeOverigeDefinitie'
-          title: definitie object type overige
-          description: 'Verwijzing naar het schema van het type OBJECT als `objectType` de waarde "overige" heeft.
-
-
-            * De URL referentie moet naar een JSON endpoint   wijzen waarin het objecttype gedefinieerd is, inclusief het   [JSON-schema](https://json-schema.org/).
-
-            * Gebruik het `schema` attribuut om te verwijzen naar het schema binnen   de objecttype resource (deze gebruikt het   [jq](http://stedolan.github.io/jq/) formaat.
-
-            * Gebruik het `objectData` attribuut om te verwijzen naar de gegevens   binnen het OBJECT. Deze gebruikt ook het   [jq](http://stedolan.github.io/jq/) formaat.
-
-
-            Indien je hier gebruikt van maakt, dan moet je een OBJECT url opgeven en is het gebruik van objectIdentificatie niet mogelijk. De opgegeven OBJECT url wordt gevalideerd tegen het schema van het opgegeven objecttype.'
-        relatieomschrijving:
-          type: string
-          description: Omschrijving van de betrekking tussen de ZAAK en het OBJECT.
-          title: relatieomschrijving
-          maxLength: 80
-      discriminator:
-        propertyName: objectType
-        mapping:
-          adres: '#/components/schemas/adres_PatchedZaakObject'
-          besluit: '#/components/schemas/besluit_PatchedZaakObject'
-          buurt: '#/components/schemas/buurt_PatchedZaakObject'
-          enkelvoudig_document: '#/components/schemas/enkelvoudig_document_PatchedZaakObject'
-          gemeente: '#/components/schemas/gemeente_PatchedZaakObject'
-          gemeentelijke_openbare_ruimte: '#/components/schemas/gemeentelijke_openbare_ruimte_PatchedZaakObject'
-          huishouden: '#/components/schemas/huishouden_PatchedZaakObject'
-          inrichtingselement: '#/components/schemas/inrichtingselement_PatchedZaakObject'
-          kadastrale_onroerende_zaak: '#/components/schemas/kadastrale_onroerende_zaak_PatchedZaakObject'
-          kunstwerkdeel: '#/components/schemas/kunstwerkdeel_PatchedZaakObject'
-          maatschappelijke_activiteit: '#/components/schemas/maatschappelijke_activiteit_PatchedZaakObject'
-          medewerker: '#/components/schemas/medewerker_PatchedZaakObject'
-          natuurlijk_persoon: '#/components/schemas/natuurlijk_persoon_PatchedZaakObject'
-          niet_natuurlijk_persoon: '#/components/schemas/niet_natuurlijk_persoon_PatchedZaakObject'
-          openbare_ruimte: '#/components/schemas/openbare_ruimte_PatchedZaakObject'
-          organisatorische_eenheid: '#/components/schemas/organisatorische_eenheid_PatchedZaakObject'
-          pand: '#/components/schemas/pand_PatchedZaakObject'
-          spoorbaandeel: '#/components/schemas/spoorbaandeel_PatchedZaakObject'
-          status: '#/components/schemas/status_PatchedZaakObject'
-          terreindeel: '#/components/schemas/terreindeel_PatchedZaakObject'
-          terrein_gebouwd_object: '#/components/schemas/terrein_gebouwd_object_PatchedZaakObject'
-          vestiging: '#/components/schemas/vestiging_PatchedZaakObject'
-          waterdeel: '#/components/schemas/waterdeel_PatchedZaakObject'
-          wegdeel: '#/components/schemas/wegdeel_PatchedZaakObject'
-          wijk: '#/components/schemas/wijk_PatchedZaakObject'
-          woonplaats: '#/components/schemas/woonplaats_PatchedZaakObject'
-          woz_deelobject: '#/components/schemas/woz_deelobject_PatchedZaakObject'
-          woz_object: '#/components/schemas/woz_object_PatchedZaakObject'
-          woz_waarde: '#/components/schemas/woz_waarde_PatchedZaakObject'
-          zakelijk_recht: '#/components/schemas/zakelijk_recht_PatchedZaakObject'
-          overige: '#/components/schemas/overige_PatchedZaakObject'
-    ValidatieFout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
+          description: Naam van het veld met ongeldige gegevens
+          title: name
         code:
           type: string
           description: Systeemcode die het type fout aangeeft
           title: code
-        title:
+        reason:
           type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
       required:
       - code
-      - detail
-      - instance
-      - invalidParams
-      - status
-      - title
-    ObjectTypeEnum:
-      enum:
-      - adres
-      - besluit
-      - buurt
-      - enkelvoudig_document
-      - gemeente
-      - gemeentelijke_openbare_ruimte
-      - huishouden
-      - inrichtingselement
-      - kadastrale_onroerende_zaak
-      - kunstwerkdeel
-      - maatschappelijke_activiteit
-      - medewerker
-      - natuurlijk_persoon
-      - niet_natuurlijk_persoon
-      - openbare_ruimte
-      - organisatorische_eenheid
-      - pand
-      - spoorbaandeel
-      - status
-      - terreindeel
-      - terrein_gebouwd_object
-      - vestiging
-      - waterdeel
-      - wegdeel
-      - wijk
-      - woonplaats
-      - woz_deelobject
-      - woz_object
-      - woz_waarde
-      - zakelijk_recht
-      - overige
-      type: string
+      - name
+      - reason
     ObjectTypeOverigeDefinitie:
       type: object
       properties:
@@ -1502,6 +1496,3 @@ components:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-zaken-openapi.yml
-- vng-realisatie-zaken-openapi.yml

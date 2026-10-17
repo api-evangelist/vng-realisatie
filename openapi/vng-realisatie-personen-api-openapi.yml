@@ -1,16 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Personen API
+  title: Klantinteracties Personen API
+  description: Een API om een klantinteractiecomponent (KIC) te benaderen.
   version: 00.01.00
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
   contact:
     url: http://www.verzoeken.nl
     email: standaarden.ondersteuning@vng.nl
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
     url: https://eupl.eu/1.2/nl/
-  x-imvertor-generator-version: 2.0.0
-  x-yamlCompiler-stylesheets-version: '20230512'
-  description: 'Operations tagged Personen across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
@@ -66,11 +66,6 @@ paths:
       - Personen
       summary: Registreerpersoon
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_wijzig_persoon:
     post:
       operationId: wijzigpersoon
@@ -118,11 +113,6 @@ paths:
       - Personen
       summary: Wijzigpersoon
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_zoek_persoon:
     post:
       operationId: zoekpersoon
@@ -170,44 +160,8 @@ paths:
       - Personen
       summary: Zoekpersoon
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
 components:
   schemas:
-    Huisnummertoevoeging:
-      type: string
-      description: ''
-      maxLength: 4
-    Partijnummer:
-      type: integer
-      description: ''
-    Huisnummer:
-      type: integer
-      description: ''
-    RegistreerPersoon_parameters:
-      type: object
-      description: ''
-      properties:
-        bezoekadres:
-          $ref: '#/components/schemas/Bezoekadres'
-        correspondentieadres:
-          $ref: '#/components/schemas/Correspondentieadres'
-        digitaalAdres:
-          type: array
-          minItems: 0
-          items:
-            $ref: '#/components/schemas/RegistreerDigitaalAdres_parameters'
-        interneNotitie:
-          $ref: '#/components/schemas/Omschrijvinglang'
-        naam:
-          $ref: '#/components/schemas/Persoonsnaamgegevens'
-        voorkeurskanaal:
-          $ref: '#/components/schemas/Kanaal'
-        voorkeurstaal:
-          $ref: '#/components/schemas/Voorkeurstaal'
     SoortPartij:
       type: string
       description: De typering van de partij.
@@ -215,26 +169,6 @@ components:
       - persoon
       - organisatie
       - contactpersoon
-    SoortDigitaalAdres:
-      type: object
-      description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het soort digitaal adres.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van het soort digitaal adres.
-          minLength: 1
     SoortExternId:
       type: object
       description: Een opsomming van de soorten externe identificatiecodes met de bijbehorende externe registers.
@@ -264,16 +198,200 @@ components:
           minLength: 1
         soortPartij:
           $ref: '#/components/schemas/SoortPartij'
+    DigitaalAdres:
+      type: object
+      description: 'Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.
+
+
+        Digitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.'
+      required:
+      - adres
+      - id
+      - indicatieActief
+      - omschrijving
+      - partijId
+      - soortDigitaalAdres
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+        soortDigitaalAdres:
+          $ref: '#/components/schemas/SoortDigitaalAdres'
     AanduidingBijHuisnummer:
       type: string
       description: De aanduiding die gebruikt wordt voor bijvoorbeeld een ligplaats of een standplaats die geen eigen nummeraanduiding heeft.
       enum:
       - bij
       - tegenover
-    Identificatiecode:
+    WijzigPersoon_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      properties:
+        bezoekadres:
+          $ref: '#/components/schemas/Bezoekadres'
+        correspondentieadres:
+          $ref: '#/components/schemas/Correspondentieadres'
+        digitaalAdres:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/RegistreerDigitaalAdres_parameters'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        interneNotitie:
+          $ref: '#/components/schemas/Omschrijvinglang'
+        naam:
+          $ref: '#/components/schemas/Persoonsnaamgegevens'
+        voorkeurskanaal:
+          $ref: '#/components/schemas/Kanaal'
+        voorkeurstaal:
+          $ref: '#/components/schemas/Voorkeurstaal'
+    Huisnummertoevoeging:
       type: string
       description: ''
-      maxLength: 40
+      maxLength: 4
+    Persoonsnaamgegevens:
+      type: object
+      description: De naamgegevens van een persoon.
+      properties:
+        achternaam:
+          type: string
+          title: Achternaam
+          description: De axhternaam waarmee de persoon aangesproken wnest te worden. Deze zal over het algemeen gelijk zijn aan de (geslachts)naam waarvan de eventueel aanwezige voorvoegsels en adellijke titel/predikaat zijn afgesplitst.
+        voornaam:
+          type: string
+          title: Voornaam
+          description: De roepnaam waarmee de persoon wenst aangeproken te worden.
+        voorvoegselAchternaam:
+          type: string
+          title: Voorvoegsel achternaam
+          description: Dat deel van de achternaam dat voorkomt in de Voorvoegseltabel en, gescheiden door een spatie, vooraf gaat aan de rest van de achternaam.
+    RegistreerDigitaalAdres_parameters:
+      type: object
+      description: ''
+      required:
+      - adres
+      - codeSoortDigitaalAdres
+      - omschrijving
+      - partijId
+      properties:
+        adres:
+          $ref: '#/components/schemas/Adresregel'
+        codeSoortDigitaalAdres:
+          type: string
+          title: Soort digitaal adres
+          description: De typering van het digitale adres waarmee bepaald kan worden op welk kanaal dit digitale adres valide is.
+          minLength: 1
+        omschrijving:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        partijId:
+          $ref: '#/components/schemas/Identificatiecode'
+    SoortBezoekadres:
+      type: string
+      description: Typering waarmee aangegeven of het bezoekadres een binnenlands - of een buitenlands adres is.<body><ul><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
+      enum:
+      - binnenlands_adres
+      - buitenlands_adres
+    Bezoekadres:
+      type: object
+      description: Een bezoekadres is een adres waar een persoon of een bedrijf bezoekers ontvangt.
+      required:
+      - soortBezoekadres
+      properties:
+        aanduidingBijHuisnummer:
+          $ref: '#/components/schemas/AanduidingBijHuisnummer'
+        adresregelBuitenland1:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland2:
+          $ref: '#/components/schemas/Adresregel'
+        adresregelBuitenland3:
+          $ref: '#/components/schemas/Adresregel'
+        huisletter:
+          $ref: '#/components/schemas/Huisletter'
+        huisnummer:
+          $ref: '#/components/schemas/Huisnummer'
+        huisnummertoevoeging:
+          $ref: '#/components/schemas/Huisnummertoevoeging'
+        land:
+          $ref: '#/components/schemas/Land'
+        postcode:
+          $ref: '#/components/schemas/Postcode'
+        soortBezoekadres:
+          $ref: '#/components/schemas/SoortBezoekadres'
+        straat:
+          $ref: '#/components/schemas/Straat'
+        woonplaats:
+          $ref: '#/components/schemas/Woonplaats'
+    ZoekPersoon_parameters:
+      type: object
+      description: ''
+      required:
+      - id
+      - nummer
+      properties:
+        bezoekadres:
+          $ref: '#/components/schemas/Bezoekadres'
+        correspondentieadres:
+          $ref: '#/components/schemas/Correspondentieadres'
+        digitaalAdres:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/DigitaalAdres'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        naam:
+          $ref: '#/components/schemas/Persoonsnaamgegevens'
+        nummer:
+          $ref: '#/components/schemas/Partijnummer'
+        voorkeurskanaal:
+          $ref: '#/components/schemas/Kanaal'
+    SoortDigitaalAdres:
+      type: object
+      description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort digitaal adres.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort digitaal adres.
+          minLength: 1
+    Partijnummer:
+      type: integer
+      description: ''
+    Huisnummer:
+      type: integer
+      description: ''
+    Persoon:
+      allOf:
+      - $ref: '#/components/schemas/Partij'
+      - type: object
+        description: "Een natuurlijk persoon.\n\nKan zowel een ingeschreven, niet ingeschreven alsook een natuurlijk persoon zijn waarvan niet bekend is of die ingeschreven is of niet.\n\nKan zowel een ingeschreven, niet ingeschreven alsook een natuurlijk persoon zijn waarvan niet bekend is of die ingeschreven is of niet. \n\nKan zowel een ingeschreven, niet ingeschreven alsook een natuurlijk persoon zijn waarvan niet bekend is of die ingeschreven is of niet."
+        properties:
+          naam:
+            $ref: '#/components/schemas/Persoonsnaamgegevens'
+    Postbusnummer:
+      type: integer
+      description: ''
     Correspondentieadres:
       type: object
       description: Het adres waarnaar de persoon of de organisatie de voor hen bestemde correspondentie laat verzenden.
@@ -308,6 +426,57 @@ components:
           $ref: '#/components/schemas/Straat'
         woonplaats:
           $ref: '#/components/schemas/Woonplaats'
+    Postcode:
+      type: string
+      description: ''
+      maxLength: 7
+    Antwoordnummer:
+      type: integer
+      description: ''
+    Kanaal:
+      type: object
+      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het kanaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het kanaal.
+          minLength: 1
+    Omschrijvinglang:
+      type: string
+      description: ''
+      maxLength: 200
+    ExterneIdentificatie:
+      type: object
+      description: De identificatiecode van een Relatie zoals die in een andere (authentieke?) registratie gevoerd wordt.
+      required:
+      - externId
+      - id
+      - soortExternId
+      properties:
+        anderSoortExternId:
+          $ref: '#/components/schemas/Omschrijvingkort'
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        soortExternId:
+          $ref: '#/components/schemas/SoortExternId'
+    Omschrijvingkort:
+      type: string
+      description: ''
+      maxLength: 40
     Voorkeurstaal:
       type: object
       description: Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.
@@ -328,54 +497,55 @@ components:
           title: Naam
           description: De naam van de voorkeurstaal.
           minLength: 1
-    Antwoordnummer:
-      type: integer
-      description: ''
-    WijzigPersoon_parameters:
+    Land:
       type: object
-      description: ''
+      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
       required:
-      - id
+      - einddatumLand
+      - ingangsdatumLand
+      - landcode
+      - landnaam
       properties:
-        bezoekadres:
-          $ref: '#/components/schemas/Bezoekadres'
-        correspondentieadres:
-          $ref: '#/components/schemas/Correspondentieadres'
-        digitaalAdres:
-          type: array
-          minItems: 0
-          items:
-            $ref: '#/components/schemas/RegistreerDigitaalAdres_parameters'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        interneNotitie:
-          $ref: '#/components/schemas/Omschrijvinglang'
-        naam:
-          $ref: '#/components/schemas/Persoonsnaamgegevens'
-        voorkeurskanaal:
-          $ref: '#/components/schemas/Kanaal'
-        voorkeurstaal:
-          $ref: '#/components/schemas/Voorkeurstaal'
-    Huisletter:
+        einddatumLand:
+          type: string
+          title: Einddatum land
+          description: De datum waarop het land/gebied is opgeheven.
+          format: date
+        ingangsdatumLand:
+          type: string
+          title: Ingangsdatum land
+          description: De datum waarop het land/gebied is ontstaan.
+          format: date
+        landcode:
+          type: string
+          title: Landcode
+          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
+          minLength: 1
+        landnaam:
+          type: string
+          title: Landnaam
+          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
+          minLength: 1
+    SoortCorrespondentieadres:
       type: string
-      description: ''
-      maxLength: 1
+      description: Typering waarmee aangegeven wordt of het correspondentieadres een binnenlands - of een buitenlands adres is danwel een postbusnummer of een antwoordnummer.<body><ul><li>`postbusnummer` - postbusnummer </li><li>`antwoordnummer` - antwoordnummer </li><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
+      enum:
+      - postbusnummer
+      - antwoordnummer
+      - binnenlands_adres
+      - buitenlands_adres
     Woonplaats:
       type: string
       description: ''
       maxLength: 80
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
     Adresregel:
       type: string
       description: Een generieke regel om adresgegevens in op te nemen.
       maxLength: 80
-    Persoon:
-      allOf:
-      - $ref: '#/components/schemas/Partij'
-      - type: object
-        description: "Een natuurlijk persoon.\n\nKan zowel een ingeschreven, niet ingeschreven alsook een natuurlijk persoon zijn waarvan niet bekend is of die ingeschreven is of niet.\n\nKan zowel een ingeschreven, niet ingeschreven alsook een natuurlijk persoon zijn waarvan niet bekend is of die ingeschreven is of niet. \n\nKan zowel een ingeschreven, niet ingeschreven alsook een natuurlijk persoon zijn waarvan niet bekend is of die ingeschreven is of niet."
-        properties:
-          naam:
-            $ref: '#/components/schemas/Persoonsnaamgegevens'
     Partij:
       type: object
       description: "Een persoon of organisatie waarmee de gemeente een relatie heeft.\n\n(Uiteindelijk) belanghebbenden waarmee de gemeente geen direct contact heeft (of heeft gehad) (bijvoorbeeld door vertegenwoordiging) zien we als partijen waarmee de gemeente een relatie heeft.? Een vertegenwoordiger (van een belanghebbende) is een partij? Partijen zijn ???gekende??? personen of organisaties? Dit betekent dat er voor eerste registratie en bij eventueel (her)gebruik authenticatie heeft plaatsgevonden. Dit hoeft niet per se te gebeuren met DigiD, eHerkenning o.i.d. Er is dus ook niet altijd sprake van vastlegging en verwerking van een BSN of ander buiten de gemeente toegekend ID-nummer.?\n\n(Uiteindelijk) belanghebbenden waarmee de gemeente geen direct contact heeft (of heeft gehad) (bijvoorbeeld door vertegenwoordiging) zien we als partijen waarmee de gemeente een relatie heeft.? Een vertegenwoordiger (van een belanghebbende) is een partij? Partijen zijn ???gekende??? personen of organisaties? Dit betekent dat er voor eerste registratie en bij eventueel (her)gebruik authenticatie heeft plaatsgevonden. Dit hoeft niet per se te gebeuren met DigiD, eHerkenning o.i.d. Er is dus ook niet altijd sprake van vastlegging en verwerking van een BSN of ander buiten de gemeente toegekend ID-nummer.? \n\n(Uiteindelijk) belanghebbenden waarmee de gemeente geen direct contact heeft (of heeft gehad) (bijvoorbeeld door vertegenwoordiging) zien we als partijen waarmee de gemeente een relatie heeft.? Een vertegenwoordiger (van een belanghebbende) is een partij? Partijen zijn ???gekende??? personen of organisaties? Dit betekent dat er voor eerste registratie en bij eventueel (her)gebruik authenticatie heeft plaatsgevonden. Dit hoeft niet per se te gebeuren met DigiD, eHerkenning o.i.d. Er is dus ook niet altijd sprake van vastlegging en verwerking van een BSN of ander buiten de gemeente toegekend ID-nummer.?"
@@ -429,125 +599,9 @@ components:
           readOnly: true
           uniqueItems: true
           example: datapunt.voorbeeldgemeente.nl/api/v1/Digitale adressen/123456789
-    RegistreerDigitaalAdres_parameters:
+    RegistreerPersoon_parameters:
       type: object
       description: ''
-      required:
-      - adres
-      - codeSoortDigitaalAdres
-      - omschrijving
-      - partijId
-      properties:
-        adres:
-          $ref: '#/components/schemas/Adresregel'
-        codeSoortDigitaalAdres:
-          type: string
-          title: Soort digitaal adres
-          description: De typering van het digitale adres waarmee bepaald kan worden op welk kanaal dit digitale adres valide is.
-          minLength: 1
-        omschrijving:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        partijId:
-          $ref: '#/components/schemas/Identificatiecode'
-    DigitaalAdres:
-      type: object
-      description: 'Adres waarop een persoon of een organisatie via een digitaal kanaal bereikt kan worden.
-
-
-        Digitaal adres duidt gegevens aan die beschrijven hoe een persoon of organisatie via een digitaal kanaal bereikt kan worden. Voorbeelden hiervan zijn een telefoonnummer, een e-mailadres of een gebruikersnaam op een sociaal medium. Adressen die gekoppeld kunnen worden aan een vaste plaats in de fysieke wereld, zoals een bezoekadres, postbus of antwoordnummer zijn geen digitaal adres.'
-      required:
-      - adres
-      - id
-      - indicatieActief
-      - omschrijving
-      - partijId
-      - soortDigitaalAdres
-      properties:
-        adres:
-          $ref: '#/components/schemas/Adresregel'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        omschrijving:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        partijId:
-          $ref: '#/components/schemas/Identificatiecode'
-        soortDigitaalAdres:
-          $ref: '#/components/schemas/SoortDigitaalAdres'
-    Land:
-      type: object
-      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
-      required:
-      - einddatumLand
-      - ingangsdatumLand
-      - landcode
-      - landnaam
-      properties:
-        einddatumLand:
-          type: string
-          title: Einddatum land
-          description: De datum waarop het land/gebied is opgeheven.
-          format: date
-        ingangsdatumLand:
-          type: string
-          title: Ingangsdatum land
-          description: De datum waarop het land/gebied is ontstaan.
-          format: date
-        landcode:
-          type: string
-          title: Landcode
-          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
-          minLength: 1
-        landnaam:
-          type: string
-          title: Landnaam
-          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
-          minLength: 1
-    Omschrijvingkort:
-      type: string
-      description: ''
-      maxLength: 40
-    SoortBezoekadres:
-      type: string
-      description: Typering waarmee aangegeven of het bezoekadres een binnenlands - of een buitenlands adres is.<body><ul><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
-      enum:
-      - binnenlands_adres
-      - buitenlands_adres
-    Straat:
-      type: string
-      description: ''
-      maxLength: 80
-    Postcode:
-      type: string
-      description: ''
-      maxLength: 7
-    Kanaal:
-      type: object
-      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het kanaal.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van het kanaal.
-          minLength: 1
-    ZoekPersoon_parameters:
-      type: object
-      description: ''
-      required:
-      - id
-      - nummer
       properties:
         bezoekadres:
           $ref: '#/components/schemas/Bezoekadres'
@@ -557,95 +611,23 @@ components:
           type: array
           minItems: 0
           items:
-            $ref: '#/components/schemas/DigitaalAdres'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
+            $ref: '#/components/schemas/RegistreerDigitaalAdres_parameters'
+        interneNotitie:
+          $ref: '#/components/schemas/Omschrijvinglang'
         naam:
           $ref: '#/components/schemas/Persoonsnaamgegevens'
-        nummer:
-          $ref: '#/components/schemas/Partijnummer'
         voorkeurskanaal:
           $ref: '#/components/schemas/Kanaal'
-    ExterneIdentificatie:
-      type: object
-      description: De identificatiecode van een Relatie zoals die in een andere (authentieke?) registratie gevoerd wordt.
-      required:
-      - externId
-      - id
-      - soortExternId
-      properties:
-        anderSoortExternId:
-          $ref: '#/components/schemas/Omschrijvingkort'
-        externId:
-          $ref: '#/components/schemas/Identificatiecode'
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        soortExternId:
-          $ref: '#/components/schemas/SoortExternId'
-    Bezoekadres:
-      type: object
-      description: Een bezoekadres is een adres waar een persoon of een bedrijf bezoekers ontvangt.
-      required:
-      - soortBezoekadres
-      properties:
-        aanduidingBijHuisnummer:
-          $ref: '#/components/schemas/AanduidingBijHuisnummer'
-        adresregelBuitenland1:
-          $ref: '#/components/schemas/Adresregel'
-        adresregelBuitenland2:
-          $ref: '#/components/schemas/Adresregel'
-        adresregelBuitenland3:
-          $ref: '#/components/schemas/Adresregel'
-        huisletter:
-          $ref: '#/components/schemas/Huisletter'
-        huisnummer:
-          $ref: '#/components/schemas/Huisnummer'
-        huisnummertoevoeging:
-          $ref: '#/components/schemas/Huisnummertoevoeging'
-        land:
-          $ref: '#/components/schemas/Land'
-        postcode:
-          $ref: '#/components/schemas/Postcode'
-        soortBezoekadres:
-          $ref: '#/components/schemas/SoortBezoekadres'
-        straat:
-          $ref: '#/components/schemas/Straat'
-        woonplaats:
-          $ref: '#/components/schemas/Woonplaats'
-    Postbusnummer:
-      type: integer
+        voorkeurstaal:
+          $ref: '#/components/schemas/Voorkeurstaal'
+    Straat:
+      type: string
       description: ''
+      maxLength: 80
     IndicatieJaNee:
       type: boolean
       description: ''
-    Persoonsnaamgegevens:
-      type: object
-      description: De naamgegevens van een persoon.
-      properties:
-        achternaam:
-          type: string
-          title: Achternaam
-          description: De axhternaam waarmee de persoon aangesproken wnest te worden. Deze zal over het algemeen gelijk zijn aan de (geslachts)naam waarvan de eventueel aanwezige voorvoegsels en adellijke titel/predikaat zijn afgesplitst.
-        voornaam:
-          type: string
-          title: Voornaam
-          description: De roepnaam waarmee de persoon wenst aangeproken te worden.
-        voorvoegselAchternaam:
-          type: string
-          title: Voorvoegsel achternaam
-          description: Dat deel van de achternaam dat voorkomt in de Voorvoegseltabel en, gescheiden door een spatie, vooraf gaat aan de rest van de achternaam.
-    Omschrijvinglang:
+    Huisletter:
       type: string
       description: ''
-      maxLength: 200
-    SoortCorrespondentieadres:
-      type: string
-      description: Typering waarmee aangegeven wordt of het correspondentieadres een binnenlands - of een buitenlands adres is danwel een postbusnummer of een antwoordnummer.<body><ul><li>`postbusnummer` - postbusnummer </li><li>`antwoordnummer` - antwoordnummer </li><li>`binnenlands_adres` - binnenlands adres </li><li>`buitenlands_adres` - buitenlands adres </li></ul></body>
-      enum:
-      - postbusnummer
-      - antwoordnummer
-      - binnenlands_adres
-      - buitenlands_adres
-x-refined-from:
-- vng-realisatie-klantinteracties-openapi.yml
-- vng-realisatie-klantinteracties-openapi.yml
+      maxLength: 1

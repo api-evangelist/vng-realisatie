@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Zaakinformatieobjecten API
+  title: Zaken Zaakinformatieobjecten API
   version: 1.5.1
+  description: Een API om een zaakregistratiecomponent (ZRC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged zaakinformatieobjecten across 2 of this provider''s published API definitions: vng-realisatie-zaken-openapi.yml, vng-realisatie-zaken-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://zaken-api.vng.cloud/api/v1/
   description: Productie Omgeving
@@ -322,9 +322,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
   /zaakinformatieobjecten/{uuid}:
     get:
       operationId: zaakinformatieobject_retrieve
@@ -981,97 +978,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/ZaakInformatieObject'
           description: OK
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
 components:
   schemas:
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
-      required:
-      - code
-      - name
-      - reason
-    PatchedZaakInformatieObject:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
-        uuid:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unieke resource identifier (UUID4)
-          title: uuid
-        informatieobject:
-          type: string
-          format: uri
-          description: URL-referentie naar het INFORMATIEOBJECT (in de Documenten API), waar ook de relatieinformatie opgevraagd kan worden.
-          title: informatieobject
-          maxLength: 1000
-        zaak:
-          type: string
-          format: uri
-          description: URL-referentie naar de ZAAK.
-          title: zaak
-          minLength: 1
-          maxLength: 1000
-        aardRelatieWeergave:
-          allOf:
-          - $ref: '#/components/schemas/AardRelatieWeergaveEnum'
-          readOnly: true
-          title: aardRelatieWeergave
-        titel:
-          type: string
-          description: De naam waaronder het INFORMATIEOBJECT binnen het OBJECT bekend is.
-          title: titel
-          maxLength: 200
-        beschrijving:
-          type: string
-          description: Een op het object gerichte beschrijving van de inhoud vanhet INFORMATIEOBJECT.
-          title: beschrijving
-        registratiedatum:
-          type: string
-          format: date-time
-          readOnly: true
-          description: De datum waarop de behandelende organisatie het INFORMATIEOBJECT heeft geregistreerd bij het OBJECT. Geldige waardes zijn datumtijden gelegen op of voor de huidige datum en tijd.
-          title: registratiedatum
-        vernietigingsdatum:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: De datum waarop het informatieobject uit het zaakdossier verwijderd moet worden.
-          title: vernietigingsdatum
-        status:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: De bij de desbetreffende ZAAK behorende STATUS waarvoor het ZAAK-INFORMATIEOBJECT relevant is (geweest) met het oog op het bereiken van die STATUS en/of de communicatie daarover.
-          title: status
-          minLength: 1
-          maxLength: 1000
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -1106,11 +1014,71 @@ components:
       - instance
       - status
       - title
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
     AardRelatieWeergaveEnum:
       enum:
       - 'Hoort bij, omgekeerd: kent'
       - 'Legt vast, omgekeerd: kan vastgelegd zijn als'
       type: string
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
     ZaakInformatieObject:
       type: object
       properties:
@@ -1184,51 +1152,74 @@ components:
       - url
       - uuid
       - zaak
-    ValidatieFout:
+    PatchedZaakInformatieObject:
       type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
       properties:
-        type:
+        url:
           type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        uuid:
           type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
+          format: uuid
+          readOnly: true
+          description: Unieke resource identifier (UUID4)
+          title: uuid
+        informatieobject:
           type: string
-          description: Generieke titel voor het type fout
-          title: title
+          format: uri
+          description: URL-referentie naar het INFORMATIEOBJECT (in de Documenten API), waar ook de relatieinformatie opgevraagd kan worden.
+          title: informatieobject
+          maxLength: 1000
+        zaak:
+          type: string
+          format: uri
+          description: URL-referentie naar de ZAAK.
+          title: zaak
+          minLength: 1
+          maxLength: 1000
+        aardRelatieWeergave:
+          allOf:
+          - $ref: '#/components/schemas/AardRelatieWeergaveEnum'
+          readOnly: true
+          title: aardRelatieWeergave
+        titel:
+          type: string
+          description: De naam waaronder het INFORMATIEOBJECT binnen het OBJECT bekend is.
+          title: titel
+          maxLength: 200
+        beschrijving:
+          type: string
+          description: Een op het object gerichte beschrijving van de inhoud vanhet INFORMATIEOBJECT.
+          title: beschrijving
+        registratiedatum:
+          type: string
+          format: date-time
+          readOnly: true
+          description: De datum waarop de behandelende organisatie het INFORMATIEOBJECT heeft geregistreerd bij het OBJECT. Geldige waardes zijn datumtijden gelegen op of voor de huidige datum en tijd.
+          title: registratiedatum
+        vernietigingsdatum:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: De datum waarop het informatieobject uit het zaakdossier verwijderd moet worden.
+          title: vernietigingsdatum
         status:
-          type: integer
-          description: De HTTP status code
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: De bij de desbetreffende ZAAK behorende STATUS waarvoor het ZAAK-INFORMATIEOBJECT relevant is (geweest) met het oog op het bereiken van die STATUS en/of de communicatie daarover.
           title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
-      required:
-      - code
-      - detail
-      - instance
-      - invalidParams
-      - status
-      - title
+          minLength: 1
+          maxLength: 1000
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-zaken-openapi.yml
-- vng-realisatie-zaken-openapi.yml

@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Bestandsdelen API
+  title: Documenten Bestandsdelen API
   version: 1.5.0
+  description: Een API om een documentregistratiecomponent (DRC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged bestandsdelen across 2 of this provider''s published API definitions: vng-realisatie-documenten-openapi.yml, vng-realisatie-documenten-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://documenten-api.vng.cloud/api/v1
   description: Productie Omgeving
@@ -174,82 +174,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://documenten-api.vng.cloud/api/v1
-      description: Productie Omgeving
 components:
   schemas:
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
-      required:
-      - code
-      - name
-      - reason
-    BestandsDeelRequest:
-      type: object
-      properties:
-        inhoud:
-          type: string
-          format: binary
-          writeOnly: true
-          description: De (binaire) bestandsinhoud van dit specifieke bestandsdeel.
-          title: inhoud
-        lock:
-          type: string
-          minLength: 1
-          description: Hash string, which represents id of the lock of related informatieobject
-          title: lock
-      required:
-      - lock
-    BestandsDeelResponse:
-      type: object
-      properties:
-        url:
-          type: string
-          format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
-        lock:
-          type: string
-          description: Hash string, which represents id of the lock of related informatieobject
-          title: lock
-        omvang:
-          type: integer
-          description: De grootte van dit specifieke bestandsdeel.
-          title: omvang
-        inhoud:
-          type: string
-          format: uri
-          description: De URL naar de bestandsinhoud van dit specifieke bestandsdeel.
-          title: inhoud
-        voltooid:
-          type: boolean
-          description: 'Indicatie of dit bestandsdeel volledig is geupload. Dat wil zeggen: het aantal bytes dat staat genoemd bij grootte is daadwerkelijk ontvangen.'
-          title: voltooid
-        volgnummer:
-          type: integer
-          description: Een volgnummer dat de volgorde van de bestandsdelen aangeeft.
-          title: volgnummer
-      required:
-      - lock
-      - url
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -324,11 +250,79 @@ components:
       - invalidParams
       - status
       - title
+    BestandsDeelRequest:
+      type: object
+      properties:
+        inhoud:
+          type: string
+          format: binary
+          writeOnly: true
+          description: De (binaire) bestandsinhoud van dit specifieke bestandsdeel.
+          title: inhoud
+        lock:
+          type: string
+          minLength: 1
+          description: Hash string, which represents id of the lock of related informatieobject
+          title: lock
+      required:
+      - lock
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
+    BestandsDeelResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        lock:
+          type: string
+          description: Hash string, which represents id of the lock of related informatieobject
+          title: lock
+        omvang:
+          type: integer
+          description: De grootte van dit specifieke bestandsdeel.
+          title: omvang
+        inhoud:
+          type: string
+          format: uri
+          description: De URL naar de bestandsinhoud van dit specifieke bestandsdeel.
+          title: inhoud
+        voltooid:
+          type: boolean
+          description: 'Indicatie of dit bestandsdeel volledig is geupload. Dat wil zeggen: het aantal bytes dat staat genoemd bij grootte is daadwerkelijk ontvangen.'
+          title: voltooid
+        volgnummer:
+          type: integer
+          description: Een volgnummer dat de volgorde van de bestandsdelen aangeeft.
+          title: volgnummer
+      required:
+      - lock
+      - url
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-documenten-openapi.yml
-- vng-realisatie-documenten-openapi.yml

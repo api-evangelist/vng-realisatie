@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Applicaties API
-  version: 1.0.1-alpha1
+  title: Autorisaties Applicaties API
+  description: Een API om een autorisatiecomponent (AC) te benaderen.
   contact:
     url: https://vng-realisatie.github.io/gemma-zaken
     email: standaarden.ondersteuning@vng.nl
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged applicaties across 2 of this provider''s published API definitions: vng-realisatie-autorisaties-openapi.yml, vng-realisatie-autorisaties-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: 1.0.1-alpha1
 servers:
 - url: /api/v1
 security:
@@ -176,8 +176,6 @@ paths:
       security:
       - JWT-Claims:
         - autorisaties.bijwerken
-    servers:
-    - url: /api/v1
   /applicaties/consumer:
     parameters: []
     get:
@@ -234,8 +232,6 @@ paths:
       security:
       - JWT-Claims:
         - autorisaties.lezen
-    servers:
-    - url: /api/v1
   /applicaties/{uuid}:
     parameters:
     - name: uuid
@@ -461,150 +457,8 @@ paths:
       security:
       - JWT-Claims:
         - autorisaties.bijwerken
-    servers:
-    - url: /api/v1
 components:
-  responses:
-    '404':
-      description: Not found
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '415':
-      description: Unsupported media type
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '410':
-      description: Gone
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '500':
-      description: Internal server error
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '403':
-      description: Forbidden
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '401':
-      description: Unauthorized
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '429':
-      description: Too many requests
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '406':
-      description: Not acceptable
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-    '400':
-      description: Bad request
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/ValidatieFout'
-    '409':
-      description: Conflict
-      headers:
-        API-version:
-          schema:
-            type: string
-          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
-      content:
-        application/problem+json:
-          schema:
-            $ref: '#/components/schemas/Fout'
-  requestBodies:
-    Applicatie:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Applicatie'
-      required: true
   schemas:
-    FieldValidationError:
-      required:
-      - name
-      - code
-      - reason
-      type: object
-      properties:
-        name:
-          title: Name
-          description: Naam van het veld met ongeldige gegevens
-          type: string
-          minLength: 1
-        code:
-          title: Code
-          description: Systeemcode die het type fout aangeeft
-          type: string
-          minLength: 1
-        reason:
-          title: Reason
-          description: Uitleg wat er precies fout is met de gegevens
-          type: string
-          minLength: 1
     Fout:
       required:
       - code
@@ -640,6 +494,106 @@ components:
         instance:
           title: Instance
           description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          type: string
+          minLength: 1
+    ValidatieFout:
+      required:
+      - code
+      - title
+      - status
+      - detail
+      - instance
+      - invalidParams
+      type: object
+      properties:
+        type:
+          title: Type
+          description: URI referentie naar het type fout, bedoeld voor developers
+          type: string
+        code:
+          title: Code
+          description: Systeemcode die het type fout aangeeft
+          type: string
+          minLength: 1
+        title:
+          title: Title
+          description: Generieke titel voor het type fout
+          type: string
+          minLength: 1
+        status:
+          title: Status
+          description: De HTTP status code
+          type: integer
+        detail:
+          title: Detail
+          description: Extra informatie bij de fout, indien beschikbaar
+          type: string
+          minLength: 1
+        instance:
+          title: Instance
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          type: string
+          minLength: 1
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+    Applicatie:
+      required:
+      - clientIds
+      - label
+      type: object
+      properties:
+        url:
+          title: Url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          type: string
+          format: uri
+          readOnly: true
+          maxLength: 1000
+          minLength: 1
+        clientIds:
+          description: Lijst van consumer identifiers (hun 'client_id'). Een `client_id` mag slechts bij één applicatie-object voorkomen.
+          type: array
+          items:
+            title: Client ids
+            type: string
+            maxLength: 50
+            minLength: 1
+        label:
+          title: Label
+          description: Een leesbare representatie van de applicatie, voor eindgebruikers.
+          type: string
+          maxLength: 100
+          minLength: 1
+        heeftAlleAutorisaties:
+          title: Heeft alle autorisaties
+          description: Indien alle autorisaties gegeven zijn, dan hoeven deze niet individueel opgegeven te worden. Gebruik dit alleen als je de consumer helemaal vertrouwt.
+          type: boolean
+        autorisaties:
+          type: array
+          items:
+            $ref: '#/components/schemas/AutorisatieBase'
+    FieldValidationError:
+      required:
+      - name
+      - code
+      - reason
+      type: object
+      properties:
+        name:
+          title: Name
+          description: Naam van het veld met ongeldige gegevens
+          type: string
+          minLength: 1
+        code:
+          title: Code
+          description: Systeemcode die het type fout aangeeft
+          type: string
+          minLength: 1
+        reason:
+          title: Reason
+          description: Uitleg wat er precies fout is met de gegevens
           type: string
           minLength: 1
     AutorisatieBase:
@@ -700,89 +654,126 @@ components:
             minLength: 1
       discriminator:
         propertyName: component
-    Applicatie:
-      required:
-      - clientIds
-      - label
-      type: object
-      properties:
-        url:
-          title: Url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          type: string
-          format: uri
-          readOnly: true
-          maxLength: 1000
-          minLength: 1
-        clientIds:
-          description: Lijst van consumer identifiers (hun 'client_id'). Een `client_id` mag slechts bij één applicatie-object voorkomen.
-          type: array
-          items:
-            title: Client ids
+  responses:
+    '500':
+      description: Internal server error
+      headers:
+        API-version:
+          schema:
             type: string
-            maxLength: 50
-            minLength: 1
-        label:
-          title: Label
-          description: Een leesbare representatie van de applicatie, voor eindgebruikers.
-          type: string
-          maxLength: 100
-          minLength: 1
-        heeftAlleAutorisaties:
-          title: Heeft alle autorisaties
-          description: Indien alle autorisaties gegeven zijn, dan hoeven deze niet individueel opgegeven te worden. Gebruik dit alleen als je de consumer helemaal vertrouwt.
-          type: boolean
-        autorisaties:
-          type: array
-          items:
-            $ref: '#/components/schemas/AutorisatieBase'
-    ValidatieFout:
-      required:
-      - code
-      - title
-      - status
-      - detail
-      - instance
-      - invalidParams
-      type: object
-      properties:
-        type:
-          title: Type
-          description: URI referentie naar het type fout, bedoeld voor developers
-          type: string
-        code:
-          title: Code
-          description: Systeemcode die het type fout aangeeft
-          type: string
-          minLength: 1
-        title:
-          title: Title
-          description: Generieke titel voor het type fout
-          type: string
-          minLength: 1
-        status:
-          title: Status
-          description: De HTTP status code
-          type: integer
-        detail:
-          title: Detail
-          description: Extra informatie bij de fout, indien beschikbaar
-          type: string
-          minLength: 1
-        instance:
-          title: Instance
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          type: string
-          minLength: 1
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '410':
+      description: Gone
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '401':
+      description: Unauthorized
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '415':
+      description: Unsupported media type
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '404':
+      description: Not found
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '400':
+      description: Bad request
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/ValidatieFout'
+    '429':
+      description: Too many requests
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '406':
+      description: Not acceptable
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '409':
+      description: Conflict
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+    '403':
+      description: Forbidden
+      headers:
+        API-version:
+          schema:
+            type: string
+          description: 'Geeft een specifieke API-versie aan in de context van een specifieke aanroep. Voorbeeld: 1.2.1.'
+      content:
+        application/problem+json:
+          schema:
+            $ref: '#/components/schemas/Fout'
+  requestBodies:
+    Applicatie:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Applicatie'
+      required: true
   securitySchemes:
     JWT-Claims:
       type: http
       scheme: bearer
       bearerFormat: JWT
-x-refined-from:
-- vng-realisatie-autorisaties-openapi.yml
-- vng-realisatie-autorisaties-openapi.yml

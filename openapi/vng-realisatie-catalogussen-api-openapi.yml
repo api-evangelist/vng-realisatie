@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Catalogussen API
+  title: Catalogi Catalogussen API
   version: 1.3.1
+  description: Een API om een zaaktypecatalogus (ZTC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged catalogussen across 2 of this provider''s published API definitions: vng-realisatie-catalogi-openapi.yml, vng-realisatie-catalogi-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://catalogi-api.vng.cloud/api/v1
   description: Productie Omgeving
@@ -308,9 +308,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /catalogussen/{uuid}:
     get:
       operationId: catalogus_retrieve
@@ -500,31 +497,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Catalogus'
           description: OK
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
 components:
   schemas:
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
-      required:
-      - code
-      - name
-      - reason
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -717,11 +691,28 @@ components:
       - rsin
       - url
       - zaaktypen
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-catalogi-openapi.yml
-- vng-realisatie-catalogi-openapi.yml

@@ -1,16 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Referentielijsten API
+  title: Klantinteracties Referentielijsten API
+  description: Een API om een klantinteractiecomponent (KIC) te benaderen.
   version: 00.01.00
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
   contact:
     url: http://www.verzoeken.nl
     email: standaarden.ondersteuning@vng.nl
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
     url: https://eupl.eu/1.2/nl/
-  x-imvertor-generator-version: 2.0.0
-  x-yamlCompiler-stylesheets-version: '20230512'
-  description: 'Operations tagged Referentielijsten across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
@@ -66,11 +66,6 @@ paths:
       - Referentielijsten
       summary: Haalreferentielijstenop
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_raadpleeg_kanaal:
     post:
       operationId: raadpleegkanaal
@@ -118,11 +113,6 @@ paths:
       - Referentielijsten
       summary: Raadpleegkanaal
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_raadpleeg_land:
     post:
       operationId: raadpleegland
@@ -170,11 +160,6 @@ paths:
       - Referentielijsten
       summary: Raadpleegland
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_raadpleeg_soort_digitaal_adres:
     post:
       operationId: raadpleegsoortdigitaaladres
@@ -222,11 +207,6 @@ paths:
       - Referentielijsten
       summary: Raadpleegsoortdigitaaladres
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_raadpleeg_soort_extern_id:
     post:
       operationId: raadpleegsoortexternid
@@ -274,11 +254,6 @@ paths:
       - Referentielijsten
       summary: Raadpleegsoortexternid
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_raadpleeg_soort_object:
     post:
       operationId: raadpleegsoortobject
@@ -326,11 +301,6 @@ paths:
       - Referentielijsten
       summary: Raadpleegsoortobject
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_raadpleeg_voorkeurstaal:
     post:
       operationId: raadpleegvoorkeurstaal
@@ -378,147 +348,8 @@ paths:
       - Referentielijsten
       summary: Raadpleegvoorkeurstaal
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
 components:
   schemas:
-    Voorkeurstaal_parameters:
-      type: object
-      description: Parameter voor het raadplegen van de voorkeurstaal.
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij de voorkeurstaal.
-          minLength: 1
-    Kanaal:
-      type: object
-      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het kanaal.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van het kanaal.
-          minLength: 1
-    SoortExternId_parameters:
-      type: object
-      description: Parameter voor het raadplegen van het soort extern id.
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het soort extern id.
-          minLength: 1
-    Land:
-      type: object
-      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
-      required:
-      - einddatumLand
-      - ingangsdatumLand
-      - landcode
-      - landnaam
-      properties:
-        einddatumLand:
-          type: string
-          title: Einddatum land
-          description: De datum waarop het land/gebied is opgeheven.
-          format: date
-        ingangsdatumLand:
-          type: string
-          title: Ingangsdatum land
-          description: De datum waarop het land/gebied is ontstaan.
-          format: date
-        landcode:
-          type: string
-          title: Landcode
-          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
-          minLength: 1
-        landnaam:
-          type: string
-          title: Landnaam
-          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
-          minLength: 1
-    Voorkeurstaal:
-      type: object
-      description: Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij de voorkeurstaal.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van de voorkeurstaal.
-          minLength: 1
-    SoortObject:
-      type: object
-      description: Een opsomming van de soorten objecten waarmee een koppeling gelegd wordt vanuit het register klantinteracties.
-      required:
-      - code
-      - indicatieActief
-      - naam
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het soort object.
-          minLength: 1
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          type: string
-          title: Naam
-          description: De naam van het soort object.
-          minLength: 1
-    Referentielijsten_parameters:
-      type: object
-      description: ''
-      properties:
-        kanaal:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        land:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        soortDigitaalAdres:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        soortExternId:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        soortObject:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        voorkeurstaal:
-          $ref: '#/components/schemas/IndicatieJaNee'
-    SoortPartij:
-      type: string
-      description: De typering van de partij.
-      enum:
-      - persoon
-      - organisatie
-      - contactpersoon
     Referentielijstbody:
       type: object
       description: Bevat waarden van referentielijsten.
@@ -553,28 +384,6 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/Voorkeurstaal'
-    SoortObject_parameters:
-      type: object
-      description: Parameter voor het raadplegen van een Soort object
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het soort object.
-          minLength: 1
-    SoortDigitaalAdres_parameters:
-      type: object
-      description: Parameter voor het raadplegen van het kanaal.
-      required:
-      - code
-      properties:
-        code:
-          type: string
-          title: Code
-          description: De code, behorende bij het soort digitaal adres.
-          minLength: 1
     SoortExternId:
       type: object
       description: Een opsomming van de soorten externe identificatiecodes met de bijbehorende externe registers.
@@ -604,9 +413,162 @@ components:
           minLength: 1
         soortPartij:
           $ref: '#/components/schemas/SoortPartij'
-    IndicatieJaNee:
-      type: boolean
+    Referentielijsten_parameters:
+      type: object
       description: ''
+      properties:
+        kanaal:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        land:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        soortDigitaalAdres:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        soortExternId:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        soortObject:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        voorkeurstaal:
+          $ref: '#/components/schemas/IndicatieJaNee'
+    SoortPartij:
+      type: string
+      description: De typering van de partij.
+      enum:
+      - persoon
+      - organisatie
+      - contactpersoon
+    Voorkeurstaal_parameters:
+      type: object
+      description: Parameter voor het raadplegen van de voorkeurstaal.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij de voorkeurstaal.
+          minLength: 1
+    Kanaal:
+      type: object
+      description: Een opsomming van de kanalen waarlangs de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het kanaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het kanaal.
+          minLength: 1
+    SoortObject_parameters:
+      type: object
+      description: Parameter voor het raadplegen van een Soort object
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort object.
+          minLength: 1
+    SoortExternId_parameters:
+      type: object
+      description: Parameter voor het raadplegen van het soort extern id.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort extern id.
+          minLength: 1
+    Voorkeurstaal:
+      type: object
+      description: Een opsomming van de talen waarin de gemeente klantcontacten kan hebben.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij de voorkeurstaal.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van de voorkeurstaal.
+          minLength: 1
+    Kanaal_parameters:
+      type: object
+      description: Parameter voor het raadplegen van het kanaal.
+      required:
+      - code
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het kanaal.
+          minLength: 1
+    SoortObject:
+      type: object
+      description: Een opsomming van de soorten objecten waarmee een koppeling gelegd wordt vanuit het register klantinteracties.
+      required:
+      - code
+      - indicatieActief
+      - naam
+      properties:
+        code:
+          type: string
+          title: Code
+          description: De code, behorende bij het soort object.
+          minLength: 1
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          type: string
+          title: Naam
+          description: De naam van het soort object.
+          minLength: 1
+    Land:
+      type: object
+      description: Een opsomming van alle huidige en voormalige landen met hun codes, namen en geldigheidstermijnen.
+      required:
+      - einddatumLand
+      - ingangsdatumLand
+      - landcode
+      - landnaam
+      properties:
+        einddatumLand:
+          type: string
+          title: Einddatum land
+          description: De datum waarop het land/gebied is opgeheven.
+          format: date
+        ingangsdatumLand:
+          type: string
+          title: Ingangsdatum land
+          description: De datum waarop het land/gebied is ontstaan.
+          format: date
+        landcode:
+          type: string
+          title: Landcode
+          description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
+          minLength: 1
+        landnaam:
+          type: string
+          title: Landnaam
+          description: De naam van het land, zoals opgenomen in de Landentabel van de GBA.
+          minLength: 1
     SoortDigitaalAdres:
       type: object
       description: Een opsomming van de type digitaal adres waarlangs de gemeente klantcontacten kan hebben.
@@ -627,7 +589,7 @@ components:
           title: Naam
           description: De naam van het soort digitaal adres.
           minLength: 1
-    Kanaal_parameters:
+    SoortDigitaalAdres_parameters:
       type: object
       description: Parameter voor het raadplegen van het kanaal.
       required:
@@ -636,8 +598,11 @@ components:
         code:
           type: string
           title: Code
-          description: De code, behorende bij het kanaal.
+          description: De code, behorende bij het soort digitaal adres.
           minLength: 1
+    IndicatieJaNee:
+      type: boolean
+      description: ''
     Land_parameters:
       type: object
       description: Parameter voor het raadplegen van het kanaal.
@@ -649,6 +614,3 @@ components:
           title: Landcode
           description: De code, behorende bij de landnaam, opgenomen in de Landentabel van de GBA.
           minLength: 1
-x-refined-from:
-- vng-realisatie-klantinteracties-openapi.yml
-- vng-realisatie-klantinteracties-openapi.yml

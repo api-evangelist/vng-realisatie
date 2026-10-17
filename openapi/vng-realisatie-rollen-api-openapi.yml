@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Rollen API
+  title: Zaken Rollen API
   version: 1.5.1
+  description: Een API om een zaakregistratiecomponent (ZRC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged rollen across 2 of this provider''s published API definitions: vng-realisatie-zaken-openapi.yml, vng-realisatie-zaken-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://zaken-api.vng.cloud/api/v1/
   description: Productie Omgeving
@@ -396,9 +396,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
   /rollen/{uuid}:
     get:
       operationId: rol_retrieve
@@ -718,11 +715,98 @@ paths:
               schema:
                 $ref: '#/components/schemas/Rol'
           description: OK
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
 components:
   schemas:
+    Fout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+      required:
+      - code
+      - detail
+      - instance
+      - status
+      - title
+    ContactPersoonRol:
+      type:
+      - object
+      - 'null'
+      description: De gegevens van de persoon die anderen desgevraagd in contact brengt met medewerkers van de BETROKKENE, een NIET-NATUURLIJK PERSOON of VESTIGING zijnde, of met BETROKKENE zelf, een NATUURLIJK PERSOON zijnde , vanuit het belang van BETROKKENE in haar ROL bij een ZAAK.
+      properties:
+        emailadres:
+          type: string
+          format: email
+          title: Email
+          description: Elektronich postadres waaronder de contactpersoon in de regel bereikbaar is.
+          maxLength: 254
+        functie:
+          type: string
+          description: 'De aanduiding van de taken, rechten en plichten die de contactpersoon heeft binnen de organisatie van BETROKKENE. '
+          title: functie
+          maxLength: 50
+        telefoonnummer:
+          type: string
+          description: Telefoonnummer waaronder de contactpersoon in de regel bereikbaar is.
+          title: telefoonnummer
+          maxLength: 20
+        naam:
+          type: string
+          description: De opgemaakte naam van de contactpersoon namens de BETROKKENE.
+          title: naam
+          maxLength: 200
+      required:
+      - naam
+    PaginatedRolList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rol'
+    IndicatieMachtigingEnum:
+      enum:
+      - gemachtigde
+      - machtiginggever
+      type: string
     Rol_betrokkeneTypeEnum:
       enum:
       - natuurlijk_persoon
@@ -731,26 +815,49 @@ components:
       - organisatorische_eenheid
       - medewerker
       type: string
-    FieldValidationError:
+    ValidatieFout:
       type: object
-      description: Formaat van validatiefouten.
+      description: Formaat van HTTP 4xx en 5xx fouten.
       properties:
-        name:
+        type:
           type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
         code:
           type: string
           description: Systeemcode die het type fout aangeeft
           title: code
-        reason:
+        title:
           type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
       required:
       - code
-      - name
-      - reason
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+    BlankEnum:
+      enum:
+      - ''
     Rol:
       type: object
       properties:
@@ -901,144 +1008,28 @@ components:
           vestiging: '#/components/schemas/vestiging_Rol'
           organisatorische_eenheid: '#/components/schemas/organisatorische_eenheid_Rol'
           medewerker: '#/components/schemas/medewerker_Rol'
-    PaginatedRolList:
+    FieldValidationError:
       type: object
+      description: Formaat van validatiefouten.
       properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rol'
-    Fout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
+        name:
           type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
+          description: Naam van het veld met ongeldige gegevens
+          title: name
         code:
           type: string
           description: Systeemcode die het type fout aangeeft
           title: code
-        title:
+        reason:
           type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
       required:
       - code
-      - detail
-      - instance
-      - status
-      - title
-    IndicatieMachtigingEnum:
-      enum:
-      - gemachtigde
-      - machtiginggever
-      type: string
-    BlankEnum:
-      enum:
-      - ''
-    ValidatieFout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
-          type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
-      required:
-      - code
-      - detail
-      - instance
-      - invalidParams
-      - status
-      - title
-    ContactPersoonRol:
-      type:
-      - object
-      - 'null'
-      description: De gegevens van de persoon die anderen desgevraagd in contact brengt met medewerkers van de BETROKKENE, een NIET-NATUURLIJK PERSOON of VESTIGING zijnde, of met BETROKKENE zelf, een NATUURLIJK PERSOON zijnde , vanuit het belang van BETROKKENE in haar ROL bij een ZAAK.
-      properties:
-        emailadres:
-          type: string
-          format: email
-          title: Email
-          description: Elektronich postadres waaronder de contactpersoon in de regel bereikbaar is.
-          maxLength: 254
-        functie:
-          type: string
-          description: 'De aanduiding van de taken, rechten en plichten die de contactpersoon heeft binnen de organisatie van BETROKKENE. '
-          title: functie
-          maxLength: 50
-        telefoonnummer:
-          type: string
-          description: Telefoonnummer waaronder de contactpersoon in de regel bereikbaar is.
-          title: telefoonnummer
-          maxLength: 20
-        naam:
-          type: string
-          description: De opgemaakte naam van de contactpersoon namens de BETROKKENE.
-          title: naam
-          maxLength: 200
-      required:
-      - naam
+      - name
+      - reason
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-zaken-openapi.yml
-- vng-realisatie-zaken-openapi.yml

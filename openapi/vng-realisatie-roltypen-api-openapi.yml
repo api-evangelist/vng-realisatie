@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Roltypen API
+  title: Catalogi Roltypen API
   version: 1.3.1
+  description: Een API om een zaaktypecatalogus (ZTC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged roltypen across 2 of this provider''s published API definitions: vng-realisatie-catalogi-openapi.yml, vng-realisatie-catalogi-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://catalogi-api.vng.cloud/api/v1
   description: Productie Omgeving
@@ -332,9 +332,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
   /roltypen/{uuid}:
     get:
       operationId: roltype_retrieve
@@ -946,11 +943,191 @@ paths:
               schema:
                 $ref: '#/components/schemas/RolType'
           description: OK
-    servers:
-    - url: https://catalogi-api.vng.cloud/api/v1
-      description: Productie Omgeving
 components:
   schemas:
+    Fout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+      required:
+      - code
+      - detail
+      - instance
+      - status
+      - title
+    ValidatieFout:
+      type: object
+      description: Formaat van HTTP 4xx en 5xx fouten.
+      properties:
+        type:
+          type: string
+          description: URI referentie naar het type fout, bedoeld voor developers
+          title: type
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        title:
+          type: string
+          description: Generieke titel voor het type fout
+          title: title
+        status:
+          type: integer
+          description: De HTTP status code
+          title: status
+        detail:
+          type: string
+          description: Extra informatie bij de fout, indien beschikbaar
+          title: detail
+        instance:
+          type: string
+          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
+          title: instance
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldValidationError'
+          title: invalidParams
+      required:
+      - code
+      - detail
+      - instance
+      - invalidParams
+      - status
+      - title
+    PatchedRolType:
+      type: object
+      description: Adds nested create feature
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+          title: url
+          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
+          minLength: 1
+          maxLength: 1000
+        zaaktype:
+          type: string
+          format: uri
+          description: URL-referentie naar het ZAAKTYPE waar deze ROLTYPEn betrokken kunnen zijn.
+          title: Zaaktype
+        zaaktypeIdentificatie:
+          type: string
+          readOnly: true
+          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
+          title: Zaaktype
+        omschrijving:
+          type: string
+          description: Omschrijving van de aard van de ROL.
+          title: omschrijving
+          maxLength: 100
+        omschrijvingGeneriek:
+          allOf:
+          - $ref: '#/components/schemas/OmschrijvingGeneriekEnum'
+          description: 'Algemeen gehanteerde omschrijving van de aard van de ROL.
+
+
+            Uitleg bij mogelijke waarden:
+
+
+            * `adviseur` - (Adviseur) Kennis in dienst stellen van de behandeling van (een deel van) een zaak.
+
+            * `behandelaar` - (Behandelaar) De vakinhoudelijke behandeling doen van (een deel van) een zaak.
+
+            * `belanghebbende` - (Belanghebbende) Vanuit eigen en objectief belang rechtstreeks betrokken zijn bij de behandeling en/of de uitkomst van een zaak.
+
+            * `beslisser` - (Beslisser) Nemen van besluiten die voor de uitkomst van een zaak noodzakelijk zijn.
+
+            * `initiator` - (Initiator) Aanleiding geven tot de start van een zaak ..
+
+            * `klantcontacter` - (Klantcontacter) Het eerste aanspreekpunt zijn voor vragen van burgers en bedrijven ..
+
+            * `zaakcoordinator` - (Zaakcoördinator) Er voor zorg dragen dat de behandeling van de zaak in samenhang uitgevoerd wordt conform de daarover gemaakte afspraken.
+
+            * `mede_initiator` - Mede-initiator'
+          title: omschrijving generiek
+        catalogus:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL-referentie naar de CATALOGUS waartoe dit ROLTYPE behoort.
+          title: catalogus
+        beginGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het is ontstaan.
+          title: datum begin geldigheid
+        eindeGeldigheid:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop het is opgeheven.
+          title: datum einde geldigheid
+        beginObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum waarop de eerst versie van het object ontstaan is.
+          title: datum begin object
+        eindeObject:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: De datum van de aller laatste versie van het object.
+          title: datum einde object
+    PaginatedRolTypeList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RolType'
     FieldValidationError:
       type: object
       description: Formaat van validatiefouten.
@@ -1064,127 +1241,6 @@ components:
       - url
       - zaaktype
       - zaaktypeIdentificatie
-    Fout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
-          type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-      required:
-      - code
-      - detail
-      - instance
-      - status
-      - title
-    PatchedRolType:
-      type: object
-      description: Adds nested create feature
-      properties:
-        url:
-          type: string
-          format: uri
-          readOnly: true
-          title: url
-          description: URL-referentie naar dit object. Dit is de unieke identificatie en locatie van dit object.
-          minLength: 1
-          maxLength: 1000
-        zaaktype:
-          type: string
-          format: uri
-          description: URL-referentie naar het ZAAKTYPE waar deze ROLTYPEn betrokken kunnen zijn.
-          title: Zaaktype
-        zaaktypeIdentificatie:
-          type: string
-          readOnly: true
-          description: Unieke identificatie van het ZAAKTYPE binnen de CATALOGUS waarin het ZAAKTYPE voorkomt.
-          title: Zaaktype
-        omschrijving:
-          type: string
-          description: Omschrijving van de aard van de ROL.
-          title: omschrijving
-          maxLength: 100
-        omschrijvingGeneriek:
-          allOf:
-          - $ref: '#/components/schemas/OmschrijvingGeneriekEnum'
-          description: 'Algemeen gehanteerde omschrijving van de aard van de ROL.
-
-
-            Uitleg bij mogelijke waarden:
-
-
-            * `adviseur` - (Adviseur) Kennis in dienst stellen van de behandeling van (een deel van) een zaak.
-
-            * `behandelaar` - (Behandelaar) De vakinhoudelijke behandeling doen van (een deel van) een zaak.
-
-            * `belanghebbende` - (Belanghebbende) Vanuit eigen en objectief belang rechtstreeks betrokken zijn bij de behandeling en/of de uitkomst van een zaak.
-
-            * `beslisser` - (Beslisser) Nemen van besluiten die voor de uitkomst van een zaak noodzakelijk zijn.
-
-            * `initiator` - (Initiator) Aanleiding geven tot de start van een zaak ..
-
-            * `klantcontacter` - (Klantcontacter) Het eerste aanspreekpunt zijn voor vragen van burgers en bedrijven ..
-
-            * `zaakcoordinator` - (Zaakcoördinator) Er voor zorg dragen dat de behandeling van de zaak in samenhang uitgevoerd wordt conform de daarover gemaakte afspraken.
-
-            * `mede_initiator` - Mede-initiator'
-          title: omschrijving generiek
-        catalogus:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL-referentie naar de CATALOGUS waartoe dit ROLTYPE behoort.
-          title: catalogus
-        beginGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop het is ontstaan.
-          title: datum begin geldigheid
-        eindeGeldigheid:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop het is opgeheven.
-          title: datum einde geldigheid
-        beginObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum waarop de eerst versie van het object ontstaan is.
-          title: datum begin object
-        eindeObject:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: De datum van de aller laatste versie van het object.
-          title: datum einde object
     OmschrijvingGeneriekEnum:
       enum:
       - adviseur
@@ -1196,73 +1252,8 @@ components:
       - zaakcoordinator
       - mede_initiator
       type: string
-    ValidatieFout:
-      type: object
-      description: Formaat van HTTP 4xx en 5xx fouten.
-      properties:
-        type:
-          type: string
-          description: URI referentie naar het type fout, bedoeld voor developers
-          title: type
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        title:
-          type: string
-          description: Generieke titel voor het type fout
-          title: title
-        status:
-          type: integer
-          description: De HTTP status code
-          title: status
-        detail:
-          type: string
-          description: Extra informatie bij de fout, indien beschikbaar
-          title: detail
-        instance:
-          type: string
-          description: URI met referentie naar dit specifiek voorkomen van de fout. Deze kan gebruikt worden in combinatie met server logs, bijvoorbeeld.
-          title: instance
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/FieldValidationError'
-          title: invalidParams
-      required:
-      - code
-      - detail
-      - instance
-      - invalidParams
-      - status
-      - title
-    PaginatedRolTypeList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/RolType'
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-catalogi-openapi.yml
-- vng-realisatie-catalogi-openapi.yml

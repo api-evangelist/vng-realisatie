@@ -1,16 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Medewerkers API
+  title: Klantinteracties Medewerkers API
+  description: Een API om een klantinteractiecomponent (KIC) te benaderen.
   version: 00.01.00
+  x-imvertor-generator-version: 2.0.0
+  x-yamlCompiler-stylesheets-version: '20230512'
   contact:
     url: http://www.verzoeken.nl
     email: standaarden.ondersteuning@vng.nl
   license:
     name: European Union Public License, version 1.2 (EUPL-1.2)
     url: https://eupl.eu/1.2/nl/
-  x-imvertor-generator-version: 2.0.0
-  x-yamlCompiler-stylesheets-version: '20230512'
-  description: 'Operations tagged Medewerkers across 2 of this provider''s published API definitions: vng-realisatie-klantinteracties-openapi.yml, vng-realisatie-klantinteracties-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - description: SwaggerHub API Auto Mocking
   url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
@@ -66,11 +66,6 @@ paths:
       - Medewerkers
       summary: Registreermedewerker
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_wijzig_medewerker:
     post:
       operationId: wijzigmedewerker
@@ -118,11 +113,6 @@ paths:
       - Medewerkers
       summary: Wijzigmedewerker
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
   /_zoek_medewerker:
     post:
       operationId: zoekmedewerker
@@ -170,42 +160,33 @@ paths:
       - Medewerkers
       summary: Zoekmedewerker
       x-summary-source: derived
-    servers:
-    - description: SwaggerHub API Auto Mocking
-      url: https://virtserver.swaggerhub.com/VNGRealisatie/api/klantinteracties/v00
-    - description: Referentie-implementatie
-      url: https://www.voorbeeldgemeente.nl/api/klantinteracties/v00
 components:
   schemas:
-    ZoekMedewerker_parameters:
+    RegistreerMedewerker_parameters:
       type: object
       description: ''
       required:
       - eMailadres
       - functie
       - naam
+      - telefoonnummer
       properties:
         eMailadres:
           $ref: '#/components/schemas/Emailadres'
+        externId:
+          $ref: '#/components/schemas/Identificatiecode'
+        externRegister:
+          $ref: '#/components/schemas/Omschrijvingkort'
         functie:
           $ref: '#/components/schemas/Omschrijvingkort'
         naam:
           $ref: '#/components/schemas/Naamlang'
-    SoortActor:
-      type: string
-      description: De typering van de actor.<body><ul><li>`medewerker` - medewerker </li><li>`geautomatiseerde_actor` - geautomatiseerde actor </li><li>`organisatorische_eenheid` - organisatorische eenheid </li></ul></body>
-      enum:
-      - medewerker
-      - geautomatiseerde_actor
-      - organisatorische_eenheid
-    Omschrijvingkort:
+        telefoonnummer:
+          $ref: '#/components/schemas/Telefoonnummer'
+    Naamlang:
       type: string
       description: ''
-      maxLength: 40
-    Telefoonnummer:
-      type: string
-      description: ''
-      maxLength: 20
+      maxLength: 200
     WijzigMedewerker_parameters:
       type: object
       description: ''
@@ -226,6 +207,42 @@ components:
           $ref: '#/components/schemas/Naamlang'
         telefoonnummer:
           $ref: '#/components/schemas/Telefoonnummer'
+    SoortActor:
+      type: string
+      description: De typering van de actor.<body><ul><li>`medewerker` - medewerker </li><li>`geautomatiseerde_actor` - geautomatiseerde actor </li><li>`organisatorische_eenheid` - organisatorische eenheid </li></ul></body>
+      enum:
+      - medewerker
+      - geautomatiseerde_actor
+      - organisatorische_eenheid
+    Telefoonnummer:
+      type: string
+      description: ''
+      maxLength: 20
+    Emailadres:
+      type: string
+      description: Een geldig email-adres, maximaal 20 karakters lang en minimaal een @ en een . opgenomen.
+      maxLength: 200
+    Actor:
+      type: object
+      description: De acor handelt in een interne taak of een klantcontact.
+      required:
+      - id
+      - indicatieActief
+      - naam
+      - soortActor
+      properties:
+        id:
+          $ref: '#/components/schemas/Identificatiecode'
+        indicatieActief:
+          $ref: '#/components/schemas/IndicatieJaNee'
+        naam:
+          $ref: '#/components/schemas/Naamlang'
+        soortActor:
+          $ref: '#/components/schemas/SoortActor'
+    Omschrijvingkort:
+      type: string
+      description: ''
+      maxLength: 40
     Medewerker:
       allOf:
       - $ref: '#/components/schemas/Actor'
@@ -251,56 +268,21 @@ components:
     IndicatieJaNee:
       type: boolean
       description: ''
-    RegistreerMedewerker_parameters:
+    Identificatiecode:
+      type: string
+      description: ''
+      maxLength: 40
+    ZoekMedewerker_parameters:
       type: object
       description: ''
       required:
       - eMailadres
       - functie
       - naam
-      - telefoonnummer
       properties:
         eMailadres:
           $ref: '#/components/schemas/Emailadres'
-        externId:
-          $ref: '#/components/schemas/Identificatiecode'
-        externRegister:
-          $ref: '#/components/schemas/Omschrijvingkort'
         functie:
           $ref: '#/components/schemas/Omschrijvingkort'
         naam:
           $ref: '#/components/schemas/Naamlang'
-        telefoonnummer:
-          $ref: '#/components/schemas/Telefoonnummer'
-    Emailadres:
-      type: string
-      description: Een geldig email-adres, maximaal 20 karakters lang en minimaal een @ en een . opgenomen.
-      maxLength: 200
-    Naamlang:
-      type: string
-      description: ''
-      maxLength: 200
-    Identificatiecode:
-      type: string
-      description: ''
-      maxLength: 40
-    Actor:
-      type: object
-      description: De acor handelt in een interne taak of een klantcontact.
-      required:
-      - id
-      - indicatieActief
-      - naam
-      - soortActor
-      properties:
-        id:
-          $ref: '#/components/schemas/Identificatiecode'
-        indicatieActief:
-          $ref: '#/components/schemas/IndicatieJaNee'
-        naam:
-          $ref: '#/components/schemas/Naamlang'
-        soortActor:
-          $ref: '#/components/schemas/SoortActor'
-x-refined-from:
-- vng-realisatie-klantinteracties-openapi.yml
-- vng-realisatie-klantinteracties-openapi.yml

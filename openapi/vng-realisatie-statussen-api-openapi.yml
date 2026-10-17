@@ -1,14 +1,14 @@
 openapi: 3.2.0
 info:
-  title: Vng Realisatie Statussen API
+  title: Zaken Statussen API
   version: 1.5.1
+  description: Een API om een zaakregistratiecomponent (ZRC) te benaderen.
   contact:
     email: standaarden.ondersteuning@vng.nl
     url: https://vng-realisatie.github.io/gemma-zaken
   license:
     name: EUPL 1.2
     url: https://opensource.org/licenses/EUPL-1.2
-  description: 'Operations tagged statussen across 2 of this provider''s published API definitions: vng-realisatie-zaken-openapi.yml, vng-realisatie-zaken-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://zaken-api.vng.cloud/api/v1/
   description: Productie Omgeving
@@ -325,9 +325,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Fout'
           description: Internal server error
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
   /statussen/{uuid}:
     get:
       operationId: status_retrieve
@@ -517,31 +514,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Status'
           description: OK
-    servers:
-    - url: https://zaken-api.vng.cloud/api/v1/
-      description: Productie Omgeving
 components:
   schemas:
-    FieldValidationError:
-      type: object
-      description: Formaat van validatiefouten.
-      properties:
-        name:
-          type: string
-          description: Naam van het veld met ongeldige gegevens
-          title: name
-        code:
-          type: string
-          description: Systeemcode die het type fout aangeeft
-          title: code
-        reason:
-          type: string
-          description: Uitleg wat er precies fout is met de gegevens
-          title: reason
-      required:
-      - code
-      - name
-      - reason
     Fout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -576,28 +550,6 @@ components:
       - instance
       - status
       - title
-    PaginatedStatusList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type:
-          - string
-          - 'null'
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/Status'
     ValidatieFout:
       type: object
       description: Formaat van HTTP 4xx en 5xx fouten.
@@ -708,11 +660,50 @@ components:
       - uuid
       - zaak
       - zaakinformatieobjecten
+    PaginatedStatusList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Status'
+    FieldValidationError:
+      type: object
+      description: Formaat van validatiefouten.
+      properties:
+        name:
+          type: string
+          description: Naam van het veld met ongeldige gegevens
+          title: name
+        code:
+          type: string
+          description: Systeemcode die het type fout aangeeft
+          title: code
+        reason:
+          type: string
+          description: Uitleg wat er precies fout is met de gegevens
+          title: reason
+      required:
+      - code
+      - name
+      - reason
   securitySchemes:
     JWT-Claims:
       type: http
       bearerFormat: JWT
       scheme: bearer
-x-refined-from:
-- vng-realisatie-zaken-openapi.yml
-- vng-realisatie-zaken-openapi.yml
