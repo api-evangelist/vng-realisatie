@@ -30,6 +30,15 @@ tags:
 - Netherlands
 - API Standards
 - Common Ground
+- Open Standard
+- Public Sector
+tags_raw:
+- Company
+- Government
+- Municipalities
+- Netherlands
+- API Standards
+- Common Ground
 - Open Standards
 - Public Sector
 
@@ -788,6 +797,8 @@ apis:
   humanURL: https://vng-realisatie.github.io/gemma-zaken/
   baseURL: https://zaken-api.vng.cloud/api/v1
   tags:
+  - Domains
+  tags_raw:
   - domains
   properties:
   - type: OpenAPI
@@ -1075,6 +1086,8 @@ apis:
   humanURL: https://vng-realisatie.github.io/gemma-zaken/
   baseURL: https://zaken-api.vng.cloud/api/v1
   tags:
+  - Event
+  tags_raw:
   - events
   properties:
   - type: OpenAPI
@@ -1361,6 +1374,8 @@ apis:
   humanURL: https://vng-realisatie.github.io/gemma-zaken/
   baseURL: https://zaken-api.vng.cloud/api/v1
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -3084,6 +3099,8 @@ apis:
   humanURL: https://vng-realisatie.github.io/gemma-zaken/
   baseURL: https://zaken-api.vng.cloud/api/v1
   tags:
+  - Subscription
+  tags_raw:
   - subscriptions
   properties:
   - type: OpenAPI
